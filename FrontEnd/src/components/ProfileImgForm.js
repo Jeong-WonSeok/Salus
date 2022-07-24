@@ -31,7 +31,9 @@ const Div = styled.div`
 const ProfileImgForm = () => {
   const [image, setImage] = useState(null);
   const [error, setError] = useState(false);
-
+  
+  //이미지 업로드 함수
+  //이미지를 URL로 변환 후 업로드
   const ImageUploader = (e) => {
     const imageSelected = e.target.files[0];
     const types = ["image/png", "image/jpeg", "image/jpg"];
@@ -45,8 +47,9 @@ const ProfileImgForm = () => {
       setError(true);
     }
   };
+  //이미지를 지우는 함수
   const ImageRemover = () => {
-    setImage((state) => state ? null : null)
+    setImage(null)
   }
   return (
     <Div>
