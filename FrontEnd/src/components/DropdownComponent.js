@@ -1,7 +1,6 @@
 import React from 'react';
 
-
-const LoginPage = () => {
+const DropdownComponent = () => {
   return (
     <div>
       
@@ -9,4 +8,4 @@ const LoginPage = () => {
   );
 };
 
-export default LoginPage;
+export default DropdownComponent;
