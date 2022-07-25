@@ -8,7 +8,7 @@ const Logo = styled.div`
   height: 100%;
   background: linear-gradient(284.21deg, #92a3fd -7.95%, #9dceff 138.55%);
 
-  $img {
+  &img {
     width: 346px;
     height: 100%;
   }
