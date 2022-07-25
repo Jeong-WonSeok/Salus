@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 import React from 'react';
 import AuthWrapper from '../layout-wrapper/AuthWrapper';
 import InputComponent from '../components/InputComponent';
@@ -6,15 +5,6 @@ import styled from 'styled-components';
 import ButtonComponent from '../components/ButtonComponent';
 import ProfileImgForm from '../components/ProfileImgForm';
 import InputToggleComponent from '../components/InputToggleComponent';
-=======
-import React from "react";
-import AuthWrapper from "../layout-wrapper/AuthWrapper";
-import InputComponent from "../components/InputComponent";
-import styled from "styled-components";
-import ButtonComponent from "../components/ButtonComponent";
-import ProfileImgForm from "../components/ProfileImgForm";
-import InputToggleComponent from "../components/InputToggleComponent";
->>>>>>> f5ededc066e5804229424ded668e381626db709e
 
 // 로고 사진 대신 사용하는 임시 Div 스타일
 const DivStyle = styled.div`
@@ -123,12 +113,7 @@ const SignupPage = () => {
                 ></InputComponent>
               </Div>
               <Div>
-<<<<<<< HEAD
                 <InputToggleComponent></InputToggleComponent>
-=======
-                <InputToggleComponent>
-                </InputToggleComponent>
->>>>>>> f5ededc066e5804229424ded668e381626db709e
               </Div>
             </Div>
           </div>
