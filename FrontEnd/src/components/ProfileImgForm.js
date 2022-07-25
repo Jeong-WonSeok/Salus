@@ -1,4 +1,4 @@
-import React, { Fragment, useState } from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 
 const Div = styled.div`
@@ -28,7 +28,7 @@ const Div = styled.div`
   }
 `;
 
-const ProfileImgForm = () => {
+const ProfileImgForm = ({imageUploader}) => {
   const [image, setImage] = useState(null);
   const [error, setError] = useState(false);
   
@@ -42,6 +42,7 @@ const ProfileImgForm = () => {
       ImgReader.readAsDataURL(imageSelected);
       ImgReader.onloadend = (e) => {
         setImage(e.target.result);
+        imageUploader(image)
       };
     } else {
       setError(true);
@@ -50,6 +51,7 @@ const ProfileImgForm = () => {
   //이미지를 지우는 함수
   const ImageRemover = () => {
     setImage(null)
+    imageUploader(null);
   }
   return (
     <Div>
