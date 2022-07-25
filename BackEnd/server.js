@@ -17,7 +17,6 @@ app.use(routers);
 const { swaggerUi, specs } = require("./swagger/swagger");
 app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(specs));
 
-
 // server run
 http.createServer(app).listen(3000, ()=>{
     console.log("Salus Server started 3000");

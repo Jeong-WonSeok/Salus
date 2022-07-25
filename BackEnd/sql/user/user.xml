@@ -15,4 +15,11 @@
     WHERE
       email = #{email}
   </select>
+  <insert id="signup">
+    insert
+    into
+    user
+    (email, lastName, firstName, password, phone, birthDay, excerciseCheck)
+    VALUES (#{email}, #{lastName}, #{firstName}, #{password}, #{phone}, #{birthDay}, #{excerciseCheck})
+  </insert>
 </mapper>
