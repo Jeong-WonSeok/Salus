@@ -5,6 +5,7 @@ import { useState } from 'react';
 const StyledDiv = styled.div`
   width: ${(props) => (props.inputWidth ? props.inputWidth : 0 + "px")};
   height: ${(props) => (props.inputHeight ? props.inputHeight : 0 + "px")};
+  color: #443846;
   position: relative;
 
   & input {
@@ -18,6 +19,8 @@ const StyledDiv = styled.div`
     transition: 0.2s;
     background: none;
     z-index: 1;
+    font-size: 16px;
+    font-weight: 700;
   }
 
   & label {
@@ -27,7 +30,7 @@ const StyledDiv = styled.div`
     width: 100%;
     height: 100%;
     color: #96989d;
-    transition: 0.4s;
+    transition: 0.3s;
     display: ${(props) => (props.inputLength ? "none" : "")};
   }
 
@@ -52,10 +55,36 @@ const StyledDiv = styled.div`
     color: #1a73e8;
     font-size: 0.8rem;
     z-index: 10;
+    font-weight: 400;
+  }
+
+  & input[type="date"]::-webkit-datetime-edit-text {
+    -webkit-appearance: ${(props) => (props.inputLength ? "" : "none")};
+    display: ${(props) => (props.inputLength ? "" : "none")};
+  }
+
+  & input[type="date"]::-webkit-datetime-edit-month-field {
+    -webkit-appearance: ${(props) => (props.inputLength ? "" : "none")};
+    display: ${(props) => (props.inputLength ? "" : "none")};
+  }
+
+  & input[type="date"]::-webkit-datetime-edit-day-field {
+    -webkit-appearance: ${(props) => (props.inputLength ? "" : "none")};
+    display: ${(props) => (props.inputLength ? "" : "none")};
+  }
+
+  & input[type="date"]::-webkit-datetime-edit-year-field {
+    -webkit-appearance: ${(props) => (props.inputLength ? "" : "none")};
+    display: ${(props) => (props.inputLength ? "" : "none")};
+  }
+
+  input[type="date"]:valid {
+    font-size: 16px;
+    font-weight: 400;
   }
 `;
 
-const InputComponent = ({inputLabel, inputWidth="300px", inputHeight="50px", inputValid=true, labelTop= 2}) => {
+const InputComponent = ({inputLabel="inputLabel을 지정해주세요.", inputWidth="300px", inputHeight="50px", inputValid=true, labelTop= 2, inputType='text'}) => {
   const [inputLength, setInputLength] = useState(0)
   const inputLengthChecker = (e) => {
     setInputLength(e.target.value)
@@ -70,7 +99,7 @@ const InputComponent = ({inputLabel, inputWidth="300px", inputHeight="50px", inp
       inputLength={inputLength ? true : false}
     >
       <div>{inputLabel}</div>
-      <input type="text" id="label" autoComplete="off" onChange={inputLengthChecker}/>
+      <input type={inputType} id="label" autoComplete="off" onChange={inputLengthChecker}/>
       <label htmlFor="label">{inputLabel}</label>
     </StyledDiv>
   );
