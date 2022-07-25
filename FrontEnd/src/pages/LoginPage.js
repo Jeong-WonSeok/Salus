@@ -5,8 +5,9 @@ import LoginLogo from '../components/LoginLogo';
 
 const LoginPage = () => {
   return (
-    <AuthWrapper>
+    <AuthWrapper className="d-flex">
       <LoginLogo />
+      <p>로그인</p>
     </AuthWrapper>
   );
 };

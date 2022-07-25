@@ -1,9 +1,10 @@
-import React from "react";
-import AuthWrapper from "../layout-wrapper/AuthWrapper";
-import InputComponent from "../components/InputComponent";
-import styled from "styled-components";
-import ButtonComponent from "../components/ButtonComponent";
-import ProfileImgForm from "../components/ProfileImgForm";
+import React from 'react';
+import AuthWrapper from '../layout-wrapper/AuthWrapper';
+import InputComponent from '../components/InputComponent';
+import styled from 'styled-components';
+import ButtonComponent from '../components/ButtonComponent';
+import ProfileImgForm from '../components/ProfileImgForm';
+import InputToggleComponent from '../components/InputToggleComponent';
 
 // 로고 사진 대신 사용하는 임시 Div 스타일
 const DivStyle = styled.div`
@@ -16,10 +17,10 @@ const DivStyle = styled.div`
 
 // 회원가입 페이지에서 사용할 div 스타일
 const Div = styled.div`
-  margin-bottom: ${(props) => (props.mb ? props.mb + "px" : 0)};
-  margin-top: ${(props) => (props.mt ? props.mt + "px" : 0)};
-  margin-right: ${(props) => (props.mr ? props.mr + "px" : 0)};
-  margin-left: ${(props) => (props.ml ? props.ml + "px" : 0)};
+  margin-bottom: ${(props) => (props.mb ? props.mb + 'px' : 0)};
+  margin-top: ${(props) => (props.mt ? props.mt + 'px' : 0)};
+  margin-right: ${(props) => (props.mr ? props.mr + 'px' : 0)};
+  margin-left: ${(props) => (props.ml ? props.ml + 'px' : 0)};
 `;
 
 const FormContainer = styled.form`
@@ -27,14 +28,12 @@ const FormContainer = styled.form`
   height: 100%;
 `;
 
-
 const SignupPage = () => {
-  const classList = ["d-flex"];
+  const classList = ['d-flex'];
   const SubmitHandler = (e) => {
     e.preventDefault();
     console.log(e);
   };
-
 
   return (
     <AuthWrapper classList={classList}>
@@ -71,6 +70,7 @@ const SignupPage = () => {
                   inputWidth="330px"
                   inputValid={true}
                   labelTop={1.3}
+                  inputType="date"
                 ></InputComponent>
               </Div>
             </Div>
@@ -103,7 +103,7 @@ const SignupPage = () => {
                   labelTop={1.3}
                 ></InputComponent>
               </Div>
-              <Div>
+              <Div mb={65}>
                 <InputComponent
                   inputLabel="휴대전화"
                   inputHeight="25px"
@@ -113,27 +113,15 @@ const SignupPage = () => {
                 ></InputComponent>
               </Div>
               <Div>
-                <InputComponent
-                  inputLabel="성별"
-                  inputHeight="25px"
-                  inputWidth={50}
-                  inputValid={true}
-                  labelTop={1.3}
-                ></InputComponent>
+                <InputToggleComponent></InputToggleComponent>
               </Div>
             </Div>
           </div>
 
           <div className="d-flex justify-content-center">
             <div>
-              <ButtonComponent
-                inputWidth={358}
-                buttonHeigh={50}
-                buttonText="회원 가입"
-              ></ButtonComponent>
-              <div className="d-flex justify-content-center mt-3">
-                다른 아이디로 로그인 하기
-              </div>
+              <ButtonComponent inputWidth={358} buttonHeigh={50} buttonText="회원 가입"></ButtonComponent>
+              <div className="d-flex justify-content-center mt-3">다른 아이디로 로그인 하기</div>
             </div>
           </div>
         </Div>
