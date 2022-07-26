@@ -9,10 +9,10 @@ import SignupLogo from "../components/SignupLogo";
 
 // 회원가입 페이지에서 사용할 div 스타일
 const Div = styled.div`
-  margin-bottom: ${(props) => (props.mb ? props.mb + "px" : 0)};
-  margin-top: ${(props) => (props.mt ? props.mt + "px" : 0)};
-  margin-right: ${(props) => (props.mr ? props.mr + "px" : 0)};
-  margin-left: ${(props) => (props.ml ? props.ml + "px" : 0)};
+  margin-bottom: ${(props) => (props.mb ? props.mb + 'px' : 0)};
+  margin-top: ${(props) => (props.mt ? props.mt + 'px' : 0)};
+  margin-right: ${(props) => (props.mr ? props.mr + 'px' : 0)};
+  margin-left: ${(props) => (props.ml ? props.ml + 'px' : 0)};
 `;
 
 const FormContainer = styled.form`
@@ -185,14 +185,8 @@ const SignupPage = () => {
 
           <div className="d-flex justify-content-center">
             <div>
-              <ButtonComponent
-                inputWidth={358}
-                buttonHeigh={50}
-                buttonText="회원 가입"
-              ></ButtonComponent>
-              <div className="d-flex justify-content-center mt-3">
-                다른 아이디로 로그인 하기
-              </div>
+              <ButtonComponent inputWidth={358} buttonHeigh={50} buttonText="회원 가입"></ButtonComponent>
+              <div className="d-flex justify-content-center mt-3">다른 아이디로 로그인 하기</div>
             </div>
           </div>
         </Div>

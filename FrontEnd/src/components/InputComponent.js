@@ -1,16 +1,16 @@
 import React from 'react';
-import styled from 'styled-components'
+import styled from 'styled-components';
 import { useState } from 'react';
 //인터렉티브 인풋 컴포넌트
 const StyledDiv = styled.div`
-  width: ${(props) => (props.inputWidth ? props.inputWidth : 0 + "px")};
-  height: ${(props) => (props.inputHeight ? props.inputHeight : 0 + "px")};
+  width: ${(props) => (props.inputWidth ? props.inputWidth : 0 + 'px')};
+  height: ${(props) => (props.inputHeight ? props.inputHeight : 0 + 'px')};
   color: #443846;
   position: relative;
 
   & input {
     position: absolute;
-    border: 2px solid ${(props) => (props.inputValid ? "#dcddde" : "red")};
+    border: 2px solid ${(props) => (props.inputValid ? '#dcddde' : 'red')};
     width: 100%;
     height: 100%;
     border-radius: 9px;
@@ -25,13 +25,13 @@ const StyledDiv = styled.div`
 
   & label {
     position: absolute;
-    top: ${(props) => props.labelTop + "rem"};
+    top: ${(props) => props.labelTop + 'rem'};
     left: 2rem;
     width: 100%;
     height: 100%;
     color: #96989d;
     transition: 0.3s;
-    display: ${(props) => (props.inputLength ? "none" : "")};
+    display: ${(props) => (props.inputLength ? 'none' : '')};
   }
 
   & div {
@@ -41,11 +41,11 @@ const StyledDiv = styled.div`
     font-weight: 500;
     color: #1a73e8;
     font-size: 0.8rem;
-    display: ${(props) => (props.inputLength ? "" : "none")};
+    display: ${(props) => (props.inputLength ? '' : 'none')};
   }
 
   & input:focus {
-    border: 2px solid ${(props) => (props.inputValid ? "#1A73E8" : "red")};
+    border: 2px solid ${(props) => (props.inputValid ? '#1A73E8' : 'red')};
   }
 
   & input:focus + label {
@@ -58,27 +58,27 @@ const StyledDiv = styled.div`
     font-weight: 400;
   }
 
-  & input[type="date"]::-webkit-datetime-edit-text {
-    -webkit-appearance: ${(props) => (props.inputLength ? "" : "none")};
-    display: ${(props) => (props.inputLength ? "" : "none")};
+  & input[type='date']::-webkit-datetime-edit-text {
+    -webkit-appearance: ${(props) => (props.inputLength ? '' : 'none')};
+    display: ${(props) => (props.inputLength ? '' : 'none')};
   }
 
-  & input[type="date"]::-webkit-datetime-edit-month-field {
-    -webkit-appearance: ${(props) => (props.inputLength ? "" : "none")};
-    display: ${(props) => (props.inputLength ? "" : "none")};
+  & input[type='date']::-webkit-datetime-edit-month-field {
+    -webkit-appearance: ${(props) => (props.inputLength ? '' : 'none')};
+    display: ${(props) => (props.inputLength ? '' : 'none')};
   }
 
-  & input[type="date"]::-webkit-datetime-edit-day-field {
-    -webkit-appearance: ${(props) => (props.inputLength ? "" : "none")};
-    display: ${(props) => (props.inputLength ? "" : "none")};
+  & input[type='date']::-webkit-datetime-edit-day-field {
+    -webkit-appearance: ${(props) => (props.inputLength ? '' : 'none')};
+    display: ${(props) => (props.inputLength ? '' : 'none')};
   }
 
-  & input[type="date"]::-webkit-datetime-edit-year-field {
-    -webkit-appearance: ${(props) => (props.inputLength ? "" : "none")};
-    display: ${(props) => (props.inputLength ? "" : "none")};
+  & input[type='date']::-webkit-datetime-edit-year-field {
+    -webkit-appearance: ${(props) => (props.inputLength ? '' : 'none')};
+    display: ${(props) => (props.inputLength ? '' : 'none')};
   }
 
-  input[type="date"]:valid {
+  input[type='date']:valid {
     font-size: 16px;
     font-weight: 400;
   }
