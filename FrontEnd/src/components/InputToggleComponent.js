@@ -14,10 +14,10 @@ const Label = styled.label`
 
   & span {
     position: absolute;
-    top: 0;
+    top: 4px;
     left: 0;
     width: 160px;
-    height: 50px;
+    height: 40px;
     background: white;
     border: 1.5px solid white;
     border-radius: 14px;
@@ -33,7 +33,7 @@ const Label = styled.label`
   }
 
   & input:checked ~ span {
-    left: 190px;
+    left: 187px;
   }
 `;
 

@@ -84,19 +84,12 @@ const StyledDiv = styled.div`
   }
 `;
 
-const InputComponent = ({
-  inputLabel = 'inputLabel을 지정해주세요.',
-  inputWidth = '300px',
-  inputHeight = '50px',
-  inputValid = true,
-  labelTop = 2,
-  inputType = 'text',
-  children,
-}) => {
-  const [inputLength, setInputLength] = useState(0);
+const InputComponent = ({inputName, inputEvent, inputId, inputLabel="inputLabel을 지정해주세요.", inputWidth="300px", inputHeight="50px", inputValid=true, labelTop= 2, inputType='text'}) => {
+  const [inputLength, setInputLength] = useState(0)
   const inputLengthChecker = (e) => {
-    setInputLength(e.target.value);
-  };
+    setInputLength(e.target.value)
+    inputEvent(e, inputType)
+  }
 
   return (
     <StyledDiv
@@ -107,9 +100,14 @@ const InputComponent = ({
       inputLength={inputLength ? true : false}
     >
       <div>{inputLabel}</div>
-      <input type={inputType} id="label" autoComplete="off" onChange={inputLengthChecker} />
-      <label htmlFor="label">{inputLabel}</label>
-      {children}
+      <input
+        type={inputType}
+        id={`${inputId}`}
+        autoComplete="off"
+        onChange={inputLengthChecker}
+        name = {inputName}
+      />
+      <label htmlFor={`${inputId}`}>{inputLabel}</label>
     </StyledDiv>
   );
 };
