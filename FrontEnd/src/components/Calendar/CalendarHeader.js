@@ -1,4 +1,28 @@
 import React from "react";
+import styled from "styled-components";
+
+const Header = styled.div`
+  background-color: white;
+  text-align: center;
+  min-height: 2rem;
+  line-height: 2rem;
+  color: var(--linear-blue);
+  font-family: var(--font-book);
+  font-weight: 700;
+  display: flex;
+`;
+
+const Previous = styled.div`
+  flex: 1;
+  text-align: left;
+  margin-left: 1rem;
+`;
+
+const Next = styled.div`
+  flex: 1;
+  text-align: left;
+  margin-right: 1rem;
+`;
 
 const CalendarHeader = ({ value, setValue }) => {
   function currMonthName() {
@@ -22,20 +46,15 @@ const CalendarHeader = ({ value, setValue }) => {
   };
 
   return (
-    <div className="header">
-      <div
-        className="previous"
-        onClick={() => !thisMonth() && setValue(prevMonth())}
-      >
-        {!thisMonth() ? String.fromCharCode(171) : null}
-      </div>
-      <div className="current">
+    <Header>
+      <div>
         {currMonthName()} {currYear()}
       </div>
-      <div className="next" onClick={() => setValue(nextMonth())}>
-        {String.fromCharCode(187)}
-      </div>
-    </div>
+      <Previous onClick={() => !thisMonth() && setValue(prevMonth())}>
+        {!thisMonth() ? "<" : null}
+      </Previous>
+      <Next onClick={() => setValue(nextMonth())}>></Next>
+    </Header>
   );
 };
 
