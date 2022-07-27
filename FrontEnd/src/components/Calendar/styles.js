@@ -1,3 +1,5 @@
+import moment from "moment";
+
 function isSelected(day, value) {
   return value.isSame(day, "day");
 }
@@ -5,15 +7,44 @@ function isSelected(day, value) {
 export function beforeToday(day) {
   return day.isBefore(new Date(), "day");
 }
+export function beforeMonth(day, value) {
+  return day.isBefore(value.clone().startOf("month"), "day");
+}
+
+export function afterMonth(day, value) {
+  return day.isAfter(value.clone().endOf("month"), "day");
+}
 
 function isToday(day) {
   return day.isSame(new Date(), "day");
 }
 
-function dayStyles(day, value) {
-  if (beforeToday(day)) return "before";
+function isEvent(day, events) {
+  for (const iterator of events) {
+    if (day.isSame(moment(iterator.date), "day")) {
+      return iterator;
+    }
+  }
+}
+
+function dayStyles(day, value, events) {
+  const event = isEvent(day, events);
+  if (isToday(day)) {
+    console.log("hi", day);
+    return "today";
+  }
+  if (event) {
+    return {
+      style: "events",
+      volume: event.volume,
+      calorie: event.calorie,
+      type: event.type,
+    };
+  }
+
+  if (beforeMonth(day, value)) return "before";
+  if (afterMonth(day, value)) return "before";
   if (isSelected(day, value)) return "selected";
-  if (isToday(day)) return "today";
   return "";
 }
 
