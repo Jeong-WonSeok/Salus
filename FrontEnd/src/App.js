@@ -1,4 +1,5 @@
 import { Route, Routes, Navigate } from 'react-router-dom';
+import KioskMainPage from './pages/KioskMainPage';
 import LoginPage from './pages/LoginPage';
 import SignupPage from './pages/SignupPage';
 import CalendarPage from './pages/CalendarPage';
@@ -15,6 +16,7 @@ function App() {
         <Route path="/signup" element={<SignupPage />} />
         <Route path="/calendar" element={<CalendarPage />} />
         <Route path="/muscle" element={<MuscleTest />} />
+        <Route path="/kiosk" element={<KioskMainPage />} />
       </Routes>
     </div>
   );
