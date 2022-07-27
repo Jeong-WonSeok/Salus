@@ -3,9 +3,9 @@ import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 
 import AuthWrapper from '../layout-wrapper/AuthWrapper';
-import LoginLogo from '../components/LoginLogo';
-import InputComponent from '../components/InputComponent';
-import ButtonComponent from '../components/ButtonComponent';
+import LoginLogo from '../components/Auth/LoginLogo';
+import InputComponent from '../components/Common/InputComponent';
+import ButtonComponent from '../components/Common/ButtonComponent';
 
 import Google from '../components/SocialLogin/Google';
 import Naver from '../components/SocialLogin/Naver';

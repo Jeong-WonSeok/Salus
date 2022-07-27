@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
 
-import FindId from '../components/FindId';
-import FindPw from '../components/FindPw';
+import FindId from '../components/Auth/FindId';
+import FindPw from '../components/Auth/FindPw';
 
 const Wrapper = styled.div`
   width: 785px;

@@ -2,7 +2,7 @@ import React from "react";
 import styled from "@emotion/styled";
 
 const Circle = styled.circle`
-  animation: circle-fill-animation 2s infinite;
+  animation: circle-fill-animation 2s ease;
   stroke-linecap: round;
 
   @keyframes circle-fill-animation {
@@ -18,6 +18,7 @@ const Circle = styled.circle`
 const Div = styled.div`
   width: ${props => props.roundWidth ? props.roundWidth : "180px"};
   height: ${props => props.roundHeight ? props.roundHeight : "180px"};
+  position: relative;
 `
 const TextDiv = styled.div`
   position: absolute;

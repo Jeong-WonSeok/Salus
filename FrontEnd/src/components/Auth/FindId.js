@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-import InputComponent from './InputComponent';
+import InputComponent from '../Common/InputComponent';
 
 const Div = styled.div`
   margin-bottom: ${(props) => (props.mb ? props.mb + 'px' : 0)};
