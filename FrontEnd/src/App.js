@@ -4,6 +4,7 @@ import LoginPage from './pages/LoginPage';
 import SignupPage from './pages/SignupPage';
 import CalendarPage from './pages/CalendarPage';
 import FindAccountPage from './pages/FindAccountPage';
+import MuscleTest from './pages/MuscleTest';
 
 function App() {
   return (
@@ -14,6 +15,7 @@ function App() {
         <Route path="/findaccount" element={<FindAccountPage />} />
         <Route path="/signup" element={<SignupPage />} />
         <Route path="/calendar" element={<CalendarPage />} />
+        <Route path="/muscle" element={<MuscleTest />} />
         <Route path="/kiosk" element={<KioskMainPage/>}/>
       </Routes>
     </div>
