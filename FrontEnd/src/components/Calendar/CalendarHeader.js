@@ -50,10 +50,8 @@ const CalendarHeader = ({ value, setValue }) => {
       <div>
         {currMonthName()} {currYear()}
       </div>
-      <Previous onClick={() => !thisMonth() && setValue(prevMonth())}>
-        {!thisMonth() ? "<" : null}
-      </Previous>
-      <Next onClick={() => setValue(nextMonth())}>></Next>
+      <Previous onClick={() => setValue(prevMonth())}>{"<"} </Previous>
+      <Next onClick={() => setValue(nextMonth())}>{">"}</Next>
     </Header>
   );
 };
