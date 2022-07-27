@@ -17,38 +17,6 @@
 CREATE DATABASE IF NOT EXISTS `salus` /*!40100 DEFAULT CHARACTER SET utf8mb4 */;
 USE `salus`;
 
-<<<<<<< Updated upstream
--- 테이블 salus.achievement 구조 내보내기
-CREATE TABLE IF NOT EXISTS `achievement` (
-  `achievementId` int(11) NOT NULL,
-  `achievementOrNot` tinyint(4) NOT NULL DEFAULT 0,
-  `achievementDay` datetime DEFAULT NULL,
-  `achievementName` varchar(40) NOT NULL,
-  PRIMARY KEY (`achievementId`),
-  UNIQUE KEY `achievementName` (`achievementName`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
--- 테이블 데이터 salus.achievement:~0 rows (대략적) 내보내기
-/*!40000 ALTER TABLE `achievement` DISABLE KEYS */;
-/*!40000 ALTER TABLE `achievement` ENABLE KEYS */;
-
--- 테이블 salus.achievement-conditions 구조 내보내기
-CREATE TABLE IF NOT EXISTS `achievement-conditions` (
-  `achievementConditionsId` int(11) NOT NULL,
-  `achievementConditions` int(11) NOT NULL,
-  `achievementContent` text DEFAULT NULL,
-  `achievementId` int(11) NOT NULL,
-  PRIMARY KEY (`achievementConditionsId`),
-  KEY `FK__achievement` (`achievementId`),
-  CONSTRAINT `FK__achievement` FOREIGN KEY (`achievementId`) REFERENCES `achievement` (`achievementId`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
--- 테이블 데이터 salus.achievement-conditions:~0 rows (대략적) 내보내기
-/*!40000 ALTER TABLE `achievement-conditions` DISABLE KEYS */;
-/*!40000 ALTER TABLE `achievement-conditions` ENABLE KEYS */;
-
-=======
->>>>>>> Stashed changes
 -- 테이블 salus.board 구조 내보내기
 CREATE TABLE IF NOT EXISTS `board` (
   `subjectNo` int(11) NOT NULL AUTO_INCREMENT,
@@ -60,21 +28,11 @@ CREATE TABLE IF NOT EXISTS `board` (
   `firstRegist` datetime NOT NULL DEFAULT current_timestamp(),
   `updateRegist` datetime NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
   PRIMARY KEY (`subjectNo`),
-<<<<<<< Updated upstream
-  KEY `FK1_manager_board` (`managerId`),
-  CONSTRAINT `FK1_manager_board` FOREIGN KEY (`managerId`) REFERENCES `manager` (`managerId`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
--- 테이블 데이터 salus.board:~0 rows (대략적) 내보내기
-/*!40000 ALTER TABLE `board` DISABLE KEYS */;
-/*!40000 ALTER TABLE `board` ENABLE KEYS */;
-=======
   KEY `FK1_manager_board` (`board_gymId`) USING BTREE,
   CONSTRAINT `FK1_gymId_board` FOREIGN KEY (`board_gymId`) REFERENCES `gym` (`gymId`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- 내보낼 데이터가 선택되어 있지 않습니다.
->>>>>>> Stashed changes
 
 -- 테이블 salus.daily_routine 구조 내보내기
 CREATE TABLE IF NOT EXISTS `daily_routine` (
@@ -83,18 +41,6 @@ CREATE TABLE IF NOT EXISTS `daily_routine` (
   `progress` double DEFAULT NULL,
   `dailyExcerciseTime` int(11) DEFAULT NULL,
   `userId` int(11) NOT NULL,
-<<<<<<< Updated upstream
-  `rfidKey` bigint(20) DEFAULT NULL,
-  `oneDayRoutineTitle` varchar(20) NOT NULL,
-  PRIMARY KEY (`dailyRoutineId`),
-  KEY `FK_daily_routine_user` (`userId`),
-  KEY `FK_daily_routine_user_2` (`rfidKey`),
-  KEY `excerciseDay` (`excerciseDay`),
-  KEY `FK_daily_routine_routine` (`oneDayRoutineTitle`),
-  CONSTRAINT `FK_daily_routine_routine` FOREIGN KEY (`oneDayRoutineTitle`) REFERENCES `routine` (`oneDayRoutineTitle`) ON DELETE CASCADE ON UPDATE CASCADE,
-  CONSTRAINT `FK_daily_routine_user` FOREIGN KEY (`userId`) REFERENCES `user` (`userid`) ON DELETE CASCADE ON UPDATE CASCADE,
-  CONSTRAINT `FK_daily_routine_user_2` FOREIGN KEY (`rfidKey`) REFERENCES `user` (`rfidKey`) ON DELETE CASCADE ON UPDATE CASCADE
-=======
   `oneDayRoutineTitle` varchar(20) NOT NULL,
   `firstRegist` datetime NOT NULL DEFAULT current_timestamp(),
   `updateRegist` datetime NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
@@ -104,7 +50,6 @@ CREATE TABLE IF NOT EXISTS `daily_routine` (
   KEY `FK_daily_routine_routine` (`oneDayRoutineTitle`),
   CONSTRAINT `FK_daily_routine_routine` FOREIGN KEY (`oneDayRoutineTitle`) REFERENCES `routine` (`oneDayRoutineTitle`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `FK_daily_routine_user` FOREIGN KEY (`userId`) REFERENCES `user` (`userid`) ON DELETE CASCADE ON UPDATE CASCADE
->>>>>>> Stashed changes
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- 내보낼 데이터가 선택되어 있지 않습니다.
@@ -118,28 +63,6 @@ CREATE TABLE IF NOT EXISTS `daily_routine_detail` (
   `weightNow` int(11) DEFAULT NULL,
   `numberNow` int(11) DEFAULT NULL,
   `setNow` int(11) DEFAULT NULL,
-<<<<<<< Updated upstream
-  `dailyRoutineId` int(11) NOT NULL,
-  `equipmentId` int(11) NOT NULL,
-  `equipmentName` varchar(30) NOT NULL,
-  `equipmentCategory` varchar(20) DEFAULT NULL,
-  PRIMARY KEY (`dailyExcerciseId`),
-  KEY `FK_daily_routine_excercise_daily_routine` (`dailyRoutineId`),
-  KEY `FK_daily_routine_excercise_daily_routine_2` (`excerciseDay`),
-  KEY `FK_daily_routine_excercise_fitness_equiepment` (`equipmentId`),
-  KEY `FK_daily_routine_excercise_fitness_equiepment_2` (`equipmentName`),
-  KEY `FK_daily_routine_excercise_fitness_equiepment_3` (`equipmentCategory`),
-  CONSTRAINT `FK_daily_routine_excercise_daily_routine` FOREIGN KEY (`dailyRoutineId`) REFERENCES `daily_routine` (`dailyRoutineId`) ON DELETE CASCADE ON UPDATE CASCADE,
-  CONSTRAINT `FK_daily_routine_excercise_daily_routine_2` FOREIGN KEY (`excerciseDay`) REFERENCES `daily_routine` (`excerciseDay`) ON DELETE CASCADE ON UPDATE CASCADE,
-  CONSTRAINT `FK_daily_routine_excercise_fitness_equiepment` FOREIGN KEY (`equipmentId`) REFERENCES `fitness_equiepment` (`equipmentId`) ON DELETE CASCADE ON UPDATE CASCADE,
-  CONSTRAINT `FK_daily_routine_excercise_fitness_equiepment_2` FOREIGN KEY (`equipmentName`) REFERENCES `fitness_equiepment` (`equipmentName`) ON DELETE CASCADE ON UPDATE CASCADE,
-  CONSTRAINT `FK_daily_routine_excercise_fitness_equiepment_3` FOREIGN KEY (`equipmentCategory`) REFERENCES `fitness_equiepment` (`equipmentCategory`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
--- 테이블 데이터 salus.daily_routine_detail:~0 rows (대략적) 내보내기
-/*!40000 ALTER TABLE `daily_routine_detail` DISABLE KEYS */;
-/*!40000 ALTER TABLE `daily_routine_detail` ENABLE KEYS */;
-=======
   `excerciseDay` date NOT NULL,
   `dailyRoutineId` int(11) NOT NULL,
   `equipmentName` varchar(30) NOT NULL,
@@ -153,7 +76,6 @@ CREATE TABLE IF NOT EXISTS `daily_routine_detail` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- 내보낼 데이터가 선택되어 있지 않습니다.
->>>>>>> Stashed changes
 
 -- 테이블 salus.fitness_equiepment 구조 내보내기
 CREATE TABLE IF NOT EXISTS `fitness_equiepment` (
@@ -215,13 +137,7 @@ CREATE TABLE IF NOT EXISTS `inbody_profile` (
   CONSTRAINT `FK__user_2` FOREIGN KEY (`rfidKey`) REFERENCES `user` (`rfidKey`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
-<<<<<<< Updated upstream
--- 테이블 데이터 salus.inbody_profile:~0 rows (대략적) 내보내기
-/*!40000 ALTER TABLE `inbody_profile` DISABLE KEYS */;
-/*!40000 ALTER TABLE `inbody_profile` ENABLE KEYS */;
-=======
 -- 내보낼 데이터가 선택되어 있지 않습니다.
->>>>>>> Stashed changes
 
 -- 테이블 salus.manager 구조 내보내기
 CREATE TABLE IF NOT EXISTS `manager` (
@@ -253,22 +169,6 @@ CREATE TABLE IF NOT EXISTS `routine` (
   `targetSet` int(11) DEFAULT NULL,
   `targetTime` int(11) DEFAULT NULL,
   `equipmentName` varchar(64) DEFAULT NULL,
-<<<<<<< Updated upstream
-  `equipmentCategory` varchar(20) DEFAULT NULL,
-  PRIMARY KEY (`routineId`),
-  KEY `fk1_manager_routine` (`managerId`),
-  KEY `FK_routine_fitness_equiepment` (`equipmentName`),
-  KEY `FK_routine_fitness_equiepment_2` (`equipmentCategory`),
-  KEY `oneDayRoutineTitle` (`oneDayRoutineTitle`),
-  CONSTRAINT `FK_routine_fitness_equiepment` FOREIGN KEY (`equipmentName`) REFERENCES `fitness_equiepment` (`equipmentName`) ON DELETE CASCADE ON UPDATE CASCADE,
-  CONSTRAINT `FK_routine_fitness_equiepment_2` FOREIGN KEY (`equipmentCategory`) REFERENCES `fitness_equiepment` (`equipmentCategory`) ON DELETE CASCADE ON UPDATE CASCADE,
-  CONSTRAINT `fk1_manager_routine` FOREIGN KEY (`managerId`) REFERENCES `manager` (`managerId`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
--- 테이블 데이터 salus.routine:~0 rows (대략적) 내보내기
-/*!40000 ALTER TABLE `routine` DISABLE KEYS */;
-/*!40000 ALTER TABLE `routine` ENABLE KEYS */;
-=======
   `firstRegist` datetime NOT NULL DEFAULT current_timestamp(),
   `updateRegist` datetime NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
   PRIMARY KEY (`routineId`),
@@ -280,75 +180,47 @@ CREATE TABLE IF NOT EXISTS `routine` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- 내보낼 데이터가 선택되어 있지 않습니다.
->>>>>>> Stashed changes
 
 -- 테이블 salus.user 구조 내보내기
 CREATE TABLE IF NOT EXISTS `user` (
   `userid` int(11) NOT NULL AUTO_INCREMENT,
   `rfidKey` bigint(20) DEFAULT NULL,
+  `rfidKey2` bigint(20) DEFAULT NULL,
+  `rfidKey3` bigint(20) DEFAULT NULL,
   `email` varchar(40) NOT NULL DEFAULT '',
-  `lastName` varchar(20) NOT NULL DEFAULT '',
-  `firstName` varchar(20) NOT NULL DEFAULT '',
-  `password` varchar(30) NOT NULL DEFAULT '',
-  `phone` varchar(20) NOT NULL DEFAULT '',
-  `birthDay` datetime NOT NULL,
-  `gymPassStart` datetime DEFAULT NULL,
-  `gymPassEnd` datetime DEFAULT NULL,
-  `excerciseStart` datetime DEFAULT NULL,
+  `name` varchar(20) NOT NULL DEFAULT '',
+  `password` varchar(30) DEFAULT '',
+  `phone` varchar(20) DEFAULT '',
+  `birthDay` date DEFAULT NULL,
+  `gender` varchar(10) DEFAULT '',
+  `gymPassStart` date DEFAULT NULL,
+  `gymPassEnd` date DEFAULT NULL,
+  `excerciseStart` date DEFAULT NULL,
   `totalexcerciseTime` int(10) unsigned zerofill DEFAULT NULL,
   `dailyStart` datetime DEFAULT NULL,
   `dailyEnd` datetime DEFAULT NULL,
-  `excerciseCheck` tinyint(4) NOT NULL,
+  `excerciseCheck` tinyint(4) DEFAULT NULL,
   `gymId` int(11) DEFAULT NULL,
   `firstRegist` datetime NOT NULL DEFAULT current_timestamp(),
   `updateRegist` datetime NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
   PRIMARY KEY (`userid`) USING BTREE,
   UNIQUE KEY `email` (`email`),
   UNIQUE KEY `rfidKey` (`rfidKey`),
+  UNIQUE KEY `rfidKey2` (`rfidKey2`),
+  UNIQUE KEY `rfidKey3` (`rfidKey3`),
   KEY `gymId` (`gymId`),
   CONSTRAINT `gymId` FOREIGN KEY (`gymId`) REFERENCES `gym` (`gymId`) ON DELETE SET NULL ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8mb4;
 
-<<<<<<< Updated upstream
--- 테이블 데이터 salus.user:~3 rows (대략적) 내보내기
-/*!40000 ALTER TABLE `user` DISABLE KEYS */;
-INSERT INTO `user` (`userid`, `rfidKey`, `email`, `lastName`, `firstName`, `password`, `phone`, `birthDay`, `gymPassStart`, `gymPassEnd`, `excerciseStart`, `totalexcerciseTime`, `dailyStart`, `dailyEnd`, `excerciseCheck`, `gymId`) VALUES
-	(3, NULL, 'ssafy@ssafy.com', '정', '싸피', '1234', '010-1234-1234', '1995-11-16 00:00:00', NULL, NULL, NULL, NULL, NULL, NULL, 0, NULL),
-	(7, NULL, 'ssafy1@ssafy.com', '정', '싸피', '1234', '010-4444-4444', '1996-11-16 00:00:00', NULL, NULL, NULL, NULL, NULL, NULL, 0, NULL),
-	(8, NULL, 'ssafy2@ssafy.com', '정', '싸피', '1234', '010-4444-4444', '1995-11-16 00:00:00', NULL, NULL, NULL, NULL, NULL, NULL, 0, NULL),
-	(9, NULL, 'ssafy3@ssafy.com', '정', '싸피', '1234', '010-4444-4444', '1995-11-16 16:14:00', NULL, NULL, NULL, NULL, NULL, NULL, 0, NULL);
-/*!40000 ALTER TABLE `user` ENABLE KEYS */;
-
--- 테이블 salus.user-achievement 구조 내보내기
-CREATE TABLE IF NOT EXISTS `user-achievement` (
-  `userId` int(11) NOT NULL,
-  `rfidKey` bigint(20) DEFAULT NULL,
-  `achievementId` int(11) NOT NULL,
-  KEY `FK_user-achievement_user` (`userId`),
-  KEY `FK2_user-achievement_user` (`rfidKey`),
-  KEY `FK_user-achievement_achievement` (`achievementId`),
-  CONSTRAINT `FK2_user-achievement_user` FOREIGN KEY (`rfidKey`) REFERENCES `user` (`rfidKey`) ON DELETE CASCADE ON UPDATE CASCADE,
-  CONSTRAINT `FK_user-achievement_achievement` FOREIGN KEY (`achievementId`) REFERENCES `achievement` (`achievementId`) ON DELETE CASCADE ON UPDATE CASCADE,
-  CONSTRAINT `FK_user-achievement_user` FOREIGN KEY (`userId`) REFERENCES `user` (`userid`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
--- 테이블 데이터 salus.user-achievement:~0 rows (대략적) 내보내기
-/*!40000 ALTER TABLE `user-achievement` DISABLE KEYS */;
-/*!40000 ALTER TABLE `user-achievement` ENABLE KEYS */;
-=======
 -- 내보낼 데이터가 선택되어 있지 않습니다.
->>>>>>> Stashed changes
 
 -- 테이블 salus.user-routine 구조 내보내기
 CREATE TABLE IF NOT EXISTS `user-routine` (
   `userId` int(11) NOT NULL,
   `rfidKey` bigint(20) DEFAULT NULL,
   `routineId` int(11) NOT NULL,
-<<<<<<< Updated upstream
-=======
   `firstRegist` datetime NOT NULL DEFAULT current_timestamp(),
   `updateRegist` datetime NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
->>>>>>> Stashed changes
   KEY `FK1_user_routine` (`userId`),
   KEY `FK2_user-routine_user` (`rfidKey`),
   KEY `FK3_user-routineroutine` (`routineId`),

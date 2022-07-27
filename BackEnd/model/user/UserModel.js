@@ -28,16 +28,29 @@ const selectUser = async(req, res)=>{
     })
 }
 
+const selectSignin = async(req, res)=>{
+    const body = req.body;
+    var param = {
+        email : body.email,
+        password : body.password
+    }
+    var format = {language : 'sql', indent: ''};
+    var query = mybatisMapper.getStatement('user', 'signin', param, format);
+    console.log(query);
+    conn.query(query, (err, results)=>{
+        if (err) console.log(err);
+        console.log(results);
+        return res.json(results);
+    })
+}
+
 const insertUser = async(req, res)=>{
     const body = req.body;
     var param = {
         email : body.email,
-        lastName : body.lastName,
-        firstName : body.firstName,
-        password : body.password,
-        phone : body.phone,
+        name : body.name,
         birthDay : body.birthDay,
-        excerciseCheck : body.excerciseCheck
+        gender : body.gender
     }
     var format = {language : 'sql', indent: ''};
     var query = mybatisMapper.getStatement('user', 'signup', param, format);
@@ -52,5 +65,6 @@ const insertUser = async(req, res)=>{
 module.exports = {
     selectAll,
     selectUser,
-    insertUser
+    insertUser,
+    selectSignin
 }

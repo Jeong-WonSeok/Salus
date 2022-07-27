@@ -15,11 +15,20 @@
     WHERE
       email = #{email}
   </select>
+  <select id="signin">
+    SELECT
+      lastName,
+      firstName,
+      phone
+    FROM
+      user
+    WHERE email = #{email} AND password = #{password}
+  </select>
   <insert id="signup">
     insert
     into
     user
-    (email, lastName, firstName, password, phone, birthDay, excerciseCheck)
-    VALUES (#{email}, #{lastName}, #{firstName}, #{password}, #{phone}, #{birthDay}, #{excerciseCheck})
-  </insert>
+    (email, name,birthDay, gender)
+    VALUES (#{email}, #{name}, #{birthDay}, #{gender})
+  </insert
 </mapper>

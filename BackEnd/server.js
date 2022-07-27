@@ -2,8 +2,11 @@ const http = require("http");
 const express = require("express");
 const bodyParser = require("body-parser");
 const routers = require("./routers");
+const passportConfig = require("./passport");
 const app = express();
 
+// passPort
+passportConfig(app);
 
 // bodyParser
 app.use(bodyParser.json());
