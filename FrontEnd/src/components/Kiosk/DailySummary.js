@@ -6,7 +6,7 @@ const Round = styled.div`
   border-radius: 50%;
   width: 16.666vw;
   height: 9.375vh;
-  border: 8px solid transparent;
+  border: 0.5rem solid transparent;
   background-image: linear-gradient(#fff, #fff),
     linear-gradient(284.21deg, #92a3fd -7.95%, #9dceff 138.55%);
   background-origin: border-box;

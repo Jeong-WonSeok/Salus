@@ -1,11 +1,24 @@
 import React from "react";
-import { LogoDiv } from "../../styles/kiosk.style";
-import { Div } from "../../styles/kiosk.style";
+import { LogoDiv, DailyLogoDiv, Div, CustomDiv } from "../../styles/kiosk.style";
 
 const StatsDayInfo = () => {
   return (
-    <Div mt={20}>
-      <Div fontWeight={600} fontSize="1.7rem" textAlign="center">
+    <CustomDiv
+      mt={20}
+      bgMain="white"
+      ml={40}
+      mr={20}
+      borderRadius={8}
+      divHeight={185}
+      divWidth={1008}
+    >
+      <Div
+        fontWeight={600}
+        fontSize="1.7rem"
+        textAlign="center"
+        mb={30}
+        pt={15}
+      >
         오늘의 기록
       </Div>
       <Div
@@ -16,63 +29,87 @@ const StatsDayInfo = () => {
         mt={20}
       >
         <Div>
-          <LogoDiv fontSize="1.5rem" fontWeight={700} flexDirection="column">
+          <DailyLogoDiv
+            fontSize="1.5rem"
+            fontWeight={700}
+            flexDirection="column"
+          >
             VOLUME
-          </LogoDiv>
+          </DailyLogoDiv>
           <Div
             fontSize="2.5rem"
             fontWeight={700}
             displayDiv="flex"
             bgMain="none"
+            ml={15}
+            mt={8}
           >
             51
             <Div>kg</Div>
           </Div>
         </Div>
         <Div>
-          <LogoDiv fontSize="1.5rem" fontWeight={700} flexDirection="column">
+          <DailyLogoDiv
+            fontSize="1.5rem"
+            fontWeight={700}
+            flexDirection="column"
+          >
             REPS
-          </LogoDiv>
+          </DailyLogoDiv>
           <Div
             fontSize="2.5rem"
             fontWeight={700}
             displayDiv="flex"
             bgMain="none"
+            ml={5}
+            mt={8}
           >
             51
             <Div>kg</Div>
           </Div>
         </Div>
         <Div>
-          <LogoDiv fontSize="1.5rem" fontWeight={700} flexDirection="column">
+          <DailyLogoDiv
+            fontSize="1.5rem"
+            fontWeight={700}
+            flexDirection="column"
+          >
             TIME
-          </LogoDiv>
+          </DailyLogoDiv>
           <Div
             fontSize="2.5rem"
             fontWeight={700}
             displayDiv="flex"
             bgMain="none"
+            ml={10}
+            mt={8}
           >
             51
             <Div>kg</Div>
           </Div>
         </Div>
         <Div>
-          <LogoDiv fontSize="1.5rem" fontWeight={700} flexDirection="column">
-            Calorie
-          </LogoDiv>
+          <DailyLogoDiv
+            fontSize="1.5rem"
+            fontWeight={700}
+            flexDirection="column"
+          >
+            CALORIE
+          </DailyLogoDiv>
           <Div
             fontSize="2.5rem"
             fontWeight={700}
             displayDiv="flex"
             bgMain="none"
+            mt={8}
+            ml={15}
           >
             51
             <Div>kg</Div>
           </Div>
         </Div>
       </Div>
-    </Div>
+    </CustomDiv>
   );
 };
 

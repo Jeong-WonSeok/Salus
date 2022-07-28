@@ -1,4 +1,4 @@
-import { axios } from "axios";
+import axios from "axios";
 import React, { useCallback, useState } from "react";
 
 // 세부 요청을 보내는 http 커스텀 훅

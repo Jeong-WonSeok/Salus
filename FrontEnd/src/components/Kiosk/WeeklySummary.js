@@ -3,7 +3,7 @@ import DailySummary from "./DailySummary";
 import styled from "styled-components";
 
 const Container = styled.div`
-  width: 95vw;
+  width: 93vw;
   height: 15.6vh;
   background-color: white;
   margin: 0 auto;
@@ -13,7 +13,7 @@ const Container = styled.div`
 
 const Header = styled.div`
   display: flex;
-  width: 95vw;
+  width: 93vw;
   padding-top: 2rem;
   margin-bottom: 2rem;
 `;
@@ -24,8 +24,8 @@ const Day = styled.div`
   font-size: 1.5rem;
   font-style: normal;
   font-weight: 600;
-  font-size: 24px;
-  line-height: 24px;
+  font-size: 1.5rem;
+  line-height: 1.5rem;
 `;
 
 const Icon = styled.div`
