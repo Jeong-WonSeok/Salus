@@ -21,7 +21,9 @@ const KioskMainPage = () => {
   ]);
   // 페이지 전체에 보여줄 상태
   const [kioskData, setKioskData] = useState('');
-
+  const getData = (data) => {
+    setKioskData(data);
+  };
   const exercise = [
     { title: '숄더프레스1', volume: '1000', reps: '125' },
     { title: '레그프레스1', volume: '500', reps: '200' },
@@ -63,7 +65,7 @@ const KioskMainPage = () => {
       <SelectBoardView onSelectData={saveBoadHandler} />
       {isBoard ? (
         <Div mt={10}>
-          <WeeklySummary datas={datasHey} onChange={setKioskData} />
+          <WeeklySummary datas={datasHey} onChange={getData} />
           <Exercise exerciseList={exercise} />
         </Div>
       ) : (

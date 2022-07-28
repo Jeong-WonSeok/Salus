@@ -1,21 +1,16 @@
 import React from "react";
-import styled from "@emotion/styled";
+import styled from "styled-components";
 
 const Circle = styled.circle`
   animation: circle-fill-animation 2s ease;
   stroke-linecap: round;
+  stroke-dashoffset: ${(props) => -2 * Math.PI * 90 * (1 - props.roundRatio)};
 
   @keyframes circle-fill-animation {
     0% {
       stroke-dashoffset: -${2 * Math.PI * 90};
     }
-    100% {
-      stroke-dashoffset: ${(props) =>
-        -2 * Math.PI * 90 * (1 - props.roundRatio)};
-    }
   }
-
-  stroke-dashoffset: ${(props) => -2 * Math.PI * 90 * (1 - props.roundRatio)};
 `;
 
 const Div = styled.div`
@@ -39,9 +34,9 @@ const RoundChart = ({
   colorGradient,
   textTop="10%",
   textLeft="2.7%",
-  children
+  children,
+  KEY,
 }) => {
-  const KEY = Date.now();
 
   return (
     <Div roundHeight={roundHeight} roundWidth={roundWidth}>
