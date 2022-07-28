@@ -7,13 +7,13 @@ const signupSlice = createSlice({
   initialState:initialSignupState,
   reducers: {
     fetchBody(state, action) {
-      state.email = action.email ? action.email : ''
-      state.lastName = action.lastName ? action.lastName : ''
-      state.firstName = action.firstName ? action.firstName : ''
-      state.password = action.password ? action.password : ''
-      state.gender = action.gender ? action.gender : 0
-      state.phone = action.phone ? action.phone : ''
-      state.birthDay = action.birthDay //아직 타입을 확인 못함
+      state.email = action.payload.email ? action.payload.email : ''
+      state.lastName = action.payload.lastName ? action.payload.lastName : "";
+      state.firstName = action.payload.firstName ? action.payload.firstName : "";
+      state.password = action.payload.password ? action.payload.password : "";
+      state.gender = action.payload.gender ? action.payload.gender : 0;
+      state.phone = action.payload.phone ? action.payload.phone : "";
+      state.birthDay = action.payload.birthDay; //아직 타입을 확인 못함
     }
   }
 })

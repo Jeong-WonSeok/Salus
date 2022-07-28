@@ -3,9 +3,10 @@ import styled from 'styled-components';
 import ExerciseList from './ExerciseList';
 
 const Div = styled.div`
-  width: 100%;
-  height: 400px;
-  border-radius: 10px;
+  width: 93vw;
+  height: 20.8vh;
+  border-radius: 0.625rem;
+  margin-left: 3.5vw;
 `;
 
 const Exercise = (props) => {
