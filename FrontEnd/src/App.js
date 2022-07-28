@@ -5,6 +5,7 @@ import SignupPage from './pages/SignupPage';
 import CalendarPage from './pages/CalendarPage';
 import FindAccountPage from './pages/FindAccountPage';
 import MuscleTest from './pages/MuscleTest';
+import KioskLoginPage from './pages/KioskLoginPage';
 
 function App() {
   return (
@@ -17,6 +18,7 @@ function App() {
         <Route path="/calendar" element={<CalendarPage />} />
         <Route path="/muscle" element={<MuscleTest />} />
         <Route path="/kiosk" element={<KioskMainPage />} />
+        <Route path="/kiosk/login" element={<KioskLoginPage />} />
       </Routes>
     </div>
   );
