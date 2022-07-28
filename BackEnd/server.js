@@ -3,6 +3,10 @@ const express = require("express");
 const bodyParser = require("body-parser");
 const routers = require("./routers");
 const app = express();
+<<<<<<< HEAD
+=======
+
+>>>>>>> f06620a5e3688af7d14461f49c94c0972c47c0eb
 var passport = require("passport");
 var session = require("express-session");
 

@@ -14,12 +14,33 @@ const selectAll = async (req, res) => {
 };
 
 const selectUser = async (req, res) => {
-  var email = req.param("email");
   var param = {
-    email: email,
+    email: req.params.email,
   };
   var format = { language: "sql", indent: "" };
   var query = mybatisMapper.getStatement("user", "search", param, format);
+  console.log(query);
+  conn.query(query, (err, results) => {
+    if (err) console.log(err);
+    if (results.length === 0) {
+      console.log("업데이트");
+      return res.redirect("/signup");
+    } else {
+      console.log("else");
+      console.log(results);
+      return res.redirect("/");
+    }
+  });
+};
+
+const selectSignin = async (req, res) => {
+  const body = req.body;
+  var param = {
+    email: body.email,
+    password: body.password,
+  };
+  var format = { language: "sql", indent: "" };
+  var query = mybatisMapper.getStatement("user", "signin", param, format);
   console.log(query);
   conn.query(query, (err, results) => {
     if (err) console.log(err);
@@ -30,14 +51,12 @@ const selectUser = async (req, res) => {
 
 const insertUser = async (req, res) => {
   const body = req.body;
+  console.log(body);
+  console.log(body.email);
+  console.log(body.name);
   var param = {
     email: body.email,
-    lastName: body.lastName,
-    firstName: body.firstName,
-    password: body.password,
-    phone: body.phone,
-    birthDay: body.birthDay,
-    excerciseCheck: body.excerciseCheck,
+    name: body.name,
   };
   var format = { language: "sql", indent: "" };
   var query = mybatisMapper.getStatement("user", "signup", param, format);
@@ -53,4 +72,5 @@ module.exports = {
   selectAll,
   selectUser,
   insertUser,
+  selectSignin,
 };

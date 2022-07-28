@@ -1,6 +1,7 @@
 var express = require("express");
 var router = express.Router();
 var passport = require("../config/passport");
+const controller = require("../controller/user/UserController");
 
 router.get("/login", function (req, res) {
   res.render("auth/login");
@@ -14,27 +15,15 @@ router.get("/logout", function (req, res, next) {
 
 router.get(
   "/google",
-  passport.authenticate("google", {
-    scope: ["profile", "email"],
-  })
+  passport.authenticate("google", { scope: ["profile", "email"] })
 );
 
-router.get(
-  "/google/callback",
-  passport.authenticate("google"),
-  (authSuccess = (req, res) => {
-    console.log("email", req.user.email);
-    console.log("display", req.user.displayName);
-    res.redirect("/");
-  })
-);
+router.get("/google/callback", passport.authenticate("google"), authSuccess);
 
 function authSuccess(req, res) {
-  if (req.user.email == "jws4858@gmail.com") {
-    res.redirect("/");
-  } else {
-    res.redirect("/info");
-  }
+  console.log("여기는 옴");
+  var email = req.user.email;
+  res.redirect("/user/search/" + email);
 }
 
 module.exports = router;
