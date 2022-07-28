@@ -19,8 +19,8 @@ const Circle = styled.circle`
 `;
 
 const Div = styled.div`
-  width: ${props => props.roundWidth ? props.roundWidth : "180px"};
-  height: ${props => props.roundHeight ? props.roundHeight : "180px"};
+  width: ${props => props.roundWidth ? props.roundWidth / 1080 * 100 + "vw" : "180px"};
+  height: ${props => props.roundHeight ? props.roundHeight / 1920 * 100 + "vh" : "180px"};
   position: relative;
 `
 const TextDiv = styled.div`
@@ -34,8 +34,8 @@ const Svg = styled.svg`
 
 const RoundChart = ({
   roundRatio = 1,
-  roundWidth = "180px",
-  roundHeight = "180px",
+  roundWidth = 180,
+  roundHeight = 180,
   colorGradient = ["#9DCEFF", "#92A3FD", "#6e85f7"],
   textTop="10%",
   textLeft="2.7%",
