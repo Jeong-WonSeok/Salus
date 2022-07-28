@@ -24,6 +24,7 @@ router.get(
   passport.authenticate("google"),
   (authSuccess = (req, res) => {
     console.log("email", req.user.email);
+    console.log("display", req.user.displayName);
     res.redirect("/");
   })
 );
