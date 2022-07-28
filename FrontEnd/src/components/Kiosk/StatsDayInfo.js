@@ -1,7 +1,6 @@
-import React from 'react';
-import { LogoDiv } from '../../styles/kiosk.style';
+import React from "react";
+import { LogoDiv } from "../../styles/kiosk.style";
 import { Div } from "../../styles/kiosk.style";
-
 
 const StatsDayInfo = () => {
   return (
@@ -16,34 +15,62 @@ const StatsDayInfo = () => {
         mr={80}
         mt={20}
       >
-        <LogoDiv fontSize="1.5rem" fontWeight={700} flexDirection="column">
-          VOLUME
-          <Div fontSize="2.5rem" fontWeight={700} displayDiv="flex" bgMain="none">
+        <Div>
+          <LogoDiv fontSize="1.5rem" fontWeight={700} flexDirection="column">
+            VOLUME
+          </LogoDiv>
+          <Div
+            fontSize="2.5rem"
+            fontWeight={700}
+            displayDiv="flex"
+            bgMain="none"
+          >
             51
             <Div>kg</Div>
           </Div>
-        </LogoDiv>
-        <LogoDiv fontSize="1.5rem" fontWeight={700} flexDirection="column">
-          REPS
-          <Div fontSize="2.5rem" fontWeight={700} displayDiv="flex" bgMain="none">
+        </Div>
+        <Div>
+          <LogoDiv fontSize="1.5rem" fontWeight={700} flexDirection="column">
+            REPS
+          </LogoDiv>
+          <Div
+            fontSize="2.5rem"
+            fontWeight={700}
+            displayDiv="flex"
+            bgMain="none"
+          >
             51
             <Div>kg</Div>
           </Div>
-        </LogoDiv>
-        <LogoDiv fontSize="1.5rem" fontWeight={700} flexDirection="column">
-          TIME
-          <Div fontSize="2.5rem" fontWeight={700} displayDiv="flex" bgMain="none">
+        </Div>
+        <Div>
+          <LogoDiv fontSize="1.5rem" fontWeight={700} flexDirection="column">
+            TIME
+          </LogoDiv>
+          <Div
+            fontSize="2.5rem"
+            fontWeight={700}
+            displayDiv="flex"
+            bgMain="none"
+          >
             51
             <Div>kg</Div>
           </Div>
-        </LogoDiv>
-        <LogoDiv fontSize="1.5rem" fontWeight={700} flexDirection="column">
-          Calorie
-          <Div fontSize="2.5rem" fontWeight={700} displayDiv="flex" bgMain="none">
+        </Div>
+        <Div>
+          <LogoDiv fontSize="1.5rem" fontWeight={700} flexDirection="column">
+            Calorie
+          </LogoDiv>
+          <Div
+            fontSize="2.5rem"
+            fontWeight={700}
+            displayDiv="flex"
+            bgMain="none"
+          >
             51
             <Div>kg</Div>
           </Div>
-        </LogoDiv>
+        </Div>
       </Div>
     </Div>
   );

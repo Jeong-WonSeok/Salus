@@ -17,6 +17,7 @@ export const Div = styled.div`
   background: ${(props) => (props.bgMain ? props.bgMain : "")} !important;
   flex-direction: ${(props) =>
     props.flexDirection ? props.flexDirection : "row"};
+  position: ${props => props.positionDiv ? props.positionDiv : 'relative'}
 `;
 
 //기본 Div를 상속받아 오버라이딩한 스타일

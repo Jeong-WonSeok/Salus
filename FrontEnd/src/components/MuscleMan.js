@@ -33,8 +33,10 @@ import back_calves_a from '../assets/images/muscle/man/29.png';
 import back_calves_b from '../assets/images/muscle/man/30.png';
 
 const Musclemap = styled.div`
-  position: relative;
-  width: 100%;
+  position: fixed;
+  left: -5.5vw;
+  top: 8vh;
+  width: 75vw;
 `;
 
 const Background = styled.img`
