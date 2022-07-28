@@ -22,7 +22,6 @@ app.use(passport.session());
 app.use(routers);
 app.use("/", require("./routers"));
 app.use("/auth", require("./routers/auth"));
-app.use("/kiosik", require("./routers/kiosk"));
 
 // swagger
 const { swaggerUi, specs } = require("./swagger/swagger");

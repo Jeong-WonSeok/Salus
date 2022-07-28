@@ -7,4 +7,6 @@ const conn = mysql.createConnection({
     database : 'salus'
 });
 mybatisMapper.createMapper(['./sql/user/user.xml']);
+mybatisMapper.createMapper(['./sql/kiosk/kiosk.xml']);
+
 module.exports = conn;
