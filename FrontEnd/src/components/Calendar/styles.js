@@ -30,8 +30,7 @@ function isEvent(day, events) {
 function dayStyles(day, value, events) {
   const event = isEvent(day, events);
   if (isToday(day)) {
-    console.log("hi", day);
-    return "today";
+    return { style: "today" };
   }
   if (event) {
     return {
@@ -41,10 +40,9 @@ function dayStyles(day, value, events) {
       type: event.type,
     };
   }
-
-  if (beforeMonth(day, value)) return "before";
-  if (afterMonth(day, value)) return "before";
-  if (isSelected(day, value)) return "selected";
+  if (beforeMonth(day, value)) return { style: "before" };
+  if (afterMonth(day, value)) return { style: "before" };
+  if (isSelected(day, value)) return { style: "selected" };
   return "";
 }
 
