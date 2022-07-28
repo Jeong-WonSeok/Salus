@@ -22,7 +22,7 @@ const Text = styled.div`
 
 const ExerciseList = (props) => {
   return (
-    <List className="d-flex justify-content-around align-items-center">
+    <List className="d-flex justify-content-around align-items-center mt-2">
       <Title>{props.title}</Title>
       <Text>{props.volume} Vol</Text>
       <Text>{props.reps} 회</Text>
