@@ -11,10 +11,11 @@ const StatsWeekly = () => {
       <Div>
         <Div mb={20} displayDiv="flex">
           <RoundChart
-            roundRatio={0.9}
+            roundRatio={0.3}
             roundWidth={180}
             roundHeight={180}
-            colorGradient={["#9DCEFF", "#9DCEFF", "#9DCEFF"]}
+            colorGradient={["#9DCEFF", "#92A3FD", "#6e85f7"]}
+            KEY={1}
           >
             <Div
               displayDiv="flex"
@@ -37,7 +38,8 @@ const StatsWeekly = () => {
             roundRatio={0.9}
             roundWidth={180}
             roundHeight={180}
-            colorGradient={["#F06875", "#F06875", "white"]}
+            colorGradient={["#9DCEFF", "#92A3FD", "#6e85f7"]}
+            KEY={2}
           >
             <Div
               displayDiv="flex"
@@ -57,10 +59,11 @@ const StatsWeekly = () => {
         </Div>
         <Div mb={20} displayDiv="flex">
           <RoundChart
-            roundRatio={0.9}
+            roundRatio={0.7}
             roundWidth={180}
             roundHeight={180}
-            colorGradient={["#9DCEFF", "#92A3FD", "#6e85f7"]}
+            colorGradient={["#9DCEFF", "#FB816B", "#FB816B"]}
+            KEY={3}
           >
             <Div
               displayDiv="flex"
