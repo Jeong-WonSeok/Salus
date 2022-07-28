@@ -1,11 +1,11 @@
 import React, { useState } from "react";
 import AuthWrapper from "../layout-wrapper/AuthWrapper";
-import InputComponent from "../components/InputComponent";
+import InputComponent from "../components/Common/InputComponent";
 import styled from "styled-components";
-import ButtonComponent from "../components/ButtonComponent";
-import ProfileImgForm from "../components/ProfileImgForm";
-import InputToggleComponent from "../components/InputToggleComponent";
-import SignupLogo from "../components/SignupLogo";
+import ButtonComponent from "../components/Common/ButtonComponent";
+import ProfileImgForm from "../components/Auth/ProfileImgForm";
+import InputToggleComponent from "../components/Common/InputToggleComponent";
+import SignupLogo from "../components/Auth/SignupLogo";
 
 // 회원가입 페이지에서 사용할 div 스타일
 const Div = styled.div`
