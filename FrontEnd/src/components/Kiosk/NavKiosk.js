@@ -12,7 +12,7 @@ const NavKiosk = () => {
   useEffect(() => {
     let timer = setInterval(() => {
       setTime(moment());
-    }, 1000);
+    }, 30000);
 
     return () => {
       clearInterval(timer);

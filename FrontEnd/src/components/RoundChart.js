@@ -36,7 +36,7 @@ const RoundChart = ({
   roundRatio = 1,
   roundWidth = 180,
   roundHeight = 180,
-  colorGradient = ["#9DCEFF", "#92A3FD", "#6e85f7"],
+  colorGradient,
   textTop="10%",
   textLeft="2.7%",
   children

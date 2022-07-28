@@ -4,16 +4,6 @@ import MuscleMan from './../MuscleMan';
 import MuscleWoman from './../MuscleWoman';
 const StatsMuscle = () => {
     const user = { isMale: true, muscles: ["traps", "shoulders"] };
-    const exercise = [
-      { title: "숄더프레스1", volume: "1000", reps: "125" },
-      { title: "레그프레스1", volume: "500", reps: "200" },
-      { title: "숄더프레스2", volume: "1000", reps: "125" },
-      { title: "레그프레스2", volume: "500", reps: "200" },
-      { title: "숄더프레스3", volume: "1000", reps: "125" },
-      { title: "레그프레스3", volume: "500", reps: "200" },
-      { title: "숄더프레스4", volume: "1000", reps: "125" },
-      { title: "레그프레스4", volume: "500", reps: "200" },
-    ];
   return (
     <CustomDiv
       divWidth={640}

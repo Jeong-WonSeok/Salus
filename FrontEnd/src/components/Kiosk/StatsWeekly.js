@@ -14,7 +14,7 @@ const StatsWeekly = () => {
             roundRatio={0.9}
             roundWidth={180}
             roundHeight={180}
-            colorGradient={["#9DCEFF", "#92A3FD", "#6e85f7"]}
+            colorGradient={["#9DCEFF", "#9DCEFF", "#9DCEFF"]}
           >
             <Div
               displayDiv="flex"
