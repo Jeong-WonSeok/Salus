@@ -10,4 +10,8 @@ router.use('/user', user);
 const auth = require('./auth');
 router.use('/auth', auth);
 
+/** 헬스 기구 관련 router */
+const equipment = require("./equipment");
+router.use('/equip', equipment);
+
 module.exports = router;

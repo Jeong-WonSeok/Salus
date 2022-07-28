@@ -77,21 +77,24 @@ CREATE TABLE IF NOT EXISTS `daily_routine_detail` (
 
 -- 내보낼 데이터가 선택되어 있지 않습니다.
 
--- 테이블 salus.fitness_equiepment 구조 내보내기
-CREATE TABLE IF NOT EXISTS `fitness_equiepment` (
+-- 테이블 salus.fitness_equipment 구조 내보내기
+CREATE TABLE IF NOT EXISTS `fitness_equipment` (
   `equipmentId` int(11) NOT NULL AUTO_INCREMENT,
   `equipmentName` varchar(64) NOT NULL,
+  `equipmentEnglishName` varchar(64) NOT NULL,
   `equipmentCategory` varchar(20) DEFAULT NULL,
   `gymid` int(11) DEFAULT 0,
-  `equipmentImage` varchar(64) NOT NULL,
-  `equipmentStimulate` text DEFAULT NULL,
+  `equipmentImage` varchar(64) DEFAULT NULL,
+  `equipmentStimulate` varchar(50) DEFAULT NULL,
+  `equipmentEnglishStimulate` varchar(50) DEFAULT NULL,
   `equipmentDescription` text DEFAULT NULL,
   `firstRegist` datetime NOT NULL DEFAULT current_timestamp(),
   `updateRegist` datetime NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
-  PRIMARY KEY (`equipmentId`),
-  KEY `equipmentCategory` (`equipmentCategory`),
-  KEY `equipmentName` (`equipmentName`),
-  KEY `FK_fitness equiepment_gym` (`gymid`),
+  PRIMARY KEY (`equipmentId`) USING BTREE,
+  KEY `equipmentCategory` (`equipmentCategory`) USING BTREE,
+  KEY `equipmentName` (`equipmentName`) USING BTREE,
+  KEY `FK_fitness equiepment_gym` (`gymid`) USING BTREE,
+  KEY `eqipmentEnglishName` (`equipmentEnglishName`) USING BTREE,
   CONSTRAINT `FK_fitness equiepment_gym` FOREIGN KEY (`gymid`) REFERENCES `gym` (`gymId`) ON DELETE SET NULL ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
@@ -102,14 +105,13 @@ CREATE TABLE IF NOT EXISTS `gym` (
   `gymId` int(11) NOT NULL AUTO_INCREMENT,
   `gymName` varchar(50) NOT NULL,
   `gymAddress` text NOT NULL,
-  `gymOpenTime` datetime DEFAULT NULL,
-  `gymCloseTime` datetime DEFAULT NULL,
+  `gymOpenTime` time DEFAULT NULL,
+  `gymCloseTime` time DEFAULT NULL,
   `gymMap` varchar(50) DEFAULT NULL,
-  `gymCurrentPerson` int(11) DEFAULT NULL,
   `firstRegist` datetime NOT NULL DEFAULT current_timestamp(),
   `updateRegist` datetime NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
   PRIMARY KEY (`gymId`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4;
 
 -- 내보낼 데이터가 선택되어 있지 않습니다.
 
@@ -210,7 +212,7 @@ CREATE TABLE IF NOT EXISTS `user` (
   UNIQUE KEY `rfidKey3` (`rfidKey3`),
   KEY `gymId` (`gymId`),
   CONSTRAINT `gymId` FOREIGN KEY (`gymId`) REFERENCES `gym` (`gymId`) ON DELETE SET NULL ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8mb4;
 
 -- 내보낼 데이터가 선택되어 있지 않습니다.
 

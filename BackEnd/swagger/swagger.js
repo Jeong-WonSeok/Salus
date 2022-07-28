@@ -81,6 +81,55 @@ const options = {
                 }
             },
         },
+        "/equip/regist":{
+          post:{
+            tags:["Equipment"],
+            description : "헬스장에 운동 기구를 등록합니다.",
+            requestBody:{
+              content:{
+                "application/json" :{
+                  schema:{
+                   properties:{
+                    equipmentName:{
+                      type: String,
+                      description : "기구 이름"
+                    },
+                    equipmentEnglishName:{
+                      type: String,
+                      description : "기구 이름(영어)"
+                    },
+                    equipmentCategory:{
+                      type: String,
+                      description : "기구 카테고리"
+                    },
+                    gymId:{
+                      type: Number,
+                      description : "헬스장 아이디(번호)"
+                    },
+                    equipmentStimulate:{
+                      type: String,
+                      description : "기구 자극 부위"
+                    },
+                    equipmentEnglishStimulate:{
+                      type: String,
+                      description : "기구 자극 부위(영어)"
+                    },
+                    equipmentDescription:{
+                      type: String,
+                      description : "기구 설명"
+                    }
+                   }
+                  }
+                }
+              }
+            },
+            responses:{
+              200:{
+                  description:"OK",
+              }
+            }
+          }
+        },
       }
     },
     
