@@ -10,9 +10,12 @@ const Circle = styled.circle`
       stroke-dashoffset: -${2 * Math.PI * 90};
     }
     100% {
-      stroke-dashoffset: ${(props) => -2 * Math.PI * 90 * (1-props.roundRatio)};
+      stroke-dashoffset: ${(props) =>
+        -2 * Math.PI * 90 * (1 - props.roundRatio)};
     }
   }
+
+  stroke-dashoffset: ${(props) => -2 * Math.PI * 90 * (1 - props.roundRatio)};
 `;
 
 const Div = styled.div`
