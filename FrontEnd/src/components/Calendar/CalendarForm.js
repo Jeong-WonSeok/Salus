@@ -8,14 +8,16 @@ import Day from "./Day";
 
 const Calendar = styled.div`
   box-sizing: border-box;
-  font-size: 1.5rem;
-  max-width: 100%;
+  font-size: 1rem;
+  max-width: 95vw;
+  height: 36%;
+  margin: 0 auto;
 `;
 
 const Body = styled.div`
   display: flex;
   flex-direction: column;
-  border: 1px solid lightblue;
+  border: 1px solid lightgrey;
 `;
 
 const DayNames = styled.div`
@@ -37,7 +39,7 @@ const Week = styled.div`
   max-height: 109px;
   line-height: 44px;
   text-align: center;
-  color: #7a91ff;
+  color: #92a3fd;
   font-weight: bold;
 `;
 
@@ -46,30 +48,23 @@ const Weeks = styled.div`
   flex-direction: row;
 `;
 
-const CalendarForm = ({ value, onChange, click = 0 }) => {
+// {events: 이벤트 목록(이번달꺼), value:기준 날짜, onchange: 기준날짜 변경 함수, click: 클릭 활성화 여부, header: 헤더 활성화 여부}
+const CalendarForm = ({
+  events,
+  value,
+  onChange,
+  click = true,
+  header = false,
+}) => {
   const [calendar, setCalendar] = useState([]);
 
   useEffect(() => {
     setCalendar(buildCalendar(value));
   }, [value]);
 
-  const events = [
-    { date: "2022-07-20", calorie: 1000, volume: 800, type: "상체" },
-    { date: "2022-07-23", calorie: 1000, volume: 800, type: "하체" },
-    { date: "2022-07-19", calorie: 1000, volume: 800, type: "유산소" },
-    { date: "2022-07-05", calorie: 1000, volume: 800, type: "상체" },
-    { date: "2022-07-15", calorie: 1000, volume: 800, type: "하체" },
-    { date: "2022-07-08", calorie: 1000, volume: 800, type: "하체" },
-    { date: "2022-07-01", calorie: 1000, volume: 800, type: "유산소" },
-    { date: "2022-07-26", calorie: 1000, volume: 800, type: "유산소" },
-    { date: "2022-07-07", calorie: 1000, volume: 800, type: "상체" },
-    { date: "2022-07-12", calorie: 1000, volume: 800, type: "하체" },
-    { date: "2022-07-14", calorie: 1000, volume: 800, type: "유산소" },
-  ];
-
   return (
     <Calendar>
-      <CalendarHeader value={value} setValue={onChange} />
+      {header && <CalendarHeader value={value} setValue={onChange} />}
       <Body>
         <DayNames>
           {[

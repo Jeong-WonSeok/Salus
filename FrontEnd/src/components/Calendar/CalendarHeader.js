@@ -7,21 +7,22 @@ const Header = styled.div`
   min-height: 2rem;
   line-height: 2rem;
   color: var(--linear-blue);
-  font-family: var(--font-book);
   font-weight: 700;
   display: flex;
 `;
 
 const Previous = styled.div`
-  flex: 1;
+  /* flex: 1; */
   text-align: left;
   margin-left: 1rem;
+  padding: 0 1rem 0 1rem;
 `;
 
 const Next = styled.div`
-  flex: 1;
+  /* flex: 1; */
   text-align: left;
   margin-right: 1rem;
+  padding: 0 1rem 0 1rem;
 `;
 
 const CalendarHeader = ({ value, setValue }) => {
@@ -41,9 +42,9 @@ const CalendarHeader = ({ value, setValue }) => {
     return value.clone().add(1, "month");
   }
 
-  const thisMonth = () => {
-    return value.isSame(new Date(), "month");
-  };
+  // const thisMonth = () => {
+  //   return value.isSame(new Date(), "month");
+  // };
 
   return (
     <Header>
