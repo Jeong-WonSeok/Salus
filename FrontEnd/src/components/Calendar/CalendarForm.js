@@ -53,7 +53,7 @@ const CalendarForm = ({
   events,
   value,
   onChange,
-  click = true,
+  click = false,
   header = false,
 }) => {
   const [calendar, setCalendar] = useState([]);
