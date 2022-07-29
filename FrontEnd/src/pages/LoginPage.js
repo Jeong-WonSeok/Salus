@@ -125,7 +125,7 @@ const LoginPage = () => {
           </Div>
         </Div>
         <Div mt={20} ml={25}>
-          <ButtonComponent buttonWidth={360} buttonText="로그인" />
+          <ButtonComponent buttonWidth="360px" buttonHeight="50px" buttonText="로그인" />
           <div className="d-flex justify-content-center mt-3">
             <StyledLink to="/signup" className="grey-100-font">
               회원 가입
