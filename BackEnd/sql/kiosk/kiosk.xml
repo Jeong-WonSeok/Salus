@@ -12,9 +12,9 @@
 
 
   <select id="searchCategoryData">
-    SELECT SUM(ABS(HOUR(TIMEDIFF(endtime, startTime)) * 60 ) + (second(TIMEDIFF(endtime, startTime)) + MINUTE(TIMEDIFF(endtime, startTime)) * 60) / 60) AS "totalCategoryTime", e.equipmentCategory from daily_excercise AS d 
+    SELECT d.excerciseDay, ROUND(SUM(ABS(HOUR(TIMEDIFF(endtime, startTime)) * 60 )+ (second(TIMEDIFF(endtime, startTime)) + MINUTE(TIMEDIFF(endtime, startTime)) * 60) / 60)) AS "totalCategoryTime", sum(weightNow) AS "totalWeight", sum(countNow) AS"totalCount", e.equipmentCategory AS "excerciseCategory",ROUND(SUM(6 * ROUND((HOUR(TIMEDIFF(endtime, startTime)) * 60 )+ (second(TIMEDIFF(endtime, startTime)) + MINUTE(TIMEDIFF(endtime, startTime)) * 60) / 60) * d.weightNow / 60)) AS "totalCalorie" from daily_excercise AS d 
     LEFT JOIN fitness_equipment AS e ON d.equipmentName = e.equipmentName 
-    WHERE d.excerciseDay = CONVERT(#{excerciseDay}, DATE)
-    GROUP BY e.equipmentCategory 
+    WHERE d.excerciseDay BETWEEN CONVERT( DATE_SUB(NOW(), INTERVAL 6 DAY), DATE ) and CONVERT(NOW(), DATE)
+    GROUP BY d.excerciseDay, e.equipmentCategory
   </select>
 </mapper>

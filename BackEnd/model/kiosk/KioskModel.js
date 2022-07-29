@@ -19,11 +19,7 @@ const searchDailyData = async (req, res) => {
 };
 
 const searchCategoryData = async (req, res) => {
-  const body = req.body;
-  console.log(body.excerciseDay)
-  const param = {
-    excerciseDay : body.excerciseDay
-  }
+  const param = null;
   const format = { language: "sql", indent: "" };
   const query = mybatisMapper.getStatement(
     "kiosk",
