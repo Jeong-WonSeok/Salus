@@ -8,9 +8,10 @@ import SelectBoardView from "../components/Kiosk/SelectBoardView";
 import WeeklySummary from "./../components/Kiosk/WeeklySummary";
 import Exercise from "../components/Kiosk/Exercise";
 import { createGlobalStyle } from "styled-components";
-import { Div } from './../styles/kiosk.style';
-import CalendarForm from './../components/Calendar/CalendarForm';
-import moment from 'moment';
+import { Div } from "./../styles/kiosk.style";
+import CalendarForm from "./../components/Calendar/CalendarForm";
+import moment from "moment";
+import ButtonComponent from "./../components/Common/ButtonComponent";
 
 const GlobalStyle = createGlobalStyle`
   body {
@@ -32,14 +33,14 @@ const KioskMainPage = () => {
     setKioskData(data);
   };
   const exercise = [
-    { title: '숄더프레스1', volume: '1000', reps: '125' },
-    { title: '레그프레스1', volume: '500', reps: '200' },
-    { title: '숄더프레스2', volume: '1000', reps: '125' },
-    { title: '레그프레스2', volume: '500', reps: '200' },
-    { title: '숄더프레스3', volume: '1000', reps: '125' },
-    { title: '레그프레스3', volume: '500', reps: '200' },
-    { title: '숄더프레스4', volume: '1000', reps: '125' },
-    { title: '레그프레스4', volume: '500', reps: '200' },
+    { title: "숄더프레스1", volume: "1000", reps: "125" },
+    { title: "레그프레스1", volume: "500", reps: "200" },
+    { title: "숄더프레스2", volume: "1000", reps: "125" },
+    { title: "레그프레스2", volume: "500", reps: "200" },
+    { title: "숄더프레스3", volume: "1000", reps: "125" },
+    { title: "레그프레스3", volume: "500", reps: "200" },
+    { title: "숄더프레스4", volume: "1000", reps: "125" },
+    { title: "레그프레스4", volume: "500", reps: "200" },
   ];
   // Boad / Calender 선택
   const [isBoard, setIsBoard] = useState(true);
@@ -49,17 +50,17 @@ const KioskMainPage = () => {
   // Calender 내용
   const [value, setValue] = useState(moment());
   const [events, setEvents] = useState([
-    { date: '2022-07-20', calorie: 1000, volume: 800, type: '상체' },
-    { date: '2022-07-23', calorie: 1000, volume: 800, type: '하체' },
-    { date: '2022-07-19', calorie: 1000, volume: 800, type: '유산소' },
-    { date: '2022-07-05', calorie: 1000, volume: 800, type: '상체' },
-    { date: '2022-07-15', calorie: 1000, volume: 800, type: '하체' },
-    { date: '2022-07-08', calorie: 1000, volume: 800, type: '하체' },
-    { date: '2022-07-01', calorie: 1000, volume: 800, type: '유산소' },
-    { date: '2022-07-26', calorie: 1000, volume: 800, type: '유산소' },
-    { date: '2022-07-07', calorie: 1000, volume: 800, type: '상체' },
-    { date: '2022-07-12', calorie: 1000, volume: 800, type: '하체' },
-    { date: '2022-07-14', calorie: 1000, volume: 800, type: '유산소' },
+    { date: "2022-07-20", calorie: 1000, volume: 800, type: "상체" },
+    { date: "2022-07-23", calorie: 1000, volume: 800, type: "하체" },
+    { date: "2022-07-19", calorie: 1000, volume: 800, type: "유산소" },
+    { date: "2022-07-05", calorie: 1000, volume: 800, type: "상체" },
+    { date: "2022-07-15", calorie: 1000, volume: 800, type: "하체" },
+    { date: "2022-07-08", calorie: 1000, volume: 800, type: "하체" },
+    { date: "2022-07-01", calorie: 1000, volume: 800, type: "유산소" },
+    { date: "2022-07-26", calorie: 1000, volume: 800, type: "유산소" },
+    { date: "2022-07-07", calorie: 1000, volume: 800, type: "상체" },
+    { date: "2022-07-12", calorie: 1000, volume: 800, type: "하체" },
+    { date: "2022-07-14", calorie: 1000, volume: 800, type: "유산소" },
   ]);
   return (
     <Fragment>
@@ -73,23 +74,30 @@ const KioskMainPage = () => {
           ml={30}
           borderRadius="10px"
         >
-          <StatsMuscle/>
-          <StatsWeekly/>
+          <StatsMuscle />
+          <StatsWeekly />
+        </CustomDiv>
+        <StatsDayInfo />
+        <SelectBoardView onSelectData={saveBoadHandler} />
+        {isBoard ? (
+          <Div mt={10}>
+            <WeeklySummary datas={datasHey} onChange={getData} />
+            <Exercise exerciseList={exercise} />
+          </Div>
+        ) : (
+          <Div mt={10}>
+            <CalendarForm events={events} value={value} onChange={setValue} />
+          </Div>
+        )}
       </CustomDiv>
-      <StatsDayInfo />
-      <SelectBoardView onSelectData={saveBoadHandler} />
-      {isBoard ? (
-        <Div mt={10}>
-          <WeeklySummary datas={datasHey} onChange={getData} />
-          <Exercise exerciseList={exercise} />
-        </Div>
-      ) : (
-        <Div mt={10}>
-          <CalendarForm events={events} value={value} onChange={setValue} />
-        </Div>
-      )}
-    </CustomDiv>
-      </Fragment>
+      <Div displayDiv="flex" justifyContent="center" mt={40}>
+        <ButtonComponent
+          buttonText="홈"
+          buttonWidth="35vw"
+          buttonHeight="3vh"
+        />
+      </Div>
+    </Fragment>
   );
 };
 
