@@ -12,6 +12,7 @@ import { Div } from "./../styles/kiosk.style";
 import CalendarForm from "./../components/Calendar/CalendarForm";
 import moment from "moment";
 import ButtonComponent from "./../components/Common/ButtonComponent";
+import setDailyData from "../components/Kiosk/setDailyData";
 
 const GlobalStyle = createGlobalStyle`
   body {
@@ -20,28 +21,130 @@ const GlobalStyle = createGlobalStyle`
 `;
 
 const KioskMainPage = () => {
-  const [datasHey, setdatasHey] = useState([
-    { day: "2022-7-28", type: "하체", calorie: "200", volume: "100" },
-    { day: "2022-7-27", type: "", calorie: "200", volume: "100" },
-    { day: "2022-7-26", type: "전신", calorie: "2010", volume: "1200" },
-    { day: "2022-7-25", type: "하체", calorie: "200", volume: "100" },
-    { day: "2022-7-24", type: "하체", calorie: "200", volume: "100" },
-  ]);
-  // 페이지 전체에 보여줄 상태
-  const [kioskData, setKioskData] = useState("");
-  const getData = (data) => {
-    setKioskData(data);
-  };
-  const exercise = [
-    { title: "숄더프레스1", volume: "1000", reps: "125" },
-    { title: "레그프레스1", volume: "500", reps: "200" },
-    { title: "숄더프레스2", volume: "1000", reps: "125" },
-    { title: "레그프레스2", volume: "500", reps: "200" },
-    { title: "숄더프레스3", volume: "1000", reps: "125" },
-    { title: "레그프레스3", volume: "500", reps: "200" },
-    { title: "숄더프레스4", volume: "1000", reps: "125" },
-    { title: "레그프레스4", volume: "500", reps: "200" },
+  const dummyData = [
+    [
+      {
+        excerciseDay: "2022-07-28T15:00:00.000Z",
+        excerciseName: "컬 머신",
+        excerciseEnglishName: "Curl Machine",
+        excerciseTime: 100,
+        excerciseCategory: "상체",
+        excerciseStimulate: "이두근",
+        excerciseEnglishStimulate: "biceps, obliques, traps",
+        weightNow: 50,
+        countNow: 10,
+        calorie: 500,
+      },
+      {
+        excerciseDay: "2022-07-28T15:00:00.000Z",
+        excerciseName: "레그 컬 머신",
+        excerciseEnglishName: "Leg Curl Machine",
+        excerciseTime: 110,
+        excerciseCategory: "하체",
+        excerciseStimulate: "허벅지, 종아리",
+        excerciseEnglishStimulate: "quads, calves",
+        weightNow: 50,
+        countNow: 10,
+        calorie: 550,
+      },
+      {
+        excerciseDay: "2022-07-27T15:00:00.000Z",
+        excerciseName: "체스트 프레스 머신",
+        excerciseEnglishName: "Chest Press Machine",
+        excerciseTime: 80,
+        excerciseCategory: "상체",
+        excerciseStimulate: "가슴",
+        excerciseEnglishStimulate: "pecs",
+        weightNow: 50,
+        countNow: 10,
+        calorie: 400,
+      },
+      {
+        excerciseDay: "2022-07-26T15:00:00.000Z",
+        excerciseName: "펙덱 플라이 머신",
+        excerciseEnglishName: "Fly - Pec Dec Machine",
+        excerciseTime: 60,
+        excerciseCategory: "상체",
+        excerciseStimulate: "가슴",
+        excerciseEnglishStimulate: "pecs",
+        weightNow: 50,
+        countNow: 10,
+        calorie: 300,
+      },
+      {
+        excerciseDay: "2022-07-26T15:00:00.000Z",
+        excerciseName: "숄더프레스 머신",
+        excerciseEnglishName: "Sholder Press Machine",
+        excerciseTime: 70,
+        excerciseCategory: "상체",
+        excerciseStimulate: "어깨",
+        excerciseEnglishStimulate: "shoulders",
+        weightNow: 50,
+        countNow: 10,
+        calorie: 350,
+      },
+      {
+        excerciseDay: "2022-07-26T15:00:00.000Z",
+        excerciseName: "컬 머신",
+        excerciseEnglishName: "Curl Machine",
+        excerciseTime: 90,
+        excerciseCategory: "상체",
+        excerciseStimulate: "이두근",
+        excerciseEnglishStimulate: "biceps",
+        weightNow: 50,
+        countNow: 10,
+        calorie: 450,
+      },
+    ],
+    [
+      {
+        excerciseDay: "2022-07-28T15:00:00.000Z",
+        totalCategoryTime: 100,
+        totalWeight: 50,
+        totalCount: 10,
+        excerciseCategory: "상체",
+        totalCalorie: 500,
+      },
+      {
+        excerciseDay: "2022-07-27T15:00:00.000Z",
+        totalCategoryTime: 110,
+        totalWeight: 50,
+        totalCount: 10,
+        excerciseCategory: "하체",
+        totalCalorie: 550,
+      },
+      {
+        excerciseDay: "2022-07-26T15:00:00.000Z",
+        totalCategoryTime: 80,
+        totalWeight: 50,
+        totalCount: 10,
+        excerciseCategory: "상체",
+        totalCalorie: 400,
+      },
+      {
+        excerciseDay: "2022-07-25T15:00:00.000Z",
+        totalCategoryTime: 220,
+        totalWeight: 150,
+        totalCount: 30,
+        excerciseCategory: "상체",
+        totalCalorie: 1100,
+      },
+      {
+        excerciseDay: "2022-07-24T15:00:00.000Z",
+        totalCategoryTime: 220,
+        totalWeight: 150,
+        totalCount: 30,
+        excerciseCategory: "상체",
+        totalCalorie: 1100,
+      },
+    ],
   ];
+  const [datasHey, setDatasHey] = useState(dummyData[1]);
+  // 페이지 전체에 보여줄 상태
+  const [selectedDate, setSelectedDate] = useState("2022-07-28T15:00:00.000Z");
+  const getData = (data) => {
+    setSelectedDate(data);
+  };
   // Boad / Calender 선택
   const [isBoard, setIsBoard] = useState(true);
   const saveBoadHandler = (data) => {
@@ -62,6 +165,7 @@ const KioskMainPage = () => {
     { date: "2022-07-12", calorie: 1000, volume: 800, type: "하체" },
     { date: "2022-07-14", calorie: 1000, volume: 800, type: "유산소" },
   ]);
+  const dailyData = setDailyData(dummyData[0], selectedDate);
   return (
     <Fragment>
       <GlobalStyle />
@@ -74,7 +178,7 @@ const KioskMainPage = () => {
           ml={30}
           borderRadius="10px"
         >
-          <StatsMuscle />
+          <StatsMuscle muscle={dailyData[0]} />
           <StatsWeekly />
         </CustomDiv>
         <StatsDayInfo />
@@ -82,7 +186,7 @@ const KioskMainPage = () => {
         {isBoard ? (
           <Div mt={10}>
             <WeeklySummary datas={datasHey} onChange={getData} />
-            <Exercise exerciseList={exercise} />
+            <Exercise exerciseList={dailyData[1]} />
           </Div>
         ) : (
           <Div mt={10}>
