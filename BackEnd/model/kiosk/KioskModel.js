@@ -2,11 +2,8 @@ var conn = require("../../database/db");
 const mybatisMapper = require("mybatis-mapper");
 
 //현재 운동 데이터 받아오기
-const searchDailyEx = async (req, res) => {
-  const excerciseDay = req.param("excerciseDay");
-  const param = {
-    excerciseDay: excerciseDay,
-  };
+const searchDailyData = async (req, res) => {
+  const param = null;
   const format = { language: "sql", indent: "" };
   const query = mybatisMapper.getStatement(
     "kiosk",
@@ -22,5 +19,5 @@ const searchDailyEx = async (req, res) => {
 };
 
 module.exports = {
-  searchDailyEx,
+  searchDailyData,
 };
