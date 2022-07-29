@@ -75,18 +75,19 @@ const CalendarForm = ({
             "Thursday",
             "Friday",
             "Saturday",
-          ].map((d) => (
-            <Week>{d}</Week>
+          ].map((d, i) => (
+            <Week key={i}>{d}</Week>
           ))}
         </DayNames>
-        {calendar.map((week) => (
-          <Weeks>
-            {week.map((day) => (
+        {calendar.map((week, w) => (
+          <Weeks key={"week" + w}>
+            {week.map((day, d) => (
               <Day
                 day={day}
                 value={value}
                 events={events}
                 onChange={click ? onChange : () => {}}
+                key={"day" + w + d}
               />
             ))}
           </Weeks>
