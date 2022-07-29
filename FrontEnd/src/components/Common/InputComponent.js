@@ -3,8 +3,8 @@ import styled from 'styled-components';
 import { useState } from 'react';
 //인터렉티브 인풋 컴포넌트
 const StyledDiv = styled.div`
-  width: ${(props) => (props.inputWidth ? props.inputWidth : 0 + 'px')};
-  height: ${(props) => (props.inputHeight ? props.inputHeight : 0 + 'px')};
+  width: ${(props) => (props.inputWidth ? props.inputWidth : '0px')};
+  height: ${(props) => (props.inputHeight ? props.inputHeight : '0px')};
   color: #443846;
   position: relative;
 
@@ -15,7 +15,7 @@ const StyledDiv = styled.div`
     height: 100%;
     border-radius: 9px;
     outline: none;
-    padding: 1rem;
+    padding: 10px;
     transition: 0.2s;
     background: none;
     z-index: 1;
@@ -25,13 +25,14 @@ const StyledDiv = styled.div`
 
   & label {
     position: absolute;
-    top: ${(props) => props.labelTop + 'rem'};
-    left: 2rem;
+    top: ${(props) => props.labelTop + 'vh'};
+    left: 1.5vw;
     width: 100%;
     height: 100%;
     color: #96989d;
     transition: 0.3s;
     display: ${(props) => (props.inputLength ? 'none' : '')};
+    font-size: 0.6rem;
   }
 
   & div {
@@ -49,11 +50,11 @@ const StyledDiv = styled.div`
   }
 
   & input:focus + label {
-    top: -1.5rem;
-    left: 0.5rem;
+    top: -1.6vh;
+    left: 0.2vw;
     font-weight: 500;
     color: #1a73e8;
-    font-size: 0.8rem;
+    font-size: 0.5rem;
     z-index: 10;
     font-weight: 400;
   }

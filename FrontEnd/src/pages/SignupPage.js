@@ -6,6 +6,7 @@ import ButtonComponent from "../components/Common/ButtonComponent";
 import ProfileImgForm from "../components/Auth/ProfileImgForm";
 import InputToggleComponent from "../components/Common/InputToggleComponent";
 import SignupLogo from "../components/Auth/SignupLogo";
+import { Link } from 'react-router-dom';
 
 // 회원가입 페이지에서 사용할 div 스타일
 const Div = styled.div`
@@ -18,6 +19,13 @@ const Div = styled.div`
 const FormContainer = styled.form`
   width: 830px;
   height: 100%;
+`;
+
+const LinktoLogin = styled(Link)`
+  text-decoration: none;
+  font-size: 0.5rem;
+  margin-top: 0.5vh;
+  color: #96989D;
 `;
 
 const SignupPage = () => {
@@ -83,7 +91,7 @@ const SignupPage = () => {
         <Div mt={100}>
           <div className="d-flex justify-content-around mb-1">
             <Div>
-              <Div ml={100} mb={50}>
+              <Div ml={100} mb={60}>
                 <ProfileImgForm imageUploader={imageUploader}></ProfileImgForm>
               </Div>
               <Div mb={65}>
@@ -91,10 +99,10 @@ const SignupPage = () => {
                   inputName="lastName"
                   inputId={`${1} inputComponent`}
                   inputLabel="이름(성)"
-                  inputHeight="25px"
-                  inputWidth="330px"
+                  inputHeight="3vh"
+                  inputWidth="17.5vw"
                   inputValid={true}
-                  labelTop={1.3}
+                  labelTop={1.7}
                   inputEvent={dataUploader}
                 ></InputComponent>
               </Div>
@@ -103,10 +111,10 @@ const SignupPage = () => {
                   inputName="firstName"
                   inputId={`${2} inputComponent`}
                   inputLabel="이름"
-                  inputHeight="25px"
-                  inputWidth="330px"
+                  inputHeight="3vh"
+                  inputWidth="17.5vw"
                   inputValid={true}
-                  labelTop={1.3}
+                  labelTop={1.7}
                   inputEvent={dataUploader}
                 ></InputComponent>
               </Div>
@@ -115,26 +123,26 @@ const SignupPage = () => {
                   inputName="birthDay"
                   inputId={`${3} inputComponent`}
                   inputLabel="생년월일"
-                  inputHeight="25px"
-                  inputWidth="330px"
+                  inputHeight="3vh"
+                  inputWidth="17.5vw"
                   inputValid={true}
-                  labelTop={1.3}
+                  labelTop={1.6}
                   inputType="date"
                   inputEvent={dataUploader}
                 ></InputComponent>
               </Div>
             </Div>
 
-            <Div mt={20} mr={25}>
+            <Div mr={25}>
               <Div mb={65}>
                 <InputComponent
                   inputName="email"
                   inputId={`${4} inputComponent`}
                   inputLabel="이메일"
-                  inputHeight="25px"
-                  inputWidth="330px"
+                  inputHeight="3vh"
+                  inputWidth="17.5vw"
                   inputValid={true}
-                  labelTop={1.3}
+                  labelTop={1.7}
                   inputEvent={dataUploader}
                 ></InputComponent>
               </Div>
@@ -144,10 +152,10 @@ const SignupPage = () => {
                   inputId={`${5} inputComponent`}
                   inputLabel="비밀번호"
                   inputType="password"
-                  inputHeight="25px"
-                  inputWidth="330px"
+                  inputHeight="3vh"
+                  inputWidth="17.5vw"
                   inputValid={true}
-                  labelTop={1.3}
+                  labelTop={1.7}
                   inputEvent={dataUploader}
                 ></InputComponent>
               </Div>
@@ -157,10 +165,10 @@ const SignupPage = () => {
                   inputId={`${6} inputComponent`}
                   inputLabel="비밀번호 확인"
                   inputType="password"
-                  inputHeight="25px"
-                  inputWidth="330px"
+                  inputHeight="3vh"
+                  inputWidth="17.5vw"
                   inputValid={true}
-                  labelTop={1.3}
+                  labelTop={1.7}
                   inputEvent={dataUploader}
                 ></InputComponent>
               </Div>
@@ -169,10 +177,10 @@ const SignupPage = () => {
                   inputName="phone"
                   inputId={`${7} inputComponent`}
                   inputLabel="휴대전화"
-                  inputHeight="25px"
-                  inputWidth="330px"
+                  inputHeight="3vh"
+                  inputWidth="17.5vw"
                   inputValid={true}
-                  labelTop={1.3}
+                  labelTop={1.7}
                   inputEvent={dataUploader}
                 ></InputComponent>
               </Div>
@@ -185,8 +193,14 @@ const SignupPage = () => {
 
           <div className="d-flex justify-content-center">
             <div>
-              <ButtonComponent inputWidth={358} buttonHeigh={50} buttonText="회원 가입"></ButtonComponent>
-              <div className="d-flex justify-content-center mt-3">다른 아이디로 로그인 하기</div>
+              <ButtonComponent
+                inputWidth={358}
+                buttonHeigh={50}
+                buttonText="회원 가입"
+              ></ButtonComponent>
+              <LinktoLogin to="/Login" className="d-flex justify-content-center">
+                다른 아이디로 로그인 하기
+              </LinktoLogin>
             </div>
           </div>
         </Div>
