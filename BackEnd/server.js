@@ -28,6 +28,7 @@ const { swaggerUi, specs } = require("./swagger/swagger");
 app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(specs));
 
 // server run
-app.listen(3000, () => {
-  console.log("Salus Server started 3000");
+app.listen(3010, () => {
+  console.log("Salus Server started 3010");
 });
+
