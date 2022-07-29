@@ -1,7 +1,9 @@
 const KioskModel = require("../../model/kiosk/KioskModel");
 
-const searchDailyEx = KioskModel.searchDailyEx;
+const searchDailyData = KioskModel.searchDailyData;
+const searchCategoryData = KioskModel.searchCategoryData;
 
 module.exports = {
-  searchDailyEx,
+  searchDailyData,
+  searchCategoryData
 };
