@@ -9,16 +9,45 @@ const Div = styled.div`
   margin-left: 3.5vw;
 `;
 
+const ListDiv = styled.div`
+  width: 100%;
+`;
+
 const Exercise = (props) => {
-  const lst = props.exerciseList.map((exercise) => (
-    <ExerciseList
-      title={exercise.title}
-      volume={exercise.volume}
-      reps={exercise.reps}
-      key={`${exercise.title}${Date.now().toString()}`}
-    />
-  ));
-  return <Div className="d-flex flex-column flex-wrap align-items-center white-bg">{lst}</Div>;
+  const odd = props.exerciseList.map((exercise, index) => {
+    if (index % 2) {
+      return (
+        <ExerciseList
+          title={exercise.title}
+          volume={exercise.volume}
+          reps={exercise.reps}
+          key={`${exercise.title}${Date.now().toString()}`}
+        />
+      );
+    } else {
+      return null;
+    }
+  });
+  const even = props.exerciseList.map((exercise, index) => {
+    if (index % 2 === 0) {
+      return (
+        <ExerciseList
+          title={exercise.title}
+          volume={exercise.volume}
+          reps={exercise.reps}
+          key={`${exercise.title}${Date.now().toString()}`}
+        />
+      );
+    } else {
+      return null;
+    }
+  });
+  return (
+    <Div className="white-bg d-flex">
+      <ListDiv>{even}</ListDiv>
+      <ListDiv>{odd}</ListDiv>
+    </Div>
+  );
 };
 
 export default Exercise;
