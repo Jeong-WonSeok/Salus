@@ -35,14 +35,14 @@ function DailySummary({ data, setValue }) {
   return (
     <Round
       onClick={() => {
-        console.log(data.day);
-        setValue(data.day);
+        console.log(data.excerciseDay);
+        setValue(data.excerciseDay);
       }}
     >
-      <Type>{data.type}</Type>
+      <Type>{data.excerciseCategory}</Type>
       <div>
-        <Info>Calorie(Kcal): {data.calorie}</Info>
-        <Info>Volume(kg): {data.volume}</Info>
+        <Info>Calorie(Kcal): {data.totalCalorie}</Info>
+        <Info>Volume(kg): {data.totalWeight}</Info>
       </div>
     </Round>
   );

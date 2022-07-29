@@ -2,8 +2,8 @@ import React from "react";
 import { CustomDiv } from "../../styles/kiosk.style";
 import MuscleMan from "./../MuscleMan";
 import MuscleWoman from "./../MuscleWoman";
-const StatsMuscle = () => {
-  const user = { isMale: true, muscles: ["traps", "shoulders"] };
+const StatsMuscle = ({ muscle }) => {
+  const user = { isMale: true, muscles: muscle };
   return (
     <CustomDiv
       bgMain="white"
