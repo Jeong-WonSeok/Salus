@@ -194,8 +194,8 @@ const SignupPage = () => {
           <div className="d-flex justify-content-center">
             <div>
               <ButtonComponent
-                inputWidth={358}
-                buttonHeigh={50}
+                buttonWidth="358px"
+                buttonHeight="50px"
                 buttonText="회원 가입"
               ></ButtonComponent>
               <LinktoLogin to="/Login" className="d-flex justify-content-center">

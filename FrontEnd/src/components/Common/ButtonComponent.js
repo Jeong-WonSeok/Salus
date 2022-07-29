@@ -2,8 +2,8 @@ import React, { Fragment } from "react";
 import styled from "styled-components";
 
 const Button = styled.button`
-  width: ${(props) => props.buttonWidth + "px"};
-  height: ${(props) => props.buttonHeight + "px"};
+  width: ${(props) => props.buttonWidth ? props.buttonWidth : "0px"};
+  height: ${(props) => props.buttonHeight ? props.buttonHeight : "0px"};
   color: ${(props) => props.fontColor};
   font-weight: ${(props) => props.fontWeight};
   font-size: ${(props) => props.fontSize + "px"};
