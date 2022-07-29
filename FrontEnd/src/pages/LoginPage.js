@@ -33,6 +33,7 @@ const Div = styled.div`
 
 const StyledLink = styled(Link)`
   text-decoration: none;
+  font-size: 16px;
 `;
 
 const Hrsect = styled.div`
@@ -54,6 +55,10 @@ const Hrsect = styled.div`
     line-height: 0px;
     margin: 0px 16px;
   }
+`;
+
+const Span = styled.span`
+  font-size: 15px;
 `;
 
 const LoginPage = () => {
@@ -92,40 +97,40 @@ const LoginPage = () => {
         <Div mt={30}>
           <InputComponent
             inputLabel="이메일"
-            inputHeight="30px"
-            inputWidth="358px"
+            inputHeight="3vh"
+            inputWidth="17.5vw"
             inputValid={true}
-            labelTop={1.4}
+            labelTop={1.7}
           ></InputComponent>
         </Div>
-        <Div mt={80}>
+        <Div mt={50}>
           <InputComponent
             inputLabel="비밀번호"
-            inputHeight="30px"
-            inputWidth="358px"
+            inputHeight="3vh"
+            inputWidth="17.5vw"
             inputValid={true}
-            labelTop={1.4}
+            labelTop={1.7}
             inputType={passwordInputType.type}
           ></InputComponent>
-          <Div mt={50}>
-            <label for="cb">
+          <Div mt={20}>
+            <label htmlFor="cb">
               <input
                 type="checkbox"
                 id="cb"
                 checked={passwordOption}
                 onChange={() => setPasswordOption(!passwordOption)}
               />
-              <span>비밀번호 표시</span>
+              <Span>비밀번호 표시</Span>
             </label>
           </Div>
         </Div>
-        <Div mt={20} ml={35}>
-          <ButtonComponent buttonWidth={394} buttonText="로그인" />
+        <Div mt={20} ml={25}>
+          <ButtonComponent buttonWidth={360} buttonText="로그인" />
           <div className="d-flex justify-content-center mt-3">
             <StyledLink to="/signup" className="grey-100-font">
               회원 가입
             </StyledLink>
-            <span className="grey-100-font mx-1">|</span>
+            <Span className="grey-100-font mx-1">|</Span>
             <StyledLink to="/findaccount" className="grey-100-font">
               아이디/비밀번호 찾기
             </StyledLink>
