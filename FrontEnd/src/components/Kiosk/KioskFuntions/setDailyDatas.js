@@ -1,4 +1,4 @@
-const setDailyData = (data, date, type) => {
+const setDailyDatas = (data, date, type) => {
   const useMuscle = new Set();
   const dailyData = new Array();
   for (const excercise of data) {
@@ -13,4 +13,4 @@ const setDailyData = (data, date, type) => {
   }
   return [Array.from(useMuscle), dailyData];
 };
-export default setDailyData;
+export default setDailyDatas;

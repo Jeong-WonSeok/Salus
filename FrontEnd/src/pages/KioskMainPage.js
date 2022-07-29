@@ -12,7 +12,8 @@ import { Div } from "./../styles/kiosk.style";
 import CalendarForm from "./../components/Calendar/CalendarForm";
 import moment from "moment";
 import ButtonComponent from "./../components/Common/ButtonComponent";
-import setDailyData from "../components/Kiosk/setDailyData";
+import setDailyDatas from "../components/Kiosk/KioskFuntions/setDailyDatas";
+import setDayData from "../components/Kiosk/KioskFuntions/setDayData";
 
 const GlobalStyle = createGlobalStyle`
   body {
@@ -24,7 +25,7 @@ const KioskMainPage = () => {
   const dummyData = [
     [
       {
-        excerciseDay: "2022-07-28T15:00:00.000Z",
+        excerciseDay: "2022-07-27T15:00:00.000Z",
         excerciseName: "컬 머신",
         excerciseEnglishName: "Curl Machine",
         excerciseTime: 100,
@@ -36,7 +37,7 @@ const KioskMainPage = () => {
         calorie: 500,
       },
       {
-        excerciseDay: "2022-07-28T15:00:00.000Z",
+        excerciseDay: "2022-07-27T15:00:00.000Z",
         excerciseName: "레그 컬 머신",
         excerciseEnglishName: "Leg Curl Machine",
         excerciseTime: 110,
@@ -48,7 +49,7 @@ const KioskMainPage = () => {
         calorie: 550,
       },
       {
-        excerciseDay: "2022-07-27T15:00:00.000Z",
+        excerciseDay: "2022-07-26T15:00:00.000Z",
         excerciseName: "체스트 프레스 머신",
         excerciseEnglishName: "Chest Press Machine",
         excerciseTime: 80,
@@ -60,7 +61,7 @@ const KioskMainPage = () => {
         calorie: 400,
       },
       {
-        excerciseDay: "2022-07-26T15:00:00.000Z",
+        excerciseDay: "2022-07-25T15:00:00.000Z",
         excerciseName: "펙덱 플라이 머신",
         excerciseEnglishName: "Fly - Pec Dec Machine",
         excerciseTime: 60,
@@ -72,7 +73,7 @@ const KioskMainPage = () => {
         calorie: 300,
       },
       {
-        excerciseDay: "2022-07-26T15:00:00.000Z",
+        excerciseDay: "2022-07-25T15:00:00.000Z",
         excerciseName: "숄더프레스 머신",
         excerciseEnglishName: "Sholder Press Machine",
         excerciseTime: 70,
@@ -84,7 +85,7 @@ const KioskMainPage = () => {
         calorie: 350,
       },
       {
-        excerciseDay: "2022-07-26T15:00:00.000Z",
+        excerciseDay: "2022-07-24T15:00:00.000Z",
         excerciseName: "컬 머신",
         excerciseEnglishName: "Curl Machine",
         excerciseTime: 90,
@@ -107,6 +108,14 @@ const KioskMainPage = () => {
       },
       {
         excerciseDay: "2022-07-27T15:00:00.000Z",
+        totalCategoryTime: 100,
+        totalWeight: 50,
+        totalCount: 10,
+        excerciseCategory: "상체",
+        totalCalorie: 500,
+      },
+      {
+        excerciseDay: "2022-07-26T15:00:00.000Z",
         totalCategoryTime: 110,
         totalWeight: 50,
         totalCount: 10,
@@ -114,20 +123,12 @@ const KioskMainPage = () => {
         totalCalorie: 550,
       },
       {
-        excerciseDay: "2022-07-26T15:00:00.000Z",
+        excerciseDay: "2022-07-25T15:00:00.000Z",
         totalCategoryTime: 80,
         totalWeight: 50,
         totalCount: 10,
         excerciseCategory: "상체",
         totalCalorie: 400,
-      },
-      {
-        excerciseDay: "2022-07-25T15:00:00.000Z",
-        totalCategoryTime: 220,
-        totalWeight: 150,
-        totalCount: 30,
-        excerciseCategory: "상체",
-        totalCalorie: 1100,
       },
       {
         excerciseDay: "2022-07-24T15:00:00.000Z",
@@ -152,20 +153,11 @@ const KioskMainPage = () => {
   };
   // Calender 내용
   const [value, setValue] = useState(moment());
-  const [events, setEvents] = useState([
-    { date: "2022-07-20", calorie: 1000, volume: 800, type: "상체" },
-    { date: "2022-07-23", calorie: 1000, volume: 800, type: "하체" },
-    { date: "2022-07-19", calorie: 1000, volume: 800, type: "유산소" },
-    { date: "2022-07-05", calorie: 1000, volume: 800, type: "상체" },
-    { date: "2022-07-15", calorie: 1000, volume: 800, type: "하체" },
-    { date: "2022-07-08", calorie: 1000, volume: 800, type: "하체" },
-    { date: "2022-07-01", calorie: 1000, volume: 800, type: "유산소" },
-    { date: "2022-07-26", calorie: 1000, volume: 800, type: "유산소" },
-    { date: "2022-07-07", calorie: 1000, volume: 800, type: "상체" },
-    { date: "2022-07-12", calorie: 1000, volume: 800, type: "하체" },
-    { date: "2022-07-14", calorie: 1000, volume: 800, type: "유산소" },
-  ]);
-  const dailyData = setDailyData(dummyData[0], selectedDate);
+  const [events, setEvents] = useState(dummyData[1]);
+  // 근육 한 운동 정보
+  const dailyData = setDailyDatas(dummyData[0], selectedDate);
+  // 오늘의 기록 정보
+  const dayData = setDayData(dummyData[1], selectedDate);
   return (
     <Fragment>
       <GlobalStyle />
@@ -181,7 +173,12 @@ const KioskMainPage = () => {
           <StatsMuscle muscle={dailyData[0]} />
           <StatsWeekly />
         </CustomDiv>
-        <StatsDayInfo />
+        <StatsDayInfo
+          volume={dayData.totalWeight}
+          reps={dayData.totalCount}
+          time={dayData.totalCategoryTime}
+          calorie={dayData.totalCalorie}
+        />
         <SelectBoardView onSelectData={saveBoadHandler} />
         {isBoard ? (
           <Div mt={10}>

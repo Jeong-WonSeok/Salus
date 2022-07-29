@@ -1,7 +1,18 @@
 import React from "react";
-import { LogoDiv, DailyLogoDiv, Div, CustomDiv } from "../../styles/kiosk.style";
+import {
+  LogoDiv,
+  DailyLogoDiv,
+  Div,
+  CustomDiv,
+} from "../../styles/kiosk.style";
 
-const StatsDayInfo = () => {
+const StatsDayInfo = ({
+  volume = "-",
+  reps = "-",
+  time = "-",
+  calorie = "-",
+}) => {
+  // console.log(volume, reps, time, calorie);
   return (
     <CustomDiv
       mt={20}
@@ -44,7 +55,7 @@ const StatsDayInfo = () => {
             ml={15}
             mt={8}
           >
-            51
+            {volume}
             <Div>kg</Div>
           </Div>
         </Div>
@@ -64,8 +75,8 @@ const StatsDayInfo = () => {
             ml={5}
             mt={8}
           >
-            51
-            <Div>kg</Div>
+            {reps}
+            <Div>회</Div>
           </Div>
         </Div>
         <Div>
@@ -84,8 +95,8 @@ const StatsDayInfo = () => {
             ml={10}
             mt={8}
           >
-            51
-            <Div>kg</Div>
+            {time}
+            <Div>minute</Div>
           </Div>
         </Div>
         <Div>
@@ -104,8 +115,8 @@ const StatsDayInfo = () => {
             mt={8}
             ml={15}
           >
-            51
-            <Div>kg</Div>
+            {calorie}
+            <Div>cal</Div>
           </Div>
         </Div>
       </Div>
