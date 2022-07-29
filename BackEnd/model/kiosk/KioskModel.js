@@ -11,29 +11,13 @@ const searchDailyData = async (req, res) => {
     param,
     format
   );
-  console.log(query);
   conn.query(query, (err, results) => {
     if (err) console.log(err);
+    console.log(results);
     return res.json(results);
   });
 };
 
-const searchCategoryData = async (req, res) => {
-  const param = null;
-  const format = { language: "sql", indent: "" };
-  const query = mybatisMapper.getStatement(
-    "kiosk",
-    "searchCategoryData",
-    param,
-    format
-  );
-  conn.query(query, (err, results) => {
-    if (err) console.log(err);
-    return res.json(results);
-  });
-}
-
 module.exports = {
   searchDailyData,
-  searchCategoryData
 };
