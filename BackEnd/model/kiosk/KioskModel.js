@@ -18,6 +18,26 @@ const searchDailyData = async (req, res) => {
   });
 };
 
+const searchCategoryData = async (req, res) => {
+  const body = req.body;
+  console.log(body.excerciseDay)
+  const param = {
+    excerciseDay : body.excerciseDay
+  }
+  const format = { language: "sql", indent: "" };
+  const query = mybatisMapper.getStatement(
+    "kiosk",
+    "searchCategoryData",
+    param,
+    format
+  );
+  conn.query(query, (err, results) => {
+    if (err) console.log(err);
+    return res.json(results);
+  });
+}
+
 module.exports = {
   searchDailyData,
+  searchCategoryData
 };

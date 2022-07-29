@@ -14,7 +14,7 @@
   <select id="searchCategoryData">
     SELECT SUM(ABS(HOUR(TIMEDIFF(endtime, startTime)) * 60 ) + (second(TIMEDIFF(endtime, startTime)) + MINUTE(TIMEDIFF(endtime, startTime)) * 60) / 60) AS "totalCategoryTime", e.equipmentCategory from daily_excercise AS d 
     LEFT JOIN fitness_equipment AS e ON d.equipmentName = e.equipmentName 
-    WHERE d.excerciseDay = #{excerciseDay}
+    WHERE d.excerciseDay = CONVERT(#{excerciseDay}, DATE)
     GROUP BY e.equipmentCategory 
   </select>
 </mapper>
