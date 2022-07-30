@@ -1,6 +1,5 @@
 :root {
   --linear-blue: linear-gradient(284.21deg, #2E52FF -7.95%, #8DA1FF 138.55%);
-  font-size: 1.48vw;
 }
 html {
   font-family: "Noto Sans KR";
@@ -1757,3 +1756,7 @@ body {
 .d-grid {
   display: grid !important;
 }
+
+
+
+
