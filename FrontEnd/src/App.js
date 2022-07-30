@@ -5,6 +5,9 @@ import SignupPage from './pages/SignupPage';
 import CalendarPage from './pages/CalendarPage';
 import FindAccountPage from './pages/FindAccountPage';
 import KioskLoginPage from './pages/KioskLoginPage';
+import RecordPage from './pages/RecordPage';
+import AdminPage from './pages/AdminPage';
+import EquipmentListPage from './pages/EquipmentListPage'
 
 function App() {
   return (
@@ -17,6 +20,9 @@ function App() {
         <Route path="/calendar" element={<CalendarPage />} />
         <Route path="/kiosk" element={<KioskMainPage />} />
         <Route path="/kiosk/login" element={<KioskLoginPage />} />
+        <Route path="/record" element={<RecordPage/>}/>
+        <Route path="/admin" element={<AdminPage/>} />
+        <Route path="/equipment-list" element={<EquipmentListPage/>}/>
       </Routes>
     </div>
   );

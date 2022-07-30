@@ -1,6 +1,5 @@
 :root {
   --linear-blue: linear-gradient(284.21deg, #2E52FF -7.95%, #8DA1FF 138.55%);
-  font-size: 1.48vw;
 }
 html {
   font-family: "Noto Sans KR";
@@ -1756,4 +1755,30 @@ body {
 
 .d-grid {
   display: grid !important;
+}
+
+
+div .slider {
+  position: absolute;
+  height: 100%;
+  width: 25%;
+  z-index: 0;
+  left: 0;
+  bottom: 0;
+  background: linear-gradient(284.21deg, #92a3fd -7.95%, #9dceff 138.55%);
+  border-radius: 5px;
+  transition: all 0.3s ease;
+}
+
+
+#whole:checked div .slider {
+  left: 25%;
+}
+
+#upper:checked ~ div .slider {
+  left: 50%;
+}
+
+#lower:checked ~ div .slider {
+  left: 75%;
 }
