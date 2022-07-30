@@ -182,7 +182,11 @@ const KioskMainPage = () => {
         <SelectBoardView onSelectData={saveBoadHandler} />
         {isBoard ? (
           <Div mt={10}>
-            <WeeklySummary datas={datasHey} onChange={getData} />
+            <WeeklySummary
+              datas={datasHey}
+              onChange={getData}
+              date={selectedDate}
+            />
             <Exercise exerciseList={dailyData[1]} />
           </Div>
         ) : (

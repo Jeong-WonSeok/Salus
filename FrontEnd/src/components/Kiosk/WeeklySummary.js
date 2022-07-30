@@ -33,7 +33,7 @@ const Icon = styled.div`
   margin: 0 auto;
 `;
 
-function WeeklySummary({ datas, onChange }) {
+function WeeklySummary({ datas, onChange, date }) {
   return (
     <Container>
       <Header>
@@ -43,7 +43,14 @@ function WeeklySummary({ datas, onChange }) {
       </Header>
       <Icon>
         {datas.map((data, index) => {
-          return <DailySummary data={data} key={index} setValue={onChange} />;
+          return (
+            <DailySummary
+              data={data}
+              key={index}
+              setValue={onChange}
+              date={date}
+            />
+          );
         })}
       </Icon>
     </Container>

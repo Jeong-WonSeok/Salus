@@ -14,6 +14,11 @@ const Round = styled.div`
   text-align: center;
   box-shadow: 2px 3px 5px rgba(0, 0, 0, 0.25),
     inset 5px 2px 5px rgba(0, 0, 0, 0.25);
+
+  &.selected {
+    background-image: linear-gradient(#fff, #fff),
+      linear-gradient(284.21deg, #f06875 -7.95%, #f4929b 138.55%);
+  }
 `;
 
 const Type = styled.div`
@@ -31,12 +36,14 @@ const Info = styled.div`
   line-height: 1.5rem;
 `;
 
-function DailySummary({ data, setValue }) {
+function DailySummary({ data, setValue, date }) {
   return (
     <Round
+      className={date === data.excerciseDay ? "selected" : ""}
       onClick={() => {
         console.log(data.excerciseDay);
         setValue(data.excerciseDay);
+        console.log(date);
       }}
     >
       <Type>{data.excerciseCategory}</Type>
