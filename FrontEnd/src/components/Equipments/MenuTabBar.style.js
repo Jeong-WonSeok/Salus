@@ -29,6 +29,7 @@ export const StyledDiv = styled(Div)`
   background: linear-gradient(284.21deg, #92a3fd -7.95%, #9dceff 138.55%);
   border-radius: 5px;
   transition: all 0.35s ease;
+  
 `;
 
 export const NewDiv = styled(Div)`

@@ -14,7 +14,7 @@ const EquipmentListPage = () => {
         mr="50px"
       >
         <Div className="scarlet-200-bg" mb="30px">
-          검색 바
+          <Div></Div>
         </Div>
         <Div borderRadius="10px 10px 0px 0px">
           <MenuTabBar/>

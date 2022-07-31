@@ -23,7 +23,7 @@ export const Div = styled.div`
   border-radius: ${(props) => (props.borderRadius ? props.borderRadius : "")};
   box-shadow: ${(props) => (props.shadowDiv ? props.shadowDiv : "")};
   flex-wrap: ${(props) => (props.flexWrap ? props.flexWrap : "nowrap")};
-  overflow: ${(props) => (props.overflow ? props.overflow : "")} !important;
+  overflow: ${(props) => (props.overflow ? props.overflow : "")};
 
   .content::-webkit-scrollbar {
     width: 15px;
