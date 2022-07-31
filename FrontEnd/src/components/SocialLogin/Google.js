@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-import google from '../../assets/images/google.png';
+import google from '../../assets/images/sociallogin/google.png';
 
 const Div = styled.div`
   width: 50px;
