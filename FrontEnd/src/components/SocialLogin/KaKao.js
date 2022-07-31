@@ -8,6 +8,7 @@ const Div = styled.div`
   border: 0.8px solid #edeef4;
   border-radius: 8px;
   margin: 1rem;
+  cursor: pointer;
 `;
 
 const Kakao = () => {
