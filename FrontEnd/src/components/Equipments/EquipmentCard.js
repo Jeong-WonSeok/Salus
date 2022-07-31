@@ -5,37 +5,47 @@ import { RoundButton } from "./../Common/RoundButton";
 
 const Img = styled.img`
   width: 100%;
-  height: 70%;
-`;
-
-const NameDiv = styled(Div)`
-  text-align: center;
-  font-size: 14px;
+  height: 100%;
 `;
 
 const EquipmentCard = () => {
   return (
-    <CustomDiv ml="50px" mr="50px" mb="70px" divWidth="13%" >
+    <CustomDiv mt="20px" ml="50px" mr="50px" mb="60px" divWidth="13%" borderRadius="10px">
       <CustomDiv
         divWidth="139px"
         divHeight="190px"
         borderRadius="10px"
         className="white-bg"
-        shadowDiv="1px 3px 4px grey"
+        shadowDiv="1px 1px 4px grey, 0.1em 0.1em skyblue"
       >
+        <CustomDiv
+          className="wrap-over"
+          positionDiv="absolute"
+          divWidth="139px"
+          divHeight="190px"
+          borderRadius="10px"
+        >
+          <CustomDiv
+            justifyContent="center"
+            alignItems="center"
+            divHeight="100%"
+            borderRadius="10px"
+          >
+            <RoundButton
+              buttonWidth="100px"
+              buttonHeight="25px"
+              borderRadius="30px"
+            >
+              상세 정보
+            </RoundButton>
+          </CustomDiv>
+        </CustomDiv>
         <Img
-          src="https://www.pngall.com/wp-content/uploads/5/Workout-PNG-High-Quality-Image.png"
+          src="https://img.freepik.com/free-vector/pilates-concept-illustration_114360-1111.jpg"
           alt=""
         />
-        <NameDiv mb="8px">운동</NameDiv>
         <Div displayDiv="flex" justifyContent="center">
-          <RoundButton
-            buttonWidth="100px"
-            buttonHeight="25px"
-            borderRadius="30px"
-          >
-            상세 정보
-          </RoundButton>
+          <Div mt="10px">체스트 프레스</Div>
         </Div>
       </CustomDiv>
     </CustomDiv>

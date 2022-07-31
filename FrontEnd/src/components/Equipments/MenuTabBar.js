@@ -16,69 +16,6 @@ const MenuTabBar = () => {
   //여기서 정보를 받아옴.
   const equipmentData = [
     {
-      equipmentId: 1,
-      equipmentName: "컬 머신",
-      equipmentEnglishName: "curl machine",
-      equipmentImage: "",
-      equipmentStimulate: "이두근",
-      equipmentEnglishStimulate: "biceps, obliques, traps",
-      equipmentCategory: "상체",
-    },
-    {
-      equipmentId: 2,
-      equipmentName: "머신",
-      equipmentEnglishName: "machine",
-      equipmentImage: "",
-      equipmentStimulate: "이두근",
-      equipmentEnglishStimulate: "biceps, obliques, traps",
-      equipmentCategory: "상체",
-    },
-    {
-      equipmentId: 3,
-      equipmentName: "프레스 머신",
-      equipmentEnglishName: "press machine",
-      equipmentImage: "",
-      equipmentStimulate: "이두근",
-      equipmentEnglishStimulate: "biceps, obliques, traps",
-      equipmentCategory: "상체",
-    },
-    {
-      equipmentId: 3,
-      equipmentName: "프레스 머신",
-      equipmentEnglishName: "press machine",
-      equipmentImage: "",
-      equipmentStimulate: "이두근",
-      equipmentEnglishStimulate: "biceps, obliques, traps",
-      equipmentCategory: "상체",
-    },
-    {
-      equipmentId: 3,
-      equipmentName: "프레스 머신",
-      equipmentEnglishName: "press machine",
-      equipmentImage: "",
-      equipmentStimulate: "이두근",
-      equipmentEnglishStimulate: "biceps, obliques, traps",
-      equipmentCategory: "상체",
-    },
-    {
-      equipmentId: 3,
-      equipmentName: "프레스 머신",
-      equipmentEnglishName: "press machine",
-      equipmentImage: "",
-      equipmentStimulate: "이두근",
-      equipmentEnglishStimulate: "biceps, obliques, traps",
-      equipmentCategory: "상체",
-    },
-    {
-      equipmentId: 3,
-      equipmentName: "프레스 머신",
-      equipmentEnglishName: "press machine",
-      equipmentImage: "",
-      equipmentStimulate: "이두근",
-      equipmentEnglishStimulate: "biceps, obliques, traps",
-      equipmentCategory: "상체",
-    },
-    {
       equipmentId: 3,
       equipmentName: "프레스 머신",
       equipmentEnglishName: "press machine",
@@ -200,13 +137,13 @@ const MenuTabBar = () => {
         <StyledDiv className="slider"></StyledDiv>
       </CustomDiv>
       <Section>
-        <Div className="content content1">
+        <Div className="content content1" overflow="scroll">
           <EquipmentCardList equipmentData={equipmentData}></EquipmentCardList>
         </Div>
-        <Div className="content content2">
-          <div>저거</div>
+        <Div className="content content2" overflow="scroll">
+          <EquipmentCardList equipmentData={equipmentData}></EquipmentCardList>
         </Div>
-        <Div className="content content3">
+        <Div className="content content3" overflow="scroll">
           <div>
             Lorem ipsum dolor sit amet consectetur adipisicing elit. Neque
             error, ipsum excepturi quod quae distinctio ratione accusantium
@@ -214,7 +151,7 @@ const MenuTabBar = () => {
             veritatis laborum voluptates aliquid suscipit?
           </div>
         </Div>
-        <Div className="content content4">
+        <Div className="content content4" overflow="scroll">
           <div>
             Lorem ipsum dolor sit amet consectetur adipisicing elit. Neque
             error, ipsum excepturi quod quae distinctio ratione accusantium

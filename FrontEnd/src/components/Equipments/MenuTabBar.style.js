@@ -82,5 +82,4 @@ export const Section = styled.section`
   height: 780px;
   display: flex;
   justify-content: center;
-  padding-top: 35px;
 `;
