@@ -1,11 +1,11 @@
 import React from "react";
 import { Div, CustomDiv } from "../styles/web.style";
-import MenuTabBar from './../components/Common/MenuTabBar';
+import MenuTabBar from './../components/Equipments/MenuTabBar';
 
 const EquipmentListPage = () => {
 
   return (
-    <Div ml="327px" mt="200px">
+    <CustomDiv ml="327px" mt="200px" divWidth="100%" divHeight="100%">
       <CustomDiv
         borderRadius={10}
         divWidth="1392px"
@@ -20,7 +20,7 @@ const EquipmentListPage = () => {
           <MenuTabBar/>
         </Div>
       </CustomDiv>
-    </Div>
+    </CustomDiv>
   );
 };
 

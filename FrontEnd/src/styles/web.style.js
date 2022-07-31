@@ -1,15 +1,11 @@
 import styled from "styled-components";
 
 export const Div = styled.div`
-  margin-bottom: ${(props) =>
-    props.mb ? props.mb : "0px"};
+  margin-bottom: ${(props) => (props.mb ? props.mb : "0px")};
   margin-top: ${(props) => (props.mt ? props.mt : "0px")};
-  margin-right: ${(props) =>
-    props.mr ? props.mr : "0px"};
-  margin-left: ${(props) =>
-    props.ml ? props.ml: "0px"};
-  padding-top: ${(props) =>
-    props.pt ? props.pt: "0px"};
+  margin-right: ${(props) => (props.mr ? props.mr : "0px")};
+  margin-left: ${(props) => (props.ml ? props.ml : "0px")};
+  padding-top: ${(props) => (props.pt ? props.pt : "0px")};
   font-size: ${(props) => (props.fontSize ? props.fontSize : "1rem")};
   font-weight: ${(props) => (props.fontWeight ? props.fontWeight : 0)};
   display: ${(props) => (props.displayDiv ? props.displayDiv : "block")};
@@ -25,6 +21,8 @@ export const Div = styled.div`
     props.flexDirection ? props.flexDirection : "row"};
   position: ${(props) => (props.positionDiv ? props.positionDiv : "relative")};
   border-radius: ${(props) => (props.borderRadius ? props.borderRadius : "")};
+  box-shadow: ${(props) => (props.shadowDiv ? props.shadowDiv : "")};
+  flex-wrap: ${(props) => (props.flexWrap ? props.flexWrap : "nowrap")};
 `;
 
 //기본 Div를 상속받아 오버라이딩한 스타일
