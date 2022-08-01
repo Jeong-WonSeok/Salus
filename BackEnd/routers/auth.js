@@ -1,7 +1,8 @@
 var express = require("express");
 var router = express.Router();
-var passport = require("../config/passport");
+var passport = require();
 const controller = require("../controller/user/UserController");
+
 
 router.get("/login", function (req, res) {
   res.render("auth/login");
@@ -20,10 +21,14 @@ router.get(
 
 router.get("/google/callback", passport.authenticate("google"), authSuccess);
 
-function authSuccess(req, res) {
+async function authSuccess(req, res) {
   console.log("여기는 옴");
   var email = req.user.email;
-  res.redirect("/user/search/" + email);
+  console.log('req', req.user);
+  const test = await controller.search(req, res);
+  console.log('test',test);
+  
+  // res.redirect("/user/search/" + email);
 }
 
 module.exports = router;
