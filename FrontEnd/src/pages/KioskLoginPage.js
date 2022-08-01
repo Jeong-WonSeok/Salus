@@ -1,7 +1,7 @@
 import { Fragment } from 'react';
 import styled, { createGlobalStyle } from 'styled-components';
 
-import logo from '../assets/images/biglogo.png';
+import logo from '../assets/images/logo/biglogo.png';
 
 const GlobalStyle = createGlobalStyle`
   body {

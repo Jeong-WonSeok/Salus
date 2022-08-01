@@ -1,8 +1,8 @@
-import React from "react";
-import styled from "styled-components";
-import { useState } from "react";
-import maleicon from "../../assets/images/maleicon.jpg";
-import femaleicon from "../../assets/images/femaleicon.png";
+import React from 'react';
+import styled from 'styled-components';
+import { useState } from 'react';
+import maleicon from '../../assets/images/signup/maleicon.jpg';
+import femaleicon from '../../assets/images/signup/femaleicon.png';
 const Label = styled.label`
   position: relative;
   width: 10vw;
@@ -45,15 +45,15 @@ const Div = styled.div`
 `;
 
 const ToggleImg = styled.img`
-  width: ${(props) => (props.imgWidth ? props.imgWidth : "5vw")};
-  height: ${(props) => (props.imgHeight ? props.imgHeight : "5vh")};
+  width: ${(props) => (props.imgWidth ? props.imgWidth : '5vw')};
+  height: ${(props) => (props.imgHeight ? props.imgHeight : '5vh')};
 `;
 
 const InputToggleComponent = ({
-  inputWidth = "100px",
-  inputHeight = "200px",
-  firstValue = "남자",
-  secondValue = "여자",
+  inputWidth = '100px',
+  inputHeight = '200px',
+  firstValue = '남자',
+  secondValue = '여자',
   inputValid = true,
 }) => {
   const [checked, setChecked] = useState(false);
@@ -63,35 +63,17 @@ const InputToggleComponent = ({
 
   return (
     <Div>
-      <Label
-        inputWidth={inputWidth}
-        inputHeight={inputHeight}
-        inputValid={inputValid}
-      >
+      <Label inputWidth={inputWidth} inputHeight={inputHeight} inputValid={inputValid}>
         <input type="checkbox" onClick={checkedHandler} />
         <span>
           {!checked && (
             <div>
-              {firstValue === "남자" && (
-                <ToggleImg
-                  src={maleicon}
-                  imgWidth="2vw"
-                  imgHeight="3vh"
-                  alt=""
-                ></ToggleImg>
-              )}
+              {firstValue === '남자' && <ToggleImg src={maleicon} imgWidth="2vw" imgHeight="3vh" alt=""></ToggleImg>}
             </div>
           )}
           {checked && (
             <div>
-              {secondValue === "여자" && (
-                <ToggleImg
-                  src={femaleicon}
-                  imgWidth="2vw"
-                  imgHeight="3vh"
-                  alt=""
-                ></ToggleImg>
-              )}
+              {secondValue === '여자' && <ToggleImg src={femaleicon} imgWidth="2vw" imgHeight="3vh" alt=""></ToggleImg>}
             </div>
           )}
         </span>
