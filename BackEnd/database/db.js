@@ -9,6 +9,5 @@ const conn = mysql.createConnection({
 });
 mybatisMapper.createMapper(["./sql/user/user.xml"]);
 mybatisMapper.createMapper(["./sql/kiosk/kiosk.xml"]);
-
 mybatisMapper.createMapper(["./sql/equip/equip.xml"]);
 module.exports = conn;

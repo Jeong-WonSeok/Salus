@@ -20,7 +20,7 @@ USE `salus`;
 -- 테이블 salus.board 구조 내보내기
 CREATE TABLE IF NOT EXISTS `board` (
   `subjectNo` int(11) NOT NULL AUTO_INCREMENT,
-  `board_gymId` int(11) NOT NULL,
+  `gymId` int(11) NOT NULL,
   `title` varchar(50) NOT NULL,
   `content` text NOT NULL,
   `writeDate` date NOT NULL,
@@ -28,60 +28,60 @@ CREATE TABLE IF NOT EXISTS `board` (
   `firstRegist` datetime NOT NULL DEFAULT current_timestamp(),
   `updateRegist` datetime NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
   PRIMARY KEY (`subjectNo`),
-  KEY `FK1_manager_board` (`board_gymId`) USING BTREE,
-  CONSTRAINT `FK1_gymId_board` FOREIGN KEY (`board_gymId`) REFERENCES `gym` (`gymId`)
+  KEY `FK1_manager_board` (`gymId`) USING BTREE,
+  CONSTRAINT `FK1_gymId_board` FOREIGN KEY (`gymId`) REFERENCES `gym` (`gymId`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- 테이블 데이터 salus.board:~0 rows (대략적) 내보내기
 /*!40000 ALTER TABLE `board` DISABLE KEYS */;
 /*!40000 ALTER TABLE `board` ENABLE KEYS */;
 
--- 테이블 salus.daily_routine 구조 내보내기
-CREATE TABLE IF NOT EXISTS `daily_routine` (
-  `dailyRoutineId` int(11) NOT NULL AUTO_INCREMENT,
+-- 테이블 salus.calorie 구조 내보내기
+CREATE TABLE IF NOT EXISTS `calorie` (
+  `calorieKey` int(11) NOT NULL AUTO_INCREMENT,
   `excerciseDay` date NOT NULL,
-  `progress` double DEFAULT NULL,
-  `dailyExcerciseTime` int(11) DEFAULT NULL,
-  `userId` int(11) NOT NULL,
-  `oneDayRoutineTitle` varchar(20) NOT NULL,
+  `oneDayCalorie` int(11) DEFAULT NULL,
+  `userid` int(11) NOT NULL,
   `firstRegist` datetime NOT NULL DEFAULT current_timestamp(),
   `updateRegist` datetime NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
-  PRIMARY KEY (`dailyRoutineId`),
-  KEY `FK_daily_routine_user` (`userId`),
-  KEY `excerciseDay` (`excerciseDay`),
-  KEY `FK_daily_routine_routine` (`oneDayRoutineTitle`),
-  CONSTRAINT `FK_daily_routine_routine` FOREIGN KEY (`oneDayRoutineTitle`) REFERENCES `routine` (`oneDayRoutineTitle`) ON DELETE CASCADE ON UPDATE CASCADE,
-  CONSTRAINT `FK_daily_routine_user` FOREIGN KEY (`userId`) REFERENCES `user` (`userid`) ON DELETE CASCADE ON UPDATE CASCADE
+  PRIMARY KEY (`calorieKey`),
+  KEY `FK_calorie_user` (`userid`),
+  CONSTRAINT `FK_calorie_user` FOREIGN KEY (`userid`) REFERENCES `user` (`userId`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
--- 테이블 데이터 salus.daily_routine:~0 rows (대략적) 내보내기
-/*!40000 ALTER TABLE `daily_routine` DISABLE KEYS */;
-/*!40000 ALTER TABLE `daily_routine` ENABLE KEYS */;
+-- 테이블 데이터 salus.calorie:~0 rows (대략적) 내보내기
+/*!40000 ALTER TABLE `calorie` DISABLE KEYS */;
+/*!40000 ALTER TABLE `calorie` ENABLE KEYS */;
 
--- 테이블 salus.daily_routine_detail 구조 내보내기
-CREATE TABLE IF NOT EXISTS `daily_routine_detail` (
-  `dailyExcerciseId` int(11) NOT NULL,
-  `startTime` timestamp NULL DEFAULT NULL,
-  `endTime` timestamp NULL DEFAULT NULL,
-  `excerciseProgress` double DEFAULT NULL,
-  `weightNow` int(11) DEFAULT NULL,
-  `numberNow` int(11) DEFAULT NULL,
-  `setNow` int(11) DEFAULT NULL,
-  `excerciseDay` date NOT NULL,
-  `dailyRoutineId` int(11) NOT NULL,
+-- 테이블 salus.daily_excercise 구조 내보내기
+CREATE TABLE IF NOT EXISTS `daily_excercise` (
+  `dailyExcerciseId` int(11) NOT NULL AUTO_INCREMENT,
   `equipmentName` varchar(30) NOT NULL,
-  `firstRegist` datetime NOT NULL,
+  `userid` int(11) NOT NULL,
+  `startTime` datetime DEFAULT NULL,
+  `endTime` datetime DEFAULT NULL,
+  `weightNow` int(11) DEFAULT NULL,
+  `countNow` int(11) DEFAULT NULL,
+  `excerciseDay` date NOT NULL,
+  `firstRegist` datetime NOT NULL DEFAULT current_timestamp(),
   `updateRegist` datetime NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
   PRIMARY KEY (`dailyExcerciseId`),
-  KEY `FK1_dailyroutineId` (`dailyRoutineId`),
   KEY `FK2_equipmentName` (`equipmentName`),
-  CONSTRAINT `FK1_dailyroutineId` FOREIGN KEY (`dailyRoutineId`) REFERENCES `daily_routine` (`dailyRoutineId`) ON DELETE CASCADE ON UPDATE CASCADE,
-  CONSTRAINT `FK2_equipmentName` FOREIGN KEY (`equipmentName`) REFERENCES `fitness_equiepment` (`equipmentName`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+  KEY `FK_daily_excercise_user` (`userid`),
+  CONSTRAINT `FK_daily_excercise_fitness_equipment` FOREIGN KEY (`equipmentName`) REFERENCES `fitness_equipment` (`equipmentName`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `FK_daily_excercise_user` FOREIGN KEY (`userid`) REFERENCES `user` (`userId`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8mb4;
 
--- 테이블 데이터 salus.daily_routine_detail:~0 rows (대략적) 내보내기
-/*!40000 ALTER TABLE `daily_routine_detail` DISABLE KEYS */;
-/*!40000 ALTER TABLE `daily_routine_detail` ENABLE KEYS */;
+-- 테이블 데이터 salus.daily_excercise:~6 rows (대략적) 내보내기
+/*!40000 ALTER TABLE `daily_excercise` DISABLE KEYS */;
+INSERT INTO `daily_excercise` (`dailyExcerciseId`, `equipmentName`, `userid`, `startTime`, `endTime`, `weightNow`, `countNow`, `excerciseDay`, `firstRegist`, `updateRegist`) VALUES
+	(4, '펙덱 플라이 머신', 14, '2022-07-27 16:26:07', '2022-07-27 17:26:07', 50, 10, '2022-07-27', '2022-07-28 16:26:07', '2022-07-29 10:55:11'),
+	(5, '숄더프레스 머신', 14, '2022-07-27 16:27:28', '2022-07-27 17:37:28', 50, 10, '2022-07-27', '2022-07-28 16:27:28', '2022-07-29 10:26:07'),
+	(6, '체스트 프레스 머신', 14, '2022-07-28 16:27:56', '2022-07-28 17:47:56', 50, 10, '2022-07-28', '2022-07-28 16:27:56', '2022-07-29 10:55:12'),
+	(7, '컬 머신', 14, '2022-07-28 16:28:20', '2022-07-28 17:58:20', 50, 10, '2022-07-28', '2022-07-28 16:28:20', '2022-07-29 14:01:25'),
+	(8, '컬 머신', 13, '2022-07-29 16:28:36', '2022-07-29 18:08:36', 50, 10, '2022-07-29', '2022-07-28 16:28:36', '2022-07-29 10:55:06'),
+	(9, '레그 컬 머신', 14, '2022-07-29 16:28:52', '2022-07-29 18:18:52', 50, 10, '2022-07-29', '2022-07-28 16:28:52', '2022-07-29 11:11:39');
+/*!40000 ALTER TABLE `daily_excercise` ENABLE KEYS */;
 
 -- 테이블 salus.fitness_equipment 구조 내보내기
 CREATE TABLE IF NOT EXISTS `fitness_equipment` (
@@ -174,7 +174,7 @@ CREATE TABLE IF NOT EXISTS `inbody_profile` (
   `updateRegist` datetime NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
   PRIMARY KEY (`userid`),
   KEY `FK__user_2` (`rfidKey`),
-  CONSTRAINT `FK__user` FOREIGN KEY (`userid`) REFERENCES `user` (`userid`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `FK__user` FOREIGN KEY (`userid`) REFERENCES `user` (`userId`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `FK__user_2` FOREIGN KEY (`rfidKey`) REFERENCES `user` (`rfidKey`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
@@ -230,10 +230,8 @@ CREATE TABLE IF NOT EXISTS `routine` (
 
 -- 테이블 salus.user 구조 내보내기
 CREATE TABLE IF NOT EXISTS `user` (
-  `userid` int(11) NOT NULL AUTO_INCREMENT,
+  `userId` int(11) NOT NULL AUTO_INCREMENT,
   `rfidKey` bigint(20) DEFAULT NULL,
-  `rfidKey2` bigint(20) DEFAULT NULL,
-  `rfidKey3` bigint(20) DEFAULT NULL,
   `email` varchar(40) NOT NULL DEFAULT '',
   `name` varchar(20) NOT NULL DEFAULT '',
   `password` varchar(30) DEFAULT '',
@@ -250,39 +248,19 @@ CREATE TABLE IF NOT EXISTS `user` (
   `gymId` int(11) DEFAULT NULL,
   `firstRegist` datetime NOT NULL DEFAULT current_timestamp(),
   `updateRegist` datetime NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
-  PRIMARY KEY (`userid`) USING BTREE,
+  PRIMARY KEY (`userId`) USING BTREE,
   UNIQUE KEY `email` (`email`),
   UNIQUE KEY `rfidKey` (`rfidKey`),
-  UNIQUE KEY `rfidKey2` (`rfidKey2`),
-  UNIQUE KEY `rfidKey3` (`rfidKey3`),
   KEY `gymId` (`gymId`),
   CONSTRAINT `gymId` FOREIGN KEY (`gymId`) REFERENCES `gym` (`gymId`) ON DELETE SET NULL ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8mb4;
 
--- 테이블 데이터 salus.user:~1 rows (대략적) 내보내기
+-- 테이블 데이터 salus.user:~2 rows (대략적) 내보내기
 /*!40000 ALTER TABLE `user` DISABLE KEYS */;
-INSERT INTO `user` (`userid`, `rfidKey`, `rfidKey2`, `rfidKey3`, `email`, `name`, `password`, `phone`, `birthDay`, `gender`, `gymPassStart`, `gymPassEnd`, `excerciseStart`, `totalexcerciseTime`, `dailyStart`, `dailyEnd`, `excerciseCheck`, `gymId`, `firstRegist`, `updateRegist`) VALUES
-	(13, NULL, NULL, NULL, 'sbpark110542@naver.com', '박성배', '', '', '1995-11-05', 'male', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-07-27 11:48:29', '2022-07-27 11:48:29');
+INSERT INTO `user` (`userId`, `rfidKey`, `email`, `name`, `password`, `phone`, `birthDay`, `gender`, `gymPassStart`, `gymPassEnd`, `excerciseStart`, `totalexcerciseTime`, `dailyStart`, `dailyEnd`, `excerciseCheck`, `gymId`, `firstRegist`, `updateRegist`) VALUES
+	(13, NULL, 'sbpark110542@naver.com', '박성배', '', '', '1995-11-05', 'male', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-07-27 11:48:29', '2022-07-27 11:48:29'),
+	(14, 132131321313213, 'sbpark0402@gmail.com', '박성배', '', '', NULL, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-07-28 16:31:33', '2022-07-29 10:12:04');
 /*!40000 ALTER TABLE `user` ENABLE KEYS */;
-
--- 테이블 salus.user-routine 구조 내보내기
-CREATE TABLE IF NOT EXISTS `user-routine` (
-  `userId` int(11) NOT NULL,
-  `rfidKey` bigint(20) DEFAULT NULL,
-  `routineId` int(11) NOT NULL,
-  `firstRegist` datetime NOT NULL DEFAULT current_timestamp(),
-  `updateRegist` datetime NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
-  KEY `FK1_user_routine` (`userId`),
-  KEY `FK2_user-routine_user` (`rfidKey`),
-  KEY `FK3_user-routineroutine` (`routineId`),
-  CONSTRAINT `FK1_user_routine` FOREIGN KEY (`userId`) REFERENCES `user` (`userid`) ON DELETE CASCADE ON UPDATE CASCADE,
-  CONSTRAINT `FK2_user-routine_user` FOREIGN KEY (`rfidKey`) REFERENCES `user` (`rfidKey`) ON DELETE CASCADE ON UPDATE CASCADE,
-  CONSTRAINT `FK3_user-routineroutine` FOREIGN KEY (`routineId`) REFERENCES `routine` (`routineId`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
--- 테이블 데이터 salus.user-routine:~0 rows (대략적) 내보내기
-/*!40000 ALTER TABLE `user-routine` DISABLE KEYS */;
-/*!40000 ALTER TABLE `user-routine` ENABLE KEYS */;
 
 /*!40101 SET SQL_MODE=IFNULL(@OLD_SQL_MODE, '') */;
 /*!40014 SET FOREIGN_KEY_CHECKS=IFNULL(@OLD_FOREIGN_KEY_CHECKS, 1) */;
