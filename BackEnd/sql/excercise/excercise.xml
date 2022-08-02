@@ -16,13 +16,13 @@
     insert into daily_excercise
     (weightNow, countNow, equipmentName, excerciseDay, userid)
     values
-    (#{weightNow}, #{countNow}, #{equipmentName}, #{excerciseDay}, #{userid}) 
+    (#{weightNow}, 1, #{equipmentName}, #{excerciseDay}, #{userid}) 
     </insert>
 
     <!-- 운동 데이터 수정-->
     <update id="updateExcercise">
     update daily_excercise
-    set countNow = coutnNow + 1
+    set countNow = countNow + 1
     where excerciseDay = #{excerciseDay}
     and weightNow = #{weightNow}
     and equipmentName = #{equipmentName}

@@ -45,6 +45,7 @@ const searchDailyData = async (req, res) => {
     return res.json(results);
   });
 };
+
 const selectExcercise = async (req, res) =>{
   var param = {
     rfidKey : req.params.rfidKey,
