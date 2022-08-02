@@ -26,7 +26,6 @@ async function authSuccess(req, res) {
   var email = req.user.email;
   console.log('req', req.user);
   const test = await controller.search(req, res);
-  console.log('test',test);
   
   // res.redirect("/user/search/" + email);
 }

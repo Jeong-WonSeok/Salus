@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="excercise">
+<mapper namespace="dailyexcercise">
     <!-- 운동 데이터가 있는 지 확인 -->
     <select id="selectExcercise">
     select * 
@@ -8,15 +8,15 @@
     where excerciseDay = #{excerciseDay}
     and weightNow = #{weightNow}
     and equipmentName = #{equipmentName}
-    and userId = #{userId}
+    and userid = #{userid}
     </select>
 
     <!-- 운동 데이터 삽입-->
     <insert id="insertExcercise" >
     insert into daily_excercise
-    (weightNow, countNow, equipmentName, excerciseDay, userId)
+    (weightNow, countNow, equipmentName, excerciseDay, userid)
     values
-    (#{weightNow}, #{countNow}, #{equipmentName}, #{excerciseDay}, #{userId}) 
+    (#{weightNow}, #{countNow}, #{equipmentName}, #{excerciseDay}, #{userid}) 
     </insert>
 
     <!-- 운동 데이터 수정-->
@@ -26,7 +26,7 @@
     where excerciseDay = #{excerciseDay}
     and weightNow = #{weightNow}
     and equipmentName = #{equipmentName}
-    and userId = #{userId}
+    and userid = #{userid}
     </update>
 
 </mapper>

@@ -11,6 +11,8 @@ const user = require("./user");
 /** 키오스크 관련 router */
 const kiosk = require("./kiosk");
 
+const excercise = require("./excercise");
+
 router.get("/", function (req, res) {
   res.render('main')
   // res.render("main", { user: req.user });
@@ -20,6 +22,7 @@ router.get("/", function (req, res) {
 
 router.use("/user", user);
 router.use("/kiosk", kiosk);
+router.use("/excercise", excercise)
 router.get("/", function (req, res) {
   res.render("main", { user: req.user });
 });
