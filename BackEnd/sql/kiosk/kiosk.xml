@@ -4,7 +4,7 @@
   <select id="searchDailyData" >
     SELECT daily_excercise.excerciseDay, fitness_equipment.equipmentName AS"excerciseName", fitness_equipment.equipmentEnglishName AS "excerciseEnglishName", ROUND((HOUR(TIMEDIFF(endtime, startTime)) * 60 )+ (second(TIMEDIFF(endtime, startTime)) + MINUTE(TIMEDIFF(endtime, startTime)) * 60) / 60) AS "excerciseTime", fitness_equipment.equipmentCategory AS "excerciseCategory", fitness_equipment.equipmentStimulate AS"excerciseStimulate", fitness_equipment.equipmentEnglishStimulate AS "excerciseEnglishStimulate", daily_excercise.weightNow, daily_excercise.countNow, ROUND(6 * ROUND((HOUR(TIMEDIFF(endtime, startTime)) * 60 )+ (second(TIMEDIFF(endtime, startTime)) + MINUTE(TIMEDIFF(endtime, startTime)) * 60) / 60) * daily_excercise.weightNow / 60) AS "calorie" FROM daily_excercise 
     INNER JOIN user 
-    on daily_excercise.userid = user.userid 
+    on daily_excercise.userid = #{userid} 
     AND daily_excercise.excerciseDay BETWEEN CONVERT( DATE_SUB(NOW(), INTERVAL 4 DAY), DATE ) and CONVERT(NOW(), DATE)
     INNER JOIN fitness_equipment 
     ON daily_excercise.equipmentName = fitness_equipment.equipmentName
@@ -15,4 +15,15 @@
     GROUP BY d.excerciseDay, e.equipmentCategory
     ORDER BY d.excerciseDay DESC;
   </select>
+  <select id="searchuserid">
+  SELECT userid FROM user WHERE rfidKey = #{rfidKey};
+  </select>
+  <select id="searchequip">
+  SELECT userid FROM user WHERE rfidKey = #{rfidKey};
+  select equipmentName from fitness_equipment where equipmentId = #{equipmentId}
+  </select>
+  <insert id="dailyexcerciseInsert">
+  INSERT INTO daily_excercise (equipmentName, userid, startTime, excerciseDay)
+  VALUES(#{equipmentName}, #{userid}, NOW(), NOW())
+  </insert>
 </mapper>
