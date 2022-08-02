@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="excercise">
+    <!-- 운동 데이터가 있는 지 확인 -->
+    <select id="selectExcercise">
+    select * 
+    from daily_excercise
+    where excerciseDay = #{excerciseDay}
+    and weightNow = #{weightNow}
+    and equipmentName = #{equipmentName}
+    and userId = #{userId}
+    </select>
+
+    <!-- 운동 데이터 삽입-->
+    <insert id="insertExcercise" >
+    insert into daily_excercise
+    (weightNow, countNow, equipmentName, excerciseDay, userId)
+    values
+    (#{weightNow}, #{countNow}, #{equipmentName}, #{excerciseDay}, #{userId}) 
+    </insert>
+
+    <!-- 운동 데이터 수정-->
+    <update id="updateExcercise">
+    update daily_excercise
+    set countNow = coutnNow + 1
+    where excerciseDay = #{excerciseDay}
+    and weightNow = #{weightNow}
+    and equipmentName = #{equipmentName}
+    and userId = #{userId}
+    </update>
+
+</mapper>

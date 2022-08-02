@@ -12,7 +12,8 @@ const user = require("./user");
 const kiosk = require("./kiosk");
 
 router.get("/", function (req, res) {
-  res.render("main", { user: req.user });
+  res.render('main')
+  // res.render("main", { user: req.user });
   console.log("user", req.user);
 });
 
