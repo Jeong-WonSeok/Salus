@@ -1,9 +1,17 @@
 const SocketIO = require('socket.io');
 
-const io = SocketIO('http://i7b110.p.ssafy.io:3000/eqyipmentdata')
-io.on('connection', (socket) => {
-    socket.on('equipment', (data) => {
-    console.log(data);
-    })
+module.exports = (server) => {
+    const io = SocketIO(server, {path: '/socket.io'});
 
-});
+    io.on('connection', (socket) => {
+        
+        socket.on('equipmentdata', (data) => {
+        console.log(data);
+        })
+
+        // socket.interval = setInterval(() => {
+        //     socket.emit('equipmentdata', 'Hello Socket.IO');
+        // }, 3000);
+
+    });
+}

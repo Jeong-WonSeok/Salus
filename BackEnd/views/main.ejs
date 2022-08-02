@@ -1,8 +1,18 @@
 <h1>Main Page</h1>
 
+<!-- 
 <% if(!user){ %>
     <a href="auth/login">Login</a>
 <% } else { %>
     <p>Welcome <%= user.displayName %></p>
         <a href="auth/logout">Logout</a>
-<% } %>
+<% } %> -->
+
+<!-- <script src = "/socket.io/socket.io.js"></script>
+<script>
+    const socket = io.connect('http://localhost:3000', { path: '/socket.io'});
+    socket.on('equipment', function(data) {
+        console.log(data);
+        socekt.emit('equipment', 'hello');
+    })
+</script> -->

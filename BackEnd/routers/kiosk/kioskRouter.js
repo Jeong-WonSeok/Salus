@@ -1,5 +1,5 @@
-var expree = require("express");
-var router = expree.Router();
+var express = require("express");
+var router = express.Router();
 
 // controller
 const controller = require("../../controller/kiosk/KioskController");
