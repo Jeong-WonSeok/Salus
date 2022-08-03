@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-import kakao from '../../assets/images/kakao.png';
+import kakao from '../../assets/images/sociallogin/kakao.png';
 
 const Div = styled.div`
   width: 50px;

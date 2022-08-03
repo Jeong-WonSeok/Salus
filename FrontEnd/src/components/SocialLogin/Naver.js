@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-import naver from '../../assets/images/naver.png';
+import naver from '../../assets/images/sociallogin/naver.png';
 
 const Div = styled.div`
   width: 50px;

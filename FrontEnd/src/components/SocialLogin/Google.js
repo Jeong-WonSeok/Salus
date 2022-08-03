@@ -1,8 +1,8 @@
-import { useEffect } from "react";
-import styled from "styled-components";
-import google from "../../assets/images/google.png";
-import axios from "axios";
-import { useState } from "react";
+import { useEffect } from 'react';
+import styled from 'styled-components';
+import google from '../../assets/images/sociallogin/google.png';
+import axios from 'axios';
+import { useState } from 'react';
 
 const Div = styled.div`
   width: 50px;
@@ -16,14 +16,11 @@ const Div = styled.div`
 const Google = () => {
   const [data, setData] = useState({});
   const googleLoginReq = () => {
-    window.open("http://localhost:3010/auth/google");
+    window.open('http://localhost:3010/auth/google');
   };
 
   return (
-    <Div
-      className="d-flex justify-content-center align-items-center"
-      onClick={googleLoginReq}
-    >
+    <Div className="d-flex justify-content-center align-items-center" onClick={googleLoginReq}>
       <img src={google} alt="" />
     </Div>
   );
