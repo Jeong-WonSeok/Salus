@@ -8,7 +8,7 @@ import FindAccountPage from './pages/FindAccountPage';
 import KioskLoginPage from './pages/KioskLoginPage';
 import RecordPage from './pages/RecordPage';
 import AdminPage from './pages/AdminPage';
-import EquipmentListPage from './pages/EquipmentListPage'
+import EquipmentListPage from './pages/EquipmentListPage';
 
 import NavSideBar from './components/Nav&Side/NavSideBar';
 
@@ -19,6 +19,8 @@ function App() {
         <Route element={<NavSideBar />}>
           <Route path="/main" element={<MainPage />} />
           <Route path="/calendar" element={<CalendarPage />} />
+          <Route path="/record" element={<RecordPage />} />
+          <Route path="/equipment-list" element={<EquipmentListPage />} />
         </Route>
         <Route path="/" element={<Navigate push to="/login" />} />
         <Route path="/login" element={<LoginPage />} />
@@ -26,9 +28,7 @@ function App() {
         <Route path="/signup" element={<SignupPage />} />
         <Route path="/kiosk" element={<KioskMainPage />} />
         <Route path="/kiosk/login" element={<KioskLoginPage />} />
-        <Route path="/record" element={<RecordPage/>}/>
-        <Route path="/admin" element={<AdminPage/>} />
-        <Route path="/equipment-list" element={<EquipmentListPage/>}/>
+        <Route path="/admin" element={<AdminPage />} />
       </Routes>
     </div>
   );
