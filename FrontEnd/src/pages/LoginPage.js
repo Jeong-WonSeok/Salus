@@ -112,7 +112,7 @@ const LoginPage = () => {
             labelTop={1.7}
             inputType={passwordInputType.type}
           ></InputComponent>
-          <Div mt={20}>
+          <Div mt={30}>
             <label htmlFor="cb">
               <input
                 type="checkbox"
