@@ -36,6 +36,7 @@ const Exercise = (props) => {
           volume={exercise.volume}
           reps={exercise.reps}
           key={`${exercise.title}${Date.now().toString()}`}
+
         />
       );
     } else {
