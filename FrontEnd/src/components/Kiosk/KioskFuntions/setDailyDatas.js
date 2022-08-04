@@ -8,9 +8,10 @@ const setDailyDatas = (data, date, type) => {
         volume: excercise.weightNow * excercise.countNow,
         reps: excercise.countNow,
       });
-      useMuscle.add(...excercise.excerciseEnglishStimulate.split(", "));
+      useMuscle.add(excercise.excerciseEnglishStimulate.split(', '));
     }
   }
-  return [Array.from(useMuscle), dailyData];
+  console.log(Array.from(useMuscle)[0]);
+  return [Array.from(useMuscle)[0], dailyData];
 };
 export default setDailyDatas;

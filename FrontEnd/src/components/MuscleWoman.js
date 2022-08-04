@@ -34,7 +34,6 @@ import back_calves_b from '../assets/images/muscle/woman/30.png';
 
 const Musclemap = styled.div`
   position: relative;
-  left: -14.5vw;
   width: 98vw;
 `;
 
@@ -172,7 +171,7 @@ const MuscleWoman = (props) => {
         src={back_traps_a}
         alt="back_traps_a"
         opacity={props.muscles.includes('traps') ? '1' : '0'}
-        top="20.53%"
+        top="19.5%"
         left="66.36%"
         width="7.47%"
       />
