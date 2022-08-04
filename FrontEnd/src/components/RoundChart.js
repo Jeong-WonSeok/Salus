@@ -1,5 +1,5 @@
-import React from "react";
-import styled from "styled-components";
+import React from 'react';
+import styled from 'styled-components';
 
 const Circle = styled.circle`
   animation: circle-fill-animation 2s ease;
@@ -14,30 +14,29 @@ const Circle = styled.circle`
 `;
 
 const Div = styled.div`
-  width: ${props => props.roundWidth ? props.roundWidth / 1080 * 100 + "vw" : "180px"};
-  height: ${props => props.roundHeight ? props.roundHeight / 1920 * 100 + "vh" : "180px"};
+  width: ${(props) => (props.roundWidth ? (props.roundWidth / 1080) * 100 + 'vw' : '180px')};
+  height: ${(props) => (props.roundHeight ? (props.roundHeight / 1920) * 100 + 'vh' : '180px')};
   position: relative;
-`
+`;
 const TextDiv = styled.div`
   position: absolute;
-  top: ${(props) => (props.textTop ? props.textTop : "10%")};
-  left: ${(props) => (props.textLeft ? props.textLeft : "2.7%")};
+  top: ${(props) => (props.textTop ? props.textTop : '10%')};
+  left: ${(props) => (props.textLeft ? props.textLeft : '2.7%')};
 `;
 const Svg = styled.svg`
   transform: rotate(-90deg);
-`
+`;
 
 const RoundChart = ({
   roundRatio = 1,
   roundWidth = 180,
   roundHeight = 180,
   colorGradient,
-  textTop="10%",
-  textLeft="2.7%",
+  textTop = '10%',
+  textLeft = '2.7%',
   children,
   KEY,
 }) => {
-
   return (
     <Div roundHeight={roundHeight} roundWidth={roundWidth}>
       <TextDiv textTop={textTop} textLeft={textLeft}>
@@ -49,14 +48,7 @@ const RoundChart = ({
           <stop offset="50%" stopColor={colorGradient[1]}></stop>
           <stop offset="100%" stopColor={colorGradient[2]}></stop>
         </linearGradient>
-        <circle
-          cx="100"
-          cy="100"
-          r="90"
-          fill="none"
-          strokeWidth="10"
-          stroke="#EDEEF4"
-        />
+        <circle cx="100" cy="100" r="90" fill="none" strokeWidth="10" stroke="#EDEEF4" />
         <Circle
           cx="100"
           cy="100"
@@ -65,7 +57,7 @@ const RoundChart = ({
           strokeWidth="10"
           stroke={`url(#linearColors${KEY})`}
           strokeDasharray={`${2 * Math.PI * 90 * 1}`}
-          roundRatio= {roundRatio}
+          roundRatio={roundRatio}
         />
       </Svg>
     </Div>

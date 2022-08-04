@@ -33,10 +33,9 @@ import back_calves_a from '../assets/images/muscle/woman/29.png';
 import back_calves_b from '../assets/images/muscle/woman/30.png';
 
 const Musclemap = styled.div`
-  position: fixed;
-  left: -5vw;
-  top: 8vh;
-  width: 75vw;
+  position: relative;
+  left: -14.5vw;
+  width: 98vw;
 `;
 
 const Background = styled.img`
@@ -50,6 +49,7 @@ const MuscleImg = styled.img`
   top: ${(props) => props.top};
   left: ${(props) => props.left};
   width: ${(props) => props.width};
+  transition: 0.25s ease-in;
 `;
 
 const MuscleWoman = (props) => {
