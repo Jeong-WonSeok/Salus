@@ -10,6 +10,7 @@ const ButtonDiv = styled(Div)`
   background-image: linear-gradient(#fff, #fff), linear-gradient(284.21deg, #92a3fd -7.95%, #9dceff 138.55%);
   background-origin: border-box;
   background-clip: content-box, border-box;
+  font-family: 'Pretendard-Regular';
 `;
 
 const LeftDiv = styled(Div)`

@@ -5,6 +5,7 @@ import styled from 'styled-components';
 
 const NavDiv = styled(Div)`
   font-family: 'Pretendard-Regular';
+  font-varint: tabular-nums;
 `;
 
 const NavKiosk = () => {

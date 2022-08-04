@@ -7,6 +7,7 @@ const Div = styled.div`
   height: 20.8vh;
   border-radius: 0.625rem;
   margin-left: 3.5vw;
+  font-family: 'Pretendard-Regular';
 `;
 
 const ListDiv = styled.div`
