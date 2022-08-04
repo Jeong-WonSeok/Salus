@@ -176,7 +176,7 @@ const KioskMainPage = () => {
       <CustomDiv>
         <NavKiosk />
         <CustomDiv displayDiv="flex" mt={20} mr={30} ml={30} borderRadius="10px" justifyContent="space-between">
-          <StatsMuscle muscle={dailyData[0]} />
+          <StatsMuscle muscle={dailyData[0]} date={selectedDate} />
           <StatsWeekly />
         </CustomDiv>
         {/* <StatsDayInfo
