@@ -3,9 +3,33 @@ import { CustomDiv, Div } from '../../styles/kiosk.style';
 import styled from 'styled-components';
 import RoundChart from '../RoundChart';
 
-
 const FontCustomDiv = styled(CustomDiv)`
   font-family: 'Pretendard-Regular';
+`;
+
+const ChartDiv = styled(Div)`
+  position: relative;
+  &:active {
+    & .infoDiv {
+      display: flex;
+      text-align: center;
+      align-items: center;
+    }
+  }
+`;
+
+const InfoDiv = styled(Div)`
+  position: absolute;
+  height: 3vh;
+  width: ${(props) => (props.width ? props.width + 'vw' : '20vw')};
+  top: 3vh;
+  left: ${(props) => (props.left ? props.left + 'vw' : '')};
+  padding: 0.7vh;
+  display: none;
+  background: white;
+  border: 1px solid rgba(99, 126, 255, 0.5);
+  border-radius: 8px;
+  color: rgba(0, 0, 0, 0.7);
 `;
 
 const StatsWeekly = () => {
@@ -24,7 +48,7 @@ const StatsWeekly = () => {
         이번 주 운동 통계
       </Div> */}
       <Div>
-        <Div displayDiv="flex" mb={10}>
+        <ChartDiv displayDiv="flex" mb={10}>
           <RoundChart
             roundRatio={0.5}
             roundWidth={180}
@@ -38,8 +62,11 @@ const StatsWeekly = () => {
               <Div fontSize="1rem">분</Div>
             </Div>
           </RoundChart>
-        </Div>
-        <Div displayDiv="flex" mb={10}>
+          <InfoDiv className="infoDiv" left={-20}>
+            성인 권장 유산소 운동량 대비 회원님의 운동량입니다.
+          </InfoDiv>
+        </ChartDiv>
+        <ChartDiv displayDiv="flex" mb={10}>
           <RoundChart
             roundRatio={0.9}
             roundWidth={180}
@@ -53,8 +80,11 @@ const StatsWeekly = () => {
               <Div fontSize="1rem">%</Div>
             </Div>
           </RoundChart>
-        </Div>
-        <Div displayDiv="flex" mb={10}>
+          <InfoDiv className="infoDiv" left={-23} width={23}>
+            전체 헬스장 인원의 상체운동 시간 대비 회원님의 운동 시간입니다.
+          </InfoDiv>
+        </ChartDiv>
+        <ChartDiv displayDiv="flex" mb={10}>
           <RoundChart
             roundRatio={0.7}
             roundWidth={180}
@@ -68,8 +98,11 @@ const StatsWeekly = () => {
               <Div fontSize="1rem">%</Div>
             </Div>
           </RoundChart>
-        </Div>
-        <Div displayDiv="flex">
+          <InfoDiv className="infoDiv" left={-23} width={23}>
+            전체 헬스장 인원의 하체운동 시간 대비 회원님의 운동 시간입니다.
+          </InfoDiv>
+        </ChartDiv>
+        <ChartDiv displayDiv="flex">
           <RoundChart
             roundRatio={0.7}
             roundWidth={180}
@@ -83,7 +116,10 @@ const StatsWeekly = () => {
               <Div fontSize="1rem">%</Div>
             </Div>
           </RoundChart>
-        </Div>
+          <InfoDiv className="infoDiv" left={-21} width={21}>
+            오늘 회원님의 헬스장 이용시간 대비 운동시간입니다.
+          </InfoDiv>
+        </ChartDiv>
       </Div>
     </FontCustomDiv>
   );
