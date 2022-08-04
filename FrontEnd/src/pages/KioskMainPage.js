@@ -14,6 +14,13 @@ import moment from 'moment';
 import ButtonComponent from './../components/Common/ButtonComponent';
 import setDailyDatas from '../components/Kiosk/KioskFuntions/setDailyDatas';
 import setDayData from '../components/Kiosk/KioskFuntions/setDayData';
+import styled from 'styled-components';
+
+const HomeDiv = styled(Div)`
+  position: absolute;
+  bottom: 5%;
+  left: 32%;
+`
 
 const GlobalStyle = createGlobalStyle`
   body {
@@ -175,7 +182,14 @@ const KioskMainPage = () => {
       <GlobalStyle />
       <CustomDiv>
         <NavKiosk />
-        <CustomDiv displayDiv="flex" mt={20} mr={30} ml={30} borderRadius="10px" justifyContent="space-between">
+        <CustomDiv
+          displayDiv="flex"
+          mt={20}
+          mr={30}
+          ml={30}
+          borderRadius="10px"
+          justifyContent="space-between"
+        >
           <StatsMuscle muscle={dailyData[0]} date={selectedDate} />
           <StatsWeekly />
         </CustomDiv>
@@ -188,7 +202,11 @@ const KioskMainPage = () => {
         <SelectBoardView onSelectData={saveBoadHandler} />
         {isBoard ? (
           <Div mt={10}>
-            <WeeklySummary datas={datasHey} onChange={getData} date={selectedDate} />
+            <WeeklySummary
+              datas={datasHey}
+              onChange={getData}
+              date={selectedDate}
+            />
             <Exercise exerciseList={dailyData[1]} />
           </Div>
         ) : (
@@ -197,9 +215,13 @@ const KioskMainPage = () => {
           </Div>
         )}
       </CustomDiv>
-      <Div displayDiv="flex" justifyContent="center" mt={40}>
-        <ButtonComponent buttonText="홈" buttonWidth="35vw" buttonHeight="3vh" />
-      </Div>
+      <HomeDiv displayDiv="flex" justifyContent="center">
+        <ButtonComponent
+          buttonText="홈"
+          buttonWidth="35vw"
+          buttonHeight="3vh"
+        />
+      </HomeDiv>
     </Fragment>
   );
 };
