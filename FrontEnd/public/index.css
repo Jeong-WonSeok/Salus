@@ -9,7 +9,7 @@ html {
 }
 
 body {
-  background: #F7F8F8;
+  background: #f7f8f8;
   -webkit-font-smoothing: antialiased;
   overflow-x: hidden;
 }
@@ -179,15 +179,15 @@ body {
 /* 백그라운드 색상 */
 
 .main-theme-bg {
-  background: linear-gradient(284.21deg, #92A3FD -7.95%, #9DCEFF 138.55%);
+  background: linear-gradient(284.21deg, #92a3fd -7.95%, #9dceff 138.55%);
 }
 
 .main-font-bg {
-  background: #443B46;
+  background: #443b46;
 }
 
 .main-bg {
-  background: #F7F8F8;
+  background: #f7f8f8;
 }
 
 .tr-blue-bg {
@@ -207,116 +207,117 @@ body {
 }
 
 .blue-100-bg {
-  background: #2E52FF;
+  background: #2e52ff;
 }
 
 .blue-200-bg {
-  background: #7A91FF;
+  background: #7a91ff;
 }
 
 .blue-300-bg {
-  background: #E6EAFF;
+  background: #e6eaff;
 }
 
 .blue-400-bg {
-  background: #F8F9FD;
+  background: #f8f9fd;
 }
 
 .scarlet-100-bg {
-  background: #BA3955;
+  background: #ba3955;
 }
 
 .scarlet-200-bg {
-  background: #D43C5D;
+  background: #d43c5d;
 }
 
 .scarlet-300-bg {
-  background: #F06875;
+  background: #f06875;
 }
 
 .scarlet-400-bg {
-  background: #FCEAE9;
+  background: #fceae9;
 }
 
 .grey-100-bg {
-  background: #96989D;
+  background: #96989d;
 }
 
 .grey-200-bg {
-  background: #C0C2C4;
-  ;
+  background: #c0c2c4;
 }
 
 .grey-300-bg {
-  background: #DCDDDE;
-  ;
+  background: #dcddde;
 }
 
 .grey-400-bg {
-  background: #EDEEF4;
-  ;
+  background: #edeef4;
 }
 
 .grey-500-bg {
-  background: #F8F8F8;
+  background: #f8f8f8;
 }
 
 .linear-blue-bg {
-  background: linear-gradient(284.21deg, #2E52FF -7.95%, #8DA1FF 138.55%);
+  background: linear-gradient(284.21deg, #2e52ff -7.95%, #8da1ff 138.55%);
 }
 
 .linear-red-bg {
-  background: linear-gradient(284.21deg, #F06875 -7.95%, #F4929B 138.55%);
+  background: linear-gradient(284.21deg, #f06875 -7.95%, #f4929b 138.55%);
 }
 
 .linear-purple-bg {
-  background: linear-gradient(284.21deg, #8260F1 -7.95%, #B19CF7 138.55%);
+  background: linear-gradient(284.21deg, #8260f1 -7.95%, #b19cf7 138.55%);
 }
 
 .linear-violet-bg {
-  background: linear-gradient(284.21deg, #B98EF5 -7.95%, #C9A7F8 70.64%);
+  background: linear-gradient(284.21deg, #b98ef5 -7.95%, #c9a7f8 70.64%);
 }
 
 .linear-orange-bg {
-  background: linear-gradient(284.21deg, #FB816B -7.95%, #FEA08F 138.55%);
+  background: linear-gradient(284.21deg, #fb816b -7.95%, #fea08f 138.55%);
 }
 
 .white-bg {
-  background: #FFFFFF;
+  background: #ffffff;
 }
 
 .orange-bg {
-  background: #FB816B;
+  background: #fb816b;
 }
 
 .lilac-bg {
-  background: #F1E9FC;
+  background: #f1e9fc;
 }
 
 .green-bg {
-  background: #00A66C;
+  background: #00a66c;
 }
 
 .kakao-bg {
-  background: #FFEB00;
+  background: #ffeb00;
 }
 
 .radical-bg {
-  background: radial-gradient(70.5% 70.5% at 50% 50%, #637EFF 0%, rgba(99, 126, 255, 0) 100%);
+  background: radial-gradient(
+    70.5% 70.5% at 50% 50%,
+    #637eff 0%,
+    rgba(99, 126, 255, 0) 100%
+  );
 }
 
 /* 폰트 색상 */
 
 .main-theme-font {
-  color: linear-gradient(284.21deg, #92A3FD -7.95%, #9DCEFF 138.55%);
+  color: linear-gradient(284.21deg, #92a3fd -7.95%, #9dceff 138.55%);
 }
 
 .main-font-font {
-  color: #443B46;
+  color: #443b46;
 }
 
 .main-font {
-  color: #F7F8F8;
+  color: #f7f8f8;
 }
 
 .tr-blue-font {
@@ -336,102 +337,103 @@ body {
 }
 
 .blue-100-font {
-  color: #2E52FF;
+  color: #2e52ff;
 }
 
 .blue-200-font {
-  color: #7A91FF;
+  color: #7a91ff;
 }
 
 .blue-300-font {
-  color: #E6EAFF;
+  color: #e6eaff;
 }
 
 .blue-400-font {
-  color: #F8F9FD;
+  color: #f8f9fd;
 }
 
 .scarlet-100-font {
-  color: #BA3955;
+  color: #ba3955;
 }
 
 .scarlet-200-font {
-  color: #D43C5D;
+  color: #d43c5d;
 }
 
 .scarlet-300-font {
-  color: #F06875;
+  color: #f06875;
 }
 
 .scarlet-400-font {
-  color: #FCEAE9;
+  color: #fceae9;
 }
 
 .grey-100-font {
-  color: #96989D;
+  color: #96989d;
 }
 
 .grey-200-font {
-  color: #C0C2C4;
-  ;
+  color: #c0c2c4;
 }
 
 .grey-300-font {
-  color: #DCDDDE;
-  ;
+  color: #dcddde;
 }
 
 .grey-400-font {
-  color: #EDEEF4;
-  ;
+  color: #edeef4;
 }
 
 .grey-500-font {
-  color: #F8F8F8;
+  color: #f8f8f8;
 }
 
 .linear-blue-font {
-  color: linear-gradient(284.21deg, #2E52FF -7.95%, #8DA1FF 138.55%);
+  color: linear-gradient(284.21deg, #2e52ff -7.95%, #8da1ff 138.55%);
 }
 
 .linear-red-font {
-  color: linear-gradient(284.21deg, #F06875 -7.95%, #F4929B 138.55%);
+  color: linear-gradient(284.21deg, #f06875 -7.95%, #f4929b 138.55%);
 }
 
 .linear-purple-font {
-  color: linear-gradient(284.21deg, #8260F1 -7.95%, #B19CF7 138.55%);
+  color: linear-gradient(284.21deg, #8260f1 -7.95%, #b19cf7 138.55%);
 }
 
 .linear-violet-font {
-  color: linear-gradient(284.21deg, #B98EF5 -7.95%, #C9A7F8 70.64%);
+  color: linear-gradient(284.21deg, #b98ef5 -7.95%, #c9a7f8 70.64%);
 }
 
 .linear-orange-font {
-  color: linear-gradient(284.21deg, #FB816B -7.95%, #FEA08F 138.55%);
+  color: linear-gradient(284.21deg, #fb816b -7.95%, #fea08f 138.55%);
 }
 
 .white-font {
-  color: #FFFFFF;
+  color: #ffffff;
 }
 
 .orange-font {
-  color: #FB816B;
+  color: #fb816b;
 }
 
 .lilac-font {
-  color: #F1E9FC;
+  color: #f1e9fc;
 }
 
 .green-font {
-  color: #00A66C;
+  color: #00a66c;
 }
 
 .kakao-font {
-  color: #FFEB00;
+  color: #ffeb00;
 }
 
 .radical-font {
-  color: radial-gradient(70.5% 70.5% at 50% 50%, #637EFF 0%, rgba(99, 126, 255, 0) 100%);
+  color: radial-gradient(
+    70.5% 70.5% at 50% 50%,
+    #637eff 0%,
+    rgba(99, 126, 255, 0) 100%
+  );
 }
 
 /* flex 관련 CSS */
@@ -554,7 +556,6 @@ body {
 .align-content-around {
   align-content: space-around !important;
 }
-
 
 /* margin, padding 관련 CSS */
 
@@ -980,7 +981,6 @@ body {
   order: 6 !important;
 }
 
-
 /* container */
 
 .container {
@@ -1167,9 +1167,7 @@ body {
   width: 100%;
 }
 
-
 /* greed system */
-
 
 @media (min-width: 576px) {
   .col-sm {
@@ -1324,7 +1322,6 @@ body {
     margin-left: 91.66666667%;
   }
 }
-
 
 @media (min-width: 768px) {
   .col-md {

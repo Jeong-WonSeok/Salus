@@ -1,33 +1,14 @@
-import React, { useCallback, useEffect, useState } from 'react';
-import { useDispatch } from 'react-redux';
+import React from 'react';
 import { CustomDiv, Div } from '../../styles/kiosk.style';
 import styled from 'styled-components';
 import RoundChart from '../RoundChart';
-import useHttp from './../../customHooks/useHttp';
-import { statsWeeklyActions } from '../../store/weekly-workout';
+
 
 const FontCustomDiv = styled(CustomDiv)`
   font-family: 'Pretendard-Regular';
 `;
 
 const StatsWeekly = () => {
-  //useHttp 로직으로 비동기 요청 및 redux store에 저장
-  const { loading, error, apiRequest } = useHttp();
-  const dispatch = useDispatch();
-  const transformData = useCallback((objData) => {
-    dispatch(
-      statsWeeklyActions.fetchWeeklyState({
-        statsRunning: 10,
-        statsUpperBody: 10,
-        statsLowerBody: 10,
-      })
-    );
-  });
-
-  useEffect(() => {
-    apiRequest({ url: 'https://jsonplaceholder.typicode.com/todos/1' }, transformData);
-  }, [apiRequest, transformData]);
-
   return (
     <FontCustomDiv
       divWidth={250}
