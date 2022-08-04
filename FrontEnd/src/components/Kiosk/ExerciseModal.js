@@ -7,7 +7,7 @@ import { Div } from "../../styles/web.style";
 
 const BackDropDiv = styled.div`
   position: fixed;
-  top: 0;
+  bottom: 0;
   left: 0;
   width: 100%;
   height: 100vh;
@@ -15,26 +15,24 @@ const BackDropDiv = styled.div`
   background: rgba(0, 0, 0, 0.75);
 `;
 const modalActive = keyframes`
-  from { top: 200px;}
-  to { bottom: 0px;}
+  from { top: 20vh; opacity: 0; }
+  to { top: 30vh; opacity: 1; }
 `;
 
 const ModalDiv = styled.div`
-    position: fixed;
-    top: 30vh;
-    left: 10%;
-    width: 80%;
-    z-index: 100;
-    overflow: hidden;
-    height: 30%;
-    background: white;
-    border-radius: 8px;
-    &.modal-active {
-      animation: ${modalActive} 0.6s;
-    }
+  position: fixed;
+  top: 30vh;
+  left: 10%;
+  width: 80%;
+  z-index: 100;
+  overflow: hidden;
+  height: 30%;
+  background: white;
+  border-radius: 8px;
+  &.modal-active {
+    animation: ${modalActive} 0.5s;
+  }
 `;
-
-
 
 const Img = styled.img`
   width: 7%;
