@@ -1,6 +1,7 @@
 import styled from "styled-components";
 
 export const Div = styled.div`
+  margin: ${(props) => (props.m ? props.m : "0px")};
   margin-bottom: ${(props) => (props.mb ? props.mb : "0px")};
   margin-top: ${(props) => (props.mt ? props.mt : "0px")};
   margin-right: ${(props) => (props.mr ? props.mr : "0px")};
@@ -30,12 +31,10 @@ export const Div = styled.div`
     height: 100%;
     background-color: black;
     border-radius: 10px;
-    
   }
   .content::-webkit-scrollbar-thumb {
     background: linear-gradient(284.21deg, #92a3fd -7.95%, #9dceff 138.55%);
     border-radius: 10px;
-    
   }
   .content::-webkit-scrollbar-track {
     background-color: #e6eaff;

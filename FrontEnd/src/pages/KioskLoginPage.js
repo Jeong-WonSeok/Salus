@@ -1,6 +1,6 @@
 import { Fragment, useEffect, useState } from "react";
 import styled, { createGlobalStyle } from "styled-components";
-import logo from "../assets/images/logo/biglogo.png";
+import logo from "../assets/images/logo/bglogo8.png";
 import io from "socket.io-client";
 import { Navigate } from "react-router";
 
