@@ -1,10 +1,11 @@
-import React from 'react'
+import { useState, useEffect } from 'react';
+import { LogoDiv, Div } from '../../styles/kiosk.style';
+import moment from 'moment';
+import styled from 'styled-components';
 
-import moment from "moment";
-import { useState } from "react";
-import { useEffect } from "react";
-import { LogoDiv } from '../../styles/kiosk.style';
-import { Div } from '../../styles/kiosk.style';
+const NavDiv = styled(Div)`
+  font-family: 'Pretendard-Regular';
+`;
 
 const NavKiosk = () => {
   const [time, setTime] = useState(moment());
@@ -21,10 +22,17 @@ const NavKiosk = () => {
 
   return (
     <Div displayDiv="flex" justifyContent="space-between">
-      <LogoDiv ml={20} fontSize="5.5rem">Salus</LogoDiv>
-      <Div mt={30} mr={40} fontSize="3rem">
-        {time.format("YYYY-MM-DD HH:mm")}
-      </Div>
+      <LogoDiv ml={30} fontSize="5.5rem">
+        Salus
+      </LogoDiv>
+      <NavDiv displayDiv="flex" mr={40} mt={40}>
+        <Div fontSize="2.5rem" mr={15} mt={10}>
+          {time.format('YYYY년 MM월 DD일')}
+        </Div>
+        <Div fontSize="3rem" fontWeight="bold">
+          {time.format('HH : mm')}
+        </Div>
+      </NavDiv>
     </Div>
   );
 };

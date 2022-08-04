@@ -64,7 +64,7 @@ const SideBar = () => {
           </NavStyle>
         </li>
         <li>
-          <NavStyle to="/1" className="d-flex align-items-center">
+          <NavStyle to="/record" className="d-flex align-items-center">
             <Img src={note} className="menuImg me-1" />
             <span>운동기록</span>
           </NavStyle>
@@ -76,7 +76,7 @@ const SideBar = () => {
           </NavStyle>
         </li>
         <li>
-          <NavStyle to="/1" className="d-flex align-items-center">
+          <NavStyle to="/equipment-list" className="d-flex align-items-center">
             <Img src={fitness} className="menuImg me-1" />
             <span>전체 운동 기구</span>
           </NavStyle>

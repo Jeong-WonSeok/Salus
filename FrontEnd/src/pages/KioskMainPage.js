@@ -175,16 +175,16 @@ const KioskMainPage = () => {
       <GlobalStyle />
       <CustomDiv>
         <NavKiosk />
-        <CustomDiv displayDiv="flex" mt={20} mr={30} ml={30} borderRadius="10px">
+        <CustomDiv displayDiv="flex" mt={20} mr={30} ml={30} borderRadius="10px" justifyContent="space-between">
           <StatsMuscle muscle={dailyData[0]} />
           <StatsWeekly />
         </CustomDiv>
-        <StatsDayInfo
+        {/* <StatsDayInfo
           volume={dayData.totalWeight}
           reps={dayData.totalCount}
           time={dayData.totalCategoryTime}
           calorie={dayData.totalCalorie}
-        />
+        /> */}
         <SelectBoardView onSelectData={saveBoadHandler} />
         {isBoard ? (
           <Div mt={10}>
