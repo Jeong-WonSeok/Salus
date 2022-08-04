@@ -7,7 +7,7 @@ const routers = require("./routers");
 const passport = require("passport");
 const session = require("express-session");
 const passportConfig = require('./passport');
-
+const cors = require("cors");
 
 dotenv.config({path: path.join(__dirname, '/.env')});
 
@@ -30,15 +30,9 @@ app.use(
 app.use(passport.initialize());
 app.use(passport.session());
 
-// sequelize.sync({ force: false })
-//   .then(() => {
-//     console.log('데이터 베이스 연결 성공');
-//   })
-//   .catch((err) => {
-//     console.error(err);
-//   })
 
 // routers
+app.use(cors());
 app.use(routers);
 app.use("/", require("./routers"));
 app.use("/auth", require("./routers/auth"));

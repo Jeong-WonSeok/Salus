@@ -62,7 +62,7 @@ CREATE TABLE IF NOT EXISTS `daily_excercise` (
   `endTime` datetime DEFAULT NULL,
   `weightNow` int(11) DEFAULT NULL,
   `countNow` int(11) DEFAULT NULL,
-  `excerciseDay` date NOT NULL,
+  `excerciseDay` date NOT NULL DEFAULT current_timestamp(),
   `firstRegist` datetime NOT NULL DEFAULT current_timestamp(),
   `updateRegist` datetime NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
   PRIMARY KEY (`dailyExcerciseId`),
@@ -70,9 +70,9 @@ CREATE TABLE IF NOT EXISTS `daily_excercise` (
   KEY `FK_daily_excercise_user` (`userid`),
   CONSTRAINT `FK_daily_excercise_fitness_equipment` FOREIGN KEY (`equipmentName`) REFERENCES `fitness_equipment` (`equipmentName`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `FK_daily_excercise_user` FOREIGN KEY (`userid`) REFERENCES `user` (`userId`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8mb4;
 
--- 테이블 데이터 salus.daily_excercise:~6 rows (대략적) 내보내기
+-- 테이블 데이터 salus.daily_excercise:~7 rows (대략적) 내보내기
 /*!40000 ALTER TABLE `daily_excercise` DISABLE KEYS */;
 INSERT INTO `daily_excercise` (`dailyExcerciseId`, `equipmentName`, `userid`, `startTime`, `endTime`, `weightNow`, `countNow`, `excerciseDay`, `firstRegist`, `updateRegist`) VALUES
 	(4, '펙덱 플라이 머신', 14, '2022-07-27 16:26:07', '2022-07-27 17:26:07', 50, 10, '2022-07-27', '2022-07-28 16:26:07', '2022-07-29 10:55:11'),
@@ -80,7 +80,8 @@ INSERT INTO `daily_excercise` (`dailyExcerciseId`, `equipmentName`, `userid`, `s
 	(6, '체스트 프레스 머신', 14, '2022-07-28 16:27:56', '2022-07-28 17:47:56', 50, 10, '2022-07-28', '2022-07-28 16:27:56', '2022-07-29 10:55:12'),
 	(7, '컬 머신', 14, '2022-07-28 16:28:20', '2022-07-28 17:58:20', 50, 10, '2022-07-28', '2022-07-28 16:28:20', '2022-07-29 14:01:25'),
 	(8, '컬 머신', 13, '2022-07-29 16:28:36', '2022-07-29 18:08:36', 50, 10, '2022-07-29', '2022-07-28 16:28:36', '2022-07-29 10:55:06'),
-	(9, '레그 컬 머신', 14, '2022-07-29 16:28:52', '2022-07-29 18:18:52', 50, 10, '2022-07-29', '2022-07-28 16:28:52', '2022-07-29 11:11:39');
+	(9, '레그 컬 머신', 14, '2022-07-29 16:28:52', '2022-07-29 18:18:52', 50, 10, '2022-07-29', '2022-07-28 16:28:52', '2022-07-29 11:11:39'),
+	(10, '업도미널 머신', 14, '2022-08-03 16:08:00', '2022-08-03 15:08:00', 50, 10, '2022-08-03', '2022-08-03 16:08:18', '2022-08-03 16:08:19');
 /*!40000 ALTER TABLE `daily_excercise` ENABLE KEYS */;
 
 -- 테이블 salus.fitness_equipment 구조 내보내기
@@ -259,7 +260,7 @@ CREATE TABLE IF NOT EXISTS `user` (
 /*!40000 ALTER TABLE `user` DISABLE KEYS */;
 INSERT INTO `user` (`userId`, `rfidKey`, `email`, `name`, `password`, `phone`, `birthDay`, `gender`, `gymPassStart`, `gymPassEnd`, `excerciseStart`, `totalexcerciseTime`, `dailyStart`, `dailyEnd`, `excerciseCheck`, `gymId`, `firstRegist`, `updateRegist`) VALUES
 	(13, NULL, 'sbpark110542@naver.com', '박성배', '', '', '1995-11-05', 'male', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-07-27 11:48:29', '2022-07-27 11:48:29'),
-	(14, 132131321313213, 'sbpark0402@gmail.com', '박성배', '', '', NULL, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-07-28 16:31:33', '2022-07-29 10:12:04');
+	(14, 12341234, 'sbpark0402@gmail.com', '박성배', '', '', NULL, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-07-28 16:31:33', '2022-08-02 12:09:30');
 /*!40000 ALTER TABLE `user` ENABLE KEYS */;
 
 /*!40101 SET SQL_MODE=IFNULL(@OLD_SQL_MODE, '') */;

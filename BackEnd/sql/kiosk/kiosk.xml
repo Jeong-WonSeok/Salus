@@ -1,17 +1,31 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="kiosk">
-  <select id="searchDailyData" >
-    SELECT daily_excercise.excerciseDay, fitness_equipment.equipmentName AS"excerciseName", fitness_equipment.equipmentEnglishName AS "excerciseEnglishName", ROUND((HOUR(TIMEDIFF(endtime, startTime)) * 60 )+ (second(TIMEDIFF(endtime, startTime)) + MINUTE(TIMEDIFF(endtime, startTime)) * 60) / 60) AS "excerciseTime", fitness_equipment.equipmentCategory AS "excerciseCategory", fitness_equipment.equipmentStimulate AS"excerciseStimulate", fitness_equipment.equipmentEnglishStimulate AS "excerciseEnglishStimulate", daily_excercise.weightNow, daily_excercise.countNow, ROUND(6 * ROUND((HOUR(TIMEDIFF(endtime, startTime)) * 60 )+ (second(TIMEDIFF(endtime, startTime)) + MINUTE(TIMEDIFF(endtime, startTime)) * 60) / 60) * daily_excercise.weightNow / 60) AS "calorie" FROM daily_excercise 
-    INNER JOIN user 
-    on daily_excercise.userid = #{userid} 
-    AND daily_excercise.excerciseDay BETWEEN CONVERT( DATE_SUB(NOW(), INTERVAL 4 DAY), DATE ) and CONVERT(NOW(), DATE)
-    INNER JOIN fitness_equipment 
-    ON daily_excercise.equipmentName = fitness_equipment.equipmentName
-    ORDER BY daily_excercise.excerciseDay DESC;
-    SELECT d.excerciseDay, ROUND(SUM(ABS(HOUR(TIMEDIFF(endtime, startTime)) * 60 )+ (second(TIMEDIFF(endtime, startTime)) + MINUTE(TIMEDIFF(endtime, startTime)) * 60) / 60)) AS "totalCategoryTime", sum(weightNow) AS "totalWeight", sum(countNow) AS"totalCount", e.equipmentCategory AS "excerciseCategory",ROUND(SUM(6 * ROUND((HOUR(TIMEDIFF(endtime, startTime)) * 60 )+ (second(TIMEDIFF(endtime, startTime)) + MINUTE(TIMEDIFF(endtime, startTime)) * 60) / 60) * d.weightNow / 60)) AS "totalCalorie" from daily_excercise AS d 
+  <select id="DailyData" >
+    SELECT DATE_FORMAT(d.excerciseDay,'%y-%m-%d') as excerciseDay, d.equipmentName AS"excerciseName", e.equipmentEnglishName AS "excerciseEnglishName", ROUND((HOUR(TIMEDIFF(endtime, startTime)) * 60 )+ (second(TIMEDIFF(endtime, startTime)) + MINUTE(TIMEDIFF(endtime, startTime)) * 60) / 60) AS "excerciseTime", e.equipmentCategory AS "excerciseCategory", e.equipmentStimulate AS"excerciseStimulate", e.equipmentEnglishStimulate AS "excerciseEnglishStimulate", d.weightNow, d.countNow, ROUND(6 * ROUND((HOUR(TIMEDIFF(endtime, startTime)) * 60 )+ (second(TIMEDIFF(endtime, startTime)) + MINUTE(TIMEDIFF(endtime, startTime)) * 60) / 60) * d.weightNow / 60) AS "calorie" 
+    FROM daily_excercise AS d
+    INNER JOIN fitness_equipment AS e
+    ON d.equipmentName = e.equipmentName
+    where d.userid = #{userid}
+    and  d.excerciseDay BETWEEN CONVERT( DATE_SUB(NOW(), INTERVAL 4 DAY), DATE ) and CONVERT(NOW(), DATE)
+    ORDER BY d.excerciseDay DESC;
+    SELECT DATE_FORMAT(d.excerciseDay,'%y-%m-%d') as excerciseDay, ROUND(SUM(ABS(HOUR(TIMEDIFF(endtime, startTime)) * 60 )+ (second(TIMEDIFF(endtime, startTime)) + MINUTE(TIMEDIFF(endtime, startTime)) * 60) / 60)) AS "totalCategoryTime", sum(weightNow) AS "totalWeight", sum(countNow) AS"totalCount", e.equipmentCategory AS "excerciseCategory",ROUND(SUM(6 * ROUND((HOUR(TIMEDIFF(endtime, startTime)) * 60 )+ (second(TIMEDIFF(endtime, startTime)) + MINUTE(TIMEDIFF(endtime, startTime)) * 60) / 60) * d.weightNow / 60)) AS "totalCalorie" from daily_excercise AS d 
     LEFT JOIN fitness_equipment AS e ON d.equipmentName = e.equipmentName 
-    WHERE d.excerciseDay BETWEEN CONVERT( DATE_SUB(NOW(), INTERVAL 4 DAY), DATE ) and CONVERT(NOW(), DATE)
+    WHERE MONTH(d.excerciseDay) = MONTH(NOW())
+    GROUP BY d.excerciseDay, e.equipmentCategory
+    ORDER BY d.excerciseDay DESC;
+  </select>
+  <select id="searchCalendarDailyData" >
+     SELECT DATE_FORMAT(d.excerciseDay,'%y-%m-%d') as excerciseDay, d.equipmentName AS"excerciseName", e.equipmentEnglishName AS "excerciseEnglishName", ROUND((HOUR(TIMEDIFF(endtime, startTime)) * 60 )+ (second(TIMEDIFF(endtime, startTime)) + MINUTE(TIMEDIFF(endtime, startTime)) * 60) / 60) AS "excerciseTime", e.equipmentCategory AS "excerciseCategory", e.equipmentStimulate AS"excerciseStimulate", e.equipmentEnglishStimulate AS "excerciseEnglishStimulate", d.weightNow, d.countNow, ROUND(6 * ROUND((HOUR(TIMEDIFF(endtime, startTime)) * 60 )+ (second(TIMEDIFF(endtime, startTime)) + MINUTE(TIMEDIFF(endtime, startTime)) * 60) / 60) * d.weightNow / 60) AS "calorie" 
+     FROM daily_excercise AS d
+     INNER JOIN fitness_equipment AS e
+    ON d.equipmentName = e.equipmentName
+    where d.userid = #{userid}
+    and MONTH(d.excerciseDay) = MONTH(NOW())
+    ORDER BY d.excerciseDay DESC;
+    SELECT DATE_FORMAT(d.excerciseDay,'%y-%m-%d') as excerciseDay, ROUND(SUM(ABS(HOUR(TIMEDIFF(endtime, startTime)) * 60 )+ (second(TIMEDIFF(endtime, startTime)) + MINUTE(TIMEDIFF(endtime, startTime)) * 60) / 60)) AS "totalCategoryTime", sum(weightNow) AS "totalWeight", sum(countNow) AS"totalCount", e.equipmentCategory AS "excerciseCategory",ROUND(SUM(6 * ROUND((HOUR(TIMEDIFF(endtime, startTime)) * 60 )+ (second(TIMEDIFF(endtime, startTime)) + MINUTE(TIMEDIFF(endtime, startTime)) * 60) / 60) * d.weightNow / 60)) AS "totalCalorie" from daily_excercise AS d 
+    LEFT JOIN fitness_equipment AS e ON d.equipmentName = e.equipmentName 
+    WHERE MONTH(d.excerciseDay) = MONTH(NOW())
     GROUP BY d.excerciseDay, e.equipmentCategory
     ORDER BY d.excerciseDay DESC;
   </select>

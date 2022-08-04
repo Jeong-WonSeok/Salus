@@ -25,27 +25,27 @@ const searchuserId = async (req, res) =>{
   });
 }
 
-//현재 운동 데이터 받아오기
-const searchDailyData = async (req, res) => {
+//오늘 운동 데이터 받아오기
+const DailyData = async (req, res) => {
   var param =  {
     userid: req.params.userid
   }
-  console.log("dtd");
-  console.log(param);
   const format = { language: "sql", indent: "" };
   const query = mybatisMapper.getStatement(
     "kiosk",
-    "searchDailyData",
+    "DailyData",
     param,
     format
   );
   conn.query(query, (err, results) => {
     if (err) console.log(err);
-    // console.log(results);
+    console.log(results);
     return res.json(results);
   });
 };
-const selectExcercise = async (req, res) =>{
+
+// RFID 운동 찍었을 때
+const rfidExcerciseData = async (req, res) =>{
   var param = {
     rfidKey : req.params.rfidKey,
     equipmentId : req.params.equipmentId
@@ -59,9 +59,6 @@ const selectExcercise = async (req, res) =>{
   );
   conn.query(query, (err, results) => {
     if (err) console.log(err);
-    console.log(results);
-    console.log(results[0][0].userid);
-    console.log(results[1][0].equipmentName);
     var userid = results[0][0].userid;
     var equipmentName = results[1][0].equipmentName;
     var param = {
@@ -80,10 +77,27 @@ const selectExcercise = async (req, res) =>{
   });
 }
 
+const calendarData = async (req, res) => {
+  var param =  {
+    userid: req.params.userid
+  };
+  const format = { language: "sql", indent: "" };
+  const query = mybatisMapper.getStatement(
+    "kiosk",
+    "searchCalendarDailyData",
+    param,
+    format
+  );
+  conn.query(query, (err, results) => {
+    if (err) console.log(err);
+    console.log(results);
+    return res.json(results);
+  });
+};
 
 module.exports = {
-  searchDailyData,
+  DailyData,
   searchuserId,
-  selectExcercise
-  
+  rfidExcerciseData,
+  calendarData
 };
