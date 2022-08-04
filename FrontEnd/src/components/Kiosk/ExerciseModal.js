@@ -1,5 +1,5 @@
 import React from "react";
-import closeIcon from "./../../assets/images/common/close-icon.jpg";
+import closeIcon from "./../../assets/images/common/close-icon.png";
 import ReactDOM from "react-dom";
 import styled, { keyframes } from "styled-components";
 import { Div } from "../../styles/web.style";
