@@ -29,9 +29,5 @@ module.exports = (server) => {
             });
         })
 
-        // const test = KioskModel.searchDailyData({params : { userid : 13} });
-        // console.log('test', test);
-        
-
     });
 }

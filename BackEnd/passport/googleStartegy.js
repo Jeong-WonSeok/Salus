@@ -19,10 +19,10 @@ module.exports = () => {
             callbackURL   : process.env.GOOGLE_URL,
             passReqToCallback   : true
         }, function(request, accessToken, refreshToken, profile, done){
-            // console.log('profile: ', profile);
+            console.log('profile: ', profile);
             var user = profile;
 
-            // done(null, user);
+            done(null, user);
         }
     ));
 }
