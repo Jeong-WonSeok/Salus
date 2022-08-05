@@ -2,13 +2,13 @@ const conn = require("../../database/db");
 const mybatisMapper = require("mybatis-mapper");
 
 //현재 운동 측정 값 받아오기
-const ExcerciseData = async (req, res) => {
+const searchExcerciseData = async (req, res) => {
   // console.log(req.query)
   const param = {
     excerciseDay: req.query.excerciseDay,
     weightNow: req.query.weightNow,
     equipmentName: req.query.equipmentName,
-    rfidKey: req.query.rfidKey,
+    userid: req.query.userid,
   };
   const format = { language: "sql", indent: "" };
   const query = mybatisMapper.getStatement(
@@ -52,5 +52,5 @@ const ExcerciseData = async (req, res) => {
 };
 
 module.exports = {
-  ExcerciseData,
+  searchExcerciseData,
 };
