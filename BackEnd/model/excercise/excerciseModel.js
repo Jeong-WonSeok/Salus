@@ -8,7 +8,7 @@ const searchExcerciseData = async (req, res) => {
     excerciseDay: req.query.excerciseDay,
     weightNow: req.query.weightNow,
     equipmentName: req.query.equipmentName,
-    userid: req.query.userid,
+    rfidKey: req.query.rfidKey,
   };
   const format = { language: "sql", indent: "" };
   const query = mybatisMapper.getStatement(
