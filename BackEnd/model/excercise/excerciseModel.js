@@ -1,4 +1,3 @@
-// 모델
 const conn = require("../../database/db");
 const mybatisMapper = require("mybatis-mapper");
 
