@@ -2,8 +2,8 @@ var express = require("express");
 var router = express.Router();
 
 // controller
-const controller = require("../../controller/kiosk/KioskController");
-router.get("/daily/:userid", controller.dailyData);
-router.get("/login/:rfidKey", controller.userId);
-router.get("/excercise/:rfidKey/:equipmentId", controller.selectExcercise);
+const controller = require("../../controller/kiosk/kioskController");
+router.get("/daily/:rfidKey", controller.dailyData);
+router.get("/login/:rfidKey", controller.userInfo);
+router.get("/calendar/:userid", controller.calendarData);
 module.exports = router;

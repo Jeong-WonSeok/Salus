@@ -8,15 +8,21 @@
     where excerciseDay = #{excerciseDay}
     and weightNow = #{weightNow}
     and equipmentName = #{equipmentName}
-    and userid = #{userid}
+    and rfidKey = #{rfidKey}
     </select>
 
     <!-- 운동 데이터 삽입-->
     <insert id="insertExcercise" >
     insert into daily_excercise
+<<<<<<< HEAD
     (weightNow, startTime, endTime, countNow, equipmentName, excerciseDay, userid)
     values
     (#{weightNow}, NOW(), NOW() ,1, #{equipmentName}, #{excerciseDay}, #{userid}) 
+=======
+    (weightNow, startTime, endTime, countNow, equipmentName, excerciseDay, rfidKey)
+    values
+    (#{weightNow}, NOW(), NOW() ,1, #{equipmentName}, #{excerciseDay}, #{rfidKey}) 
+>>>>>>> BE-dev
     </insert>
 
     <!-- 운동 데이터 수정-->
@@ -26,7 +32,7 @@
     where excerciseDay = #{excerciseDay}
     and weightNow = #{weightNow}
     and equipmentName = #{equipmentName}
-    and userid = #{userid}
+    and rfidKey = #{rfidKey}
     </update>
 
 </mapper>
