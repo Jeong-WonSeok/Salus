@@ -1,22 +1,20 @@
 const http = require("http");
-const dotenv = require('dotenv');
-const path = require('path');
+const dotenv = require("dotenv");
+const path = require("path");
 const express = require("express");
 const bodyParser = require("body-parser");
 const routers = require("./routers");
 const passport = require("passport");
 const session = require("express-session");
-const passportConfig = require('./passport');
+const passportConfig = require("./passport");
 const cors = require("cors");
 
-dotenv.config({path: path.join(__dirname, '/.env')});
-
+dotenv.config({ path: path.join(__dirname, "/.env") });
 
 // const { sequelize } = require('./mosdel');
 
 const app = express();
 passportConfig();
-
 
 // bodyParser
 app.use(bodyParser.json());
@@ -29,7 +27,6 @@ app.use(
 
 app.use(passport.initialize());
 app.use(passport.session());
-
 
 // routers
 app.use(cors());

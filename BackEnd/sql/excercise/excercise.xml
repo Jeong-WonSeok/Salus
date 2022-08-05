@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="dailyexcercise">
+    <!-- 운동 데이터가 있는 지 확인 -->
+    <select id="selectExcercise">
+    select * 
+    from daily_excercise
+    where excerciseDay = #{excerciseDay}
+    and weightNow = #{weightNow}
+    and equipmentName = #{equipmentName}
+    and rfidKey = #{rfidKey}
+    </select>
+
+    <!-- 운동 데이터 삽입-->
+    <insert id="insertExcercise" >
+    insert into daily_excercise
+    (weightNow, startTime, endTime, countNow, equipmentName, excerciseDay, rfidKey)
+    values
+    (#{weightNow}, NOW(), NOW() ,1, #{equipmentName}, #{excerciseDay}, #{rfidKey}) 
+    </insert>
+
+    <!-- 운동 데이터 수정-->
+    <update id="updateExcercise">
+    update daily_excercise
+    set countNow = countNow + 1 and endTime = NOW()
+    where excerciseDay = #{excerciseDay}
+    and weightNow = #{weightNow}
+    and equipmentName = #{equipmentName}
+    and rfidKey = #{rfidKey}
+    </update>
+
+</mapper>

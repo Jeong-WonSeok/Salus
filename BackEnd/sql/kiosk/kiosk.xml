@@ -2,16 +2,17 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="kiosk">
   <select id="DailyData" >
-    SELECT DATE_FORMAT(d.excerciseDay,'%y-%m-%d') as excerciseDay, d.equipmentName AS"excerciseName", e.equipmentEnglishName AS "excerciseEnglishName", ROUND((HOUR(TIMEDIFF(endtime, startTime)) * 60 )+ (second(TIMEDIFF(endtime, startTime)) + MINUTE(TIMEDIFF(endtime, startTime)) * 60) / 60) AS "excerciseTime", e.equipmentCategory AS "excerciseCategory", e.equipmentStimulate AS"excerciseStimulate", e.equipmentEnglishStimulate AS "excerciseEnglishStimulate", d.weightNow, d.countNow, ROUND(6 * ROUND((HOUR(TIMEDIFF(endtime, startTime)) * 60 )+ (second(TIMEDIFF(endtime, startTime)) + MINUTE(TIMEDIFF(endtime, startTime)) * 60) / 60) * d.weightNow / 60) AS "calorie" 
+   SELECT DATE_FORMAT(d.excerciseDay,'%y-%m-%d') as excerciseDay, d.equipmentName AS"excerciseName", e.equipmentEnglishName AS "excerciseEnglishName", ROUND((HOUR(TIMEDIFF(endtime, startTime)) * 60 )+ (second(TIMEDIFF(endtime, startTime)) + MINUTE(TIMEDIFF(endtime, startTime)) * 60) / 60) AS "excerciseTime", e.equipmentCategory AS "excerciseCategory", e.equipmentStimulate AS"excerciseStimulate", e.equipmentEnglishStimulate AS "excerciseEnglishStimulate", d.weightNow, d.countNow, ROUND(6 * ROUND((HOUR(TIMEDIFF(endtime, startTime)) * 60 )+ (second(TIMEDIFF(endtime, startTime)) + MINUTE(TIMEDIFF(endtime, startTime)) * 60) / 60) * d.weightNow / 60) AS "calorie" 
     FROM daily_excercise AS d
     INNER JOIN fitness_equipment AS e
     ON d.equipmentName = e.equipmentName
-    where d.userid = #{userid}
+    where d.rfidKey = #{rfidKey}
     and  d.excerciseDay BETWEEN CONVERT( DATE_SUB(NOW(), INTERVAL 4 DAY), DATE ) and CONVERT(NOW(), DATE)
     ORDER BY d.excerciseDay DESC;
     SELECT DATE_FORMAT(d.excerciseDay,'%y-%m-%d') as excerciseDay, ROUND(SUM(ABS(HOUR(TIMEDIFF(endtime, startTime)) * 60 )+ (second(TIMEDIFF(endtime, startTime)) + MINUTE(TIMEDIFF(endtime, startTime)) * 60) / 60)) AS "totalCategoryTime", sum(weightNow) AS "totalWeight", sum(countNow) AS"totalCount", e.equipmentCategory AS "excerciseCategory",ROUND(SUM(6 * ROUND((HOUR(TIMEDIFF(endtime, startTime)) * 60 )+ (second(TIMEDIFF(endtime, startTime)) + MINUTE(TIMEDIFF(endtime, startTime)) * 60) / 60) * d.weightNow / 60)) AS "totalCalorie" from daily_excercise AS d 
-    LEFT JOIN fitness_equipment AS e ON d.equipmentName = e.equipmentName 
-    WHERE MONTH(d.excerciseDay) = MONTH(NOW())
+    LEFT JOIN fitness_equipment AS e ON d.equipmentName = e.equipmentName
+    WHERE d.rfidKey = #{rfidKey}
+    AND d.excerciseDay BETWEEN CONVERT( DATE_SUB(NOW(), INTERVAL 4 DAY), DATE ) and CONVERT(NOW(), DATE)
     GROUP BY d.excerciseDay, e.equipmentCategory
     ORDER BY d.excerciseDay DESC;
   </select>
@@ -20,24 +21,36 @@
      FROM daily_excercise AS d
      INNER JOIN fitness_equipment AS e
     ON d.equipmentName = e.equipmentName
-    where d.userid = #{userid}
+    where d.rfidKey = #{rfidKey}
     and MONTH(d.excerciseDay) = MONTH(NOW())
     ORDER BY d.excerciseDay DESC;
     SELECT DATE_FORMAT(d.excerciseDay,'%y-%m-%d') as excerciseDay, ROUND(SUM(ABS(HOUR(TIMEDIFF(endtime, startTime)) * 60 )+ (second(TIMEDIFF(endtime, startTime)) + MINUTE(TIMEDIFF(endtime, startTime)) * 60) / 60)) AS "totalCategoryTime", sum(weightNow) AS "totalWeight", sum(countNow) AS"totalCount", e.equipmentCategory AS "excerciseCategory",ROUND(SUM(6 * ROUND((HOUR(TIMEDIFF(endtime, startTime)) * 60 )+ (second(TIMEDIFF(endtime, startTime)) + MINUTE(TIMEDIFF(endtime, startTime)) * 60) / 60) * d.weightNow / 60)) AS "totalCalorie" from daily_excercise AS d 
     LEFT JOIN fitness_equipment AS e ON d.equipmentName = e.equipmentName 
-    WHERE MONTH(d.excerciseDay) = MONTH(NOW())
+    WHERE d.rfidKey = #{rfidKey}
+    AND MONTH(d.excerciseDay) = MONTH(NOW())
     GROUP BY d.excerciseDay, e.equipmentCategory
     ORDER BY d.excerciseDay DESC;
   </select>
-  <select id="searchuserid">
-  SELECT userid FROM user WHERE rfidKey = #{rfidKey};
-  </select>
-  <select id="searchequip">
-  SELECT userid FROM user WHERE rfidKey = #{rfidKey};
-  select equipmentName from fitness_equipment where equipmentId = #{equipmentId}
-  </select>
-  <insert id="dailyexcerciseInsert">
-  INSERT INTO daily_excercise (equipmentName, userid, startTime, excerciseDay)
-  VALUES(#{equipmentName}, #{userid}, NOW(), NOW())
+  <insert id="attendanceEntry">
+  INSERT INTO attendance 
+  (rfidKey, dailyExcerciseStart, attendanceCheck, excerciseDay)
+  VALUES(#{rfidKey}, NOW(), 1, NOW())
   </insert>
+  <update id="attendanceExit">
+  UPDATE attendance
+  SET dailyExcerciseEnd = NOW(), attendanceCheck = 0
+  WHERE rfidKey = #{rfidKey}
+  </update>
+  <select id="searchuser">
+  SELECT rfidKey, name
+  FROM user
+  WHERE rfidKey = #{rfidKey}
+  </select>
+  <select id="todayCheck">
+  SELECT attendanceCheck
+  FROM attendance
+  WHERE rfidKey = #{rfidKey}
+  AND excerciseDay = DATE_FORMAT(NOW(),'%y-%m-%d')
+  </select>
+
 </mapper>
