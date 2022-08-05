@@ -1,6 +1,6 @@
 import { StatusBar } from "expo-status-bar";
 import styled from "styled-components/native";
-import { StyleSheet, Text, View } from "react-native";
+import { StyleSheet, Text, View, Button } from "react-native";
 
 const NewView = styled.View`
   flex: 1;
@@ -14,13 +14,17 @@ const NewText = styled.Text`
   font-size: 48px;
   color: white;
 `;
-const index = () => {
+const Home = ({navigation}) => {
   return (
     <NewView>
       <NewText>Open up App.js to start working on your app!</NewText>
+      <Button
+        title="go to CurrentExercise"
+        onPress={() => navigation.navigate('Exercise')}
+      />
       <StatusBar style="auto" />
     </NewView>
   );
 };
 
-export default index;
+export default Home;
