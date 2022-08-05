@@ -1,16 +1,16 @@
-import { Route, Routes, Navigate } from 'react-router-dom';
-import KioskMainPage from './pages/KioskMainPage';
-import LoginPage from './pages/LoginPage';
-import SignupPage from './pages/SignupPage';
-import MainPage from './pages/MainPage';
-import CalendarPage from './pages/CalendarPage';
-import FindAccountPage from './pages/FindAccountPage';
-import KioskLoginPage from './pages/KioskLoginPage';
-import RecordPage from './pages/RecordPage';
-import AdminPage from './pages/AdminPage';
-import EquipmentListPage from './pages/EquipmentListPage';
+import { Route, Routes, Navigate } from "react-router-dom";
+import KioskMainPage from "./pages/KioskMainPage";
+import LoginPage from "./pages/LoginPage";
+import SignupPage from "./pages/SignupPage";
+import MainPage from "./pages/MainPage";
+import CalendarPage from "./pages/CalendarPage";
+import FindAccountPage from "./pages/FindAccountPage";
+import KioskLoginPage from "./pages/KioskLoginPage";
+import RecordPage from "./pages/RecordPage";
+import AdminPage from "./pages/AdminPage";
+import EquipmentListPage from "./pages/EquipmentListPage";
 
-import NavSideBar from './components/Nav&Side/NavSideBar';
+import NavSideBar from "./components/Nav&Side/NavSideBar";
 
 function App() {
   return (
