@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="user">  
+  <select id="allsearch">
+    SELECT
+      *
+    FROM
+      user
+  </select>
+    <select id="search">
+    SELECT
+      *
+    FROM
+      user
+    WHERE
+      email = #{email}
+  </select>
+  <select id="signin">
+    SELECT
+      lastName,
+      firstName,
+      phone
+    FROM
+      user
+    WHERE email = #{email} AND password = #{password}
+  </select>
+
+  <insert id="signup">
+    insert
+    into
+    user
+    (email, name)
+    VALUES (#{email}, #{name})
+  </insert>
+
+  <select id="login">
+    select * from user
+    where rfidKey = #{rfidkey} and password = #{password}
+  </select>
+</mapper>

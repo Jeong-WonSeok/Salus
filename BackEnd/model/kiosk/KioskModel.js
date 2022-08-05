@@ -1,6 +1,7 @@
 var conn = require("../../database/db");
 const mybatisMapper = require("mybatis-mapper");
 const MybatisMapper = require("mybatis-mapper");
+
 const searchUser = async (req, res) => {
   var param = {
     rfidKey: req.params.rfidKey,
@@ -72,6 +73,8 @@ const DailyData = (req, res) => {
     console.log(results);
     return res.json(results);
   });
+  
+
 };
 
 const calendarData = async (req, res) => {

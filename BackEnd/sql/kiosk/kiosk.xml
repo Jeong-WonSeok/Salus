@@ -17,9 +17,9 @@
     ORDER BY d.excerciseDay DESC;
   </select>
   <select id="searchCalendarDailyData" >
-     SELECT DATE_FORMAT(d.excerciseDay,'%y-%m-%d') as excerciseDay, d.equipmentName AS"excerciseName", e.equipmentEnglishName AS "excerciseEnglishName", ROUND((HOUR(TIMEDIFF(endtime, startTime)) * 60 )+ (second(TIMEDIFF(endtime, startTime)) + MINUTE(TIMEDIFF(endtime, startTime)) * 60) / 60) AS "excerciseTime", e.equipmentCategory AS "excerciseCategory", e.equipmentStimulate AS"excerciseStimulate", e.equipmentEnglishStimulate AS "excerciseEnglishStimulate", d.weightNow, d.countNow, ROUND(6 * ROUND((HOUR(TIMEDIFF(endtime, startTime)) * 60 )+ (second(TIMEDIFF(endtime, startTime)) + MINUTE(TIMEDIFF(endtime, startTime)) * 60) / 60) * d.weightNow / 60) AS "calorie" 
-     FROM daily_excercise AS d
-     INNER JOIN fitness_equipment AS e
+    SELECT DATE_FORMAT(d.excerciseDay,'%y-%m-%d') as excerciseDay, d.equipmentName AS"excerciseName", e.equipmentEnglishName AS "excerciseEnglishName", ROUND((HOUR(TIMEDIFF(endtime, startTime)) * 60 )+ (second(TIMEDIFF(endtime, startTime)) + MINUTE(TIMEDIFF(endtime, startTime)) * 60) / 60) AS "excerciseTime", e.equipmentCategory AS "excerciseCategory", e.equipmentStimulate AS"excerciseStimulate", e.equipmentEnglishStimulate AS "excerciseEnglishStimulate", d.weightNow, d.countNow, ROUND(6 * ROUND((HOUR(TIMEDIFF(endtime, startTime)) * 60 )+ (second(TIMEDIFF(endtime, startTime)) + MINUTE(TIMEDIFF(endtime, startTime)) * 60) / 60) * d.weightNow / 60) AS "calorie" 
+    FROM daily_excercise AS d
+    INNER JOIN fitness_equipment AS e
     ON d.equipmentName = e.equipmentName
     where d.rfidKey = #{rfidKey}
     and MONTH(d.excerciseDay) = MONTH(NOW())
