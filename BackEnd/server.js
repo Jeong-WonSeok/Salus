@@ -1,23 +1,19 @@
 const http = require("http");
-const dotenv = require('dotenv');
-const path = require('path');
+const dotenv = require("dotenv");
+const path = require("path");
 const express = require("express");
 const bodyParser = require("body-parser");
 const routers = require("./routers");
 const passport = require("passport");
 const session = require("express-session");
-const passportConfig = require('./passport');
-const cors = require('cors');
+const passportConfig = require("./passport");
+const cors = require("cors");
 
-dotenv.config({path: path.join(__dirname, '/.env')});
-const webSocket = require('./socket/socket');
-
-
-// const { sequelize } = require('./mosdel');
+dotenv.config({ path: path.join(__dirname, "/.env") });
+const webSocket = require("./socket/socket");
 
 const app = express();
 passportConfig();
-
 
 // bodyParser
 app.use(bodyParser.json());
@@ -30,14 +26,6 @@ app.use(
 
 app.use(passport.initialize());
 app.use(passport.session());
-
-// sequelize.sync({ force: false })
-//   .then(() => {
-//     console.log('데이터 베이스 연결 성공');
-//   })
-//   .catch((err) => {
-//     console.error(err);
-//   })
 
 // routers
 app.use(cors());

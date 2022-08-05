@@ -1,10 +1,10 @@
-const KioskModel = require("../../model/kiosk/KioskModel");
+const KioskModel = require("../../model/kiosk/kioskModel");
 
-const dailyData = KioskModel.searchDailyData;
-const userId = KioskModel.searchuserId;
-const selectExcercise = KioskModel.selectExcercise;
+const dailyData = KioskModel.DailyData;
+const userInfo = KioskModel.searchUser;
+const calendarData = KioskModel.calendarData;
 module.exports = {
   dailyData,
-  userId,
-  selectExcercise
+  userInfo,
+  calendarData,
 };
