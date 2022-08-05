@@ -14,6 +14,19 @@ const selectAll = async (req, res) => {
   });
 };
 
+// const loginUser = async (req, res) => {
+//   var param = {
+//     rfidKey: req.user.refidKey,
+//     password: req.user.password,
+//   }
+//   const format = { language: "sql", indent: ""};
+//   const query = mybatisMapper.getStatement("user", "loginuser", param, format);
+//   const check = conn.query(query, (err, results) => {
+//     if(err) console.error(err);
+    
+//   })
+
+// }
 
 const selectUser = async (req, res) => {
   var param = {
@@ -23,9 +36,9 @@ const selectUser = async (req, res) => {
   var format = { language: "sql", indent: "" };
   var query = mybatisMapper.getStatement("user", "search", param, format);
   console.log(query);
-  conn.query(query, (err, results) => {
+  const result = await conn.query(query, (err, results) => {
     if (err) console.log(err);
-    console.log(results)
+    // console.log(results)
     if (results.length === 0) {
       console.log("업데이트");
       return res.json(results);
@@ -37,6 +50,7 @@ const selectUser = async (req, res) => {
       return  res.json(results);
     }
   });
+  return result;
 };
 
 const selectSignin = async (req, res) => {
@@ -57,9 +71,6 @@ const selectSignin = async (req, res) => {
 
 const insertUser = async (req, res) => {
   const body = req.body;
-  console.log(body);
-  console.log(body.email);
-  console.log(body.name);
   var param = {
     email: body.email,
     name: body.name,

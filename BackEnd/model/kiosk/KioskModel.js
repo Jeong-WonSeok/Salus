@@ -1,6 +1,7 @@
 var conn = require("../../database/db");
 const mybatisMapper = require("mybatis-mapper");
 
+
 const searchuserId = async (req, res) =>{
   var param = {
     rfidKey : req.params.rfidKey
@@ -30,21 +31,25 @@ const searchDailyData = async (req, res) => {
   var param =  {
     userid: req.params.userid
   }
-  console.log("dtd");
-  console.log(param);
+
   const format = { language: "sql", indent: "" };
+
   const query = mybatisMapper.getStatement(
     "kiosk",
     "searchDailyData",
     param,
     format
   );
-  conn.query(query, (err, results) => {
+  
+  conn.query(query, async (err, results) =>  {
     if (err) console.log(err);
     // console.log(results);
-    return res.json(results);
+    return results;
   });
+  
+
 };
+
 
 const selectExcercise = async (req, res) =>{
   var param = {
@@ -85,6 +90,6 @@ const selectExcercise = async (req, res) =>{
 module.exports = {
   searchDailyData,
   searchuserId,
-  selectExcercise
+  selectExcercise,
   
 };

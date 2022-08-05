@@ -24,11 +24,17 @@
       user
     WHERE email = #{email} AND password = #{password}
   </select>
+
   <insert id="signup">
     insert
     into
     user
     (email, name)
     VALUES (#{email}, #{name})
-  </insert
+  </insert>
+
+  <select id="login">
+    select * from user
+    where rfidKey = #{rfidkey} and password = #{password}
+  </select>
 </mapper>
