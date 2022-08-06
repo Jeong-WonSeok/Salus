@@ -11,7 +11,6 @@ const Exercise = () => {
       <ScrollView
         horizontal
         pagingEnabled
-        contentContainerStyle={styles.scroll}
       >
         <MuscleMan/>
         <MuscleWoman/>
@@ -20,8 +19,5 @@ const Exercise = () => {
   );
 };
 
-const styles = StyleSheet.create({
-
-});
 
 export default Exercise;

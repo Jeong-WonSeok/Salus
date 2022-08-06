@@ -56,100 +56,104 @@ const MuscleWoman = () => {
         width={screenWidth}
         height={screenHeight / 2}
       >
-        <Parts source={traps_a} top="-20.9%" left="0.97%" scale="scale(0.05)" />
-        <Parts source={traps_b} top="-20.9%" left="8.8%" scale="scale(0.05)" />
-        {/*<Parts
+        <Parts source={traps_a} top="-20.5%" left="0.97%" scale="scale(0.05)" />
+        <Parts source={traps_b} top="-20.5%" left="8.8%" scale="scale(0.05)" />
+        <Parts
           source={shoulders_a}
-          top="-18.35%"
-          left="-5.19%"
-          scale="scale(0.1046)"
+          top="-26.3%"
+          left="-6.69%"
+          width="95%"
+          height="100%"
+          scale="scale(0.074)"
         />
         <Parts
           source={shoulders_b}
-          top="-18.34%"
-          left="15.15%"
-          scale="scale(0.105)"
+          top="-26.35%"
+          left="11.6%"
+          width="95%"
+          height="100%"
+          scale="scale(0.072)"
         />
         <Parts
           source={pecs}
-          top="-2.15%"
-          left="-14.97%"
-          width="130%"
+          top="0.65%"
+          left="0%"
+          width="100%"
           height="50%"
-          scale="scale(0.169)"
+          scale="scale(0.171)"
         />
         <Parts
           source={biceps_a}
-          top="-25.15%"
-          left="1.72%"
-          width="70%"
-          height="110%"
-          scale="scale(0.097)"
+          top="-29.28%"
+          left="3.02%"
+          width="72%"
+          height="120%"
+          scale="scale(0.0745)"
         />
         <Parts
           source={biceps_b}
-          top="-25.15%"
-          left="28.16%"
-          width="70%"
-          height="110%"
-          scale="scale(0.097)"
+          top="-29.28%"
+          left="24.92%"
+          width="72%"
+          height="120%"
+          scale="scale(0.0745)"
         />
         <Parts
           source={forearm_a}
-          top="-24.95%"
-          left="-18%"
-          width="100%"
-          height="129%"
-          scale="scale(0.111)"
+          top="-9%"
+          left="6.35%"
+          width="58%"
+          height="100%"
+          scale="scale(0.14)"
         />
         <Parts
           source={forearm_b}
-          top="-24.95%"
-          left="17.95%"
-          width="100%"
-          height="129%"
-          scale="scale(0.111)"
+          top="-9.1%"
+          left="35.45%"
+          width="58%"
+          height="100%"
+          scale="scale(0.14)"
         />
         <Parts
           source={obliques}
-          top="-15.75%"
-          left="9.96%"
+          top="-14.59%"
+          left="10.15%"
           width="79.55%"
-          height="98%"
-          scale="scale(0.136)"
+          height="100%"
+          scale="scale(0.115)"
         />
         <Parts
           source={quads_a}
-          top="-15.35%"
-          left="12.74%"
-          width="61.5%"
-          height="141.2%"
-          scale="scale(0.177)"
+          top="7.85%"
+          left="25.8%"
+          width="37%"
+          height="100%"
+          scale="scale(0.23)"
         />
         <Parts
           source={quads_b}
-          top="-15.35%"
-          left="25.69%"
-          width="61.5%"
-          height="141.2%"
-          scale="scale(0.176)"
+          top="7.85%"
+          left="37.1%"
+          width="37%"
+          height="100%"
+          scale="scale(0.23)"
         />
         <Parts
           source={calves_a}
-          top="19.5%"
-          left="18.22%"
-          width="45.7%"
-          height="121.15%"
-          scale="scale(0.161)"
+          top="17.8%"
+          left="16.68%"
+          width="51%"
+          height="132.5%"
+          scale="scale(0.124)"
         />
         <Parts
           source={calves_b}
-          top="19.5%"
-          left="36%"
-          width="45.7%"
-          height="121.15%"
-          scale="scale(0.161)"
-        /> */}
+          top="15.7%"
+          left="30.67%"
+          width="54%"
+          height="137%"
+          scale="scale(0.115)"
+        />
         <Image source={female} style={styles.image} />
       </Container>
       <Container
@@ -158,134 +162,134 @@ const MuscleWoman = () => {
         width={screenWidth}
         height={screenHeight / 2}
       >
-        {/* <Parts
+        <Parts
           source={back_traps_a}
           width="100%"
-          height="39.6%"
-          top="-6.09%"
-          left="0.035%"
-          scale="scale(0.117)"
+          height="32.6%"
+          top="-0.09%"
+          left="-0.315%"
+          scale="scale(0.13)"
         />
         <Parts
           source={back_traps_b}
-          top="-26.7%"
-          left="12.26%"
-          width="76%"
+          top="-24.1%"
+          left="8.52%"
+          width="82.5%"
           height="100%"
-          scale="scale(0.176)"
+          scale="scale(0.168)"
         />
         <Parts
           source={back_shoulders_a}
-          top="-22.6%"
-          left="-10.66%"
+          top="-25.5%"
+          left="-10%"
           width="100%"
-          height="86.3%"
-          scale="scale(0.094)"
+          height="95%"
+          scale="scale(0.079)"
         />
         <Parts
           source={back_shoulders_b}
-          top="-22.1%"
-          left="11.26%"
+          top="-25.5%"
+          left="9.45%"
           width="100%"
-          height="85.2%"
-          scale="scale(0.0945)"
+          height="95%"
+          scale="scale(0.078)"
         />
         <Parts
           source={triceps_a}
-          top="-33.45%"
-          left="-3.96%"
-          width="80%"
-          height="124.5%"
-          scale="scale(0.0945)"
+          top="-19.75%"
+          left="15.1%"
+          width="46%"
+          height="100%"
+          scale="scale(0.112)"
         />
         <Parts
           source={triceps_b}
-          top="-34.1%"
-          left="24.46%"
-          width="80%"
-          height="125.8%"
-          scale="scale(0.0945)"
+          top="-19.75%"
+          left="38.4%"
+          width="46%"
+          height="100%"
+          scale="scale(0.112)"
         />
         <Parts
           source={back_lats_a}
-          top="-26.2%"
-          left="9.5%"
-          width="70.5%"
-          height="118.9%"
-          scale="scale(0.1385)"
+          top="-14.3%"
+          left="21.95%"
+          width="47.5%"
+          height="100%"
+          scale="scale(0.1625)"
         />
         <Parts
           source={back_lats_b}
-          top="-26.2%"
-          left="20.5%"
-          width="70.5%"
-          height="118.9%"
-          scale="scale(0.1385)"
+          top="-14.3%"
+          left="30.1%"
+          width="47.5%"
+          height="100%"
+          scale="scale(0.1625)"
         />
         <Parts
           source={back_lower}
-          top="-11%"
-          left="8.5%"
-          width="83.5%"
+          top="-9.1%"
+          left="9.5%"
+          width="80.5%"
           height="100%"
-          scale="scale(0.1325)"
+          scale="scale(0.125)"
         />
         <Parts
           source={back_forearms_a}
-          top="-9.46%"
-          left="-2.8%"
-          width="67%"
-          height="101%"
-          scale="scale(0.1535)"
+          top="-7.46%"
+          left="12.6%"
+          width="45%"
+          height="100%"
+          scale="scale(0.1435)"
         />
         <Parts
           source={back_forearms_b}
-          top="-9.46%"
-          left="36.15%"
-          width="67%"
-          height="101%"
-          scale="scale(0.1535)"
+          top="-7.46%"
+          left="41.9%"
+          width="45%"
+          height="100%"
+          scale="scale(0.1435)"
         />
         <Parts
           source={back_glutes}
-          top="6.3%"
-          left="-14.75%"
-          width="130%"
-          height="85%"
-          scale="scale(0.159)"
+          top="17.6%"
+          left="-0.26%"
+          width="100%"
+          height="66%"
+          scale="scale(0.188)"
         />
         <Parts
           source={back_hamstrings_a}
-          top="-14.1%"
-          left="10.15%"
-          width="67.3%"
-          height="153%"
-          scale="scale(0.1645)"
+          top="13.9%"
+          left="25.75%"
+          width="36%"
+          height="100%"
+          scale="scale(0.255)"
         />
         <Parts
           source={back_hamstrings_b}
-          top="-13.9%"
-          left="23.1%"
-          width="67.3%"
-          height="153%"
-          scale="scale(0.1645)"
+          top="13.9%"
+          left="37.75%"
+          width="36%"
+          height="100%"
+          scale="scale(0.255)"
         />
         <Parts
           source={back_calves_a}
-          top="32.65%"
-          left="16.8%"
-          width="45%"
-          height="90%"
-          scale="scale(0.169)"
+          top="27.65%"
+          left="13.55%"
+          width="58%"
+          height="100%"
+          scale="scale(0.118)"
         />
         <Parts
           source={back_calves_b}
-          top="32.65%"
-          left="38.8%"
-          width="45%"
-          height="90%"
-          scale="scale(0.169)"
-        /> */}
+          top="27.65%"
+          left="27.95%"
+          width="58%"
+          height="100%"
+          scale="scale(0.118)"
+        />
         <Image source={female2} style={styles.image} />
       </Container>
     </Container>
