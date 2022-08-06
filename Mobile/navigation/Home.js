@@ -3,8 +3,18 @@ import { StatusBar } from 'expo-status-bar';
 import { Container } from '../theme/global-theme';
 import calendar from '../assets/main/calendar.png';
 import { todayFormal } from '../utils/todayFormal';
+import { Chart } from '../components/Chart/Chart';
 
 const Home = ({ navigation }) => {
+  const data = [
+    Math.random() * 100,
+    Math.random() * 100,
+    Math.random() * 100,
+    Math.random() * 100,
+    Math.random() * 100,
+    Math.random() * 100,
+    Math.random() * 100,
+  ];
   return (
     <Container flexDirection="column">
       <Container flex={1} justifyContent="space-between" mt={15}>
@@ -15,9 +25,14 @@ const Home = ({ navigation }) => {
         </View>
       </Container>
       <Container flex={9} flexDirection="column">
-        <Container flex={3} justifyContent="space-between">
-          <Text>이번주 운동(볼륨)</Text>
-          <Text>{todayFormal()}</Text>
+        <Container flex={4} flexDirection="column">
+          <Container justifyContent="space-between">
+            <Text>이번주 운동(볼륨)</Text>
+            <Text>{todayFormal()}</Text>
+          </Container>
+          <View>
+            <Chart data={data} />
+          </View>
         </Container>
         <Container flex={2}>
           <Text>이번주 운동(볼륨)</Text>
@@ -36,7 +51,7 @@ const styles = StyleSheet.create({
   logo: {
     color: '#92a3fd',
     marginLeft: '5%',
-    fontSize: '40px',
+    fontSize: 40,
   },
   image: {
     width: 30,
