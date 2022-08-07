@@ -34,10 +34,14 @@ import back_hamstrings_b from "./../../assets/muscle/man/28.png";
 import back_calves_a from "./../../assets/muscle/man/29.png";
 import back_calves_b from "./../../assets/muscle/man/30.png";
 import { Container } from "./../../theme/global-theme";
+import { useState } from "react";
+
+const male1_uri = Image.resolveAssetSource(male).uri; 
+const traps_a_uri = Image.resolveAssetSource(traps_a).uri;
 
 const Parts = styled.Image`
   position: absolute;
-  width: ${(props) => (props.width ? props.width : "90%")};
+  width: ${(props) => (props.width ? props.width : "100%")};
   height: ${(props) => (props.height ? props.height : "80%")};
   top: ${(props) => (props.top ? props.top : "0%")};
   left: ${(props) => (props.left ? props.left : "0%")};
@@ -46,31 +50,32 @@ const Parts = styled.Image`
 `;
 
 const MuscleMan = () => {
-    let screenWidth = Dimensions.get("window").width;
-    let screenHeight = Dimensions.get("window").height;
+   const [heightImage, setHeightImage] = useState(0);
+   let screenWidth = Dimensions.get("window").width;
+   let screenHeight = Dimensions.get("window").height;
+   Image.getSize(traps_a_uri, (w, h) => {
+     setHeightImage(h * (screenWidth / w));
+   });
+
   return (
     <Container alignItems="stretch">
-      <Container
-        background="#5f9ea0"
-        flex={1}
-        width={screenWidth}
-        height={screenHeight / 2}
-      >
+      <Container background="#5f9ea0" flex={1} width={screenWidth} height="60%">
         <Parts
-          source={traps_a}
-          top="-24.2%"
-          left="0.95%"
-          scale="scale(0.065)"
+          source={{ uri: traps_a_uri, heightImage }}
+          top="-24.3%"
+          left="-4%"
+          resizeMode="cover"
+          scale="scale(0.06)"
         />
         <Parts
           source={traps_b}
           top="-24.2%"
           left="8.95%"
-          scale="scale(0.065)"
+          scale="scale(0.08)"
         />
         <Parts
           source={shoulders_a}
-          top="-18.35%"
+          top="-1.35%"
           left="-5.19%"
           scale="scale(0.1046)"
         />
@@ -160,7 +165,7 @@ const MuscleMan = () => {
           height="121.15%"
           scale="scale(0.161)"
         />
-        <Image source={male} style={styles.image} />
+        <Image source={{uri: male1_uri, heightImage }} style={styles.image} resize="contain" />
       </Container>
       <Container
         background="#5f9ea0"
