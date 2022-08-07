@@ -64,7 +64,7 @@ const MuscleMan = () => {
           source={{ uri: traps_a_uri, heightImage }}
           top="-24.3%"
           left="-4%"
-          resizeMode="cover"
+          resizeMode="contain"
           scale="scale(0.06)"
         />
         <Parts
@@ -72,18 +72,21 @@ const MuscleMan = () => {
           top="-24.2%"
           left="8.95%"
           scale="scale(0.08)"
+          resizeMode="contain"
         />
         <Parts
           source={shoulders_a}
           top="-1.35%"
           left="-5.19%"
           scale="scale(0.1046)"
+          resizeMode="contain"
         />
         <Parts
           source={shoulders_b}
           top="-18.34%"
           left="15.15%"
           scale="scale(0.105)"
+          resizeMode="contain"
         />
         <Parts
           source={pecs}
@@ -92,6 +95,7 @@ const MuscleMan = () => {
           width="130%"
           height="50%"
           scale="scale(0.169)"
+          resizeMode="contain"
         />
         <Parts
           source={biceps_a}
@@ -100,6 +104,7 @@ const MuscleMan = () => {
           width="70%"
           height="110%"
           scale="scale(0.097)"
+          resizeMode="contain"
         />
         <Parts
           source={biceps_b}
@@ -108,6 +113,7 @@ const MuscleMan = () => {
           width="70%"
           height="110%"
           scale="scale(0.097)"
+          resizeMode="contain"
         />
         <Parts
           source={forearm_a}
@@ -116,6 +122,7 @@ const MuscleMan = () => {
           width="100%"
           height="129%"
           scale="scale(0.111)"
+          resizeMode="contain"
         />
         <Parts
           source={forearm_b}
@@ -124,6 +131,7 @@ const MuscleMan = () => {
           width="100%"
           height="129%"
           scale="scale(0.111)"
+          resizeMode="contain"
         />
         <Parts
           source={obliques}
@@ -132,6 +140,7 @@ const MuscleMan = () => {
           width="79.55%"
           height="98%"
           scale="scale(0.136)"
+          resizeMode="contain"
         />
         <Parts
           source={quads_a}
@@ -140,6 +149,7 @@ const MuscleMan = () => {
           width="61.5%"
           height="141.2%"
           scale="scale(0.177)"
+          resizeMode="contain"
         />
         <Parts
           source={quads_b}
@@ -148,6 +158,7 @@ const MuscleMan = () => {
           width="61.5%"
           height="141.2%"
           scale="scale(0.176)"
+          resizeMode="contain"
         />
         <Parts
           source={calves_a}
@@ -156,6 +167,7 @@ const MuscleMan = () => {
           width="45.7%"
           height="121.15%"
           scale="scale(0.161)"
+          resizeMode="contain"
         />
         <Parts
           source={calves_b}
@@ -164,8 +176,13 @@ const MuscleMan = () => {
           width="45.7%"
           height="121.15%"
           scale="scale(0.161)"
+          resizeMode="contain"
         />
-        <Image source={{uri: male1_uri, heightImage }} style={styles.image} resize="contain" />
+        <Image
+          source={{ uri: male1_uri, heightImage }}
+          style={styles.image}
+          resizeMode="contain"
+        />
       </Container>
       <Container
         background="#5f9ea0"
