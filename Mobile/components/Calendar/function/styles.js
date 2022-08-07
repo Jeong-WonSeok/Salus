@@ -7,13 +7,13 @@ function isSelected(day, value) {
 // export function beforeToday(day) {
 //   return day.isBefore(new Date(), "day");
 // }
-// export function beforeMonth(day, value) {
-//   return day.isBefore(value.clone().startOf("month"), "day");
-// }
+export function beforeMonth(day, value) {
+  return day.isBefore(value.clone().startOf("month"), "day");
+}
 
-// export function afterMonth(day, value) {
-//   return day.isAfter(value.clone().endOf("month"), "day");
-// }
+export function afterMonth(day, value) {
+  return day.isAfter(value.clone().endOf("month"), "day");
+}
 
 function isToday(day) {
   return day.isSame(new Date(), "day");
@@ -32,8 +32,8 @@ function dayStyles(day, value) {
   if (isToday(day)) {
     return { style: "today" };
   }
-  // if (beforeMonth(day, value)) return { style: "before" };
-  // if (afterMonth(day, value)) return { style: "before" };
+  if (beforeMonth(day, value)) return { style: "other" };
+  if (afterMonth(day, value)) return { style: "other" };
   return "";
 }
 

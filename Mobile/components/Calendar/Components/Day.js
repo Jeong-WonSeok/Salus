@@ -11,7 +11,8 @@ const Day = ({ day, value, onChange }) => {
         <Text
           style={
             (context.style === "today" ? styles.today : null) ||
-            (context.style === "selected" ? styles.selected : null)
+            (context.style === "selected" ? styles.selected : null) ||
+            (context.style === "other" ? styles.other : null)
           }
         >
           {day.format("D").toString()}
@@ -57,6 +58,9 @@ const styles = StyleSheet.create({
     height: "25px",
     width: "25px",
     borderRadius: "50%",
+  },
+  other: {
+    color: "lightgray",
   },
 });
 
