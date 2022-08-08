@@ -1,7 +1,7 @@
 const express = require("express");
 const router = express.Router();
 
-const controller = require("../../controller/excercise/excerciseController");
+const controller = require("../../controller/excercise/ExcerciseController");
 
 router.get("/search", controller.searchExcerciseData);
 
