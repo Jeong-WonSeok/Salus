@@ -9,12 +9,33 @@
     where d.rfidKey = #{rfidKey}
     and d.excerciseDay BETWEEN CONVERT( DATE_SUB(NOW(), INTERVAL 4 DAY), DATE ) and CONVERT(NOW(), DATE)
     ORDER BY d.excerciseDay;
-    SELECT DATE_FORMAT(d.excerciseDay,'%y-%m-%d') as excerciseDay, ROUND(SUM(ABS(HOUR(TIMEDIFF(endtime, startTime)) * 60 )+ (second(TIMEDIFF(endtime, startTime)) + MINUTE(TIMEDIFF(endtime, startTime)) * 60) / 60)) AS "totalCategoryTime", sum(weightNow) AS "totalWeight", sum(countNow) AS"totalCount", e.equipmentCategory AS "excerciseCategory", (SUM(weightNow) * SUM(countNow)) AS "totalVolume" from daily_excercise AS d 
+    SELECT ROUND(SUM(ABS(HOUR(TIMEDIFF(endtime, startTime)) * 60 )+ (second(TIMEDIFF(endtime, startTime)) + MINUTE(TIMEDIFF(endtime, startTime)) * 60) / 60)) AS "userTotalCategoryTime", e.equipmentCategory AS "excerciseCategory"from daily_excercise AS d 
     LEFT JOIN fitness_equipment AS e ON d.equipmentName = e.equipmentName 
     WHERE d.rfidKey = #{rfidKey}
-    AND  d.excerciseDay BETWEEN CONVERT( DATE_SUB(NOW(), INTERVAL 4 DAY), DATE ) and CONVERT(NOW(), DATE)
-    GROUP BY d.excerciseDay, e.equipmentCategory
-    ORDER BY d.excerciseDay;
+    AND
+    d.excerciseDay 
+    BETWEEN
+        DATE_FORMAT((SELECT ADDDATE(NOW(), - WEEKDAY(NOW()) + 0 )), '%Y-%m-%d')
+    AND
+        DATE_FORMAT((SELECT ADDDATE(NOW(), - WEEKDAY(NOW()) + 6 )), '%Y-%m-%d')
+    GROUP BY e.equipmentCategory;
+    SELECT ROUND(SUM(ABS(HOUR(TIMEDIFF(endtime, startTime)) * 60 )+ (second(TIMEDIFF(endtime, startTime)) + MINUTE(TIMEDIFF(endtime, startTime)) * 60) / 60)) AS "AllTotalCategoryTime", e.equipmentCategory AS "excerciseCategory"from daily_excercise AS d 
+    LEFT JOIN fitness_equipment AS e ON d.equipmentName = e.equipmentName 
+    where
+    d.excerciseDay 
+    BETWEEN
+        DATE_FORMAT((SELECT ADDDATE(NOW(), - WEEKDAY(NOW()) + 0 )), '%Y-%m-%d')
+    AND
+        DATE_FORMAT((SELECT ADDDATE(NOW(), - WEEKDAY(NOW()) + 6 )), '%Y-%m-%d')
+          GROUP BY e.equipmentCategory;
+    SELECT ROUND(SUM(ABS(HOUR(TIMEDIFF(a.dailyExcerciseEnd, a.dailyExcerciseStart)) * 60 )+ (second(TIMEDIFF(a.dailyExcerciseEnd, a.dailyExcerciseStart)) + MINUTE(TIMEDIFF(a.dailyExcerciseEnd, a.dailyExcerciseStart)) * 60) / 60)) AS "totalExcerciseTime" from attendance AS a
+WHERE a.rfidKey = #{rfidKey}
+AND
+    a.excerciseDay 
+    BETWEEN
+        DATE_FORMAT((SELECT ADDDATE(NOW(), - WEEKDAY(NOW()) + 0 )), '%Y-%m-%d')
+    AND
+        DATE_FORMAT((SELECT ADDDATE(NOW(), - WEEKDAY(NOW()) + 6 )), '%Y-%m-%d');
   </select>
   <select id="searchCalendarDailyData" >
      SELECT DATE_FORMAT(d.excerciseDay,'%y-%m-%d') as excerciseDay, d.equipmentName AS"excerciseName", e.equipmentEnglishName AS "excerciseEnglishName", ROUND((HOUR(TIMEDIFF(endtime, startTime)) * 60 )+ (second(TIMEDIFF(endtime, startTime)) + MINUTE(TIMEDIFF(endtime, startTime)) * 60) / 60) AS "excerciseTime", e.equipmentCategory AS "excerciseCategory", e.equipmentStimulate AS"excerciseStimulate", e.equipmentEnglishStimulate AS "excerciseEnglishStimulate", d.weightNow, d.countNow, (weightNow * countNow) AS "volume"  
