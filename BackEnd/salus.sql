@@ -30,10 +30,12 @@ CREATE TABLE IF NOT EXISTS `attendance` (
   CONSTRAINT `fk_rfidkey` FOREIGN KEY (`rfidKey`) REFERENCES `user` (`rfidKey`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
--- 테이블 데이터 salus.attendance:~1 rows (대략적) 내보내기
+-- 테이블 데이터 salus.attendance:~3 rows (대략적) 내보내기
 /*!40000 ALTER TABLE `attendance` DISABLE KEYS */;
 INSERT INTO `attendance` (`rfidKey`, `dailyExcerciseStart`, `dailyExcerciseEnd`, `attendanceCheck`, `excerciseDay`, `firstRegist`, `updateRegist`) VALUES
-	(12341234, '2022-08-04 14:40:23', '2022-08-04 17:25:34', 0000, '2022-08-04', '2022-08-04 14:40:23', '2022-08-04 17:25:34');
+	(12341234, '2022-08-04 14:40:23', '2022-08-05 22:18:01', 0000, '2022-08-04', '2022-08-04 14:40:23', '2022-08-05 22:18:01'),
+	(12341234, '2022-08-05 13:53:46', '2022-08-05 22:18:01', 0000, '2022-08-05', '2022-08-05 13:53:46', '2022-08-05 22:18:01'),
+	(11111111, '2022-08-05 14:10:43', '2022-08-05 14:11:17', 0000, '2022-08-05', '2022-08-05 14:10:43', '2022-08-05 14:11:17');
 /*!40000 ALTER TABLE `attendance` ENABLE KEYS */;
 
 -- 테이블 salus.board 구조 내보내기
@@ -73,11 +75,12 @@ CREATE TABLE IF NOT EXISTS `daily_excercise` (
   CONSTRAINT `FK_daily_excercise_user` FOREIGN KEY (`rfidKey`) REFERENCES `user` (`rfidKey`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8mb4;
 
--- 테이블 데이터 salus.daily_excercise:~2 rows (대략적) 내보내기
+-- 테이블 데이터 salus.daily_excercise:~3 rows (대략적) 내보내기
 /*!40000 ALTER TABLE `daily_excercise` DISABLE KEYS */;
 INSERT INTO `daily_excercise` (`dailyExcerciseId`, `equipmentName`, `startTime`, `endTime`, `weightNow`, `countNow`, `excerciseDay`, `firstRegist`, `updateRegist`, `rfidKey`) VALUES
 	(1, '숄더프레스 머신', '2022-08-04 14:52:09', '2022-08-04 15:52:10', 100, 10, '2022-08-04', '2022-08-04 14:52:08', '2022-08-04 14:52:42', 12341234),
-	(2, '레그 컬 머신', '2022-08-04 14:52:52', '2022-08-04 15:52:53', 100, 10, '2022-08-04', '2022-08-04 14:52:50', '2022-08-04 14:53:30', 12341234);
+	(2, '레그 컬 머신', '2022-08-04 14:52:52', '2022-08-04 15:52:53', 100, 10, '2022-08-04', '2022-08-04 14:52:50', '2022-08-05 14:08:53', 11111111),
+	(3, '레그 컬 머신', '2022-08-05 14:08:13', '2022-08-05 15:08:14', 100, 10, '2022-08-05', '2022-08-05 14:08:21', '2022-08-05 14:08:22', 12341234);
 /*!40000 ALTER TABLE `daily_excercise` ENABLE KEYS */;
 
 -- 테이블 salus.fitness_equipment 구조 내보내기
@@ -207,11 +210,6 @@ CREATE TABLE IF NOT EXISTS `user` (
   `gender` varchar(10) DEFAULT '',
   `gymPassStart` date DEFAULT NULL,
   `gymPassEnd` date DEFAULT NULL,
-  `excerciseStart` date DEFAULT NULL,
-  `totalexcerciseTime` int(10) unsigned zerofill DEFAULT NULL,
-  `dailyStart` datetime DEFAULT NULL,
-  `dailyEnd` datetime DEFAULT NULL,
-  `excerciseCheck` tinyint(4) DEFAULT NULL,
   `gymId` int(11) DEFAULT NULL,
   `firstRegist` datetime NOT NULL DEFAULT current_timestamp(),
   `updateRegist` datetime NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
@@ -220,10 +218,11 @@ CREATE TABLE IF NOT EXISTS `user` (
   CONSTRAINT `gymId` FOREIGN KEY (`gymId`) REFERENCES `gym` (`gymId`) ON DELETE SET NULL ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
--- 테이블 데이터 salus.user:~1 rows (대략적) 내보내기
+-- 테이블 데이터 salus.user:~2 rows (대략적) 내보내기
 /*!40000 ALTER TABLE `user` DISABLE KEYS */;
-INSERT INTO `user` (`rfidKey`, `email`, `name`, `password`, `phone`, `birthDay`, `gender`, `gymPassStart`, `gymPassEnd`, `excerciseStart`, `totalexcerciseTime`, `dailyStart`, `dailyEnd`, `excerciseCheck`, `gymId`, `firstRegist`, `updateRegist`) VALUES
-	(12341234, 'sbpark0402@gmail.com', '박성배', '1234', '01020649961', '1995-11-05', '1', '2022-08-04', '2022-08-04', NULL, NULL, NULL, NULL, NULL, NULL, '2022-08-04 14:21:10', '2022-08-04 14:21:52');
+INSERT INTO `user` (`rfidKey`, `email`, `name`, `password`, `phone`, `birthDay`, `gender`, `gymPassStart`, `gymPassEnd`, `gymId`, `firstRegist`, `updateRegist`) VALUES
+	(11111111, 'tset@gmail.com', '테스트', '1234', '', NULL, '', NULL, NULL, NULL, '2022-08-05 14:08:46', '2022-08-05 14:08:48'),
+	(12341234, 'sbpark0402@gmail.com', '박성배', '1234', '01020649961', '1995-11-05', '1', '2022-08-04', '2022-08-04', NULL, '2022-08-04 14:21:10', '2022-08-04 14:21:52');
 /*!40000 ALTER TABLE `user` ENABLE KEYS */;
 
 /*!40101 SET SQL_MODE=IFNULL(@OLD_SQL_MODE, '') */;
