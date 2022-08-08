@@ -14,19 +14,16 @@ const selectAll = async (req, res) => {
   });
 };
 
-// const loginUser = async (req, res) => {
-//   var param = {
-//     rfidKey: req.user.refidKey,
-//     password: req.user.password,
-//   }
-//   const format = { language: "sql", indent: ""};
-//   const query = mybatisMapper.getStatement("user", "loginuser", param, format);
-//   const check = conn.query(query, (err, results) => {
-//     if(err) console.error(err);
-    
-//   })
-
-// }
+const loginUser = async (req, res) => {
+  console.log(req);
+  var param = {
+    rfidKey: req.user.rfidKey,
+    password: req.user.password,
+  }
+  const format = { language: "sql", indent: ""};
+  const query = mybatisMapper.getStatement("user", "login", param, format);
+  return await conn.promise().query(query)
+}
 
 const selectUser = async (req, res) => {
   var param = {
@@ -90,4 +87,5 @@ module.exports = {
   selectUser,
   insertUser,
   selectSignin,
+  loginUser
 };

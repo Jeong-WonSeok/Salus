@@ -14,21 +14,15 @@
     <!-- 운동 데이터 삽입-->
     <insert id="insertExcercise" >
     insert into daily_excercise
-<<<<<<< HEAD
-    (weightNow, startTime, endTime, countNow, equipmentName, excerciseDay, userid)
-    values
-    (#{weightNow}, NOW(), NOW() ,1, #{equipmentName}, #{excerciseDay}, #{userid}) 
-=======
     (weightNow, startTime, endTime, countNow, equipmentName, excerciseDay, rfidKey)
     values
-    (#{weightNow}, NOW(), NOW() ,1, #{equipmentName}, #{excerciseDay}, #{rfidKey}) 
->>>>>>> BE-dev
+    (#{weightNow}, NOW(), NOW() ,1, #{equipmentName}, #{excerciseDay}, #{rfidKey})
     </insert>
 
     <!-- 운동 데이터 수정-->
     <update id="updateExcercise">
     update daily_excercise
-    set countNow = countNow + 1 and endTime = NOW()
+    set countNow = countNow + 1, endTime = NOW()
     where excerciseDay = #{excerciseDay}
     and weightNow = #{weightNow}
     and equipmentName = #{equipmentName}

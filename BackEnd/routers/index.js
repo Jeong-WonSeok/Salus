@@ -17,7 +17,6 @@ const excercise = require("./excercise");
 router.get("/", function (req, res) {
   res.render("main");
   // res.render("main", { user: req.user });
-  console.log("user", req.user);
 });
 
 router.use("/user", user);

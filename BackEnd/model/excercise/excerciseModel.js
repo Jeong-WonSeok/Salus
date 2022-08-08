@@ -18,7 +18,7 @@ const ExcerciseData = async (req, res) => {
     format
   );
   conn.query(query, (err, results) => {
-    // console.log('select', results);
+    console.log('select', results);
     if (err) console.log(err);
     //만약 운동데이터가 없다면 새로 만들고 횟수 1 넣어줌
     else if (results.length === 0) {
