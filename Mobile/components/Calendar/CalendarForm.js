@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { StyleSheet, View, Text } from "react-native";
+import CalendarHeader from "./Components/CalendarHeader";
 import Day from "./Components/Day";
 import buildCalendar from "./function/bulid";
 
@@ -12,8 +13,16 @@ const CalendarForm = ({ value, onChange }) => {
 
   return (
     <View style={styles.page}>
-      <Text>CalendarForm</Text>
       <View style={styles.calendar}>
+        <CalendarHeader value={value} setValue={onChange} />
+        <View style={styles.dayNames}>
+          {["Sun", "Mon", "Tus", "Wed", "Thu", "Fri", "Sat"].map((d, i) => (
+            <Text style={styles.dayName} key={i}>
+              {d}
+            </Text>
+          ))}
+        </View>
+
         {calendar.map((week, w) => (
           <View style={styles.weeks} key={"week" + w}>
             {week.map((day, d) => (
@@ -39,12 +48,12 @@ const styles = StyleSheet.create({
     width: "100%",
   },
   calendar: {
-    flex: 1,
     width: "100%",
+    marginBottom: "5%",
   },
   info: {
     flex: 1,
-    backgroundColor: "blue",
+    backgroundColor: "lightblue",
     color: "white",
     width: "100%",
   },
@@ -52,6 +61,21 @@ const styles = StyleSheet.create({
     width: "100%",
     flexDirection: "row",
     padding: 0,
+  },
+  dayNames: {
+    flexDirection: "row",
+    flexWrap: "wrap",
+    width: "100%",
+    alignItems: "center",
+    textAlign: "center",
+  },
+  dayName: {
+    flexDirection: "row",
+    backgroundColor: "white",
+    width: "calc(100% / 7)",
+    textAlign: "center",
+    color: "#92a3fd",
+    fontWeight: "bold",
   },
 });
 

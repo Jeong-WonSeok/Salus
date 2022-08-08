@@ -10,9 +10,6 @@ const Calendar = () => {
   return (
     <Container alignItems="stretch" mt={20}>
       <CalendarForm value={value} onChange={setValue}></CalendarForm>
-      <ScrollView horizontal pagingEnabled>
-        <Text>임시</Text>
-      </ScrollView>
     </Container>
   );
 };
