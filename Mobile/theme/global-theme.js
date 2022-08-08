@@ -1,6 +1,6 @@
 import styled from 'styled-components/native';
 export const Container = styled.View`
-  flex: ${(props) => (props.flex ? props.flex : 1)};
+  flex: ${(props) => (props.flex ? props.flex : '')};
   background: ${(props) => (props.background ? props.background : "white")};
   width: ${(props) => (props.width ? props.width : "100%")};
   height: ${(props) => (props.height ? props.height : "100%")};
@@ -25,5 +25,6 @@ export const Container = styled.View`
     props.flexDirection ? props.flexDirection : "row"};
   border-radius: ${(props) => (props.borderRadius ? props.borderRadius : 0)};
   flex-wrap: ${(props) => (props.flexWrap ? props.flexWrap : "nowrap")};
+  border: ${(props) => (props.border ? props.border : 'none')};
 `;
 
