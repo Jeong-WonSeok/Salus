@@ -17,13 +17,7 @@ const App = () => {
             headerShown: false,
           }}
         />
-        <Stack.Screen
-          name="Exercise"
-          component={Exercise}
-          options={{
-            headerShown: false,
-          }}
-        />
+        <Stack.Screen name="Exercise" component={Exercise} />
       </Stack.Navigator>
     </NavigationContainer>
   );
