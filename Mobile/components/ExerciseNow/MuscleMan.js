@@ -34,10 +34,6 @@ import back_hamstrings_b from "./../../assets/muscle/man/28.png";
 import back_calves_a from "./../../assets/muscle/man/29.png";
 import back_calves_b from "./../../assets/muscle/man/30.png";
 import { Container } from "./../../theme/global-theme";
-import { useState } from "react";
-
-const male1_uri = Image.resolveAssetSource(male).uri; 
-const traps_a_uri = Image.resolveAssetSource(traps_a).uri;
 
 const Parts = styled.Image`
   position: absolute;
@@ -50,18 +46,15 @@ const Parts = styled.Image`
 `;
 
 const MuscleMan = () => {
-   const [heightImage, setHeightImage] = useState(0);
    let screenWidth = Dimensions.get("window").width;
    let screenHeight = Dimensions.get("window").height;
-   Image.getSize(traps_a_uri, (w, h) => {
-     setHeightImage(h * (screenWidth / w));
-   });
+
 
   return (
     <Container alignItems="stretch">
       <Container background="#5f9ea0" flex={1} width={screenWidth} height="60%">
         <Parts
-          source={{ uri: traps_a_uri, heightImage }}
+          source={traps_a}
           top="-24.3%"
           left="-4%"
           resizeMode="contain"
@@ -179,7 +172,7 @@ const MuscleMan = () => {
           resizeMode="contain"
         />
         <Image
-          source={{ uri: male1_uri, heightImage }}
+          source={male}
           style={styles.image}
           resizeMode="contain"
         />
@@ -315,7 +308,7 @@ const MuscleMan = () => {
           top="32.65%"
           left="38.8%"
           width="45%"
-          height="90%"
+          height="90%"  
           scale="scale(0.169)"
         />
         <Image source={male2} style={styles.image} />
