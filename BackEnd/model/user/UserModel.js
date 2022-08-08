@@ -3,6 +3,7 @@ const mybatisMapper = require("mybatis-mapper");
 const bcrypt = require('bcrypt');
 
 const selectAll = async (req, res) => {
+	conn.connect();
   var param = null;
   var format = { language: "sql", indent: "" };
   var query = mybatisMapper.getStatement("user", "allsearch", param, format);
@@ -15,6 +16,7 @@ const selectAll = async (req, res) => {
 };
 
 const loginUser = async (req, res) => {
+	conn.connect();
   console.log(req);
   var param = {
     rfidKey: req.user.rfidKey,
@@ -26,6 +28,7 @@ const loginUser = async (req, res) => {
 }
 
 const selectUser = async (req, res) => {
+	conn.connect();
   var param = {
     // email: req.params.email,
     email: req.user.email,
@@ -51,6 +54,7 @@ const selectUser = async (req, res) => {
 };
 
 const selectSignin = async (req, res) => {
+	conn.connect();
   const body = req.body;
   var param = {
     email: body.email,
@@ -67,6 +71,7 @@ const selectSignin = async (req, res) => {
 };
 
 const insertUser = async (req, res) => {
+	conn.connect();
   const body = req.body;
   var param = {
     email: body.email,

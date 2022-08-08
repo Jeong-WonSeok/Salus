@@ -8,6 +8,8 @@ const passport = require("passport");
 const session = require("express-session");
 const passportConfig = require("./passport");
 const cors = require("cors");
+const conn = require("./database/db");
+
 
 dotenv.config({ path: path.join(__dirname, "/.env") });
 const webSocket = require("./socket/socket");

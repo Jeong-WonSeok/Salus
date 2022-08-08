@@ -1,4 +1,4 @@
-const KioskModel = require("../../model/kiosk/kioskModel");
+const KioskModel = require("../../model/kiosk/KioskModel");
 
 const dailyData = KioskModel.DailyData;
 const userInfo = KioskModel.searchUser;

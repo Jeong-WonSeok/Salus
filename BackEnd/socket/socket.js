@@ -2,7 +2,7 @@ const conn = require("../database/db")
 const mybatisMapper = require('mybatis-mapper');
 const express = require("express");
 const SocketIO = require('socket.io');
-const KioskModel = require("../model/kiosk/kioskModel");
+const KioskModel = require("../model/kiosk/KioskModel");
 const router = express.Router();
 
 module.exports = (server) => {
