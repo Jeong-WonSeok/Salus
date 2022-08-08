@@ -69,7 +69,6 @@ const DailyData = async (req, res) => {
   const query = mybatisMapper.getStatement("kiosk", "DailyData", param, format);
   // let result = {};
   const result = await conn.promise().query(query);
-
   return result;
 
 };
@@ -92,8 +91,28 @@ const calendarData = async (req, res) => {
   });
 };
 
+const equipmentMonthData = async(req, res) =>{
+  var param = {
+    equipmentName : req.params.equipmentName
+  };
+  console.log(param);
+  const format = { language: "sql", indent: "" };
+  const query = mybatisMapper.getStatement(
+    "kiosk",
+    "equipMonthData",
+    param,
+    format
+  );
+  conn.query(query, (err, results) => {
+    if (err) console.log(err);
+    console.log(results);
+    return res.json(results);
+  });
+}
+
 module.exports = {
   DailyData,
   searchUser,
   calendarData,
+  equipmentMonthData
 };

@@ -1,4 +1,4 @@
-const mysql = require("mysql");
+const mysql = require("mysql2");
 const mybatisMapper = require("mybatis-mapper");
 const dotenv = require("dotenv");
 dotenv.config();
