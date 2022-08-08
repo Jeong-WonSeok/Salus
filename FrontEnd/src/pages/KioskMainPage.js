@@ -18,6 +18,7 @@ import styled from 'styled-components';
 import useHttp from './../customHooks/useHttp';
 import { useEffect } from 'react';
 import { useCallback } from 'react';
+import axios from 'axios'
 
 const HomeDiv = styled(Div)`
   position: absolute;
@@ -32,16 +33,19 @@ const GlobalStyle = createGlobalStyle`
 `;
 
 const KioskMainPage = () => {
-  // const [loading, error, apiRequest] = useHttp();
-  // const [equipmentData, setEquipmentData] = useState([]);
+  const {loading, error, apiRequest} = useHttp();
+  const [equipmentData, setEquipmentData] = useState([]);
   
-  // const getEquipmentData = useCallback((data) => {
-  //   setEquipmentData(data)
-  // })
+  const getEquipmentData = useCallback((data) => {
+    setEquipmentData(data)
+    console.log(data)
+  },[])
 
-  // useEffect(() => {
-  //   apiRequest({uri: 'd'}, getEquipmentData)
-  // }, [apiRequest, getEquipmentData])
+  useEffect(() => {
+    // apiRequest({ uri: "http://i7b110.p.safy.io:3000/" }, getEquipmentData);
+    axios.get("http://i7b110.p.ssafy.io:3000/kiosk/login/12341234")
+    .then(res => console.log(res.data)).catch(err => console.log(err))
+  }, [apiRequest, getEquipmentData])
   const dummyData = [
     [
       {
