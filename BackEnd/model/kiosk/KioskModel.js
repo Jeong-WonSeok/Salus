@@ -1,6 +1,5 @@
 var conn = require("../../database/db");
 const mybatisMapper = require("mybatis-mapper");
-const MybatisMapper = require("mybatis-mapper");
 
 const searchUser = async (req, res) => {
   var param = {
@@ -43,7 +42,7 @@ const searchUser = async (req, res) => {
             return res.redirect("/kiosk/daily/" + rfidKey);
           });
         } else {
-          const query4 = MybatisMapper.getStatement(
+          const query4 = mybatisMapper.getStatement(
             "kiosk",
             "attendanceExit",
             param,
@@ -62,18 +61,16 @@ const searchUser = async (req, res) => {
 };
 
 //오늘 운동 데이터 받아오기
-const DailyData = (req, res) => {
+const DailyData = async (req, res) => {
   var param = {
     rfidKey: req.params.rfidKey,
   };
   const format = { language: "sql", indent: "" };
   const query = mybatisMapper.getStatement("kiosk", "DailyData", param, format);
-  conn.query(query, (err, results) => {
-    if (err) console.log(err);
-    console.log(results);
-    return res.json(results);
-  });
-  
+  // let result = {};
+  const result = await conn.promise().query(query);
+
+  return result;
 
 };
 
