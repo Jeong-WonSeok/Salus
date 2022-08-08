@@ -1,9 +1,16 @@
-import { StyleSheet, Text, View, Button, Image } from 'react-native';
-import { StatusBar } from 'expo-status-bar';
-import { Container } from '../theme/global-theme';
-import calendar from '../assets/main/calendar.png';
-import { todayFormal } from '../utils/todayFormal';
-import { Chart } from '../components/Chart/Chart';
+import {
+  StyleSheet,
+  Text,
+  View,
+  Button,
+  Image,
+  TouchableOpacity,
+} from "react-native";
+import { StatusBar } from "expo-status-bar";
+import { Container } from "../theme/global-theme";
+import calendar from "../assets/main/calendar.png";
+import { todayFormal } from "../utils/todayFormal";
+import { Chart } from "../components/Chart/Chart";
 
 const Home = ({ navigation }) => {
   const data = [
@@ -20,7 +27,13 @@ const Home = ({ navigation }) => {
       <Container flex={1} justifyContent="space-between" mt={15}>
         <Text style={styles.logo}>Salus</Text>
         <View>
-          <Image source={calendar} style={styles.image} />
+          <TouchableOpacity
+            onPress={() => {
+              navigation.navigate("Calendar");
+            }}
+          >
+            <Image source={calendar} style={styles.image} />
+          </TouchableOpacity>
           <Text style={styles.calendar}>캘린더</Text>
         </View>
       </Container>
@@ -40,7 +53,10 @@ const Home = ({ navigation }) => {
         <Container flex={5}>
           <Text>이번주 운동(볼륨)</Text>
         </Container>
-        <Button title="go to CurrentExercise" onPress={() => navigation.navigate('Exercise')} />
+        <Button
+          title="go to CurrentExercise"
+          onPress={() => navigation.navigate("Exercise")}
+        />
       </Container>
       <StatusBar style="auto" />
     </Container>
@@ -49,8 +65,8 @@ const Home = ({ navigation }) => {
 
 const styles = StyleSheet.create({
   logo: {
-    color: '#92a3fd',
-    marginLeft: '5%',
+    color: "#92a3fd",
+    marginLeft: "5%",
     fontSize: 40,
   },
   image: {
@@ -58,9 +74,9 @@ const styles = StyleSheet.create({
     height: 30,
   },
   calendar: {
-    marginRight: '6%',
-    fontSize: '12px',
-    color: '#96989d',
+    marginRight: "6%",
+    fontSize: "12px",
+    color: "#96989d",
   },
 });
 
