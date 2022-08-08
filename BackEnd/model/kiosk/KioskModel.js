@@ -42,6 +42,7 @@ const searchUser = async (req, res) => {
             return res.redirect("/kiosk/daily/" + rfidKey);
           });
         } else {
+          console.log("출석체크 o");
           const query4 = mybatisMapper.getStatement(
             "kiosk",
             "attendanceExit",
@@ -68,8 +69,9 @@ const DailyData = async (req, res) => {
   const format = { language: "sql", indent: "" };
   const query = mybatisMapper.getStatement("kiosk", "DailyData", param, format);
   // let result = {};
-  const result = await conn.promise().query(query);
-  return result;
+   const result = await conn.promise().query(query);
+  
+  return res.json(result);
 
 };
 
