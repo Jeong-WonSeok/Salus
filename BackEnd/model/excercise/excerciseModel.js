@@ -5,10 +5,10 @@ const mybatisMapper = require("mybatis-mapper");
 const excerciseData = async (req, res) => {
   // console.log(req.query)
   const param = {
-    excerciseDay: req.query.excerciseDay,
-    weightNow: req.query.weightNow,
-    equipmentName: req.query.equipmentName,
-    rfidKey: req.query.rfidKey,
+    excerciseDay: req.params.excerciseDay,
+    weightNow: req.params.weightNow,
+    equipmentName: req.params.equipmentName,
+    rfidKey: req.params.rfidKey,
   };
   const format = { language: "sql", indent: "" };
   const query = mybatisMapper.getStatement(
