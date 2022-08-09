@@ -11,7 +11,6 @@ const setDailyDatas = (data, date, type) => {
       useMuscle.add(excercise.excerciseEnglishStimulate.split(', '));
     }
   }
-  console.log(Array.from(useMuscle)[0]);
   return [Array.from(useMuscle)[0], dailyData];
 };
 export default setDailyDatas;

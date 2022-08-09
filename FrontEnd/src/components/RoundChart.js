@@ -20,8 +20,10 @@ const Div = styled.div`
 `;
 const TextDiv = styled.div`
   position: absolute;
-  top: ${(props) => (props.textTop ? props.textTop : '10%')};
-  left: ${(props) => (props.textLeft ? props.textLeft : '2.7%')};
+  width: 180px;
+  height: 180px;
+  top: ${(props) => (props.textTop ? props.textTop : '0px')};
+  left: ${(props) => (props.textLeft ? props.textLeft : '0px')};
 `;
 const Svg = styled.svg`
   transform: rotate(-90deg);
@@ -32,8 +34,8 @@ const RoundChart = ({
   roundWidth = 180,
   roundHeight = 180,
   colorGradient,
-  textTop = '10%',
-  textLeft = '2.7%',
+  textTop = '35px',
+  textLeft = '0px',
   children,
   KEY,
 }) => {

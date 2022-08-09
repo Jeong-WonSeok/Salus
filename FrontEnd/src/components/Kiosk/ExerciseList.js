@@ -40,7 +40,7 @@ const ExerciseList = (props) => {
         <Text>{props.volume} Vol</Text>
         <Text>{props.reps} 회</Text>
       </List>
-      <ExerciseModal open={openModal} toggleModal={toggleModal} title={props.title}/>
+      <ExerciseModal open={openModal} toggleModal={toggleModal} title={props.title} chartData={props.chartData}/>
     </Div>
   );
 };

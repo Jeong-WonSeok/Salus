@@ -22,7 +22,8 @@ const Exercise = (props) => {
           title={exercise.title}
           volume={exercise.volume}
           reps={exercise.reps}
-          key={`${exercise.title}${Date.now().toString()}`}
+          chartData={props.chartData}
+          key={`${exercise.title}${index}`}
         />
       );
     } else {
@@ -36,8 +37,8 @@ const Exercise = (props) => {
           title={exercise.title}
           volume={exercise.volume}
           reps={exercise.reps}
-          key={`${exercise.title}${Date.now().toString()}`}
-
+          chartData={props.chartData}
+          key={`${exercise.title}${index}`}
         />
       );
     } else {

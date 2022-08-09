@@ -1,6 +1,7 @@
 import React from 'react';
 import DailySummary from './DailySummary';
 import styled from 'styled-components';
+import { WeekData } from '../../api-request/functions';
 
 const Container = styled.div`
   width: 93vw;
@@ -35,6 +36,7 @@ const Icon = styled.div`
 `;
 
 function WeeklySummary({ datas, onChange, date }) {
+  const weeklyData = WeekData(datas)
   return (
     <Container>
       <Header>
@@ -43,7 +45,8 @@ function WeeklySummary({ datas, onChange, date }) {
         })}
       </Header>
       <Icon>
-        {datas.map((data, index) => {
+        
+        {weeklyData.map((data, index) => {
           return <DailySummary data={data} key={index} setValue={onChange} date={date} />;
         })}
       </Icon>

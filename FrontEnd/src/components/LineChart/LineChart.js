@@ -23,7 +23,7 @@ const LineChart = ({
 
   const points = data
     .map((element) => {
-      const x = (element.x / maximumXFromData) * chartWidth + padding;
+      const x = maximumXFromData ? (element.x / maximumXFromData) * chartWidth + padding : padding;
       const y =
         chartHeight - (element.y / maximumYFromData) * chartHeight + padding;
       return `${x},${y}`;
@@ -31,7 +31,7 @@ const LineChart = ({
     .join(" ");
 
   const dotPoints = data.map((element) => {
-    const x = (element.x / maximumXFromData) * chartWidth + padding;
+    const x = maximumXFromData ? (element.x / maximumXFromData) * chartWidth + padding: padding;
     const y =
       chartHeight - (element.y / maximumYFromData) * chartHeight + padding;
     const arr = [];
@@ -101,7 +101,6 @@ const LineChart = ({
         strokeWidth={STROKE}
         points={points}
       />
-      {console.log(dotPoints)}
       <g>
         {dotPoints.map((dot, index) => (
           <circle

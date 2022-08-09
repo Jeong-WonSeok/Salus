@@ -52,6 +52,11 @@ const MuscleImg = styled.img`
 `;
 
 const MuscleWoman = (props) => {
+  if (!props.muscles) { return (
+    <Musclemap>
+      <Background src={background} alt="background" />
+    </Musclemap>
+  ); }
   return (
     <Musclemap>
       <Background src={background} alt="background" />

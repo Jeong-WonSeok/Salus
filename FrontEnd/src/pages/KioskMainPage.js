@@ -1,30 +1,29 @@
-import React, { Fragment, useState } from 'react';
-import { CustomDiv } from '../styles/kiosk.style';
-import StatsWeekly from '../components/Kiosk/StatsWeekly';
-import StatsMuscle from './../components/Kiosk/StatsMuscle';
-import NavKiosk from './../components/Kiosk/NavKiosk';
-import StatsDayInfo from './../components/Kiosk/StatsDayInfo';
-import SelectBoardView from '../components/Kiosk/SelectBoardView';
-import WeeklySummary from './../components/Kiosk/WeeklySummary';
-import Exercise from '../components/Kiosk/Exercise';
-import { createGlobalStyle } from 'styled-components';
-import { Div } from './../styles/kiosk.style';
-import CalendarForm from './../components/Calendar/CalendarForm';
-import moment from 'moment';
-import ButtonComponent from './../components/Common/ButtonComponent';
-import setDailyDatas from '../components/Kiosk/KioskFuntions/setDailyDatas';
-import setDayData from '../components/Kiosk/KioskFuntions/setDayData';
-import styled from 'styled-components';
-import useHttp from './../customHooks/useHttp';
-import { useEffect } from 'react';
-import { useCallback } from 'react';
-import axios from 'axios'
+import React, { Fragment, useState } from "react";
+import { CustomDiv } from "../styles/kiosk.style";
+import StatsWeekly from "../components/Kiosk/StatsWeekly";
+import StatsMuscle from "./../components/Kiosk/StatsMuscle";
+import NavKiosk from "./../components/Kiosk/NavKiosk";
+import SelectBoardView from "../components/Kiosk/SelectBoardView";
+import WeeklySummary from "./../components/Kiosk/WeeklySummary";
+import Exercise from "../components/Kiosk/Exercise";
+import { createGlobalStyle } from "styled-components";
+import { Div } from "./../styles/kiosk.style";
+import CalendarForm from "./../components/Calendar/CalendarForm";
+import moment from "moment";
+import ButtonComponent from "./../components/Common/ButtonComponent";
+import setDailyDatas from "../components/Kiosk/KioskFuntions/setDailyDatas";
+import styled from "styled-components";
+import useHttp from "./../customHooks/useHttp";
+import { useEffect } from "react";
+import { useCallback } from "react";
+import { ChartCalc } from './../api-request/functions';
+import LoadingText from './../components/Kiosk/LoadingText';
 
 const HomeDiv = styled(Div)`
   position: absolute;
   bottom: 5%;
   left: 32%;
-`
+`;
 
 const GlobalStyle = createGlobalStyle`
   body {
@@ -33,208 +32,98 @@ const GlobalStyle = createGlobalStyle`
 `;
 
 const KioskMainPage = () => {
-  const {loading, error, apiRequest} = useHttp();
-  const [equipmentData, setEquipmentData] = useState([]);
-  
-  const getEquipmentData = useCallback((data) => {
-    setEquipmentData(data)
-    console.log(data)
-  },[])
-
-  useEffect(() => {
-    // apiRequest({ uri: "http://i7b110.p.safy.io:3000/" }, getEquipmentData);
-    axios.get("http://i7b110.p.ssafy.io:3000/kiosk/login/12341234")
-    .then(res => console.log(res.data)).catch(err => console.log(err))
-  }, [apiRequest, getEquipmentData])
-  const dummyData = [
-    [
-      {
-        excerciseDay: '2022-07-28T15:00:00.000Z',
-        excerciseName: '컬 머신',
-        excerciseEnglishName: 'Curl Machine',
-        excerciseTime: 100,
-        excerciseCategory: '상체',
-        excerciseStimulate: '이두근',
-        excerciseEnglishStimulate: 'biceps, obliques, traps',
-        weightNow: 50,
-        countNow: 10,
-        calorie: 500,
-      },
-      {
-        excerciseDay: '2022-07-27T15:00:00.000Z',
-        excerciseName: '컬 머신',
-        excerciseEnglishName: 'Curl Machine',
-        excerciseTime: 100,
-        excerciseCategory: '상체',
-        excerciseStimulate: '이두근',
-        excerciseEnglishStimulate: 'biceps, obliques, traps',
-        weightNow: 50,
-        countNow: 10,
-        calorie: 500,
-      },
-      {
-        excerciseDay: '2022-07-26T15:00:00.000Z',
-        excerciseName: '레그 컬 머신',
-        excerciseEnglishName: 'Leg Curl Machine',
-        excerciseTime: 110,
-        excerciseCategory: '하체',
-        excerciseStimulate: '허벅지, 종아리',
-        excerciseEnglishStimulate: 'quads, calves',
-        weightNow: 50,
-        countNow: 10,
-        calorie: 550,
-      },
-      {
-        excerciseDay: '2022-07-27T15:00:00.000Z',
-        excerciseName: '체스트 프레스 머신',
-        excerciseEnglishName: 'Chest Press Machine',
-        excerciseTime: 80,
-        excerciseCategory: '상체',
-        excerciseStimulate: '가슴',
-        excerciseEnglishStimulate: 'pecs',
-        weightNow: 50,
-        countNow: 10,
-        calorie: 400,
-      },
-      {
-        excerciseDay: '2022-07-25T15:00:00.000Z',
-        excerciseName: '펙덱 플라이 머신',
-        excerciseEnglishName: 'Fly - Pec Dec Machine',
-        excerciseTime: 60,
-        excerciseCategory: '상체',
-        excerciseStimulate: '가슴',
-        excerciseEnglishStimulate: 'pecs',
-        weightNow: 50,
-        countNow: 10,
-        calorie: 300,
-      },
-      {
-        excerciseDay: '2022-07-25T15:00:00.000Z',
-        excerciseName: '숄더프레스 머신',
-        excerciseEnglishName: 'Sholder Press Machine',
-        excerciseTime: 70,
-        excerciseCategory: '상체',
-        excerciseStimulate: '어깨',
-        excerciseEnglishStimulate: 'shoulders',
-        weightNow: 50,
-        countNow: 10,
-        calorie: 350,
-      },
-      {
-        excerciseDay: '2022-07-24T15:00:00.000Z',
-        excerciseName: '컬 머신',
-        excerciseEnglishName: 'Curl Machine',
-        excerciseTime: 90,
-        excerciseCategory: '상체',
-        excerciseStimulate: '이두근',
-        excerciseEnglishStimulate: 'biceps',
-        weightNow: 50,
-        countNow: 10,
-        calorie: 450,
-      },
-    ],
-    [
-      {
-        excerciseDay: '2022-07-28T15:00:00.000Z',
-        totalCategoryTime: 100,
-        totalWeight: 50,
-        totalCount: 10,
-        excerciseCategory: '상체',
-        totalCalorie: 500,
-      },
-      {
-        excerciseDay: '2022-07-27T15:00:00.000Z',
-        totalCategoryTime: 100,
-        totalWeight: 50,
-        totalCount: 10,
-        excerciseCategory: '상체',
-        totalCalorie: 500,
-      },
-      {
-        excerciseDay: '2022-07-26T15:00:00.000Z',
-        totalCategoryTime: 110,
-        totalWeight: 50,
-        totalCount: 10,
-        excerciseCategory: '하체',
-        totalCalorie: 550,
-      },
-      {
-        excerciseDay: '2022-07-25T15:00:00.000Z',
-        totalCategoryTime: 80,
-        totalWeight: 50,
-        totalCount: 10,
-        excerciseCategory: '상체',
-        totalCalorie: 400,
-      },
-      {
-        excerciseDay: '2022-07-24T15:00:00.000Z',
-        totalCategoryTime: 220,
-        totalWeight: 150,
-        totalCount: 30,
-        excerciseCategory: '상체',
-        totalCalorie: 1100,
-      },
-    ],
-  ];
-  // 페이지 전체에 보여줄 상태
-  const [selectedDate, setSelectedDate] = useState('2022-07-28T15:00:00.000Z');
-  const getData = (data) => {
-    setSelectedDate(data);
-  };
-  // Boad / Calender 선택
+  const { apiRequest } = useHttp();
+  const [equipmentData, setEquipmentData] = useState();
   const [isBoard, setIsBoard] = useState(true);
+  const [selectedDate, setSelectedDate] = useState("22-08-08");
+  const [value, setValue] = useState(moment());
+  const [loading, setLoading] = useState(true);
+  const getEquipmentData = useCallback((data) => {
+    setEquipmentData(data);
+    setLoading(false);
+  }, []);
+  //데이터 요청보내는 로직
+  useEffect(() => {
+    
+    apiRequest(
+      { url: "http://i7b110.p.ssafy.io:3000/kiosk/login/12341234" },
+      getEquipmentData
+    );
+  }, [apiRequest, getEquipmentData]);
+
+  // Boad / Calender 선택
   const saveBoadHandler = (data) => {
     setIsBoard(data);
   };
+  // 페이지 전체에 보여줄 상태
+  const getData = (data) => {
+    setSelectedDate(data);
+  };
+
   // Calender 내용
-  const [value, setValue] = useState(moment());
-  // 근육 한 운동 정보
-  const dailyData = setDailyDatas(dummyData[0], selectedDate);
+
   return (
     <Fragment>
       <GlobalStyle />
-      <CustomDiv>
-        <NavKiosk />
-        <CustomDiv
-          displayDiv="flex"
-          mt={20}
-          mr={30}
-          ml={30}
-          borderRadius="10px"
-          justifyContent="space-between"
-        >
-          <StatsMuscle muscle={dailyData[0]} date={selectedDate} />
-          <StatsWeekly />
-        </CustomDiv>
-        {/* <StatsDayInfo
-          volume={dayData.totalWeight}
-          reps={dayData.totalCount}
-          time={dayData.totalCategoryTime}
-          calorie={dayData.totalCalorie}
-        /> */}
-        <SelectBoardView onSelectData={saveBoadHandler} />
-        {isBoard ? (
-          <Div mt={10}>
-            <WeeklySummary
-              datas={dummyData[1]}
-              onChange={getData}
-              date={selectedDate}
+      {!loading ? (
+        <Fragment>
+          <CustomDiv>
+            <NavKiosk />
+            <CustomDiv
+              displayDiv="flex"
+              mt={20}
+              mr={30}
+              ml={30}
+              borderRadius="10px"
+              justifyContent="space-between"
+            >
+              <StatsMuscle
+                muscle={setDailyDatas(equipmentData[0], selectedDate)[0]}
+                date={selectedDate}
+                gender={parseInt(equipmentData[0][0].gender)}
+              />
+              <StatsWeekly
+                ratioData={ChartCalc(
+                  equipmentData[1],
+                  equipmentData[2],
+                  equipmentData[3][0]
+                )}
+              />
+            </CustomDiv>
+            <SelectBoardView onSelectData={saveBoadHandler} />
+            {isBoard ? (
+              <Div mt={10}>
+                <WeeklySummary
+                  datas={equipmentData[0]}
+                  onChange={getData}
+                  date={selectedDate}
+                />
+                <Exercise
+                  exerciseList={
+                    setDailyDatas(equipmentData[0], selectedDate)[1]
+                  }
+                  chartData={equipmentData[4]}
+                />
+              </Div>
+            ) : (
+              <Div mt={10}>
+                <CalendarForm
+                  events={setDailyDatas(equipmentData[0], selectedDate)[1]}
+                  value={value}
+                  onChange={setValue}
+                />
+              </Div>
+            )}
+          </CustomDiv>
+          <HomeDiv displayDiv="flex" justifyContent="center">
+            <ButtonComponent
+              buttonText="홈"
+              buttonWidth="35vw"
+              buttonHeight="3vh"
             />
-            <Exercise exerciseList={dailyData[1]} />
-          </Div>
-        ) : (
-          <Div mt={10}>
-            <CalendarForm events={dummyData[1]} value={value} onChange={setValue} />
-          </Div>
-        )}
-      </CustomDiv>
-      <HomeDiv displayDiv="flex" justifyContent="center">
-        <ButtonComponent
-          buttonText="홈"
-          buttonWidth="35vw"
-          buttonHeight="3vh"
-        />
-      </HomeDiv>
+          </HomeDiv>
+        </Fragment>
+      ): <LoadingText/>}
     </Fragment>
   );
 };
