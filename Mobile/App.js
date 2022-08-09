@@ -1,8 +1,9 @@
-import { NavigationContainer } from '@react-navigation/native';
-import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import Exercise from './navigation/Exercise';
-import Home from './navigation/Home';
-import * as React from 'react';
+import { NavigationContainer } from "@react-navigation/native";
+import { createNativeStackNavigator } from "@react-navigation/native-stack";
+import Exercise from "./navigation/Exercise";
+import Home from "./navigation/Home";
+import * as React from "react";
+import Calendar from "./navigation/Calendar";
 
 const Stack = createNativeStackNavigator();
 
@@ -17,7 +18,20 @@ const App = () => {
             headerShown: false,
           }}
         />
-        <Stack.Screen name="Exercise" component={Exercise} />
+        <Stack.Screen
+          name="Exercise"
+          component={Exercise}
+          options={{
+            headerShown: false,
+          }}
+        />
+        <Stack.Screen
+          name="Calendar"
+          component={Calendar}
+          options={{
+            headerShown: false,
+          }}
+        />
       </Stack.Navigator>
     </NavigationContainer>
   );
