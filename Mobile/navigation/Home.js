@@ -280,6 +280,7 @@ const styles = StyleSheet.create({
   unit: {
     textAlignVertical: 'center',
     fontWeight: 'bold',
+    lineHeight: 65,
     color: '#rgba(99, 126, 255, 0.5)',
   },
 });
