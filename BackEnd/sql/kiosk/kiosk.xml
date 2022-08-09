@@ -2,10 +2,12 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="kiosk">
   <select id="DailyData" >
-    SELECT DATE_FORMAT(d.excerciseDay,'%y-%m-%d') as excerciseDay, d.equipmentName AS"excerciseName", e.equipmentEnglishName AS "excerciseEnglishName", ROUND((HOUR(TIMEDIFF(endtime, startTime)) * 60 )+ (second(TIMEDIFF(endtime, startTime)) + MINUTE(TIMEDIFF(endtime, startTime)) * 60) / 60) AS "excerciseTime", e.equipmentCategory AS "excerciseCategory", e.equipmentStimulate AS"excerciseStimulate", e.equipmentEnglishStimulate AS "excerciseEnglishStimulate", d.weightNow, d.countNow, (weightNow * countNow) AS "volume"  
+    SELECT u.gender, DATE_FORMAT(d.excerciseDay,'%y-%m-%d') as excerciseDay, d.equipmentName AS"excerciseName", e.equipmentEnglishName AS "excerciseEnglishName", ROUND((HOUR(TIMEDIFF(endtime, startTime)) * 60 )+ (second(TIMEDIFF(endtime, startTime)) + MINUTE(TIMEDIFF(endtime, startTime)) * 60) / 60) AS "excerciseTime", e.equipmentCategory AS "excerciseCategory", e.equipmentStimulate AS"excerciseStimulate", e.equipmentEnglishStimulate AS "excerciseEnglishStimulate", d.weightNow, d.countNow, (weightNow * countNow) AS "volume"  
      FROM daily_excercise AS d
      INNER JOIN fitness_equipment AS e
     ON d.equipmentName = e.equipmentName
+     INNER JOIN user AS u 
+     ON u.rfidKey = #{rfidKey}
     where d.rfidKey = #{rfidKey}
     and d.excerciseDay BETWEEN CONVERT( DATE_SUB(NOW(), INTERVAL 4 DAY), DATE ) and CONVERT(NOW(), DATE)
     ORDER BY d.excerciseDay desc;
@@ -36,6 +38,10 @@ AND
         DATE_FORMAT((SELECT ADDDATE(NOW(), - WEEKDAY(NOW()) + 0 )), '%Y-%m-%d')
     AND
         DATE_FORMAT((SELECT ADDDATE(NOW(), - WEEKDAY(NOW()) + 6 )), '%Y-%m-%d');
+SELECT MONTH(NOW()) AS "month", equipmentName, if(excerciseDay BETWEEN CONVERT( DATE_SUB(NOW(), INTERVAL 4 DAY), DATE ) and CONVERT(NOW(), DATE) ,if(weightNow,SUM(weightNow * countNow),  ROUND((HOUR(TIMEDIFF(endtime, startTime)) * 60 )+ (second(TIMEDIFF(endtime, startTime)) + MINUTE(TIMEDIFF(endtime, startTime)) * 60) / 60)), null) AS "averageVolume"
+FROM daily_excercise
+WHERE  MONTH(excerciseDay) = MONTH(NOW())
+GROUP BY equipmentName;
   </select>
   <select id="searchCalendarDailyData" >
      SELECT DATE_FORMAT(d.excerciseDay,'%y-%m-%d') as excerciseDay, d.equipmentName AS"excerciseName", e.equipmentEnglishName AS "excerciseEnglishName", ROUND((HOUR(TIMEDIFF(endtime, startTime)) * 60 )+ (second(TIMEDIFF(endtime, startTime)) + MINUTE(TIMEDIFF(endtime, startTime)) * 60) / 60) AS "excerciseTime", e.equipmentCategory AS "excerciseCategory", e.equipmentStimulate AS"excerciseStimulate", e.equipmentEnglishStimulate AS "excerciseEnglishStimulate", d.weightNow, d.countNow, (weightNow * countNow) AS "volume"  
@@ -65,7 +71,7 @@ AND
   <update id="attendanceExit">
   UPDATE attendance
   SET dailyExcerciseEnd = NOW(), attendanceCheck = 0
-  WHERE rfidKey = #{rfidKey}
+  WHERE rfidKey = #{rfidKey} AND excerciseDay = DATE_FORMAT(NOW(),'%y-%m-%d')
   </update>
   <select id="searchuser">
   SELECT rfidKey, name
