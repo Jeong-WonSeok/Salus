@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useCallback } from 'react';
 import { Dimensions } from 'react-native';
 import { LineChart } from 'react-native-chart-kit';
 import * as Progress from 'react-native-progress';
@@ -37,24 +37,24 @@ export const PChart = ({ data }) => {
   const [progress, setProgress] = useState(0);
   const [indeterminate, setIndeterminate] = useState(true);
 
-  const animate = () => {
+  const animate = useCallback(() => {
     let now = 0;
     setTimeout(() => {
       setIndeterminate(false);
-      setInterval(() => {
+      const interval = setInterval(function () {
         now += data / 5;
         if (now > data) {
           now = data;
-          clearInterval();
+          clearInterval(interval);
         }
         setProgress(now);
       }, 100);
     }, 1000);
-  };
+  }, [data]);
 
   useEffect(() => {
     animate();
-  }, []);
+  }, [animate]);
 
   return (
     <Progress.Circle

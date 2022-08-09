@@ -4,6 +4,7 @@ import { Container } from '../theme/global-theme';
 import calendar from '../assets/main/calendar.png';
 import { todayFormal } from '../utils/todayFormal';
 import { LChart, PChart } from '../components/Chart/Chart';
+import React from 'react';
 
 const Home = ({ navigation }) => {
   const thisweek = [
@@ -23,7 +24,7 @@ const Home = ({ navigation }) => {
         <Text style={styles.logo}>Salus</Text>
         <View>
           <Image source={calendar} style={styles.image} />
-          <Text style={styles.calendar}>캘린더</Text>
+          <Text style={styles.calendartext}>캘린더</Text>
         </View>
       </Container>
       <Container flex={9} flexDirection="column">
@@ -70,14 +71,14 @@ const styles = StyleSheet.create({
     width: 30,
     height: 30,
   },
-  calendar: {
+  calendartext: {
     marginRight: '6%',
-    fontSize: '12px',
+    fontSize: 12,
     color: '#96989d',
   },
   week: { marginEnd: '5%', marginStart: '5%' },
   goal: {
-    fontSize: '15px',
+    fontSize: 15,
     marginBottom: '5%',
   },
 });
