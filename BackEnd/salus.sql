@@ -30,12 +30,13 @@ CREATE TABLE IF NOT EXISTS `attendance` (
   CONSTRAINT `fk_rfidkey` FOREIGN KEY (`rfidKey`) REFERENCES `user` (`rfidKey`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
--- 테이블 데이터 salus.attendance:~3 rows (대략적) 내보내기
+-- 테이블 데이터 salus.attendance:~4 rows (대략적) 내보내기
 /*!40000 ALTER TABLE `attendance` DISABLE KEYS */;
 INSERT INTO `attendance` (`rfidKey`, `dailyExcerciseStart`, `dailyExcerciseEnd`, `attendanceCheck`, `excerciseDay`, `firstRegist`, `updateRegist`) VALUES
-	(12341234, '2022-08-04 14:40:23', '2022-08-05 22:18:01', 0000, '2022-08-04', '2022-08-04 14:40:23', '2022-08-05 22:18:01'),
-	(12341234, '2022-08-05 13:53:46', '2022-08-05 22:18:01', 0000, '2022-08-05', '2022-08-05 13:53:46', '2022-08-05 22:18:01'),
-	(11111111, '2022-08-05 14:10:43', '2022-08-05 14:11:17', 0000, '2022-08-05', '2022-08-05 14:10:43', '2022-08-05 14:11:17');
+	(12341234, '2022-08-04 14:00:00', '2022-08-08 21:47:17', 0000, '2022-08-04', '2022-08-04 14:40:23', '2022-08-08 21:47:17'),
+	(12341234, '2022-08-05 14:00:00', '2022-08-08 21:47:17', 0000, '2022-08-05', '2022-08-05 13:53:46', '2022-08-08 21:47:17'),
+	(11111111, '2022-08-05 14:10:43', '2022-08-05 14:11:17', 0000, '2022-08-05', '2022-08-05 14:10:43', '2022-08-05 14:11:17'),
+	(12341234, '2022-08-08 11:00:00', '2022-08-08 21:47:17', 0000, '2022-08-08', '2022-08-08 09:48:20', '2022-08-08 21:47:17');
 /*!40000 ALTER TABLE `attendance` ENABLE KEYS */;
 
 -- 테이블 salus.board 구조 내보내기
@@ -73,14 +74,18 @@ CREATE TABLE IF NOT EXISTS `daily_excercise` (
   KEY `FK2_equipmentName` (`equipmentName`),
   KEY `FK_daily_excercise_user` (`rfidKey`),
   CONSTRAINT `FK_daily_excercise_user` FOREIGN KEY (`rfidKey`) REFERENCES `user` (`rfidKey`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=utf8mb4;
 
--- 테이블 데이터 salus.daily_excercise:~3 rows (대략적) 내보내기
+-- 테이블 데이터 salus.daily_excercise:~7 rows (대략적) 내보내기
 /*!40000 ALTER TABLE `daily_excercise` DISABLE KEYS */;
 INSERT INTO `daily_excercise` (`dailyExcerciseId`, `equipmentName`, `startTime`, `endTime`, `weightNow`, `countNow`, `excerciseDay`, `firstRegist`, `updateRegist`, `rfidKey`) VALUES
 	(1, '숄더프레스 머신', '2022-08-04 14:52:09', '2022-08-04 15:52:10', 100, 10, '2022-08-04', '2022-08-04 14:52:08', '2022-08-04 14:52:42', 12341234),
 	(2, '레그 컬 머신', '2022-08-04 14:52:52', '2022-08-04 15:52:53', 100, 10, '2022-08-04', '2022-08-04 14:52:50', '2022-08-05 14:08:53', 11111111),
-	(3, '레그 컬 머신', '2022-08-05 14:08:13', '2022-08-05 15:08:14', 100, 10, '2022-08-05', '2022-08-05 14:08:21', '2022-08-05 14:08:22', 12341234);
+	(3, '레그 컬 머신', '2022-08-05 14:08:13', '2022-08-05 15:08:14', 100, 10, '2022-08-05', '2022-08-05 14:08:21', '2022-08-05 14:08:22', 12341234),
+	(14, '레그 컬 머신', '2022-08-04 15:53:00', '2022-08-04 16:53:00', 150, 10, '2022-08-04', '2022-08-08 09:28:30', '2022-08-08 09:28:32', 12341234),
+	(15, '숄더프레스 머신', '2022-08-08 11:23:05', '2022-08-08 12:23:05', 100, 10, '2022-08-08', '2022-08-08 11:23:17', '2022-08-08 11:33:54', 12341234),
+	(17, '렛 풀다운 머신', '2022-08-08 12:06:25', '2022-08-08 13:06:25', 100, 10, '2022-08-08', '2022-08-08 12:06:36', '2022-08-08 13:11:50', 11111111),
+	(18, '레그 컬 머신', '2022-08-08 13:37:37', '2022-08-08 14:37:38', 100, 10, '2022-08-08', '2022-08-08 13:37:49', '2022-08-08 13:37:49', 12341234);
 /*!40000 ALTER TABLE `daily_excercise` ENABLE KEYS */;
 
 -- 테이블 salus.fitness_equipment 구조 내보내기

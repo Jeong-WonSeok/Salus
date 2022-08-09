@@ -71,7 +71,7 @@ const DailyData = async (req, res) => {
   // let result = {};
    const result = await conn.promise().query(query);
   
-  return res.json(result);
+  return res.json(result[0]);  
 
 };
 

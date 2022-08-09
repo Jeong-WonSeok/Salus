@@ -8,7 +8,7 @@
     ON d.equipmentName = e.equipmentName
     where d.rfidKey = #{rfidKey}
     and d.excerciseDay BETWEEN CONVERT( DATE_SUB(NOW(), INTERVAL 4 DAY), DATE ) and CONVERT(NOW(), DATE)
-    ORDER BY d.excerciseDay;
+    ORDER BY d.excerciseDay desc;
     SELECT ROUND(SUM(ABS(HOUR(TIMEDIFF(endtime, startTime)) * 60 )+ (second(TIMEDIFF(endtime, startTime)) + MINUTE(TIMEDIFF(endtime, startTime)) * 60) / 60)) AS "userTotalCategoryTime", e.equipmentCategory AS "excerciseCategory"from daily_excercise AS d 
     LEFT JOIN fitness_equipment AS e ON d.equipmentName = e.equipmentName 
     WHERE d.rfidKey = #{rfidKey}

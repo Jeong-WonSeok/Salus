@@ -1,6 +1,45 @@
 const conn = require("../../database/db");
 const mybatisMapper = require("mybatis-mapper");
 
+const rfidCheck = async (req, res) =>{
+  const param = {
+    rfidKey : req.params.rfidKey
+  };
+  const format = { language: "sql", indent: "" };
+  const query = mybatisMapper.getStatement(
+    "dailyexcercise",
+    "rfidCheck",
+    param,
+    format
+  );
+  const result = await conn.promise().query(query);
+  return result;
+};
+
+const updateIsStarted = async (req, res) =>{
+  const param = {
+    equipmentId : req.params.equipmentId
+  }
+  const format = { language: "sql", indent: "" };
+  const query = mybatisMapper.getStatement(
+    "dailyexcercise",
+    "isStarted",
+    param,
+    format
+  );
+  const result = await conn.promise().query(query);
+  if (result.length != 0){
+    const query2 = mybatisMapper.getStatement(
+      "dailyexcercise",
+      "returnRasp",
+      param,
+      format
+    );
+    const result2 = await conn.promise().query(query2);
+    return result2;
+  } else return "뭐 없음";
+};
+
 //현재 운동 측정 값 받아오기
 const excerciseData = async (req, res) => {
   // console.log(req.query)
@@ -53,4 +92,6 @@ const excerciseData = async (req, res) => {
 
 module.exports = {
   excerciseData,
+  rfidCheck,
+  updateIsStarted
 };
