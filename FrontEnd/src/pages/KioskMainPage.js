@@ -15,6 +15,10 @@ import ButtonComponent from './../components/Common/ButtonComponent';
 import setDailyDatas from '../components/Kiosk/KioskFuntions/setDailyDatas';
 import setDayData from '../components/Kiosk/KioskFuntions/setDayData';
 import styled from 'styled-components';
+import useHttp from './../customHooks/useHttp';
+import { useEffect } from 'react';
+import { useCallback } from 'react';
+import axios from 'axios'
 
 const HomeDiv = styled(Div)`
   position: absolute;
@@ -29,6 +33,19 @@ const GlobalStyle = createGlobalStyle`
 `;
 
 const KioskMainPage = () => {
+  const {loading, error, apiRequest} = useHttp();
+  const [equipmentData, setEquipmentData] = useState([]);
+  
+  const getEquipmentData = useCallback((data) => {
+    setEquipmentData(data)
+    console.log(data)
+  },[])
+
+  useEffect(() => {
+    // apiRequest({ uri: "http://i7b110.p.safy.io:3000/" }, getEquipmentData);
+    axios.get("http://i7b110.p.ssafy.io:3000/kiosk/login/12341234")
+    .then(res => console.log(res.data)).catch(err => console.log(err))
+  }, [apiRequest, getEquipmentData])
   const dummyData = [
     [
       {
@@ -159,7 +176,6 @@ const KioskMainPage = () => {
       },
     ],
   ];
-  const [datasHey, setDatasHey] = useState(dummyData[1]);
   // 페이지 전체에 보여줄 상태
   const [selectedDate, setSelectedDate] = useState('2022-07-28T15:00:00.000Z');
   const getData = (data) => {
@@ -172,11 +188,8 @@ const KioskMainPage = () => {
   };
   // Calender 내용
   const [value, setValue] = useState(moment());
-  const [events, setEvents] = useState(dummyData[1]);
   // 근육 한 운동 정보
   const dailyData = setDailyDatas(dummyData[0], selectedDate);
-  // 오늘의 기록 정보
-  const dayData = setDayData(dummyData[1], selectedDate);
   return (
     <Fragment>
       <GlobalStyle />
@@ -203,7 +216,7 @@ const KioskMainPage = () => {
         {isBoard ? (
           <Div mt={10}>
             <WeeklySummary
-              datas={datasHey}
+              datas={dummyData[1]}
               onChange={getData}
               date={selectedDate}
             />
@@ -211,7 +224,7 @@ const KioskMainPage = () => {
           </Div>
         ) : (
           <Div mt={10}>
-            <CalendarForm events={events} value={value} onChange={setValue} />
+            <CalendarForm events={dummyData[1]} value={value} onChange={setValue} />
           </Div>
         )}
       </CustomDiv>
