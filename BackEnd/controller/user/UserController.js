@@ -1,4 +1,4 @@
-const UserModel = require("../../model/user/userModel");
+const UserModel = require("../../model/user/UserModel");
 
 const allSearch = UserModel.selectAll;
 
