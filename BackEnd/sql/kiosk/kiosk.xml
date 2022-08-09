@@ -38,10 +38,15 @@ AND
         DATE_FORMAT((SELECT ADDDATE(NOW(), - WEEKDAY(NOW()) + 0 )), '%Y-%m-%d')
     AND
         DATE_FORMAT((SELECT ADDDATE(NOW(), - WEEKDAY(NOW()) + 6 )), '%Y-%m-%d');
-SELECT MONTH(NOW()) AS "month", equipmentName, if(excerciseDay BETWEEN CONVERT( DATE_SUB(NOW(), INTERVAL 4 DAY), DATE ) and CONVERT(NOW(), DATE) ,if(weightNow,SUM(weightNow * countNow),  ROUND((HOUR(TIMEDIFF(endtime, startTime)) * 60 )+ (second(TIMEDIFF(endtime, startTime)) + MINUTE(TIMEDIFF(endtime, startTime)) * 60) / 60)), null) AS "averageVolume"
+SELECT month(excerciseDay) AS "month", equipmentName, Round(if(weightNow, sum(weightNow * countNow),  SUM(ROUND((HOUR(TIMEDIFF(endtime, startTime)) * 60 )+ (second(TIMEDIFF(endtime, startTime)) + MINUTE(TIMEDIFF(endtime, startTime)) * 60) / 60))) / COUNT(*)) AS "averageVolume"
 FROM daily_excercise
-WHERE  MONTH(excerciseDay) = MONTH(NOW())
-GROUP BY equipmentName;
+WHERE equipmentName IN (
+	SELECT equipmentName FROM daily_excercise
+	 WHERE excerciseDay BETWEEN CONVERT( DATE_SUB(NOW(), INTERVAL 4 DAY), DATE ) and CONVERT(NOW(), DATE)
+) and rfidKey = ${rfidKey}
+AND MONTH(excerciseDay) BETWEEN MONTH(date_SUB(NOW(), INTERVAL 4 MONTH)) AND MONTH(NOW())
+GROUP BY equipmentName, MONTH(excerciseDay)
+ORDER BY MONTH(excerciseDay);
   </select>
   <select id="searchCalendarDailyData" >
      SELECT DATE_FORMAT(d.excerciseDay,'%y-%m-%d') as excerciseDay, d.equipmentName AS"excerciseName", e.equipmentEnglishName AS "excerciseEnglishName", ROUND((HOUR(TIMEDIFF(endtime, startTime)) * 60 )+ (second(TIMEDIFF(endtime, startTime)) + MINUTE(TIMEDIFF(endtime, startTime)) * 60) / 60) AS "excerciseTime", e.equipmentCategory AS "excerciseCategory", e.equipmentStimulate AS"excerciseStimulate", e.equipmentEnglishStimulate AS "excerciseEnglishStimulate", d.weightNow, d.countNow, (weightNow * countNow) AS "volume"  
