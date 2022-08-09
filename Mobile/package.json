@@ -21,6 +21,10 @@
 <<<<<<< HEAD
     "react-native-reanimated": "~2.8.0",
 =======
+<<<<<<< HEAD
+    "react-native-reanimated": "~2.8.0",
+=======
+>>>>>>> b075026765da2e22fe0243137adff3668ed39308
     "react-native-chart-kit": "^6.12.0",
 >>>>>>> 7bc4d249c93cb9037d03ce573a56130db80dbf56
     "react-native-safe-area-context": "4.2.4",
