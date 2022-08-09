@@ -21,8 +21,8 @@ const DateDiv = styled.div`
   color: #92a3fd;
 `;
 
-const StatsMuscle = ({ muscle, date }) => {
-  const user = { isMale: false, muscles: muscle };
+const StatsMuscle = ({ muscle, date, gender }) => {
+  const user = { isMale: gender, muscles: muscle };
   const history = moment(date).format('MM-DD');
   const days = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
   const diff = () => {
@@ -47,7 +47,6 @@ const StatsMuscle = ({ muscle, date }) => {
       alignItems="center"
     >
       {diff()}
-      {/* {console.log(user.muscles)} */}
       {user.isMale ? <MuscleMan muscles={user.muscles} /> : <MuscleWoman muscles={user.muscles} />}
     </CustomDiv>
   );

@@ -38,9 +38,7 @@ function DailySummary({ data, setValue, date }) {
     <Round
       className={date === data.excerciseDay ? 'selected' : ''}
       onClick={() => {
-        console.log(data.excerciseDay);
         setValue(data.excerciseDay);
-        console.log(date);
       }}
     >
       <Type>{data.excerciseCategory}</Type>

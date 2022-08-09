@@ -4,6 +4,7 @@ import ReactDOM from "react-dom";
 import styled, { keyframes } from "styled-components";
 import setChartData from "../LineChart/function/build";
 import LineChart from "../LineChart/LineChart";
+import { getMonthlyVolume } from './../../api-request/functions';
 
 const BackDropDiv = styled.div`
   position: fixed;
@@ -49,50 +50,8 @@ const Backdrop = (props) => {
 
 const ModalOverlay = (props) => {
   if (!props.open) return null;
-
-  const datas = [
-    {
-      month: "8",
-      totalCategoryTime: 100,
-      totalWeight: 50,
-      totalCount: 10,
-      excerciseCategory: "상체",
-      totalCalorie: 500,
-    },
-    {
-      month: "7",
-      totalCategoryTime: 100,
-      totalWeight: 70,
-      totalCount: 10,
-      excerciseCategory: "상체",
-      totalCalorie: 500,
-    },
-    {
-      month: "6",
-      totalCategoryTime: 110,
-      totalWeight: 100,
-      totalCount: 10,
-      excerciseCategory: "하체",
-      totalCalorie: 550,
-    },
-    {
-      month: "5",
-      totalCategoryTime: 80,
-      totalWeight: 20,
-      totalCount: 10,
-      excerciseCategory: "상체",
-      totalCalorie: 400,
-    },
-    {
-      month: "4",
-      totalCategoryTime: 220,
-      totalWeight: 150,
-      totalCount: 30,
-      excerciseCategory: "상체",
-      totalCalorie: 1100,
-    },
-  ];
-  const data = setChartData(datas);
+  const filteredData = getMonthlyVolume(props.chartData, props.title)
+  const data = setChartData(filteredData);
   return (
     <ModalDiv className="modal-active">
       <Img src={closeIcon} alt="" onClick={props.toggleModal} />
@@ -127,6 +86,7 @@ const ExerciseModal = (props) => {
       )}
       {ReactDOM.createPortal(
         <ModalOverlay
+          chartData = {props.chartData}
           toggleModal={props.toggleModal}
           open={props.open}
           title={props.title}

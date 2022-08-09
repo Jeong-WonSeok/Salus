@@ -12,7 +12,9 @@ const LabelsXAxis = ({
 
   return data.map((element, index) => {
     const x =
-      (element.x / maximumXFromData) * chartWidth + padding - FONT_SIZE / 2;
+      maximumXFromData ? (element.x / maximumXFromData) * chartWidth +
+      padding -
+      FONT_SIZE / 2 : padding-FONT_SIZE;
     return (
       <text
         key={index}

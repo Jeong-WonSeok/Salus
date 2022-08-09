@@ -12,7 +12,6 @@ const StatsDayInfo = ({
   time = "-",
   calorie = "-",
 }) => {
-  // console.log(volume, reps, time, calorie);
   return (
     <CustomDiv
       mt={20}
