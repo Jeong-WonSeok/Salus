@@ -25,6 +25,7 @@ const ButtonComponent = ({
   fontWeight = 600,
   fontSize = 20,
   fontColor = "white",
+  onClick = {}
 }) => {
   
   return (
@@ -36,6 +37,7 @@ const ButtonComponent = ({
         fontWeight={fontWeight}
         fontSize={fontSize}
         fontColor={fontColor}
+        onClick={onClick}
       >
         {buttonText}
       </Button>

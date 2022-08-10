@@ -18,6 +18,7 @@ import { useEffect } from "react";
 import { useCallback } from "react";
 import { ChartCalc } from "./../api-request/functions";
 import LoadingText from "./../components/Kiosk/LoadingText";
+import { useNavigate } from 'react-router-dom';
 
 const HomeDiv = styled(Div)`
   position: absolute;
@@ -38,7 +39,12 @@ const KioskMainPage = () => {
   const [selectedDate, setSelectedDate] = useState(moment().format("YY-MM-DD"));
   const [value, setValue] = useState(moment());
   const [loading, setLoading] = useState(true);
-  const [rfidKey, setRfidKey] = useState({});
+  const navigate = useNavigate();
+  const removeRFID = () => {
+    localStorage.removeItem('RFID')
+    navigate("/kiosk/login");
+  }
+
   const getEquipmentData = useCallback((data) => {
     setEquipmentData(data);
     setLoading(false);
@@ -48,7 +54,7 @@ const KioskMainPage = () => {
     // console.log(localStorage.getItem("RFID"));
     apiRequest(
       {
-        url: `http://i7b110.p.ssafy.io:3000/kiosk/login/${localStorage.getItem("RFID")}`,
+        url: `http://i7b110.p.ssafy.io:3010/kiosk/login/${localStorage.getItem("RFID")}`,
       },
       getEquipmentData
     );
@@ -123,6 +129,7 @@ const KioskMainPage = () => {
               buttonText="홈"
               buttonWidth="35vw"
               buttonHeight="3vh"
+              onClick={removeRFID}
             />
           </HomeDiv>
         </Fragment>
