@@ -29,4 +29,12 @@
     and rfidKey = #{rfidKey}
     </update>
 
+    <update id="isStarted">
+    UPDATE fitness_equipment SET isStarted = IF(isStarted=0,1,0) WHERE equipmentId = #{equipmentId};
+    </update>
+
+    <select id="returnRasp">
+    SELECT equipmentId, equipmentName, isStarted FROM fitness_equipment WHERE equipmentId = #{equipmentId};
+    </select>
+
 </mapper>
