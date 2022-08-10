@@ -6,12 +6,13 @@ module.exports = (server) => {
     const io = SocketIO(server, {path: '/socket.io'});
 
     io.on('connection', async (socket) => {
-        socket.on('equpmentdata', async (data) => {
+        socket.on('equipmentdata', async (data) => {
+		console.log(data);
             const test = await exModel.updateIsStarted( {
-                params : { equipmentId : data }
+                params : { equipmentId : data.equipmentId }
             })
-            console.log(test[0]);
-            socket.emit('equipmentRfidRecieved', test[0]);
+            console.log(test[0][0]);
+            socket.emit('equipmentRfidRecieved', test[0][0]);
         })
     });
 }
