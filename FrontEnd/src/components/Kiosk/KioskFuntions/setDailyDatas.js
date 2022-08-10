@@ -1,6 +1,6 @@
 const setDailyDatas = (data, date, type) => {
   const useMuscle = new Set();
-  const dailyData = new Array();
+  const dailyData = [];
   for (const excercise of data) {
     if (excercise.excerciseDay === date) {
       dailyData.push({
@@ -8,9 +8,15 @@ const setDailyDatas = (data, date, type) => {
         volume: excercise.weightNow * excercise.countNow,
         reps: excercise.countNow,
       });
-      useMuscle.add(excercise.excerciseEnglishStimulate.split(', '));
+      useMuscle.add(excercise.excerciseEnglishStimulate.split(", "));
     }
   }
-  return [Array.from(useMuscle)[0], dailyData];
+  const newArr = new Set();
+  for (const arr of useMuscle) {
+    if (arr[0]) {
+      newArr.add(...arr);
+    }
+  }
+  return [Array.from(newArr), dailyData];
 };
 export default setDailyDatas;

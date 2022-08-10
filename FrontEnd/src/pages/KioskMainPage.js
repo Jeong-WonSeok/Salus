@@ -35,7 +35,7 @@ const KioskMainPage = () => {
   const { apiRequest } = useHttp();
   const [equipmentData, setEquipmentData] = useState();
   const [isBoard, setIsBoard] = useState(true);
-  const [selectedDate, setSelectedDate] = useState("22-08-08");
+  const [selectedDate, setSelectedDate] = useState(moment().format('YY-MM-DD'));
   const [value, setValue] = useState(moment());
   const [loading, setLoading] = useState(true);
   const getEquipmentData = useCallback((data) => {
@@ -108,7 +108,7 @@ const KioskMainPage = () => {
             ) : (
               <Div mt={10}>
                 <CalendarForm
-                  events={setDailyDatas(equipmentData[0], selectedDate)[1]}
+                  events={equipmentData[0]}
                   value={value}
                   onChange={setValue}
                 />

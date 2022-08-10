@@ -23,13 +23,14 @@ const DateDiv = styled.div`
 
 const StatsMuscle = ({ muscle, date, gender }) => {
   const user = { isMale: gender, muscles: muscle };
-  const history = moment(date).format('MM-DD');
+  const history = date.slice(3, 8) //22-08-10
   const days = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+  console.log(muscle)
   const diff = () => {
     for (const day of days) {
       if (moment().subtract(day, 'day').format('MM-DD') === history) {
         if (day === 0) {
-          return <DateDiv>'오늘'</DateDiv>;
+          return <DateDiv>오늘</DateDiv>;
         } else return <DateDiv>{day}일 전</DateDiv>;
       }
     }

@@ -77,7 +77,7 @@ export const ChartCalc = (userInfo, totalInfo, timeTotal) => {
 //5일치 없는 날짜의 데이터 처리하는 함수
 export const WeekData = (datas) => {
   const arrWeekly = [];
-  for (let i = 1; i < 6; i++) {
+  for (let i = 0; i < 5; i++) {
     arrWeekly.push({
       excerciseDay: moment().subtract(i, "day").format("YY-MM-DD").toString(),
       excerciseCategory: "-",

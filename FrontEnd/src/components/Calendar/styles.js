@@ -21,6 +21,7 @@ function isToday(day) {
 
 function isEvent(day, events) {
   for (const iterator of events) {
+    console.log(moment(iterator.excerciseDay));
     if (day.isSame(moment(iterator.excerciseDay), "day")) {
       return iterator;
     }

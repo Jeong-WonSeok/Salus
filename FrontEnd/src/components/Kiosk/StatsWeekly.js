@@ -80,7 +80,7 @@ const StatsWeekly = ({ratioData}) => {
           >
             <Div displayDiv="flex" flexDirection="column" alignItems="center">
               <Div fontSize="1.5rem">상체</Div>
-              <Div fontSize="3rem">{ratioData[1] * 100}</Div>
+              <Div fontSize="3rem">{parseInt(ratioData[1] * 100)}</Div>
               <Div fontSize="1rem">%</Div>
             </Div>
           </RoundChart>
@@ -98,7 +98,7 @@ const StatsWeekly = ({ratioData}) => {
           >
             <Div displayDiv="flex" flexDirection="column" alignItems="center">
               <Div fontSize="1.5rem">하체</Div>
-              <Div fontSize="3rem">{ratioData[2] * 100}</Div>
+              <Div fontSize="3rem">{parseInt(ratioData[2] * 100)}</Div>
               <Div fontSize="1rem">%</Div>
             </Div>
           </RoundChart>
