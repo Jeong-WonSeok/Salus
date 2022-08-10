@@ -1,21 +1,6 @@
 const conn = require("../../database/db");
 const mybatisMapper = require("mybatis-mapper");
 
-const rfidCheck = async (req, res) =>{
-  const param = {
-    rfidKey : req.params.rfidKey
-  };
-  const format = { language: "sql", indent: "" };
-  const query = mybatisMapper.getStatement(
-    "dailyexcercise",
-    "rfidCheck",
-    param,
-    format
-  );
-  const result = await conn.promise().query(query);
-  return result;
-};
-
 const updateIsStarted = async (req, res) =>{
   const param = {
     equipmentId : req.params.equipmentId
@@ -92,6 +77,5 @@ const excerciseData = async (req, res) => {
 
 module.exports = {
   excerciseData,
-  rfidCheck,
   updateIsStarted
 };

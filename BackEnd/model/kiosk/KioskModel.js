@@ -17,6 +17,7 @@ const searchUser = async (req, res) => {
     console.log(results);
     if (results.length === 0) {
       console.log("유저 데이터 없음");
+      return results;
     } else {
       const query2 = mybatisMapper.getStatement(
         "kiosk",
@@ -75,24 +76,6 @@ const DailyData = async (req, res) => {
 
 };
 
-const calendarData = async (req, res) => {
-  var param = {
-    rfidKey: req.params.rfidKey,
-  };
-  const format = { language: "sql", indent: "" };
-  const query = mybatisMapper.getStatement(
-    "kiosk",
-    "searchCalendarDailyData",
-    param,
-    format
-  );
-  conn.query(query, (err, results) => {
-    if (err) console.log(err);
-    console.log(results);
-    return res.json(results);
-  });
-};
-
 const equipmentMonthData = async(req, res) =>{
   var param = {
     equipmentName : req.params.equipmentName
@@ -115,6 +98,5 @@ const equipmentMonthData = async(req, res) =>{
 module.exports = {
   DailyData,
   searchUser,
-  calendarData,
   equipmentMonthData
 };

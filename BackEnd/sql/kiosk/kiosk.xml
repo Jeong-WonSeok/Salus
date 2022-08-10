@@ -43,25 +43,16 @@ FROM daily_excercise
 WHERE equipmentName IN (
 	SELECT equipmentName FROM daily_excercise
 	 WHERE excerciseDay BETWEEN CONVERT( DATE_SUB(NOW(), INTERVAL 4 DAY), DATE ) and CONVERT(NOW(), DATE)
-) and rfidKey = ${rfidKey}
-AND MONTH(excerciseDay) BETWEEN MONTH(date_SUB(NOW(), INTERVAL 4 MONTH)) AND MONTH(NOW())
+) and rfidKey = #{rfidKey}
+AND MONTH(excerciseDay) BETWEEN MONTH(DATE_SUB(NOW(), INTERVAL 4 MONTH)) AND MONTH(NOW())
 GROUP BY equipmentName, MONTH(excerciseDay)
 ORDER BY MONTH(excerciseDay);
-  </select>
-  <select id="searchCalendarDailyData" >
-     SELECT DATE_FORMAT(d.excerciseDay,'%y-%m-%d') as excerciseDay, d.equipmentName AS"excerciseName", e.equipmentEnglishName AS "excerciseEnglishName", ROUND((HOUR(TIMEDIFF(endtime, startTime)) * 60 )+ (second(TIMEDIFF(endtime, startTime)) + MINUTE(TIMEDIFF(endtime, startTime)) * 60) / 60) AS "excerciseTime", e.equipmentCategory AS "excerciseCategory", e.equipmentStimulate AS"excerciseStimulate", e.equipmentEnglishStimulate AS "excerciseEnglishStimulate", d.weightNow, d.countNow, (weightNow * countNow) AS "volume"  
-     FROM daily_excercise AS d
-     INNER JOIN fitness_equipment AS e
-    ON d.equipmentName = e.equipmentName
-    where d.rfidKey = #{rfidKey}
-    and MONTH(d.excerciseDay) = MONTH(NOW())
-    ORDER BY d.excerciseDay;
-    SELECT DATE_FORMAT(d.excerciseDay,'%y-%m-%d') as excerciseDay, ROUND(SUM(ABS(HOUR(TIMEDIFF(endtime, startTime)) * 60 )+ (second(TIMEDIFF(endtime, startTime)) + MINUTE(TIMEDIFF(endtime, startTime)) * 60) / 60)) AS "totalCategoryTime", sum(weightNow) AS "totalWeight", sum(countNow) AS"totalCount", e.equipmentCategory AS "excerciseCategory", (SUM(weightNow) * SUM(countNow)) AS "totalVolume" from daily_excercise AS d 
+SELECT DATE_FORMAT(d.excerciseDay,'%y-%m-%d') as "excerciseDay", e.equipmentCategory AS "excerciseCategory"from daily_excercise AS d 
     LEFT JOIN fitness_equipment AS e ON d.equipmentName = e.equipmentName 
-    WHERE d.rfidKey = #{rfidKey}
-    AND MONTH(d.excerciseDay) = MONTH(NOW())
-    GROUP BY d.excerciseDay, e.equipmentCategory
-    ORDER BY d.excerciseDay;
+    where
+    MONTH(d.excerciseDay) = MONTH(NOW())
+    AND d.rfidKey = #{rfidKey}
+    GROUP BY d.excerciseDay;
   </select>
   <select id="equipMonthData">
   SELECT (weightNow * countNow) AS "volume", DATE_FORMAT(excerciseDay,'%y-%m-%d') AS "excerciseDay" FROM daily_excercise
