@@ -43,7 +43,7 @@ const KioskLoginPage = () => {
   };
 
   useEffect(() => {
-    const socket = io.connect("i7b110.p.ssafy.io:3000");
+    const socket = io.connect("i7b110.p.ssafy.io:3010");
     socket.on("RFIDcheck", (data) => {
       console.log(data);
       localStorage.setItem('RFID', JSON.stringify(data))
