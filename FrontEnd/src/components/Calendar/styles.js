@@ -1,5 +1,3 @@
-import moment from "moment";
-
 function isSelected(day, value) {
   return value.isSame(day, "day");
 }
@@ -21,8 +19,8 @@ function isToday(day) {
 
 function isEvent(day, events) {
   for (const iterator of events) {
-    console.log(moment(iterator.excerciseDay));
-    if (day.isSame(moment(iterator.excerciseDay), "day")) {
+
+    if (day.format("YY-MM-DD") === iterator.excerciseDay) {
       return iterator;
     }
   }
@@ -33,8 +31,6 @@ function dayStyles(day, value, events) {
   if (event) {
     return {
       style: "events",
-      volume: event.totalWeight,
-      calorie: event.totalCalorie,
       type: event.excerciseCategory,
     };
   }

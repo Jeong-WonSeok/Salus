@@ -56,63 +56,68 @@ const MuscleWoman = () => {
         width={screenWidth}
         height={screenHeight / 2}
       >
-        <Parts source={traps_a} top="-20.5%" left="0.97%" scale="scale(0.05)" />
-        <Parts source={traps_b} top="-20.5%" left="8.8%" scale="scale(0.05)" />
+        <Parts
+          source={traps_a}
+          top={-78.3}
+          left={3.7}
+          resizeMode="contain"
+          scale="scale(0.051)"
+        />
+        <Parts
+          source={traps_b}
+          top={-78.1}
+          left={31.8}
+          resizeMode="contain"
+          scale="scale(0.05)"
+        />
         <Parts
           source={shoulders_a}
-          top="-26.3%"
-          left="-6.69%"
-          width="95%"
-          height="100%"
-          scale="scale(0.074)"
+          top={-62}
+          left={-15}
+          resizeMode="contain"
+          scale="scale(0.09)"
         />
         <Parts
           source={shoulders_b}
-          top="-26.35%"
-          left="11.6%"
-          width="95%"
-          height="100%"
-          scale="scale(0.072)"
+          top={-62}
+          left={51}
+          resizeMode="contain"
+          scale="scale(0.09)"
         />
         <Parts
           source={pecs}
-          top="0.65%"
-          left="0%"
-          width="100%"
-          height="50%"
-          scale="scale(0.171)"
+          top={-54.5}
+          left={18}
+          resizeMode="contain"
+          scale="scale(0.185)"
         />
         <Parts
           source={biceps_a}
-          top="-29.28%"
-          left="3.02%"
-          width="72%"
-          height="120%"
-          scale="scale(0.0745)"
+          top={-35.3}
+          left={-21.7}
+          resizeMode="contain"
+          scale="scale(0.114)"
         />
         <Parts
           source={biceps_b}
-          top="-29.28%"
-          left="24.92%"
-          width="72%"
-          height="120%"
-          scale="scale(0.0745)"
+          top={-35.3}
+          left={56.9}
+          resizeMode="contain"
+          scale="scale(0.114)"
         />
         <Parts
           source={forearm_a}
-          top="-9%"
-          left="6.35%"
-          width="58%"
-          height="100%"
-          scale="scale(0.14)"
+          top={3.64}
+          left={-34.7}
+          resizeMode="contain"
+          scale="scale(0.176)"
         />
         <Parts
           source={forearm_b}
-          top="-9.1%"
-          left="35.45%"
-          width="58%"
-          height="100%"
-          scale="scale(0.14)"
+          top={3.63}
+          left={70.1}
+          resizeMode="contain"
+          scale="scale(0.175)"
         />
         <Parts
           source={obliques}

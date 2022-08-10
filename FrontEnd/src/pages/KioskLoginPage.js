@@ -37,21 +37,22 @@ const StyledDiv = styled.div`
 
 const KioskLoginPage = () => {
   const [func, setFunc] = useState(false);
+  const [Newsocket, setSocket] = useState();
   const newFunc = () => {
     setFunc((state) => !state);
   };
 
-  const socket = io.connect("i7b110.p.ssafy.io:3000", {
-    transports: ["websocket"],
-  });
   useEffect(() => {
-    socket.on("equipmentdata", (data) => {
+    const socket = io.connect("i7b110.p.ssafy.io:3000");
+    socket.on("RFIDcheck", (data) => {
       console.log(data);
+      localStorage.setItem('RFID', JSON.stringify(data))
+      setTimeout(() => setFunc(true), 2000);
     });
     return () => {
       socket.disconnect();
     };
-  }, [socket]);
+  }, []);
 
   return (
     <Fragment>
@@ -59,7 +60,8 @@ const KioskLoginPage = () => {
       <Div>
         <Img src={logo} alt="logoimg" />
         <StyledDiv onClick={newFunc}>
-          {func ? <Navigate to="/kiosk" /> : null} 키를 통해 로그인해주세요.
+          {func ? <Navigate to="/kiosk/" /> : null} 키를 통해
+          로그인해주세요.
         </StyledDiv>
       </Div>
     </Fragment>

@@ -16,8 +16,8 @@ import styled from "styled-components";
 import useHttp from "./../customHooks/useHttp";
 import { useEffect } from "react";
 import { useCallback } from "react";
-import { ChartCalc } from './../api-request/functions';
-import LoadingText from './../components/Kiosk/LoadingText';
+import { ChartCalc } from "./../api-request/functions";
+import LoadingText from "./../components/Kiosk/LoadingText";
 
 const HomeDiv = styled(Div)`
   position: absolute;
@@ -35,18 +35,21 @@ const KioskMainPage = () => {
   const { apiRequest } = useHttp();
   const [equipmentData, setEquipmentData] = useState();
   const [isBoard, setIsBoard] = useState(true);
-  const [selectedDate, setSelectedDate] = useState(moment().format('YY-MM-DD'));
+  const [selectedDate, setSelectedDate] = useState(moment().format("YY-MM-DD"));
   const [value, setValue] = useState(moment());
   const [loading, setLoading] = useState(true);
+  const [rfidKey, setRfidKey] = useState({});
   const getEquipmentData = useCallback((data) => {
     setEquipmentData(data);
     setLoading(false);
   }, []);
   //데이터 요청보내는 로직
   useEffect(() => {
-    
+    // console.log(localStorage.getItem("RFID"));
     apiRequest(
-      { url: "http://i7b110.p.ssafy.io:3000/kiosk/login/12341234" },
+      {
+        url: `http://i7b110.p.ssafy.io:3000/kiosk/login/${localStorage.getItem("RFID")}`,
+      },
       getEquipmentData
     );
   }, [apiRequest, getEquipmentData]);
@@ -108,7 +111,7 @@ const KioskMainPage = () => {
             ) : (
               <Div mt={10}>
                 <CalendarForm
-                  events={equipmentData[0]}
+                  events={equipmentData[5]}
                   value={value}
                   onChange={setValue}
                 />
@@ -123,7 +126,9 @@ const KioskMainPage = () => {
             />
           </HomeDiv>
         </Fragment>
-      ): <LoadingText/>}
+      ) : (
+        <LoadingText />
+      )}
     </Fragment>
   );
 };
