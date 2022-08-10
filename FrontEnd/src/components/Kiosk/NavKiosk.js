@@ -1,10 +1,19 @@
-import React from 'react'
+import { useState, useEffect } from 'react';
+import { LogoDiv, Div } from '../../styles/kiosk.style';
+import moment from 'moment';
+import styled from 'styled-components';
+import logoMain from './../../assets/images/logo/logo-main.png'
 
-import moment from "moment";
-import { useState } from "react";
-import { useEffect } from "react";
-import { LogoDiv } from '../../styles/kiosk.style';
-import { Div } from '../../styles/kiosk.style';
+const NavDiv = styled(Div)`
+  font-family: 'Pretendard-Regular';
+  font-varint: tabular-nums;
+`;
+
+const Img = styled.img`
+  margin-left: 5%;
+  height: 80%;
+  margin-top: 2%;
+`
 
 const NavKiosk = () => {
   const [time, setTime] = useState(moment());
@@ -12,7 +21,7 @@ const NavKiosk = () => {
   useEffect(() => {
     let timer = setInterval(() => {
       setTime(moment());
-    }, 30000);
+    }, 5000);
 
     return () => {
       clearInterval(timer);
@@ -21,10 +30,18 @@ const NavKiosk = () => {
 
   return (
     <Div displayDiv="flex" justifyContent="space-between">
-      <LogoDiv ml={20} fontSize="5.5rem">Salus</LogoDiv>
-      <Div mt={30} mr={40} fontSize="3rem">
-        {time.format("YYYY-MM-DD HH:mm")}
-      </Div>
+      {/* <LogoDiv ml={30} fontSize="5.5rem">
+        Salus
+      </LogoDiv> */}
+      <Img src={logoMain} alt=""/>
+      <NavDiv displayDiv="flex" mr={40} mt={40}>
+        <Div fontSize="2.5rem" mr={15} mt={10}>
+          {time.format('YYYY년 MM월 DD일')}
+        </Div>
+        <Div fontSize="3rem" fontWeight="bold">
+          {time.format('HH : mm')}
+        </Div>
+      </NavDiv>
     </Div>
   );
 };

@@ -1,7 +1,8 @@
 // 기본 div 로직
-import styled from "styled-components";
+import styled from 'styled-components';
 
 export const Div = styled.div`
+  margin: ${(props) => (props.m ? props.m : "0px")};
   margin-bottom: ${(props) =>
     props.mb ? (props.mb / 1920) * 100 + "vh" : "0px"};
   margin-top: ${(props) => (props.mt ? (props.mt / 1920) * 100 + "vh" : "0px")};
@@ -30,11 +31,11 @@ export const Div = styled.div`
 
 //기본 Div를 상속받아 오버라이딩한 스타일
 export const LogoDiv = styled(Div)`
-  font-family: "Noto Sans";
+  font-family: 'Noto Sans';
   font-style: normal;
   font-weight: ${(props) => (props.fontWeight ? props.fontWeight : 700)};
-  font-size: ${(props) => (props.fontSize ? props.fontSize : "100px")};
-  line-height: ${(props) => (props.lineHeight ? props.lineHeight : "")};
+  font-size: ${(props) => (props.fontSize ? props.fontSize : '100px')};
+  line-height: ${(props) => (props.lineHeight ? props.lineHeight : '')};
   display: flex;
   align-items: center;
   text-align: center;
@@ -46,8 +47,8 @@ export const LogoDiv = styled(Div)`
 `;
 // 기본 Div를 상속받아 크기를 조절할 수 있는 스타일
 export const CustomDiv = styled(Div)`
-  width: ${(props) => props.divWidth / 1080 * 100 + "vw"};
-  height: ${(props) => props.divHeight / 1920 * 100 + "vh"};
+  width: ${(props) => (props.divWidth / 1080) * 100 + 'vw'};
+  height: ${(props) => (props.divHeight / 1920) * 100 + 'vh'};
 `;
 
 export const DailyLogoDiv = styled(LogoDiv)`

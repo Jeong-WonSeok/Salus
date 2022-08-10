@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-import kakao from '../../assets/images/kakao.png';
+import kakao from '../../assets/images/sociallogin/kakao.png';
 
 const Div = styled.div`
   width: 50px;
@@ -8,6 +8,7 @@ const Div = styled.div`
   border: 0.8px solid #edeef4;
   border-radius: 8px;
   margin: 1rem;
+  cursor: pointer;
 `;
 
 const Kakao = () => {

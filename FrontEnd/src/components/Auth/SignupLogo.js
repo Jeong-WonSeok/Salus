@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
-import logo from '../../assets/images/logo.png';
-import slogan from '../../assets/images/slogan.png';
+import logo from '../../assets/images/logo/logo.png';
+import slogan from '../../assets/images/logo/slogan.png';
 
 const Logo = styled.div`
   width: 462px;

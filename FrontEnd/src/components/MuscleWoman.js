@@ -33,10 +33,8 @@ import back_calves_a from '../assets/images/muscle/woman/29.png';
 import back_calves_b from '../assets/images/muscle/woman/30.png';
 
 const Musclemap = styled.div`
-  position: fixed;
-  left: -5vw;
-  top: 8vh;
-  width: 75vw;
+  position: relative;
+  width: 98vw;
 `;
 
 const Background = styled.img`
@@ -50,9 +48,15 @@ const MuscleImg = styled.img`
   top: ${(props) => props.top};
   left: ${(props) => props.left};
   width: ${(props) => props.width};
+  transition: 0.25s ease-in;
 `;
 
 const MuscleWoman = (props) => {
+  if (!props.muscles) { return (
+    <Musclemap>
+      <Background src={background} alt="background" />
+    </Musclemap>
+  ); }
   return (
     <Musclemap>
       <Background src={background} alt="background" />
@@ -172,7 +176,7 @@ const MuscleWoman = (props) => {
         src={back_traps_a}
         alt="back_traps_a"
         opacity={props.muscles.includes('traps') ? '1' : '0'}
-        top="20.53%"
+        top="19.5%"
         left="66.36%"
         width="7.47%"
       />

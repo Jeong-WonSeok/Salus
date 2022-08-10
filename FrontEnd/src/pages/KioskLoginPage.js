@@ -1,7 +1,8 @@
-import { Fragment } from 'react';
-import styled, { createGlobalStyle } from 'styled-components';
-
-import logo from '../assets/images/biglogo.png';
+import { Fragment, useEffect, useState } from "react";
+import styled, { createGlobalStyle } from "styled-components";
+import logo from "../assets/images/logo/bglogo8.png";
+import io from "socket.io-client";
+import { Navigate } from "react-router";
 
 const GlobalStyle = createGlobalStyle`
   body {
@@ -35,12 +36,33 @@ const StyledDiv = styled.div`
 `;
 
 const KioskLoginPage = () => {
+  const [func, setFunc] = useState(false);
+  const [Newsocket, setSocket] = useState();
+  const newFunc = () => {
+    setFunc((state) => !state);
+  };
+
+  useEffect(() => {
+    const socket = io.connect("i7b110.p.ssafy.io:3000");
+    socket.on("RFIDcheck", (data) => {
+      console.log(data);
+      localStorage.setItem('RFID', JSON.stringify(data))
+      setTimeout(() => setFunc(true), 2000);
+    });
+    return () => {
+      socket.disconnect();
+    };
+  }, []);
+
   return (
     <Fragment>
       <GlobalStyle />
       <Div>
         <Img src={logo} alt="logoimg" />
-        <StyledDiv>키를 통해 로그인해주세요.</StyledDiv>
+        <StyledDiv onClick={newFunc}>
+          {func ? <Navigate to="/kiosk/" /> : null} 키를 통해
+          로그인해주세요.
+        </StyledDiv>
       </Div>
     </Fragment>
   );

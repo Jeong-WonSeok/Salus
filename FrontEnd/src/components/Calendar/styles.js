@@ -1,5 +1,3 @@
-import moment from "moment";
-
 function isSelected(day, value) {
   return value.isSame(day, "day");
 }
@@ -21,7 +19,8 @@ function isToday(day) {
 
 function isEvent(day, events) {
   for (const iterator of events) {
-    if (day.isSame(moment(iterator.date), "day")) {
+
+    if (day.format("YY-MM-DD") === iterator.excerciseDay) {
       return iterator;
     }
   }
@@ -29,16 +28,14 @@ function isEvent(day, events) {
 
 function dayStyles(day, value, events) {
   const event = isEvent(day, events);
-  if (isToday(day)) {
-    return { style: "today" };
-  }
   if (event) {
     return {
       style: "events",
-      volume: event.volume,
-      calorie: event.calorie,
-      type: event.type,
+      type: event.excerciseCategory,
     };
+  }
+  if (isToday(day)) {
+    return { style: "today" };
   }
   if (beforeMonth(day, value)) return { style: "before" };
   if (afterMonth(day, value)) return { style: "before" };

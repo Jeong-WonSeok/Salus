@@ -1,6 +1,7 @@
-import React from "react";
-import DailySummary from "./DailySummary";
-import styled from "styled-components";
+import React from 'react';
+import DailySummary from './DailySummary';
+import styled from 'styled-components';
+import { WeekData } from '../../api-request/functions';
 
 const Container = styled.div`
   width: 93vw;
@@ -9,6 +10,7 @@ const Container = styled.div`
   margin: 0 auto;
   border-radius: 8px;
   color: #443b46;
+  font-family: 'Pretendard-Regular';
 `;
 
 const Header = styled.div`
@@ -33,17 +35,19 @@ const Icon = styled.div`
   margin: 0 auto;
 `;
 
-function WeeklySummary({ datas, onChange }) {
+function WeeklySummary({ datas, onChange, date }) {
+  const weeklyData = WeekData(datas)
   return (
     <Container>
       <Header>
-        {["오늘", "1일 전", "2일 전", "3일 전", "4일 전"].map((day, index) => {
+        {['오늘', '1일 전', '2일 전', '3일 전', '4일 전'].map((day, index) => {
           return <Day key={index}>{day}</Day>;
         })}
       </Header>
       <Icon>
-        {datas.map((data, index) => {
-          return <DailySummary data={data} key={index} setValue={onChange} />;
+        
+        {weeklyData.map((data, index) => {
+          return <DailySummary data={data} key={index} setValue={onChange} date={date} />;
         })}
       </Icon>
     </Container>

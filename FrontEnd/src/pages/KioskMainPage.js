@@ -3,7 +3,6 @@ import { CustomDiv } from "../styles/kiosk.style";
 import StatsWeekly from "../components/Kiosk/StatsWeekly";
 import StatsMuscle from "./../components/Kiosk/StatsMuscle";
 import NavKiosk from "./../components/Kiosk/NavKiosk";
-import StatsDayInfo from "./../components/Kiosk/StatsDayInfo";
 import SelectBoardView from "../components/Kiosk/SelectBoardView";
 import WeeklySummary from "./../components/Kiosk/WeeklySummary";
 import Exercise from "../components/Kiosk/Exercise";
@@ -12,6 +11,19 @@ import { Div } from "./../styles/kiosk.style";
 import CalendarForm from "./../components/Calendar/CalendarForm";
 import moment from "moment";
 import ButtonComponent from "./../components/Common/ButtonComponent";
+import setDailyDatas from "../components/Kiosk/KioskFuntions/setDailyDatas";
+import styled from "styled-components";
+import useHttp from "./../customHooks/useHttp";
+import { useEffect } from "react";
+import { useCallback } from "react";
+import { ChartCalc } from "./../api-request/functions";
+import LoadingText from "./../components/Kiosk/LoadingText";
+
+const HomeDiv = styled(Div)`
+  position: absolute;
+  bottom: 5%;
+  left: 32%;
+`;
 
 const GlobalStyle = createGlobalStyle`
   body {
@@ -20,83 +32,103 @@ const GlobalStyle = createGlobalStyle`
 `;
 
 const KioskMainPage = () => {
-  const [datasHey, setdatasHey] = useState([
-    { day: "2022-7-28", type: "하체", calorie: "200", volume: "100" },
-    { day: "2022-7-27", type: "", calorie: "200", volume: "100" },
-    { day: "2022-7-26", type: "전신", calorie: "2010", volume: "1200" },
-    { day: "2022-7-25", type: "하체", calorie: "200", volume: "100" },
-    { day: "2022-7-24", type: "하체", calorie: "200", volume: "100" },
-  ]);
-  // 페이지 전체에 보여줄 상태
-  const [kioskData, setKioskData] = useState("");
-  const getData = (data) => {
-    setKioskData(data);
-  };
-  const exercise = [
-    { title: "숄더프레스1", volume: "1000", reps: "125" },
-    { title: "레그프레스1", volume: "500", reps: "200" },
-    { title: "숄더프레스2", volume: "1000", reps: "125" },
-    { title: "레그프레스2", volume: "500", reps: "200" },
-    { title: "숄더프레스3", volume: "1000", reps: "125" },
-    { title: "레그프레스3", volume: "500", reps: "200" },
-    { title: "숄더프레스4", volume: "1000", reps: "125" },
-    { title: "레그프레스4", volume: "500", reps: "200" },
-  ];
-  // Boad / Calender 선택
+  const { apiRequest } = useHttp();
+  const [equipmentData, setEquipmentData] = useState();
   const [isBoard, setIsBoard] = useState(true);
+  const [selectedDate, setSelectedDate] = useState(moment().format("YY-MM-DD"));
+  const [value, setValue] = useState(moment());
+  const [loading, setLoading] = useState(true);
+  const [rfidKey, setRfidKey] = useState({});
+  const getEquipmentData = useCallback((data) => {
+    setEquipmentData(data);
+    setLoading(false);
+  }, []);
+  //데이터 요청보내는 로직
+  useEffect(() => {
+    // console.log(localStorage.getItem("RFID"));
+    apiRequest(
+      {
+        url: `http://i7b110.p.ssafy.io:3000/kiosk/login/${localStorage.getItem("RFID")}`,
+      },
+      getEquipmentData
+    );
+  }, [apiRequest, getEquipmentData]);
+
+  // Boad / Calender 선택
   const saveBoadHandler = (data) => {
     setIsBoard(data);
   };
+  // 페이지 전체에 보여줄 상태
+  const getData = (data) => {
+    setSelectedDate(data);
+  };
+
   // Calender 내용
-  const [value, setValue] = useState(moment());
-  const [events, setEvents] = useState([
-    { date: "2022-07-20", calorie: 1000, volume: 800, type: "상체" },
-    { date: "2022-07-23", calorie: 1000, volume: 800, type: "하체" },
-    { date: "2022-07-19", calorie: 1000, volume: 800, type: "유산소" },
-    { date: "2022-07-05", calorie: 1000, volume: 800, type: "상체" },
-    { date: "2022-07-15", calorie: 1000, volume: 800, type: "하체" },
-    { date: "2022-07-08", calorie: 1000, volume: 800, type: "하체" },
-    { date: "2022-07-01", calorie: 1000, volume: 800, type: "유산소" },
-    { date: "2022-07-26", calorie: 1000, volume: 800, type: "유산소" },
-    { date: "2022-07-07", calorie: 1000, volume: 800, type: "상체" },
-    { date: "2022-07-12", calorie: 1000, volume: 800, type: "하체" },
-    { date: "2022-07-14", calorie: 1000, volume: 800, type: "유산소" },
-  ]);
+
   return (
     <Fragment>
       <GlobalStyle />
-      <CustomDiv>
-        <NavKiosk />
-        <CustomDiv
-          displayDiv="flex"
-          mt={20}
-          mr={30}
-          ml={30}
-          borderRadius="10px"
-        >
-          <StatsMuscle />
-          <StatsWeekly />
-        </CustomDiv>
-        <StatsDayInfo />
-        <SelectBoardView onSelectData={saveBoadHandler} />
-        {isBoard ? (
-          <Div mt={10}>
-            <WeeklySummary datas={datasHey} onChange={getData} />
-            <Exercise exerciseList={exercise} />
-          </Div>
-        ) : (
-          <Div mt={10}>
-            <CalendarForm events={events} value={value} onChange={setValue} />
-          </Div>
-        )}
-      </CustomDiv>
-      <Div displayDiv="flex" justifyContent="center" mt={40}>
-        <ButtonComponent
-          buttonText="홈"
-          buttonWidth="35vw"
-          buttonHeight="3vh"
-        />
-      </Div>
+      {!loading ? (
+        <Fragment>
+          <CustomDiv>
+            <NavKiosk />
+            <CustomDiv
+              displayDiv="flex"
+              mt={20}
+              mr={30}
+              ml={30}
+              borderRadius="10px"
+              justifyContent="space-between"
+            >
+              <StatsMuscle
+                muscle={setDailyDatas(equipmentData[0], selectedDate)[0]}
+                date={selectedDate}
+                gender={parseInt(equipmentData[0][0].gender)}
+              />
+              <StatsWeekly
+                ratioData={ChartCalc(
+                  equipmentData[1],
+                  equipmentData[2],
+                  equipmentData[3][0]
+                )}
+              />
+            </CustomDiv>
+            <SelectBoardView onSelectData={saveBoadHandler} />
+            {isBoard ? (
+              <Div mt={10}>
+                <WeeklySummary
+                  datas={equipmentData[0]}
+                  onChange={getData}
+                  date={selectedDate}
+                />
+                <Exercise
+                  exerciseList={
+                    setDailyDatas(equipmentData[0], selectedDate)[1]
+                  }
+                  chartData={equipmentData[4]}
+                />
+              </Div>
+            ) : (
+              <Div mt={10}>
+                <CalendarForm
+                  events={equipmentData[5]}
+                  value={value}
+                  onChange={setValue}
+                />
+              </Div>
+            )}
+          </CustomDiv>
+          <HomeDiv displayDiv="flex" justifyContent="center">
+            <ButtonComponent
+              buttonText="홈"
+              buttonWidth="35vw"
+              buttonHeight="3vh"
+            />
+          </HomeDiv>
+        </Fragment>
+      ) : (
+        <LoadingText />
+      )}
     </Fragment>
   );
 };

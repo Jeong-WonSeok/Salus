@@ -1,114 +1,131 @@
-import React, { useCallback, useEffect, useState } from "react";
-import { useDispatch } from "react-redux";
-import { CustomDiv, Div } from "../../styles/kiosk.style";
-import RoundChart from "../RoundChart";
-import useHttp from './../../customHooks/useHttp';
-import { statsWeeklyActions } from "../../store/weekly-workout";
+import React from 'react';
+import { CustomDiv, Div } from '../../styles/kiosk.style';
+import styled from 'styled-components';
+import RoundChart from '../RoundChart';
 
-const StatsWeekly = () => {
-  //useHttp 로직으로 비동기 요청 및 redux store에 저장
-  const { loading, error, apiRequest } = useHttp()
-  const dispatch = useDispatch()
-  const transformData = useCallback((objData) => {
-    dispatch(
-      statsWeeklyActions.fetchWeeklyState({
-        statsRunning: 10,
-        statsUpperBody: 10,
-        statsLowerBody: 10,
-      })
-    );
-  })
+const FontCustomDiv = styled(CustomDiv)`
+  font-family: 'Pretendard-Regular';
+`;
 
-  useEffect(() => {
-    apiRequest({url: 'https://jsonplaceholder.typicode.com/todos/1'}, transformData)
-  }, [apiRequest, transformData])
-  
+const ChartDiv = styled(Div)`
+  position: relative;
+  &:active {
+    & .infoDiv {
+      display: flex;
+      text-align: center;
+      align-items: center;
+    }
+  }
+`;
+
+const InfoDiv = styled(Div)`
+  position: absolute;
+  height: 3vh;
+  width: ${(props) => (props.width ? props.width + 'vw' : '20vw')};
+  top: 3vh;
+  left: ${(props) => (props.left ? props.left + 'vw' : '')};
+  padding: 0.7vh;
+  display: none;
+  background: white;
+  border: 1px solid rgba(99, 126, 255, 0.5);
+  border-radius: 8px;
+  color: rgba(0, 0, 0, 0.7);
+`;
+
+const StatsWeekly = ({ratioData}) => {
   return (
-    <CustomDiv
-      divWidth={375}
-      divHeight={650}
-      ml={10}
+    <FontCustomDiv
+      divWidth={250}
+      divHeight={800}
       bgMain="white"
       borderRadius="10px"
+      displayDiv="flex"
+      flexDirection="column"
+      justifyContent="center"
+      alignItems="center"
     >
-      <Div fontSize="1.5rem" fontWeight={600} mt={10} ml={110} mb={10}>
+      {/* <Div fontSize="1.5rem" fontWeight={600} mb={10}>
         이번 주 운동 통계
-      </Div>
+      </Div> */}
       <Div>
-        <Div mb={20} displayDiv="flex">
+        <ChartDiv displayDiv="flex" mb={10}>
           <RoundChart
-            roundRatio={0.5}
+            roundRatio={ratioData[0][0] <= 1 ? ratioData[0][0] : 1}
             roundWidth={180}
             roundHeight={180}
             colorGradient={["#92A3FD", "#92A3FD", "#9DCEFF"]}
             KEY={1}
           >
-            <Div
+            <CustomDiv
               displayDiv="flex"
-              ml={65}
-              mt={30}
               flexDirection="column"
               alignItems="center"
             >
-              <Div mb={2} fontSize="1rem">
-                유산소
-              </Div>
-              <Div fontSize="2rem">78</Div>
+              <Div fontSize="1.5rem">유산소</Div>
+              <Div fontSize="3rem">{ratioData[0][1]}</Div>
               <Div fontSize="1rem">분</Div>
-            </Div>
+            </CustomDiv>
           </RoundChart>
-          <Div>이것은 추가 정보 헤이헤이</Div>
-        </Div>
-        <Div mb={20} displayDiv="flex">
+          <InfoDiv className="infoDiv" left={-20}>
+            헬스장 회원의 평균 유산소 운동 시간 대비 회원님의 운동량입니다.
+          </InfoDiv>
+        </ChartDiv>
+        <ChartDiv displayDiv="flex" mb={10}>
           <RoundChart
-            roundRatio={0.9}
+            roundRatio={ratioData[1] <= 1 ? ratioData[1] : 1}
             roundWidth={180}
             roundHeight={180}
-            colorGradient={["#F06875", "#F06875", "#F4929B"]}
+            colorGradient={["#F06875", "#F4929B", "#F4929B"]}
             KEY={2}
           >
-            <Div
-              displayDiv="flex"
-              ml={65}
-              mt={30}
-              flexDirection="column"
-              alignItems="center"
-            >
-              <Div mb={2} fontSize="1rem">
-                상체
-              </Div>
-              <Div fontSize="2rem">78</Div>
+            <Div displayDiv="flex" flexDirection="column" alignItems="center">
+              <Div fontSize="1.5rem">상체</Div>
+              <Div fontSize="3rem">{parseInt(ratioData[1] * 100)}</Div>
               <Div fontSize="1rem">%</Div>
             </Div>
           </RoundChart>
-          <Div>이것은 추가 정보 헤이헤이</Div>
-        </Div>
-        <Div mb={20} displayDiv="flex">
+          <InfoDiv className="infoDiv" left={-23} width={23}>
+            헬스장 회원의 평균 상체운동 시간 대비 회원님의 운동 시간입니다.
+          </InfoDiv>
+        </ChartDiv>
+        <ChartDiv displayDiv="flex" mb={10}>
           <RoundChart
-            roundRatio={0.7}
+            roundRatio={ratioData[2] <= 1 ? ratioData[2] : 1}
             roundWidth={180}
             roundHeight={180}
             colorGradient={["#FEA08F", "#FEA08F", "#FB816B"]}
             KEY={3}
           >
-            <Div
-              displayDiv="flex"
-              ml={65}
-              mt={30}
-              flexDirection="column"
-              alignItems="center"
-            >
-              <Div mb={2} fontSize="1rem">
-                하체
-              </Div>
-              <Div fontSize="2rem">12</Div>
+            <Div displayDiv="flex" flexDirection="column" alignItems="center">
+              <Div fontSize="1.5rem">하체</Div>
+              <Div fontSize="3rem">{parseInt(ratioData[2] * 100)}</Div>
               <Div fontSize="1rem">%</Div>
             </Div>
           </RoundChart>
-          <Div>이것은 추가 정보 헤이헤이</Div>
-        </Div>
+          <InfoDiv className="infoDiv" left={-23} width={23}>
+            헬스장 회원의 평균 하체운동 시간 대비 회원님의 운동 시간입니다.
+          </InfoDiv>
+        </ChartDiv>
+        <ChartDiv displayDiv="flex">
+          <RoundChart
+            roundRatio={ratioData[3] <= 1 ? ratioData[3] : 1}
+            roundWidth={180}
+            roundHeight={180}
+            colorGradient={["#B98EF5", "#C9A7F8", "#C9A7F8"]}
+            KEY={4}
+          >
+            <Div displayDiv="flex" flexDirection="column" alignItems="center">
+              <Div fontSize="1.5rem">운동 시간</Div>
+              <Div fontSize="3rem">{parseInt(ratioData[3] * 100)}</Div>
+              <Div fontSize="1rem">%</Div>
+            </Div>
+          </RoundChart>
+          <InfoDiv className="infoDiv" left={-21} width={21}>
+            오늘 회원님의 헬스장 이용시간 대비 운동시간입니다.
+          </InfoDiv>
+        </ChartDiv>
       </Div>
-    </CustomDiv>
+    </FontCustomDiv>
   );
 };
 
