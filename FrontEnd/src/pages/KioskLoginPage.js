@@ -46,7 +46,7 @@ const KioskLoginPage = () => {
     socket.on("RFIDcheck", (data) => {
       console.log(data);
       localStorage.setItem('RFID', JSON.stringify(data))
-      setTimeout(() => setFunc(true), 2000);
+      setTimeout(() => setFunc(true), 2500);
     });
     return () => {
       socket.disconnect();
@@ -59,7 +59,7 @@ const KioskLoginPage = () => {
       <Div>
         <Img src={logo} alt="logoimg" />
         <StyledDiv onClick={newFunc}>
-          {func ? <Navigate to="/kiosk" /> : null} 키를 통해
+          {func ? <Navigate to="/kiosk" replace={true}/> : null} 키를 통해
           로그인해주세요.
         </StyledDiv>
       </Div>

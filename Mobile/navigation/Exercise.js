@@ -38,6 +38,7 @@ const Exercise = () => {
   const Items = ({ item }) =>{
     return (
     <Animated.View entering={SlideInLeft} style={[styles.modalView]}>
+      <View>dfdad</View>
       <View>
         <Text style={styles.subtitleText}>중량</Text>
         <Text style={styles.modalText}>{item.weight}</Text>
@@ -52,8 +53,8 @@ const Exercise = () => {
   const [modalVisible, setModalVisible] = useState(false);
   return (
     <Container alignItems="stretch" flexDirection="column">
-      <Text style={styles.title}>레그 프레스</Text>
-      <Container flex={2} flexDirection="column" style={styles.boxStyle}>
+      <Container flex={2.8} flexDirection="column" style={styles.boxStyle}>
+        <Text style={styles.title}>레그 프레스</Text>
         <Container justifyContent="space-between" borderRadius={10}>
           <Container flexDirection="column" borderRadius={10}>
             <Text style={styles.category}>횟수</Text>
@@ -64,7 +65,7 @@ const Exercise = () => {
             <Text style={styles.count}>300</Text>
           </Container>
         </Container>
-        <Container justifyContent="space-between" mt={10} borderRadius={10}>
+        <Container justifyContent="space-between" mt={30} borderRadius={10}>
           <Container flexDirection="column" borderRadius={10}>
             <Text style={styles.category}>칼로리</Text>
             <Text style={styles.count}>300</Text>
@@ -141,13 +142,15 @@ const styles = StyleSheet.create({
   title: {
     fontSize: 32,
     textAlign: "center",
-    marginTop: 8,
-    marginBottom: 24,
     fontWeight: "bold",
+    color: "#92a3fd",
+    marginBottom: 25,
+    marginTop: 10,
   },
   category: {
     fontSize: 24,
-    color: "blue",
+    color: "#92a3fd",
+    fontWeight: "bold",
   },
   count: {
     fontSize: 40,
@@ -156,7 +159,9 @@ const styles = StyleSheet.create({
   boxStyle: {
     width: Dimensions.get("window").width - 20,
     marginLeft: 10,
-    borderColor: "blue",
+    marginTop: 80,
+    paddingBottom: 30,
+    borderColor: "rgba(99, 126, 255, 0.5)",
     borderWidth: 2,
     borderRadius: 10,
   },
@@ -166,7 +171,7 @@ const styles = StyleSheet.create({
     alignItems: "flex-end",
     zIndex: 100,
     borderRadius: 30,
-    marginTop: 5,
+    marginTop: 20,
     marginBottom: 5,
   },
   btnStyle: {

@@ -53,7 +53,7 @@ const MuscleMan = () => {
 
   return (
     <Container alignItems="stretch">
-      <Container background="#5f9ea0" flex={1} width={screenWidth} height="60%">
+      <Container flex={1} width={screenWidth} height="60%">
         <Parts
           source={traps_a}
           top={-91.5}
@@ -156,12 +156,7 @@ const MuscleMan = () => {
         />
         <Image source={male} style={styles.image} resizeMode="contain" />
       </Container>
-      <Container
-        background="#5f9ea0"
-        flex={1}
-        width={screenWidth}
-        height={screenHeight / 2}
-      >
+      <Container flex={1} width={screenWidth} height={screenHeight / 2}>
         <Parts
           source={back_traps_a}
           top={-99}
@@ -171,21 +166,21 @@ const MuscleMan = () => {
         />
         <Parts
           source={back_traps_b}
-          top={-63}
-          left={1}
-          scale="scale(0.22)"
+          top={-62.6}
+          left={1.1}
+          scale="scale(0.218)"
           resizeMode="contain"
         />
         <Parts
           source={back_shoulders_a}
-          top={-73.4}
-          left={-39.1}
-          scale="scale(0.108)"
+          top={-73.1}
+          left={-38.6}
+          scale="scale(0.106)"
           resizeMode="contain"
         />
         <Parts
           source={back_shoulders_b}
-          top={-73.4}
+          top={-73.1}
           left={40.4}
           scale="scale(0.108)"
           resizeMode="contain"
@@ -229,14 +224,14 @@ const MuscleMan = () => {
           source={back_forearms_a}
           top={3.9}
           left={-69.2}
-          scale="scale(0.195)"
+          scale="scale(0.193)"
           resizeMode="contain"
         />
         <Parts
           source={back_forearms_b}
           top={3.9}
-          left={71.1}
-          scale="scale(0.195)"
+          left={70.4}
+          scale="scale(0.193)"
           resizeMode="contain"
         />
         <Parts
@@ -248,33 +243,33 @@ const MuscleMan = () => {
         />
         <Parts
           source={back_hamstrings_a}
-          top={85}
+          top={84.5}
           left={-22.3}
-          scale="scale(0.315)"
+          scale="scale(0.311)"
           resizeMode="contain"
         />
         <Parts
           source={back_hamstrings_b}
-          top={85.3}
+          top={85.2}
           left={24.3}
           scale="scale(0.311)"
           resizeMode="contain"
         />
         <Parts
           source={back_calves_a}
-          top={143}
-          left={-38.7}
-          scale="scale(0.19)"
+          top={142.4}
+          left={-38.3}
+          scale="scale(0.192)"
           resizeMode="contain"
         />
         <Parts
           source={back_calves_b}
-          top={143}
-          left={40.7}
-          scale="scale(0.19)"
+          top={142.4}
+          left={40.5}
+          scale="scale(0.192)"
           resizeMode="contain"
         />
-        <Image source={male2} style={styles.image} />
+        <Image source={male2} style={styles.image} resizeMode="contain" />
       </Container>
     </Container>
   );

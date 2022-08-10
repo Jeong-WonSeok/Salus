@@ -51,10 +51,9 @@ const KioskMainPage = () => {
   }, []);
   //데이터 요청보내는 로직
   useEffect(() => {
-    // console.log(localStorage.getItem("RFID"));
     apiRequest(
       {
-        url: `http://i7b110.p.ssafy.io:3010/kiosk/login/${localStorage.getItem("RFID")}`,
+        url: `http://i7b110.p.ssafy.io:3010/kiosk/login/${parseInt(JSON.parse(localStorage.getItem("RFID"))?.rfidKey)}`,
       },
       getEquipmentData
     );
