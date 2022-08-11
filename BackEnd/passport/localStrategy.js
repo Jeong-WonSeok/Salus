@@ -2,7 +2,7 @@
 const passport = require('passport');
 const LocalStrategy = require('passport-local').Strategy;
 const bcrypt = require('bcrypt');
-const UserController = require('../controller/user/UserController');
+const mobileController = require('../controller/mobile/mobileController');
 
 module.exports = () => {
     passport.use(new LocalStrategy ({
@@ -11,7 +11,7 @@ module.exports = () => {
     }, 
     async (rfidKey, password, done) => {
         try{
-            const exUser = await UserController.loginUser({ user : {
+            const exUser = await mobileController.mobileLoginData({ user : {
                 rfidKey : rfidKey, 
                 password : password
             }});

@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="mobile">
+<select id="mobileData">
+SELECT DATE_FORMAT(d.excerciseDay, '%y-%m-%d') as excerciseDay, sum(weightNow * countNow) AS "totalVolume" from daily_excercise AS d
+WHERE d.rfidKey = #{rfidKey}
+AND
+    d.excerciseDay 
+    BETWEEN
+        DATE_FORMAT((SELECT ADDDATE(NOW(), - WEEKDAY(NOW()) + 0 )), '%Y-%m-%d')
+    AND
+        DATE_FORMAT((SELECT ADDDATE(NOW(), - WEEKDAY(NOW()) + 6 )), '%Y-%m-%d')
+GROUP BY d.excerciseDay;
+SELECT  to_char(u.targetTime, 'HH24:MI') AS "targetTime" , u.targetVolume FROM user AS u
+WHERE u.rfidKey = #{rfidKey};
+SELECT ROUND((ROUND(SUM(ABS(HOUR(TIMEDIFF(d.endtime, d.startTime)) * 60 )+ (second(TIMEDIFF(d.endtime, d.startTime)) + MINUTE(TIMEDIFF(d.endtime, d.startTime)) * 60) / 60)) / ((HOUR(u.targetTime) * 60) + MINUTE(u.targetTime))) * 100) AS "percentTime"
+, ROUND((SUM(d.weightNow * d.countNow) / u.targetVolume) * 100) AS "percentVolume"
+FROM daily_excercise AS d INNER JOIN user AS u ON u.rfidKey = #{rfidKey}
+WHERE d.excerciseDay 
+    BETWEEN
+        DATE_FORMAT((SELECT ADDDATE(NOW(), - WEEKDAY(NOW()) + 0 )), '%Y-%m-%d')
+    AND
+        DATE_FORMAT((SELECT ADDDATE(NOW(), - WEEKDAY(NOW()) + 6 )), '%Y-%m-%d')
+AND d.rfidKey = #{rfidKey};
+SELECT d.equipmentName, SUM(d.countNow) AS "totalCount", SUM(d.weightNow * d.countNow) AS "totalVolume", ROUND(SUM((6 * (3.5 * u.weight * (ROUND((HOUR(TIMEDIFF(d.endtime, d.startTime)) * 60 )+ (second(TIMEDIFF(d.endtime, d.startTime)) + MINUTE(TIMEDIFF(d.endtime, d.startTime)) * 60) / 60)))) / 1000 * 5)) AS "calorie",
+sum(ROUND((HOUR(TIMEDIFF(d.endtime, d.startTime)) * 60 )+ (second(TIMEDIFF(d.endtime, d.startTime)) + MINUTE(TIMEDIFF(d.endtime, d.startTime)) * 60) / 60)) AS "totalTime"
+FROM daily_excercise AS d
+LEFT JOIN user AS u ON u.rfidKey = #{rfidKey}
+WHERE d.rfidKey = #{rfidKey}
+AND d.excerciseDay = DATE_FORMAT(NOW(),'%y-%m-%d')
+GROUP BY d.equipmentName;
+</select>
+
+  <select id="login">
+    select rfidKey from user
+    where rfidKey = #{rfidKey} and password = #{password}
+  </select>
+
+<select id="calendarData">
+SELECT DATE_FORMAT(d.excerciseDay, '%y-%m-%d') AS "excerciseday" FROM daily_excercise AS d
+WHERE d.rfidKey = #{rfidKey}
+AND DATE_FORMAT(d.excerciseDay, "%y-%m") = #{searchDay}
+</select>
+
+<select id="calendarDetailData">
+SELECT SUM(d.countNow) AS "totalCount", SUM(d.weightNow * d.countNow) AS "totalVolume", ROUND(SUM((6 * (3.5 * u.weight * (ROUND((HOUR(TIMEDIFF(d.endtime, d.startTime)) * 60 )+ (second(TIMEDIFF(d.endtime, d.startTime)) + MINUTE(TIMEDIFF(d.endtime, d.startTime)) * 60) / 60)))) / 1000 * 5)) AS "totalCalorie",
+sum(ROUND((HOUR(TIMEDIFF(d.endtime, d.startTime)) * 60 )+ (second(TIMEDIFF(d.endtime, d.startTime)) + MINUTE(TIMEDIFF(d.endtime, d.startTime)) * 60) / 60)) AS "totalTime"
+FROM daily_excercise AS d
+LEFT JOIN user AS u ON u.rfidKey = #{rfidKey}
+WHERE d.rfidKey = #{rfidKey}
+AND DATE_FORMAT(d.excerciseDay, "%y-%m-%d") = #{searchDay}
+GROUP BY d.excerciseDay;
+
+SELECT d.equipmentName, (d.countNow) AS "totalCount", SUM(d.weightNow * d.countNow) AS "totalVolume", ROUND(SUM((6 * (3.5 * u.weight * (ROUND((HOUR(TIMEDIFF(d.endtime, d.startTime)) * 60 )+ (second(TIMEDIFF(d.endtime, d.startTime)) + MINUTE(TIMEDIFF(d.endtime, d.startTime)) * 60) / 60)))) / 1000 * 5)) AS "totalCalorie",
+sum(ROUND((HOUR(TIMEDIFF(d.endtime, d.startTime)) * 60 )+ (second(TIMEDIFF(d.endtime, d.startTime)) + MINUTE(TIMEDIFF(d.endtime, d.startTime)) * 60) / 60)) AS "totalTime"
+FROM daily_excercise AS d
+LEFT JOIN user AS u ON u.rfidKey = #{rfidKey}
+WHERE d.rfidKey = #{rfidKey}
+AND DATE_FORMAT(d.excerciseDay, "%y-%m-%d") = #{searchDay}
+GROUP BY d.equipmentName
+ORDER BY d.excerciseDay;
+</select>
+
+<update id="targetTime">
+UPDATE user
+SET targetTime = #{targetTime}
+WHERE rfidKey = #{rfidKey}
+</update>
+
+<update id="targetVolume">
+UPDATE user
+SET targetVolume = #{targetVolume}
+WHERE rfidKey = #{rfidKey}
+</update>
+
+</mapper>

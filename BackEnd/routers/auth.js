@@ -7,7 +7,7 @@ const { auth } = require('./authMiddleware');
 
 dotenv.config();
 
-const controller = require("../controller/user/UserController");
+// const controller = require("../controller/user/UserController");
 
 router.get('/payload', auth, (req,res) => {
   console.log(req.decoded);
@@ -65,20 +65,20 @@ router.get("/logout", function (req, res, next) {
   res.redirect("/");
 });
 
-router.get(
-  "/google",
-  passport.authenticate("google", { scope: ["profile", "email"] })
-);
+// router.get(
+//   "/google",
+//   passport.authenticate("google", { scope: ["profile", "email"] })
+// );
 
-router.get("/google/callback", passport.authenticate("google"), authSuccess);
+// router.get("/google/callback", passport.authenticate("google"), authSuccess);
 
-async function authSuccess(req, res) {
-  console.log("여기는 옴");
-  var email = req.user.email;
-  console.log('req', req.user);
-  const test = await controller.search(req, res);
-  console.log('test', test);
-  // res.redirect("/user/search/" + email);
-}
+// async function authSuccess(req, res) {
+//   console.log("여기는 옴");
+//   var email = req.user.email;
+//   console.log('req', req.user);
+//   const test = await controller.search(req, res);
+//   console.log('test', test);
+//   // res.redirect("/user/search/" + email);
+// }
 
 module.exports = router;
