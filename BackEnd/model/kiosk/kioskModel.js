@@ -79,28 +79,7 @@ const DailyData = async (req, res) => {
 
 };
 
-<<<<<<< HEAD
-const calendarData = async (req, res) => {
-  conn.connect();
-  var param = {
-    rfidKey: req.params.rfidKey,
-  };
-  const format = { language: "sql", indent: "" };
-  const query = mybatisMapper.getStatement(
-    "kiosk",
-    "searchCalendarDailyData",
-    param,
-    format
-  );
-  conn.query(query, (err, results) => {
-    if (err) console.log(err);
-    console.log(results);
-    return res.json(results);
-  });
-};
 
-=======
->>>>>>> master
 const equipmentMonthData = async(req, res) =>{
   conn.connect();
   var param = {
