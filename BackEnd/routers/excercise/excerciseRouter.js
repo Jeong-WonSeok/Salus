@@ -4,4 +4,7 @@ const router = express.Router();
 const controller = require("../../controller/excercise/excerciseController");
 
 router.get("/search/:excerciseDay/:weightNow/:equipmentName/:rfidKey", controller.searchExcerciseData);
+router.get("/mobile/:weightNow/:equipmentName/:rfidKey", controller.mobileExcerciseData);
+router.get("/mobileList/:rfidKey", controller.mobileExcerciseDataList);
+
 module.exports = router;
