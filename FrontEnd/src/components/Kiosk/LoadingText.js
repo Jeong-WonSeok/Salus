@@ -1,6 +1,7 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Div } from './../../styles/kiosk.style';
 import styled, { keyframes } from 'styled-components';
+import { Navigate } from 'react-router-dom';
 const animate = keyframes`
   0% {
     width: 0;
@@ -42,10 +43,20 @@ const NewDiv = styled(Div)`
 `
 
 const LoadingText = () => {
+  const [back, setBack] = useState(false);
+
+  useEffect(() => {
+    setTimeout(() => {
+      localStorage.clear()
+      setBack(true)
+    }, 7000)
+  }, [])
+
   return (
     <NewDiv displayDiv="flex" justifyContent="center" alignItems="center">
-
-      <H1 data-text="Loading...">Loading...</H1>
+      <H1 data-text="Loading...">
+        {back ? <Navigate to="/kiosk/login" replace={true} /> : null}Loading...
+      </H1>
     </NewDiv>
   );
 };
