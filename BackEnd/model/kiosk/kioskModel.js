@@ -1,8 +1,9 @@
-// 오류 수정용 주석
 var conn = require("../../database/db");
 const mybatisMapper = require("mybatis-mapper");
 
+
 const searchUser = async (req, res) => {
+  conn.connect();
   var param = {
     rfidKey: req.params.rfidKey,
   };
@@ -65,6 +66,7 @@ const searchUser = async (req, res) => {
 
 //오늘 운동 데이터 받아오기
 const DailyData = async (req, res) => {
+  conn.connect();
   var param = {
     rfidKey: req.params.rfidKey,
   };
@@ -78,6 +80,7 @@ const DailyData = async (req, res) => {
 };
 
 const equipmentMonthData = async(req, res) =>{
+  conn.connect();
   var param = {
     equipmentName : req.params.equipmentName
   };
