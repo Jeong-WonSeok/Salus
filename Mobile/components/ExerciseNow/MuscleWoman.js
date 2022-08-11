@@ -121,35 +121,31 @@ const MuscleWoman = () => {
         />
         <Parts
           source={obliques}
-          top="-14.59%"
-          left="10.15%"
-          width="79.55%"
-          height="100%"
-          scale="scale(0.115)"
+          top={-17.36}
+          left={17.7}
+          scale="scale(0.142)"
+          resizeMode="contain"
         />
         <Parts
           source={quads_a}
-          top="7.85%"
-          left="25.8%"
-          width="37%"
-          height="100%"
-          scale="scale(0.23)"
+          top={67.7}
+          left={-2.5}
+          scale="scale(0.2865)"
+          resizeMode="contain"
         />
         <Parts
           source={quads_b}
-          top="7.85%"
-          left="37.1%"
-          width="37%"
-          height="100%"
-          scale="scale(0.23)"
+          top={67.7}
+          left={37.7}
+          scale="scale(0.2865)"
+          resizeMode="contain"
         />
         <Parts
           source={calves_a}
-          top="17.8%"
-          left="16.68%"
-          width="51%"
-          height="132.5%"
-          scale="scale(0.124)"
+          top={170.7}
+          left={-10.7}
+          scale="scale(0.1865)"
+          resizeMode="contain"
         />
         <Parts
           source={calves_b}

@@ -11,18 +11,20 @@ const user = require("./user");
 /** 키오스크 관련 router */
 const kiosk = require("./kiosk");
 
-router.get("/", function (req, res) {
-  res.render("main", { user: req.user });
-  console.log("user", req.user);
-});
+/** 운동 자동 기록 관련 router */
+const excercise = require("./excercise");
 
+router.get("/", function (req, res) {
+  res.render("main");
+  // res.render("main", { user: req.user });
+});
 
 router.use("/user", user);
 router.use("/kiosk", kiosk);
+router.use("/excercise", excercise);
 router.get("/", function (req, res) {
   res.render("main", { user: req.user });
 });
-
 
 router.get("/signup", (req, res) => {
   res.render("signup", { email: req.user.email, name: req.user.displayName });

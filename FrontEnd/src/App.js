@@ -22,7 +22,7 @@ function App() {
           <Route path="/record" element={<RecordPage />} />
           <Route path="/equipment-list" element={<EquipmentListPage />} />
         </Route>
-        <Route path="/" element={<Navigate push to="/login" />} />
+        <Route path="/" element={<Navigate push to="kiosk/login" />} />
         <Route path="/login" element={<LoginPage />} />
         <Route path="/findaccount" element={<FindAccountPage />} />
         <Route path="/signup" element={<SignupPage />} />

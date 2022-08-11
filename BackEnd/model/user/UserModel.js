@@ -1,5 +1,6 @@
-var conn = require("../../database/db");
+const conn = require("../../database/db");
 const mybatisMapper = require("mybatis-mapper");
+const bcrypt = require('bcrypt');
 
 const selectAll = async (req, res) => {
   var param = null;
@@ -13,24 +14,40 @@ const selectAll = async (req, res) => {
   });
 };
 
+const loginUser = async (req, res) => {
+  console.log(req);
+  var param = {
+    rfidKey: req.user.rfidKey,
+    password: req.user.password,
+  }
+  const format = { language: "sql", indent: ""};
+  const query = mybatisMapper.getStatement("user", "login", param, format);
+  return await conn.promise().query(query)
+}
+
 const selectUser = async (req, res) => {
   var param = {
-    email: req.params.email,
+    // email: req.params.email,
+    email: req.user.email,
   };
   var format = { language: "sql", indent: "" };
   var query = mybatisMapper.getStatement("user", "search", param, format);
   console.log(query);
-  conn.query(query, (err, results) => {
+  const result = await conn.query(query, (err, results) => {
     if (err) console.log(err);
+    // console.log(results)
     if (results.length === 0) {
       console.log("업데이트");
-      return res.redirect("/signup");
+      return res.json(results);
+      // return res.redirect("/signup");
     } else {
       console.log("else");
       console.log(results);
-      return res.redirect("/");
+      // return res.redirect("/");
+      return  res.json(results);
     }
   });
+  return result;
 };
 
 const selectSignin = async (req, res) => {
@@ -51,9 +68,6 @@ const selectSignin = async (req, res) => {
 
 const insertUser = async (req, res) => {
   const body = req.body;
-  console.log(body);
-  console.log(body.email);
-  console.log(body.name);
   var param = {
     email: body.email,
     name: body.name,
@@ -73,4 +87,5 @@ module.exports = {
   selectUser,
   insertUser,
   selectSignin,
+  loginUser
 };
