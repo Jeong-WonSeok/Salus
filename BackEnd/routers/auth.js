@@ -5,7 +5,7 @@ var router = express.Router();
 var passport = require('passport');
 const { auth } = require('./authMiddleware');
 const cookieParser = require('cookie-parser');
-const controller = require("../controller/user/UserController");
+// const controller = require("../controller/user/UserController");
 
 const app = express();
 

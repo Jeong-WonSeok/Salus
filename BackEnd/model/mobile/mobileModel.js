@@ -11,9 +11,12 @@ const mobileLogin = async (req, res) => {
     conn.query(query, (err, results) => {
         if (err) console.log(err);
         console.log(results[0]);
-        var rfidKey = results[0].rfidKey;
-        return res.redirect("/mobile/user/" + rfidKey);
+        if (results.length != 0){
+            var rfidKey = results[0].rfidKey;
+            return res.redirect("/mobile/user/" + rfidKey);
+        }
       });
+      return ;
 }
 
 const mobileData = async(req, res) =>{
