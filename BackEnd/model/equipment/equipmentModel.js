@@ -2,6 +2,7 @@ var conn = require("../../database/db");
 const mybatisMapper = require('mybatis-mapper');
 
 const insertEquipment = async(req, res)=>{
+    conn.connect();
     const body = req.body;
     var param = {
         equipmentName : body.equipmentName,

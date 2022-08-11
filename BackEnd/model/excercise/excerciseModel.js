@@ -73,9 +73,45 @@ const excerciseData = async (req, res) => {
       });
     }
   });
+
 };
+// 모바일로 운동데이터 보냄
+const mobileExcerciseData = async (req, res) =>{
+  const param = {
+    weightNow: req.params.weightNow,
+    equipmentName: req.params.equipmentName,
+    rfidKey: req.params.rfidKey,
+  };
+  const format = { language: "sql", indent: "" };
+  const query = mybatisMapper.getStatement(
+    "dailyexcercise",
+    "mobileExcerciseData",
+    param,
+    format
+  );
+  const result = await conn.promise().query(query);
+  return res.json(result[0]);
+}
+
+// // 모바일로 운동데이터 리스트 보냄
+// const mobileExcerciseDataList = async (req, res) =>{
+//   const param = {
+//     rfidKey: req.params.rfidKey,
+//   };
+//   const format = { language: "sql", indent: "" };
+//   const query = mybatisMapper.getStatement(
+//     "dailyexcercise",
+//     "mobileExcerciseDataList",
+//     param,
+//     format
+//   );
+//   const result = await conn.promise().query(query);1
+//   return res.json(result[0]);
+// }
 
 module.exports = {
   excerciseData,
-  updateIsStarted
+  updateIsStarted,
+  mobileExcerciseData,
+// mobileExcerciseDataList
 };

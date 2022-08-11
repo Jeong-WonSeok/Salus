@@ -8,6 +8,7 @@ const passport = require("passport");
 const session = require("express-session");
 const passportConfig = require("./passport");
 const cors = require("cors");
+const cookieParser = require('cookie-parser');
 
 dotenv.config({ path: path.join(__dirname, "/.env") });
 const webSocket = require("./socket/socket");
@@ -28,7 +29,11 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 // routers
-app.use(cors());
+app.use(cors({
+  origin : true,
+  credentials : true
+}));
+app.use(cookieParser());
 app.use(routers);
 app.use("/", require("./routers"));
 app.use("/auth", require("./routers/auth"));
