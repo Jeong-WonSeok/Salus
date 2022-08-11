@@ -1,6 +1,6 @@
 import { View, Text, Image, Dimensions } from "react-native";
 import male from "./../../assets/muscle/man/male.png";
-import male2 from "./../../assets/muscle/man/male2.png";
+import male2 from "./../../assets/muscle/man/male3.png";
 import traps_a from "./../../assets/muscle/man/01.9.png";
 import { StyleSheet } from "react-native";
 import styled from "styled-components/native";
@@ -34,8 +34,8 @@ import back_hamstrings_b from "./../../assets/muscle/man/28.png";
 import back_calves_a from "./../../assets/muscle/man/29.png";
 import back_calves_b from "./../../assets/muscle/man/30.png";
 import { Container } from "./../../theme/global-theme";
-import React from 'react';
- 
+import React from "react";
+
 const Parts = styled.Image`
   position: absolute;
   width: ${(props) => (props.width ? props.width : "100%")};
@@ -43,19 +43,22 @@ const Parts = styled.Image`
   top: ${(props) => (props.top ? props.top : "0%")};
   left: ${(props) => (props.left ? props.left : "0%")};
   transform: ${(props) => (props.scale ? props.scale : "scale(0.1)")};
+  opacity: ${(props) => (props.opacity ? props.opacity : 0)};
   z-index: 100;
 `;
 
-const MuscleMan = () => {
-   let screenWidth = Dimensions.get("window").width;
-   let screenHeight = Dimensions.get("window").height;
-
+const MuscleMan = ({ currentInfo }) => {
+  let screenWidth = Dimensions.get("window").width;
+  let screenHeight = Dimensions.get("window").height;
 
   return (
     <Container alignItems="stretch">
       <Container flex={1} width={screenWidth} height="60%">
         <Parts
           source={traps_a}
+          opacity={
+            currentInfo?.equipmentEnglishStimulate === "traps" ? "1" : "0"
+          }
           top={-91.5}
           left={-14.5}
           resizeMode="contain"
@@ -63,6 +66,7 @@ const MuscleMan = () => {
         />
         <Parts
           source={traps_b}
+          opacity={currentInfo?.equipmentEnglishStimulate === "traps" ? 1 : 0}
           top={-91}
           left={14}
           scale="scale(0.065)"
@@ -70,6 +74,9 @@ const MuscleMan = () => {
         />
         <Parts
           source={shoulders_a}
+          opacity={
+            currentInfo?.equipmentEnglishStimulate === "shoulders" ? 1 : 0
+          }
           top={-69}
           left={-36.5}
           scale="scale(0.1046)"
@@ -77,6 +84,9 @@ const MuscleMan = () => {
         />
         <Parts
           source={shoulders_b}
+          opacity={
+            currentInfo?.equipmentEnglishStimulate === "shoulders" ? 1 : 0
+          }
           top={-69}
           left={36.3}
           scale="scale(0.1046)"
@@ -84,6 +94,7 @@ const MuscleMan = () => {
         />
         <Parts
           source={pecs}
+          opacity={currentInfo?.equipmentEnglishStimulate === "pecs" ? 1 : 0}
           width={77.5}
           height={40.5}
           top={66.5}
@@ -93,6 +104,7 @@ const MuscleMan = () => {
         />
         <Parts
           source={biceps_a}
+          opacity={currentInfo?.equipmentEnglishStimulate === "biceps" ? 1 : 0}
           top={-38}
           left={-47.5}
           scale="scale(0.133)"
@@ -100,6 +112,7 @@ const MuscleMan = () => {
         />
         <Parts
           source={biceps_b}
+          opacity={currentInfo?.equipmentEnglishStimulate === "biceps" ? 1 : 0}
           top={-38}
           left={47.5}
           scale="scale(0.133)"
@@ -107,6 +120,7 @@ const MuscleMan = () => {
         />
         <Parts
           source={forearm_a}
+          opacity={currentInfo?.equipmentEnglishStimulate === "forearm" ? 1 : 0}
           top={-1.85}
           left={-64.7}
           scale="scale(0.175)"
@@ -114,6 +128,7 @@ const MuscleMan = () => {
         />
         <Parts
           source={forearm_b}
+          opacity={currentInfo?.equipmentEnglishStimulate === "forearm" ? 1 : 0}
           top={-1.85}
           left={64.1}
           scale="scale(0.175)"
@@ -121,6 +136,9 @@ const MuscleMan = () => {
         />
         <Parts
           source={obliques}
+          opacity={
+            currentInfo?.equipmentEnglishStimulate === "obliques" ? 1 : 0
+          }
           top={-25.4}
           left={-1}
           scale="scale(0.166)"
@@ -128,6 +146,7 @@ const MuscleMan = () => {
         />
         <Parts
           source={quads_a}
+          opacity={currentInfo?.equipmentEnglishStimulate === "quads" ? 1 : 0}
           top={57.3}
           left={-23.4}
           scale="scale(0.308)"
@@ -135,6 +154,7 @@ const MuscleMan = () => {
         />
         <Parts
           source={quads_b}
+          opacity={currentInfo?.equipmentEnglishStimulate === "quads" ? 1 : 0}
           top={57.3}
           left={23.2}
           scale="scale(0.309)"
@@ -142,6 +162,7 @@ const MuscleMan = () => {
         />
         <Parts
           source={calves_a}
+          opacity={currentInfo?.equipmentEnglishStimulate === "calves" ? 1 : 0}
           top={150}
           left={-31.9}
           scale="scale(0.245)"
@@ -149,6 +170,7 @@ const MuscleMan = () => {
         />
         <Parts
           source={calves_b}
+          opacity={currentInfo?.equipmentEnglishStimulate === "calves" ? 1 : 0}
           top={150.2}
           left={31.7}
           scale="scale(0.245)"
@@ -156,117 +178,145 @@ const MuscleMan = () => {
         />
         <Image source={male} style={styles.image} resizeMode="contain" />
       </Container>
-      <Container flex={1} width={screenWidth} height={screenHeight / 2}>
+      <Container flex={1} width={screenWidth} height="60%">
         <Parts
           source={back_traps_a}
-          top={-99}
+          opacity={currentInfo?.equipmentEnglishStimulate === "traps" ? 1 : 0}
+          top={-98}
           left={0}
           scale="scale(0.124)"
           resizeMode="contain"
         />
         <Parts
           source={back_traps_b}
-          top={-62.6}
-          left={1.1}
-          scale="scale(0.218)"
+          opacity={currentInfo?.equipmentEnglishStimulate === "traps" ? 1 : 0}
+          top={-62.2}
+          left={1}
+          scale="scale(0.214)"
           resizeMode="contain"
         />
         <Parts
           source={back_shoulders_a}
-          top={-73.1}
-          left={-38.6}
-          scale="scale(0.106)"
+          opacity={
+            currentInfo?.equipmentEnglishStimulate === "shoulders" ? 1 : 0
+          }
+          top={-72.6}
+          left={-38.3}
+          scale="scale(0.105)"
           resizeMode="contain"
         />
         <Parts
           source={back_shoulders_b}
-          top={-73.1}
-          left={40.4}
-          scale="scale(0.108)"
+          opacity={
+            currentInfo?.equipmentEnglishStimulate === "shoulders" ? 1 : 0
+          }
+          top={-72.6}
+          left={39.3}
+          scale="scale(0.105)"
           resizeMode="contain"
         />
         <Parts
           source={triceps_a}
+          opacity={currentInfo?.equipmentEnglishStimulate === "triceps" ? 1 : 0}
           top={-42.5}
-          left={-50.1}
-          scale="scale(0.151)"
+          left={-49.1}
+          scale="scale(0.146)"
           resizeMode="contain"
         />
         <Parts
           source={triceps_b}
-          top={-42.5}
-          left={52.1}
-          scale="scale(0.151)"
+          opacity={currentInfo?.equipmentEnglishStimulate === "triceps" ? 1 : 0}
+          top={-42.3}
+          left={50.7}
+          scale="scale(0.147)"
           resizeMode="contain"
         />
         <Parts
           source={back_lats_a}
-          top={-25.6}
+          opacity={currentInfo?.equipmentEnglishStimulate === "lats" ? 1 : 0}
+          top={-25.7}
           left={-18.5}
-          scale="scale(0.205)"
+          scale="scale(0.202)"
           resizeMode="contain"
         />
         <Parts
           source={back_lats_b}
-          top={-25.9}
-          left={20.5}
-          scale="scale(0.203)"
+          opacity={currentInfo?.equipmentEnglishStimulate === "lats" ? 1 : 0}
+          top={-25.7}
+          left={20.2}
+          scale="scale(0.202)"
           resizeMode="contain"
         />
         <Parts
           source={back_lower}
-          top={-3.6}
-          left={1}
-          scale="scale(0.167)"
+          opacity={currentInfo?.equipmentEnglishStimulate === "lower" ? 1 : 0}
+          top={-4.5}
+          left={0.5}
+          scale="scale(0.164)"
           resizeMode="contain"
         />
         <Parts
           source={back_forearms_a}
-          top={3.9}
-          left={-69.2}
+          opacity={
+            currentInfo?.equipmentEnglishStimulate === "forearms" ? 1 : 0
+          }
+          top={3.1}
+          left={-68}
           scale="scale(0.193)"
           resizeMode="contain"
         />
         <Parts
           source={back_forearms_b}
-          top={3.9}
-          left={70.4}
-          scale="scale(0.193)"
+          opacity={
+            currentInfo?.equipmentEnglishStimulate === "forearms" ? 1 : 0
+          }
+          top={3.2}
+          left={69}
+          scale="scale(0.19)"
           resizeMode="contain"
         />
         <Parts
           source={back_glutes}
-          top={33.6}
-          left={1}
-          scale="scale(0.203)"
+          opacity={currentInfo?.equipmentEnglishStimulate === "glutes" ? 1 : 0}
+          top={31.5}
+          left={0.5}
+          scale="scale(0.197)"
           resizeMode="contain"
         />
         <Parts
           source={back_hamstrings_a}
-          top={84.5}
-          left={-22.3}
-          scale="scale(0.311)"
+          opacity={
+            currentInfo?.equipmentEnglishStimulate === "hamstrings" ? 1 : 0
+          }
+          top={81.5}
+          left={-22}
+          scale="scale(0.309)"
           resizeMode="contain"
         />
         <Parts
           source={back_hamstrings_b}
-          top={85.2}
-          left={24.3}
-          scale="scale(0.311)"
+          opacity={
+            currentInfo?.equipmentEnglishStimulate === "hamstrings" ? 1 : 0
+          }
+          top={82}
+          left={23.4}
+          scale="scale(0.305)"
           resizeMode="contain"
         />
         <Parts
           source={back_calves_a}
-          top={142.4}
-          left={-38.3}
-          scale="scale(0.192)"
+          opacity={currentInfo?.equipmentEnglishStimulate === "calves" ? 1 : 0}
+          top={138}
+          left={-37.7}
+          scale="scale(0.186)"
           resizeMode="contain"
         />
         <Parts
           source={back_calves_b}
-          top={142.4}
-          left={40.5}
-          scale="scale(0.192)"
+          opacity={currentInfo?.equipmentEnglishStimulate === "calves" ? 1 : 0}
+          top={138}
+          left={39.2}
+          scale="scale(0.186)"
           resizeMode="contain"
         />
         <Image source={male2} style={styles.image} resizeMode="contain" />
@@ -280,6 +330,5 @@ const styles = StyleSheet.create({
     height: 630,
     transform: [{ scale: 0.6 }],
   },
-
 });
 export default MuscleMan;

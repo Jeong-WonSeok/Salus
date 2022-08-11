@@ -4,7 +4,6 @@ import Exercise from "./navigation/Exercise";
 import Home from "./navigation/Home";
 import * as React from "react";
 import Calendar from "./navigation/Calendar";
-
 const Stack = createNativeStackNavigator();
 
 const App = () => {

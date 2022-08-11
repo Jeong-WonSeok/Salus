@@ -37,231 +37,282 @@ import { Container } from "./../../theme/global-theme";
 
 const Parts = styled.Image`
   position: absolute;
-  width: ${(props) => (props.width ? props.width : "90%")};
-  height: ${(props) => (props.height ? props.height : "80%")};
+  width: ${(props) => (props.width ? props.width : "100%")};
+  height: ${(props) => (props.height ? props.height : "100%")};
   top: ${(props) => (props.top ? props.top : "0%")};
   left: ${(props) => (props.left ? props.left : "0%")};
   transform: ${(props) => (props.scale ? props.scale : "scale(0.1)")};
+  ${(props) => (props.opacity ? props.opacity : 0)};
   z-index: 100;
 `;
 
-const MuscleWoman = () => {
+const MuscleWoman = ({ currentInfo }) => {
   let screenWidth = Dimensions.get("window").width;
   let screenHeight = Dimensions.get("window").height;
   return (
     <Container alignItems="stretch">
-      <Container flex={1} width={screenWidth} height={screenHeight / 2}>
+      <Container flex={1} width={screenWidth} height="60%">
         <Parts
           source={traps_a}
-          top={-75}
-          left={4.2}
+          opacity={
+            currentInfo?.equipmentEnglishStimulate === "traps" ? "1" : "0"
+          }
+          top={-116.7}
+          left={-14.3}
           resizeMode="contain"
-          scale="scale(0.047)"
+          scale="scale(0.044)"
         />
         <Parts
           source={traps_b}
-          top={-75}
-          left={31.1}
+          opacity={currentInfo?.equipmentEnglishStimulate === "traps" ? 1 : 0}
+          top={-116.7}
+          left={13.6}
           resizeMode="contain"
-          scale="scale(0.047)"
+          scale="scale(0.044)"
         />
         <Parts
           source={shoulders_a}
-          top={-59.5}
-          left={-14.5}
+          opacity={
+            currentInfo?.equipmentEnglishStimulate === "shoulders" ? 1 : 0
+          }
+          top={-100.5}
+          left={-33.5}
           resizeMode="contain"
-          scale="scale(0.087)"
+          scale="scale(0.073)"
         />
         <Parts
           source={shoulders_b}
-          top={-59.5}
-          left={50}
+          opacity={
+            currentInfo?.equipmentEnglishStimulate === "shoulders" ? 1 : 0
+          }
+          top={-100.5}
+          left={33.3}
           resizeMode="contain"
-          scale="scale(0.087)"
+          scale="scale(0.073)"
         />
         <Parts
           source={pecs}
-          top={-52}
-          left={17.8}
+          opacity={currentInfo?.equipmentEnglishStimulate === "pecs" ? 1 : 0}
+          top={-93}
+          left={-0.5}
           resizeMode="contain"
-          scale="scale(0.183)"
+          scale="scale(0.17)"
         />
         <Parts
           source={biceps_a}
-          top={-33}
-          left={-20.5}
+          opacity={currentInfo?.equipmentEnglishStimulate === "biceps" ? 1 : 0}
+          top={-73.5}
+          left={-39.7}
           resizeMode="contain"
-          scale="scale(0.11)"
+          scale="scale(0.091)"
         />
         <Parts
           source={biceps_b}
-          top={-33}
-          left={56.4}
+          opacity={currentInfo?.equipmentEnglishStimulate === "biceps" ? 1 : 0}
+          top={-73.5}
+          left={39.6}
           resizeMode="contain"
-          scale="scale(0.11)"
+          scale="scale(0.091)"
         />
         <Parts
           source={forearm_a}
-          top={5}
-          left={-33.5}
+          opacity={currentInfo?.equipmentEnglishStimulate === "forearm" ? 1 : 0}
+          top={-34.4}
+          left={-53.2}
           resizeMode="contain"
-          scale="scale(0.172)"
+          scale="scale(0.141)"
         />
         <Parts
           source={forearm_b}
-          top={4.6}
-          left={68.5}
+          opacity={currentInfo?.equipmentEnglishStimulate === "forearm" ? 1 : 0}
+          top={-34.4}
+          left={52.2}
           resizeMode="contain"
-          scale="scale(0.171)"
+          scale="scale(0.141)"
         />
         <Parts
           source={obliques}
-          top={-15.8}
-          left={17.7}
-          scale="scale(0.137)"
+          opacity={
+            currentInfo?.equipmentEnglishStimulate === "obliques" ? 1 : 0
+          }
+          top={-55.6}
+          left={-0.2}
+          scale="scale(0.115)"
           resizeMode="contain"
         />
         <Parts
           source={quads_a}
-          top={67}
-          left={-1.9}
-          scale="scale(0.28)"
+          opacity={currentInfo?.equipmentEnglishStimulate === "quads" ? 1 : 0}
+          top={30}
+          left={-20.7}
+          scale="scale(0.235)"
           resizeMode="contain"
         />
         <Parts
           source={quads_b}
-          top={67}
-          left={37.3}
-          scale="scale(0.28)"
+          opacity={currentInfo?.equipmentEnglishStimulate === "quads" ? 1 : 0}
+          top={30}
+          left={20}
+          scale="scale(0.235)"
           resizeMode="contain"
         />
         <Parts
           source={calves_a}
-          top={164.8}
-          left={-9.7}
-          scale="scale(0.195)"
+          opacity={currentInfo?.equipmentEnglishStimulate === "calves" ? 1 : 0}
+          top={130}
+          left={-28.5}
+          scale="scale(0.16)"
           resizeMode="contain"
         />
         <Parts
           source={calves_b}
-          top={164.4}
-          left={44.8}
-          scale="scale(0.19)"
+          opacity={currentInfo?.equipmentEnglishStimulate === "calves" ? 1 : 0}
+          top={130}
+          left={27.5}
+          scale="scale(0.16)"
           resizeMode="contain"
         />
         <Image source={female} style={styles.image} resizeMode="contain" />
       </Container>
-      <Container flex={1} width={screenWidth} height={screenHeight / 2}>
+      <Container flex={1} width={screenWidth} height="60%">
         <Parts
           source={back_traps_a}
-          top={-91}
-          left={16.8}
-          scale="scale(0.135)"
+          opacity={currentInfo?.equipmentEnglishStimulate === "traps" ? 1 : 0}
+          top={-130}
+          left={-1}
+          scale="scale(0.11)"
           resizeMode="contain"
         />
         <Parts
           source={back_traps_b}
-          top={-53.1}
-          left={17.1}
-          scale="scale(0.213)"
+          opacity={currentInfo?.equipmentEnglishStimulate === "traps" ? 1 : 0}
+          top={-92.3}
+          left={-1}
+          scale="scale(0.172)"
           resizeMode="contain"
         />
         <Parts
           source={back_shoulders_a}
-          top={-67.5}
-          left={-18}
-          scale="scale(0.092)"
+          opacity={
+            currentInfo?.equipmentEnglishStimulate === "shoulders" ? 1 : 0
+          }
+          top={-106.5}
+          left={-36.5}
+          scale="scale(0.078)"
           resizeMode="contain"
         />
         <Parts
           source={back_shoulders_b}
-          top={-67.5}
-          left={52}
-          scale="scale(0.092)"
+          opacity={
+            currentInfo?.equipmentEnglishStimulate === "shoulders" ? 1 : 0
+          }
+          top={-106.5}
+          left={34.2}
+          scale="scale(0.077)"
           resizeMode="contain"
         />
         <Parts
           source={triceps_a}
-          top={-36.7}
-          left={-24.8}
-          scale="scale(0.138)"
+          opacity={currentInfo?.equipmentEnglishStimulate === "triceps" ? 1 : 0}
+          top={-75.5}
+          left={-43.2}
+          scale="scale(0.11)"
           resizeMode="contain"
         />
         <Parts
           source={triceps_b}
-          top={-36.7}
-          left={58.6}
-          scale="scale(0.138)"
+          opacity={currentInfo?.equipmentEnglishStimulate === "triceps" ? 1 : 0}
+          top={-75.5}
+          left={41.2}
+          scale="scale(0.11)"
           resizeMode="contain"
         />
         <Parts
           source={back_lats_a}
-          top={-16.2}
-          left={2.4}
-          scale="scale(0.2)"
+          opacity={currentInfo?.equipmentEnglishStimulate === "lats" ? 1 : 0}
+          top={-54.5}
+          left={-15.7}
+          scale="scale(0.163)"
           resizeMode="contain"
         />
         <Parts
           source={back_lats_b}
-          top={-16.2}
-          left={31.6}
-          scale="scale(0.2)"
+          opacity={currentInfo?.equipmentEnglishStimulate === "lats" ? 1 : 0}
+          top={-54.5}
+          left={13.7}
+          scale="scale(0.163)"
           resizeMode="contain"
         />
         <Parts
           source={back_lower}
-          top={3.65}
-          left={17.3}
-          scale="scale(0.155)"
+          opacity={currentInfo?.equipmentEnglishStimulate === "lower" ? 1 : 0}
+          top={-34.5}
+          left={-0.9}
+          scale="scale(0.127)"
           resizeMode="contain"
         />
         <Parts
           source={back_forearms_a}
-          top={9.4}
-          left={-35.5}
-          scale="scale(0.176)"
+          opacity={
+            currentInfo?.equipmentEnglishStimulate === "forearms" ? 1 : 0
+          }
+          top={-28.5}
+          left={-54}
+          scale="scale(0.143)"
           resizeMode="contain"
         />
         <Parts
           source={back_forearms_b}
-          top={9.38}
-          left={69.5}
-          scale="scale(0.176)"
+          opacity={
+            currentInfo?.equipmentEnglishStimulate === "forearms" ? 1 : 0
+          }
+          top={-28.5}
+          left={52}
+          scale="scale(0.143)"
           resizeMode="contain"
         />
         <Parts
           source={back_glutes}
-          top={40.5}
-          left={17.1}
-          scale="scale(0.207)"
+          opacity={currentInfo?.equipmentEnglishStimulate === "glutes" ? 1 : 0}
+          top={2.5}
+          left={-1.2}
+          scale="scale(0.188)"
           resizeMode="contain"
         />
         <Parts
           source={back_hamstrings_a}
-          top={90.5}
-          left={-4.4}
-          scale="scale(0.316)"
+          opacity={
+            currentInfo?.equipmentEnglishStimulate === "hamstrings" ? 1 : 0
+          }
+          top={53.2}
+          left={-22.5}
+          scale="scale(0.255)"
           resizeMode="contain"
         />
         <Parts
           source={back_hamstrings_b}
-          top={90.5}
-          left={38.5}
-          scale="scale(0.314)"
+          opacity={
+            currentInfo?.equipmentEnglishStimulate === "hamstrings" ? 1 : 0
+          }
+          top={53.2}
+          left={20.5}
+          scale="scale(0.255)"
           resizeMode="contain"
         />
         <Parts
           source={back_calves_a}
-          top={142.6}
-          left={-8.4}
-          scale="scale(0.144)"
+          opacity={currentInfo?.equipmentEnglishStimulate === "calves" ? 1 : 0}
+          top={105.8}
+          left={-26.9}
+          scale="scale(0.118)"
           resizeMode="contain"
         />
         <Parts
           source={back_calves_b}
-          top={142.6}
-          left={42.7}
-          scale="scale(0.144)"
+          opacity={currentInfo?.equipmentEnglishStimulate === "calves" ? 1 : 0}
+          top={105.8}
+          left={24.9}
+          scale="scale(0.118)"
           resizeMode="contain"
         />
         <Image source={female2} style={styles.image} resizeMode="contain" />
@@ -272,8 +323,8 @@ const MuscleWoman = () => {
 const styles = StyleSheet.create({
   image: {
     width: "100%",
-    height: 800,
-    transform: [{ scale: 0.47 }],
+    height: 630,
+    transform: [{ scale: 0.6 }],
   },
 });
 

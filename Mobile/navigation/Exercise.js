@@ -17,49 +17,56 @@ import React, { useEffect, useRef, useState } from "react";
 import Animated, { SlideInLeft } from "react-native-reanimated";
 import io from "socket.io-client";
 // import LottieView from "lottie-react-native";
-const animated = new Animated.Value(1);
-const fadeIn = () => {
-  Animated.timing(animated, {
-    toValue: 0.4,
-    duration: 10,
-    useNativeDriver: true,
-  }).start();
-};
-const fadeOut = () => {
-  Animated.timing(animated, {
-    toValue: 1,
-    duration: 200,
-    useNativeDriver: true,
-  }).start();
-};
 const screenWidth = Dimensions.get("window").width;
 
 const Exercise = () => {
   // const animation = useRef(null);
-  const [currentInfo, setCurrentInfo] = useState({});
+  const [currentInfo, setCurrentInfo] = useState({
+    equipmentName: "숄더프레스 머신",
+    weightNow: 100,
+    countNow: 10,
+    carlorie: "90",
+    exTime: "09:01",
+    equipmentStimulate: "어깨",
+    equipmentEnglishStimulate: "shoulders",
+    gender: "1",
+  });
   const [ExerciseNow, setExerciseNow] = useState([
-    {id: 1, equipmentName: '숄더프레스 머신', weightNow: 120, countNow: 15},
-    {id: 2, equipmentName: '숄더프레스 머신', weightNow: 120, countNow: 15},
-    {id: 3, equipmentName: '숄더프레스 머신', weightNow: 120, countNow: 15},
-
+    {
+      id: 1,
+      equipmentName: "숄더프레스 머신",
+      weightNow: 120,
+      countNow: 15,
+    },
+    {
+      id: 2,
+      equipmentName: "숄더프레스 머신",
+      weightNow: 100,
+      countNow: 10,
+    },
+    {
+      id: 3,
+      equipmentName: "레그 컬 머신",
+      weightNow: 120,
+      countNow: 4,
+    },
   ]);
   const socket = io.connect("i7b110.p.ssafy.io:3010");
   useEffect(() => {
     socket.on("test", (data) => {
       console.log(data);
-      setCurrentInfo(data[1]);
-      // setExerciseNow(data[0]);
+      setCurrentInfo(data[0][0]);
+      setExerciseNow(data[1]);
     });
     return () => {
       socket.disconnect();
     };
   }, []);
-  
 
   const Items = ({ item }) => {
     return (
       <Animated.View entering={SlideInLeft} style={[styles.modalView]}>
-        <View style={styles.workoutType}>{item.equipmentName}</View>
+        <Text style={styles.workoutType}>{item.equipmentName}</Text>
         {/* <LottieView autoplay={true} source={'./checkmark.json'} ref={animation}></LottieView> */}
         <View>
           <Text style={styles.subtitleText}>중량</Text>
@@ -77,7 +84,7 @@ const Exercise = () => {
   return (
     <Container alignItems="stretch" flexDirection="column">
       <Container flex={2.8} flexDirection="column" style={styles.boxStyle}>
-        <Text style={styles.title}>레그 프레스</Text>
+        <Text style={styles.title}>{currentInfo.equipmentName}</Text>
         <Container justifyContent="space-between" borderRadius={10}>
           <Container flexDirection="column" borderRadius={10}>
             <Text style={styles.category}>횟수</Text>
@@ -88,7 +95,7 @@ const Exercise = () => {
           <Container flexDirection="column" borderRadius={10}>
             <Text style={styles.category}>볼륨</Text>
             <Text style={styles.count}>
-              {currentInfo?.weightNow ? currentInfo.volumeNow : 0}
+              {currentInfo?.weightNow ? currentInfo.weightNow : 0}
             </Text>
           </Container>
         </Container>
@@ -132,14 +139,12 @@ const Exercise = () => {
             />
           </SafeAreaView>
           <Pressable
-            onPressIn={fadeIn}
-            onPressOut={fadeOut}
             onPress={() => setModalVisible(!modalVisible)}
             style={styles.ModalClose}
           >
-            <Animated.View style={styles.button}>
+            <View style={styles.button}>
               <Text style={styles.text}>닫기</Text>
-            </Animated.View>
+            </View>
           </Pressable>
         </Modal>
         <TouchableOpacity
@@ -155,8 +160,11 @@ const Exercise = () => {
           pagingEnabled
           showsHorizontalScrollIndicator={false}
         >
-          <MuscleMan />
-          <MuscleWoman />
+          {currentInfo?.gender ? (
+            <MuscleMan currentInfo={currentInfo} />
+          ) : (
+            <MuscleWoman currentInfo={currentInfo} />
+          )}
         </ScrollView>
       </Container>
     </Container>
@@ -197,7 +205,6 @@ const styles = StyleSheet.create({
     zIndex: 100,
     borderRadius: 30,
     marginTop: 20,
-    marginBottom: 5,
   },
   btnStyle: {
     width: "25%",
@@ -295,18 +302,17 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
   },
   button: {
-    opacity: animated,
     width: screenWidth * 0.6,
     height: 48,
     alignItems: "center",
     borderRadius: 30,
-    paddingTop: 10,
-    marginTop: 100,
+    marginTop: 70,
+    justifyContent: "center",
     backgroundColor: "#7a91ff",
   },
   text: {
     backgroundColor: "transparent",
-    fontSize: 18,
+    fontSize: 22,
     color: "#fff",
     fontWeight: "bold",
     justifyContent: "center",
@@ -314,8 +320,7 @@ const styles = StyleSheet.create({
   ModalClose: {
     justifyContent: "center",
     alignItems: "center",
-    marginTop: 50,
-  }
+  },
 });
 
 export default Exercise;
