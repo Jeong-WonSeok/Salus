@@ -19,6 +19,7 @@ import ExerciseList from '../components/MainExercise/ExerciseList';
 import TimeScroll from '../components/TimeScroll/TimeScroll';
 import React, { useState } from 'react';
 
+
 const Home = ({ navigation }) => {
   const thisweek = [26, 63, 7, 68, 50, 37, 100];
   const timeGoal = 0.59;
@@ -43,6 +44,8 @@ const Home = ({ navigation }) => {
   const minuteHandler = (data) => {
     setNowMinute(data);
   };
+
+
 
   return (
     <ScrollView>

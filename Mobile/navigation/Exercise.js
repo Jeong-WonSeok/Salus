@@ -8,47 +8,70 @@ import {
   Pressable,
   FlatList,
   SafeAreaView,
-
 } from "react-native";
 import { StyleSheet } from "react-native";
 import { Container } from "./../theme/global-theme";
 import MuscleMan from "./../components/ExerciseNow/MuscleMan";
 import MuscleWoman from "./../components/ExerciseNow/MuscleWoman";
-import { useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import Animated, { SlideInLeft } from "react-native-reanimated";
-
-let cnt = 200;
+import io from "socket.io-client";
+// import LottieView from "lottie-react-native";
+const animated = new Animated.Value(1);
+const fadeIn = () => {
+  Animated.timing(animated, {
+    toValue: 0.4,
+    duration: 10,
+    useNativeDriver: true,
+  }).start();
+};
+const fadeOut = () => {
+  Animated.timing(animated, {
+    toValue: 1,
+    duration: 200,
+    useNativeDriver: true,
+  }).start();
+};
+const screenWidth = Dimensions.get("window").width;
 
 const Exercise = () => {
+  // const animation = useRef(null);
+  const [currentInfo, setCurrentInfo] = useState({});
   const [ExerciseNow, setExerciseNow] = useState([
-    { id: 1, weight: 300, count: 10 },
-    { id: 2, weight: 300, count: 10 },
-    { id: 3, weight: 300, count: 10 },
-    { id: 5, weight: 300, count: 10 },
-    { id: 6, weight: 300, count: 10 },
-    { id: 7, weight: 300, count: 10 },
-    { id: 8, weight: 300, count: 10 },
-    { id: 9, weight: 300, count: 10 },
-    { id: 10, weight: 300, count: 10 },
-    { id: 11, weight: 300, count: 10 },
-    { id: 12, weight: 300, count: 10 },
-    { id: 13, weight: 300, count: 10 },
-  ]);
+    {id: 1, equipmentName: '숄더프레스 머신', weightNow: 120, countNow: 15},
+    {id: 2, equipmentName: '숄더프레스 머신', weightNow: 120, countNow: 15},
+    {id: 3, equipmentName: '숄더프레스 머신', weightNow: 120, countNow: 15},
 
-  const Items = ({ item }) =>{
+  ]);
+  const socket = io.connect("i7b110.p.ssafy.io:3010");
+  useEffect(() => {
+    socket.on("test", (data) => {
+      console.log(data);
+      setCurrentInfo(data[1]);
+      // setExerciseNow(data[0]);
+    });
+    return () => {
+      socket.disconnect();
+    };
+  }, []);
+  
+
+  const Items = ({ item }) => {
     return (
-    <Animated.View entering={SlideInLeft} style={[styles.modalView]}>
-      <View>dfdad</View>
-      <View>
-        <Text style={styles.subtitleText}>중량</Text>
-        <Text style={styles.modalText}>{item.weight}</Text>
-      </View>
-      <View>
-        <Text style={styles.subtitleText}>횟수</Text>
-        <Text style={styles.modalText}>{item.count}</Text>
-      </View>
-    </Animated.View>
-  )};
+      <Animated.View entering={SlideInLeft} style={[styles.modalView]}>
+        <View style={styles.workoutType}>{item.equipmentName}</View>
+        {/* <LottieView autoplay={true} source={'./checkmark.json'} ref={animation}></LottieView> */}
+        <View>
+          <Text style={styles.subtitleText}>중량</Text>
+          <Text style={styles.modalText}>{item.weightNow}</Text>
+        </View>
+        <View>
+          <Text style={styles.subtitleText}>횟수</Text>
+          <Text style={styles.modalText}>{item.countNow}</Text>
+        </View>
+      </Animated.View>
+    );
+  };
 
   const [modalVisible, setModalVisible] = useState(false);
   return (
@@ -58,21 +81,29 @@ const Exercise = () => {
         <Container justifyContent="space-between" borderRadius={10}>
           <Container flexDirection="column" borderRadius={10}>
             <Text style={styles.category}>횟수</Text>
-            <Text style={styles.count}>10</Text>
+            <Text style={styles.count}>
+              {currentInfo?.countNow ? currentInfo.countNow : 0}
+            </Text>
           </Container>
           <Container flexDirection="column" borderRadius={10}>
             <Text style={styles.category}>볼륨</Text>
-            <Text style={styles.count}>300</Text>
+            <Text style={styles.count}>
+              {currentInfo?.weightNow ? currentInfo.volumeNow : 0}
+            </Text>
           </Container>
         </Container>
         <Container justifyContent="space-between" mt={30} borderRadius={10}>
           <Container flexDirection="column" borderRadius={10}>
             <Text style={styles.category}>칼로리</Text>
-            <Text style={styles.count}>300</Text>
+            <Text style={styles.count}>
+              {currentInfo?.calorie ? currentInfo.calorie : 0}
+            </Text>
           </Container>
           <Container flexDirection="column" borderRadius={10}>
             <Text style={styles.category}>시간</Text>
-            <Text style={styles.count}>3:15</Text>
+            <Text style={styles.count}>
+              {currentInfo?.exTime ? currentInfo.exTime : "00:00"}
+            </Text>
           </Container>
         </Container>
       </Container>
@@ -90,31 +121,25 @@ const Exercise = () => {
               renderItem={Items}
               keyExtractor={(item) => item.id}
               ListHeaderComponent={() => (
-                <View>
+                <View style={styles.TitleStyle}>
                   <Text style={styles.title}>누적 기록</Text>
                 </View>
               )}
-              ListEmptyComponent={<Text>운동을 시작하세요!</Text>}
+              ListEmptyComponent={
+                <Text style={styles.textNothing}>운동 시작!</Text>
+              }
               extraData={ExerciseNow}
             />
           </SafeAreaView>
-
           <Pressable
-            style={[styles.button, styles.buttonClose]}
+            onPressIn={fadeIn}
+            onPressOut={fadeOut}
             onPress={() => setModalVisible(!modalVisible)}
+            style={styles.ModalClose}
           >
-            <Text style={styles.textStyle}>닫기</Text>
-          </Pressable>
-          <Pressable
-            style={[styles.button, styles.buttonClose]}
-            onPress={() =>
-              setExerciseNow([
-                { id: cnt++, weight: 3000, count: 3000 },
-                ...ExerciseNow,
-              ])
-            }
-          >
-            <Text style={styles.textStyle}>추가하기</Text>
+            <Animated.View style={styles.button}>
+              <Text style={styles.text}>닫기</Text>
+            </Animated.View>
           </Pressable>
         </Modal>
         <TouchableOpacity
@@ -219,7 +244,7 @@ const styles = StyleSheet.create({
     fontSize: 20,
   },
   modalView: {
-    margin: 10,
+    margin: 25,
     flexDirection: "row",
     justifyContent: "space-around",
     backgroundColor: "white",
@@ -237,7 +262,7 @@ const styles = StyleSheet.create({
   },
   modalText: {
     textAlign: "center",
-    fontSize: 30,
+    fontSize: 40,
     fontWeight: "bold",
   },
   modalTitle: {
@@ -245,9 +270,52 @@ const styles = StyleSheet.create({
   },
   subtitleText: {
     textAlign: "center",
-    fontSize: 20,
+    fontSize: 24,
+    color: "#92a3fd",
+    fontWeight: "bold",
     marginBottom: 5,
   },
+  workoutType: {
+    fontSize: 20,
+    position: "absolute",
+    color: "#92a3fd",
+    fontWeight: "bold",
+    left: 6,
+    top: -28,
+    backgroundColor: "white",
+  },
+  TitleStyle: {
+    marginBottom: 20,
+  },
+  textNothing: {
+    marginTop: 230,
+    fontSize: 48,
+    textAlign: "center",
+    color: "#92a3fd",
+    fontWeight: "bold",
+  },
+  button: {
+    opacity: animated,
+    width: screenWidth * 0.6,
+    height: 48,
+    alignItems: "center",
+    borderRadius: 30,
+    paddingTop: 10,
+    marginTop: 100,
+    backgroundColor: "#7a91ff",
+  },
+  text: {
+    backgroundColor: "transparent",
+    fontSize: 18,
+    color: "#fff",
+    fontWeight: "bold",
+    justifyContent: "center",
+  },
+  ModalClose: {
+    justifyContent: "center",
+    alignItems: "center",
+    marginTop: 50,
+  }
 });
 
 export default Exercise;
