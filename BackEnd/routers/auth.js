@@ -4,10 +4,15 @@ const dotenv = require('dotenv');
 var router = express.Router();
 var passport = require('passport');
 const { auth } = require('./authMiddleware');
+const cookieParser = require('cookie-parser');
+const controller = require("../controller/user/UserController");
+
+const app = express();
+
+app.use(cookieParser());
 
 dotenv.config();
 
-const controller = require("../controller/user/UserController");
 
 router.get('/payload', auth, (req,res) => {
   console.log(req.decoded);
@@ -24,7 +29,8 @@ router.get('/payload', auth, (req,res) => {
 
 // 로그인 & 토큰 발급
 router.post('/login', (req, res, next) => {
-  passport.authenticate('local', (authError, user, info) => {
+  passport.authenticate('local', {session: false} , (authError, user, info) => {
+
     if(authError){
       console.error(authError);
       return next(authError);
@@ -34,36 +40,42 @@ router.post('/login', (req, res, next) => {
       return res.redirect(`/?loginError=${info.message}`);
     }
 
-    const token = jwt.sign({
+    const acessToken = jwt.sign({
       type : 'JWT',
       rfidKey : user[0][0].rfidKey,
     }, process.env.JWT_KEY, {
       expiresIn: '15m',
       issuer: 'salus'
     });
-    const refreshToken = jwt.sign({}, 
-      process.env.JWT_KEY, {
+    const refreshToken = jwt.sign(
+      {}, process.env.JWT_KEY, {
         expiresIn: '14d',
         issuer: 'salus'
       });
     
-    console.log(token);
+    console.log('acess', acessToken);
+    console.log('refresh', refreshToken);
 
-    res.cookie('token', token, {maxAge:30 * 60 * 1000}).end();
+    res.cookie('token', acessToken);
     res.cookie('refreshToken', refreshToken);
-    
+    return res.json({
+      token : acessToken,
+      refreshToken,
+    })
   })(req, res, next);
 })
 // router.get("/login", function (req, res) {
 
 //   res.render("auth/login", {user : req.user});
 // });
-
-router.get("/logout", function (req, res, next) {
-  req.logOut();
-  req.session.destroy();
-  res.redirect("/");
+router.get("/logout", (req, res) =>  {
+  res.cookie('token', null, {maxAge: 0});
+  res.cookie('refreshToken', null, {maxAge: 0});
+  return res.json({
+    logout: "완료"
+  })
 });
+
 
 router.get(
   "/google",

@@ -38,15 +38,16 @@
     </select>
 
     <select id="mobileExcerciseData">
-    SELECT equipmentName, weightNow, countNow,
-    ROUND(6 * ROUND((HOUR(TIMEDIFF(endTime, startTime)) * 60 )+ (second(TIMEDIFF(endTime, startTime)) + MINUTE(TIMEDIFF(endTime, startTime)) * 60) / 60) * weightNow / 60) AS calorie,
-    date_format(TIMEDIFF(endTime, startTime), '%i:%s') AS exTime
-    FROM daily_excercise
-    WHERE weightNow = #{weightNow} AND rfidKey = #{rfidKey} AND equipmentName=#{equipmentName}
-    </select>
+    SELECT d.equipmentName, weightNow, countNow, 
+    ROUND(6 * ROUND((HOUR(TIMEDIFF(endTime, startTime)) * 60 )+ (second(TIMEDIFF(endTime, startTime)) + MINUTE(TIMEDIFF(endTime, startTime)) * 60) / 60) * weightNow / 60) AS carlorie,
+    date_format(TIMEDIFF(endTime, startTime), '%i:%s') AS exTime,
+    f.equipmentStimulate, f.equipmentEnglishStimulate, u.gender
+    FROM daily_excercise d 
+	JOIN fitness_equipment f ON d.equipmentName = f.equipmentName
+    JOIN user u on u.rfidKey = d.rfidKey
+    WHERE d.weightNow = #{weightNow} AND d.rfidKey = #{rfidKey} AND d.equipmentName=#{equipmentName} AND d.excerciseDay = DATE(NOW());
 
-    <select id="mobileExcerciseDataList">
-    SELECT equipmentName, weightNow, countNow
+    SELECT ROW_NUMBER() OVER(ORDER BY endTime DESC) as id, equipmentName, weightNow, countNow
     FROM daily_excercise
     WHERE rfidKey = #{rfidKey} 
     AND excerciseDay = DATE(NOW())
