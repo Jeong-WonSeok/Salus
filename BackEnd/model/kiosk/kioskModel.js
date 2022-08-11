@@ -79,6 +79,7 @@ const DailyData = async (req, res) => {
 
 };
 
+<<<<<<< HEAD
 const calendarData = async (req, res) => {
   conn.connect();
   var param = {
@@ -98,7 +99,8 @@ const calendarData = async (req, res) => {
   });
 };
 
-
+=======
+>>>>>>> master
 const equipmentMonthData = async(req, res) =>{
   conn.connect();
   var param = {
@@ -122,6 +124,5 @@ const equipmentMonthData = async(req, res) =>{
 module.exports = {
   DailyData,
   searchUser,
-  equipmentMonthData,
-  calendarData
+  equipmentMonthData
 };
