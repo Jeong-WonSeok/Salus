@@ -33,7 +33,7 @@ GROUP BY d.equipmentName;
 
   <select id="login">
     select rfidKey from user
-    where rfidKey = #{rfidKey} and password = #{password}
+    where rfidKey = #{rfidKey} and email = #{email}
   </select>
 
 <select id="calendarData">

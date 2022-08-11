@@ -2,9 +2,10 @@ var conn = require("../../database/db");
 const mybatisMapper = require("mybatis-mapper");
 
 const mobileLogin = async (req, res) => {
+    console.log(req.body);
     var param = {
-      rfidKey: req.params.rfidKey,
-      password: req.params.password
+      rfidKey: req.body.rfidKey,
+      email: req.body.email
     };
     const format = { language: "sql", indent: "" };
     const query = mybatisMapper.getStatement("mobile", "login", param, format);
@@ -33,7 +34,7 @@ const mobileData = async(req, res) =>{
 }
 
 const calendarData = async(req, res) =>{
-    var param = {
+       var param = {
         rfidKey : req.params.rfidKey,
         searchDay : req.params.searchDay
     }
@@ -61,9 +62,10 @@ const calendarDetailData = async(req, res) =>{
 }
 
 const targetTime = async(req, res)=>{
+    console.log(req.body);
     var param = {
-        rfidKey : req.params.rfidKey,
-        targetTime : req.params.targetTime
+        rfidKey : req.body.rfidKey,
+        targetTime : req.body.targetTime
     }
     const format = { language: "sql", indent: "" };
     const query = mybatisMapper.getStatement("mobile", "targetTime", param, format);
@@ -74,9 +76,10 @@ const targetTime = async(req, res)=>{
 }
 
 const targetVolume = async(req, res)=>{
+    console.log(req.body);
     var param = {
-        rfidKey : req.params.rfidKey,
-        targetVolume : req.params.targetVolume
+        rfidKey : req.body.rfidKey,
+        targetVolume : req.body.targetVolume
     }
     const format = { language: "sql", indent: "" };
     const query = mybatisMapper.getStatement("mobile", "targetVolume", param, format);
