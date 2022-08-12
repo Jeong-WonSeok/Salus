@@ -39,7 +39,6 @@ const Calendar = ({ navigation }) => {
           navigation={navigation}
         ></CalendarForm>
       )}
-      {console.log(events)}
     </Container>
   );
 };
