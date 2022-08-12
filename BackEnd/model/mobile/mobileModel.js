@@ -30,7 +30,6 @@ const mobileData = async(req, res) =>{
     const query = mybatisMapper.getStatement("mobile", "mobileData", param, format);
     conn.query(query, (err, results) => {
         if (err) console.log(err);
-        console.log(results);
         return res.json(results);
       });
 }
@@ -44,7 +43,6 @@ const calendarData = async(req, res) =>{
     const query = mybatisMapper.getStatement("mobile", "calendarData", param, format);
     conn.query(query, (err, results) => {
         if (err) console.log(err);
-        console.log(results);
         return res.json(results);
       });
 }
@@ -58,7 +56,6 @@ const calendarDetailData = async(req, res) =>{
     const query = mybatisMapper.getStatement("mobile", "calendarDetailData", param, format);
     conn.query(query, (err, results) => {
         if (err) console.log(err);
-        console.log(results);
         return res.json(results);
       });
 }
@@ -73,7 +70,6 @@ const targetTime = async(req, res)=>{
     const query = mybatisMapper.getStatement("mobile", "targetTime", param, format);
     conn.query(query, (err, results) => {
         if (err) console.log(err);
-        console.log("성공");
       });
 }
 
@@ -87,7 +83,6 @@ const targetVolume = async(req, res)=>{
     const query = mybatisMapper.getStatement("mobile", "targetVolume", param, format);
     conn.query(query, (err, results) => {
         if (err) console.log(err);
-        console.log("성공");
       });
 }
 module.exports = {

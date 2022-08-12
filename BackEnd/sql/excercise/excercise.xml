@@ -30,16 +30,16 @@
     </update>
 
     <update id="isStarted">
-    UPDATE fitness_equipment SET isStarted = IF(isStarted=0,1,0) WHERE equipmentId = #{equipmentId};
+    UPDATE fitness_equipment SET isStarted = IF(isStarted=0,1,0) WHERE equipmentName = #{equipmentName};
     </update>
 
     <select id="returnRasp">
-    SELECT equipmentId, equipmentName, isStarted FROM fitness_equipment WHERE equipmentId = #{equipmentId};
+    SELECT equipmentName, isStarted FROM fitness_equipment WHERE equipmentName = #{equipmentName};
     </select>
 
     <select id="mobileExcerciseData">
     SELECT d.equipmentName, weightNow, countNow, 
-    ROUND(6 * ROUND((HOUR(TIMEDIFF(endTime, startTime)) * 60 )+ (second(TIMEDIFF(endTime, startTime)) + MINUTE(TIMEDIFF(endTime, startTime)) * 60) / 60) * weightNow / 60) AS carlorie,
+    ROUND(SUM((6 * (3.5 * u.weight * (ROUND((HOUR(TIMEDIFF(d.endtime, d.startTime)) * 60 )+ (second(TIMEDIFF(d.endtime, d.startTime)) + MINUTE(TIMEDIFF(d.endtime, d.startTime)) * 60) / 60)))) / 1000 * 5)) AS "calorie",
     date_format(TIMEDIFF(endTime, startTime), '%i:%s') AS exTime,
     f.equipmentStimulate, f.equipmentEnglishStimulate, u.gender
     FROM daily_excercise d 
