@@ -6,17 +6,14 @@ module.exports = (server) => {
 	
     io.on('connection', async (socket) => {
         socket.on('rfidLogin', (data) => {
-            const loginCheck = await kioskModel.searchUser({
-                params : { rfidKey : data.rfidKey}
-            })
+            io.emit('rfidcheck', data.rfidKey);   
             const todayCheck = await kioskModel.todayCheck({
                 params : { rfidKey : data.rfidKey}
             })
             var isLoggedIn = {
                 isLoggedIn : todayCheck[0][0].attendanceCheck
             }
-                socket.on('rfidLoginRecieved', isLoggedIn)
-                io.emit('rfidcheck', (data));   
+            await socket.emit('rfidLoginRecieved', isLoggedIn)
         });
         socket.on('equipmentStart', async (data) => {
             const isStarted = await exModel.updateIsStarted( {
