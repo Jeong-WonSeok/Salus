@@ -31,26 +31,7 @@ const Exercise = () => {
     equipmentEnglishStimulate: "shoulders",
     gender: "1",
   });
-  const [ExerciseNow, setExerciseNow] = useState([
-    {
-      id: 1,
-      equipmentName: "숄더프레스 머신",
-      weightNow: 120,
-      countNow: 15,
-    },
-    {
-      id: 2,
-      equipmentName: "숄더프레스 머신",
-      weightNow: 100,
-      countNow: 10,
-    },
-    {
-      id: 3,
-      equipmentName: "레그 컬 머신",
-      weightNow: 120,
-      countNow: 4,
-    },
-  ]);
+  const [ExerciseNow, setExerciseNow] = useState([]);
   const socket = io.connect("i7b110.p.ssafy.io:3010");
   useEffect(() => {
     socket.on("test", (data) => {
