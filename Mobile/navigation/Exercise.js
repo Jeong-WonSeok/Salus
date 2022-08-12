@@ -21,28 +21,23 @@ const screenWidth = Dimensions.get("window").width;
 
 const Exercise = () => {
   // const animation = useRef(null);
-  const [currentInfo, setCurrentInfo] = useState({
-    equipmentName: "숄더프레스 머신",
-    weightNow: 100,
-    countNow: 10,
-    carlorie: "90",
-    exTime: "09:01",
-    equipmentStimulate: "어깨",
-    equipmentEnglishStimulate: "shoulders",
-    gender: "1",
-  });
+  const [currentInfo, setCurrentInfo] = useState({});
   const [ExerciseNow, setExerciseNow] = useState([]);
-  const socket = io.connect("i7b110.p.ssafy.io:3010");
+  const [loading, setLoading] = useState(true);
+  const socket = io.connect("i7b110.p.ssafy.io:3010", {
+    transports: ["websocket"],
+  });
   useEffect(() => {
     socket.on("test", (data) => {
-      console.log(data);
       setCurrentInfo(data[0][0]);
       setExerciseNow(data[1]);
     });
+    setLoading(false);
     return () => {
       socket.disconnect();
     };
   }, []);
+
 
   const Items = ({ item }) => {
     return (
@@ -62,10 +57,11 @@ const Exercise = () => {
   };
 
   const [modalVisible, setModalVisible] = useState(false);
+  if (loading) {return <Text>Loading</Text>}
   return (
     <Container alignItems="stretch" flexDirection="column">
       <Container flex={2.8} flexDirection="column" style={styles.boxStyle}>
-        <Text style={styles.title}>{currentInfo.equipmentName}</Text>
+        <Text style={styles.title}>{currentInfo?.equipmentName}</Text>
         <Container justifyContent="space-between" borderRadius={10}>
           <Container flexDirection="column" borderRadius={10}>
             <Text style={styles.category}>횟수</Text>
@@ -299,8 +295,9 @@ const styles = StyleSheet.create({
     justifyContent: "center",
   },
   ModalClose: {
-    justifyContent: "center",
-    alignItems: "center",
+    position: 'absolute',
+    bottom: 35,
+    left: screenWidth/2 - 108,
   },
 });
 

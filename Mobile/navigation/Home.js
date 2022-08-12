@@ -23,30 +23,6 @@ import TimeScroll from '../components/TimeScroll/TimeScroll';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import React, { Fragment, useState, useCallback, useEffect } from 'react';
 import useHttp from '../hooks/useHttp';
-import { LinearGradient } from 'expo-linear-gradient';
-import logo from '../assets/logo/logo.png';
-import moment from 'moment';
-import axios from 'axios';
-
-const screenWidth = Dimensions.get('window').width;
-const screenHeight = Dimensions.get('window').height;
-
-const animated = new Animated.Value(1);
-const fadeIn = () => {
-  Animated.timing(animated, {
-    toValue: 0.4,
-    duration: 10,
-    useNativeDriver: true,
-  }).start();
-};
-const fadeOut = () => {
-  Animated.timing(animated, {
-    toValue: 1,
-    duration: 200,
-    useNativeDriver: true,
-  }).start();
-};
-
 
 const Home = ({ navigation }) => {
   const { apiRequest } = useHttp();
@@ -178,8 +154,6 @@ const Home = ({ navigation }) => {
     AsyncStorage.removeItem('@user_id');
     navigation.navigate('SplashScreen');
   };
-
-
 
   return (
     <Fragment>

@@ -57,7 +57,7 @@ const MuscleMan = ({ currentInfo }) => {
         <Parts
           source={traps_a}
           opacity={
-            currentInfo?.equipmentEnglishStimulate === "traps" ? "1" : "0"
+            currentInfo?.equipmentEnglishStimulate === "traps" ? 1 : 0
           }
           top={-91.5}
           left={-14.5}
