@@ -7,5 +7,5 @@ const searchEquipMonthData = KioskModel.equipmentMonthData;
 module.exports = {
   dailyData,
   userInfo,
-  searchEquipMonthData
+  searchEquipMonthData,
 };

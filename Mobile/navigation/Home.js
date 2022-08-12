@@ -161,9 +161,8 @@ const Home = ({ navigation }) => {
             </Container>
           </Container>
           <Container flex={5} flexDirection="column">
-            <Container justifyContent="space-between" mb={5}>
-              <Text style={styles.exercise}>완료한 운동</Text>
-              <Text style={styles.detail}>상세보기 &gt;</Text>
+            <Container mb={5}>
+              <Text style={styles.exercise}>오늘 완료한 운동</Text>
             </Container>
             <Container>
               <ExerciseList data={exerciseData} />

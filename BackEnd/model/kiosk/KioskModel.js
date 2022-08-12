@@ -1,6 +1,7 @@
 var conn = require("../../database/db");
 const mybatisMapper = require("mybatis-mapper");
 
+
 const searchUser = async (req, res) => {
   var param = {
     rfidKey: req.params.rfidKey,
@@ -70,7 +71,7 @@ const DailyData = async (req, res) => {
   const format = { language: "sql", indent: "" };
   const query = mybatisMapper.getStatement("kiosk", "DailyData", param, format);
   // let result = {};
-   const result = await conn.promise().query(query);
+  const result = await conn.promise().query(query);
   
   return res.json(result[0]);  
 
