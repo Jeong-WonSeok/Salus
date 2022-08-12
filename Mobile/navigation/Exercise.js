@@ -24,33 +24,20 @@ const Exercise = () => {
   const [currentInfo, setCurrentInfo] = useState({});
   const [ExerciseNow, setExerciseNow] = useState([]);
   const [loading, setLoading] = useState(true);
-  // const socket = io.connect("i7b110.p.ssafy.io:3010", {
-  //   transports: ["websocket"],
-  // });
-  // useEffect(() => {
-    
-  //   socket.on("test", (data) => {
-  //     console.log(data);
-  //     setCurrentInfo(data[0][0]);
-  //     setExerciseNow(data[1]);
-  //   });
-  //   setLoading(false);
-  //   return () => {
-  //     socket.disconnect();
-  //   };
-  // }, []);
-  const socket = io("i7b110.p.ssafy.io:3010");
+  const socket = io.connect("i7b110.p.ssafy.io:3010", {
+    transports: ["websocket"],
+  });
   useEffect(() => {
-    
     socket.on("test", (data) => {
-      console.log(data);
       setCurrentInfo(data[0][0]);
       setExerciseNow(data[1]);
     });
     setLoading(false);
-    
+    return () => {
+      socket.disconnect();
+    };
   }, []);
-  
+
 
   const Items = ({ item }) => {
     return (
