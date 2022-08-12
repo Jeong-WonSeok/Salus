@@ -27,7 +27,7 @@ const updateIsStarted = async (req, res) =>{
 
 //현재 운동 측정 값 받아오기
 const excerciseData = async (req, res) => {
-  // console.log(req.query)
+  // console.log(req.params);
   const param = {
     excerciseDay: req.params.excerciseDay,
     weightNow: req.params.weightNow,
@@ -45,7 +45,7 @@ const excerciseData = async (req, res) => {
     console.log('select', results);
     if (err) console.log(err);
     //만약 운동데이터가 없다면 새로 만들고 횟수 1 넣어줌
-    else if (results.length === 0) {
+    if (results.length === 0) {
       const query = mybatisMapper.getStatement(
         "dailyexcercise",
         "insertExcercise",
@@ -55,7 +55,7 @@ const excerciseData = async (req, res) => {
       conn.query(query, (err, results) => {
         if (err) console.log(err);
         // console.log(results);
-        return res.json(results);
+        return results;
       });
     }
     //만약 운동데이터가 있다면 카운트 + 1
@@ -68,8 +68,8 @@ const excerciseData = async (req, res) => {
       );
       conn.query(query, (err, results) => {
         if (err) console.log(err);
-        console.log(results);
-        return res.json(results);
+        
+        return results;
       });
     }
   });
@@ -90,7 +90,7 @@ const mobileExcerciseData = async (req, res) =>{
     format
   );
   const result = await conn.promise().query(query);
-  return res.json(result[0]);
+  return result[0];
 }
 
 // // 모바일로 운동데이터 리스트 보냄

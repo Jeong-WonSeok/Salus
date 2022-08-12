@@ -2,7 +2,7 @@ var conn = require("../../database/db");
 const mybatisMapper = require("mybatis-mapper");
 
 const mobileLogin = async (req, res) => {
-    console.log(req.body);
+    console.log('body',req.body);
     var param = {
       rfidKey: req.body.rfidKey,
       email: req.body.email
@@ -11,13 +11,15 @@ const mobileLogin = async (req, res) => {
     const query = mybatisMapper.getStatement("mobile", "login", param, format);
     conn.query(query, (err, results) => {
         if (err) console.log(err);
-        console.log(results[0]);
-        if (results.length != 0){
-            var rfidKey = results[0].rfidKey;
-            return res.redirect("/mobile/user/" + rfidKey);
-        }
+	if (results.length != 0){
+            return res.json(results[0]);
+	} else{
+		var error ={
+			rfidKey: "failed"
+		}
+	    return res.json(error);
+	}
       });
-      return ;
 }
 
 const mobileData = async(req, res) =>{

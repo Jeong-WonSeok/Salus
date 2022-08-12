@@ -16,7 +16,7 @@
     insert into daily_excercise
     (weightNow, startTime, endTime, countNow, equipmentName, excerciseDay, rfidKey)
     values
-    (#{weightNow}, NOW(), NOW() ,1, #{equipmentName}, #{excerciseDay}, #{rfidKey})
+    (#{weightNow}, NOW(), NOW(),1, #{equipmentName}, #{excerciseDay}, #{rfidKey})
     </insert>
 
     <!-- 운동 데이터 수정-->

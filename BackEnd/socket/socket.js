@@ -3,21 +3,39 @@ const exModel = require("../model/excercise/excerciseModel");
 
 module.exports = (server) => {
     const io = SocketIO(server, {path: '/socket.io'});
-
+	
     io.on('connection', async (socket) => {
-        socket.on('equipmentdata', async (data) => {
+	console.log('aa');
+        socket.on('equipmentdata', async (adata) => {
             console.log(data);
             const test = await exModel.updateIsStarted( {
                 params : { equipmentId : data.equipmentId }
             })
-            console.log(test[0][0]);
+            console.log('equipmentdata', test[0][0]);
             socket.emit('equipmentRfidRecieved', test[0][0]);
         })
-        socket.on('RFIDLogin', (data) => {
+        socket.on('rfidLogin', (data) => {
                 console.log("check:",data);
-                io.emit('RFIDcheck', (data));
+                io.emit('rfidcheck', (data));
         });
-        //     var test = { rfidKey : 977237223725};
-        // socket.emit('test', { count : 5, volume : 40,  calorie : 50, time: '01:03' } );
+        await exModel.excerciseData({
+		params:{
+			excerciseDay : '2022-08-12',
+		        weightNow : 50,
+		        equipmentName : '토탈 힙',
+		        rfidKey: 977237223725
+		}
+	})
+	    //     var test = { rfidKey : 977237223725};
+	const mobiledata = await exModel.mobileExcerciseData( {
+		params : {
+			weightNow : 50,
+			equipmentName: "토탈 힙",
+			rfidKey: "977237223725"
+		}
+	})
+	
+	console.log('mobile', mobiledata);
+        socket.emit('test', mobiledata);
     });
 }
