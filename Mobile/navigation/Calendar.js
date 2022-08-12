@@ -11,7 +11,9 @@ const Calendar = ({ navigation }) => {
   const rfid = "977237223725";
   const { apiRequest } = useHttp();
   const [events, setEvents] = useState();
+  const [dailyExerciseDatas, setDailyExerciseDatas] = useState();
   const [loading, setLoading] = useState(true);
+  const [loading2, setLoading2] = useState(true);
   const getEventsData = useCallback((data) => {
     setEvents(data);
     setLoading(false);
@@ -26,6 +28,20 @@ const Calendar = ({ navigation }) => {
       getEventsData
     );
   }, [apiRequest, getEventsData, value]);
+  const getDailyData = useCallback((data) => {
+    setDailyExerciseDatas(data);
+    setLoading2(false);
+  }, []);
+  useEffect(() => {
+    apiRequest(
+      {
+        url: `http://i7b110.p.ssafy.io:3010/mobile/calendarDetail/${rfid}/${value.format(
+          "YY-MM-DD"
+        )}`,
+      },
+      getDailyData
+    );
+  }, [apiRequest, getDailyData, value]);
 
   return (
     <Container alignItems="stretch" mt={30}>

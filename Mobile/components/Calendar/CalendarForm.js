@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { StyleSheet, View, Text, Dimensions } from "react-native";
 import CalendarHeader from "./Components/CalendarHeader";
 import Day from "./Components/Day";
@@ -7,61 +7,35 @@ import React from "react";
 import { ScrollView } from "react-native";
 import DailyExerciseList from "./Components/DailyExerciseList";
 import { Container } from "../../theme/global-theme";
+import useHttp from "../../hooks/useHttp";
 
-const CalendarForm = ({ value, onChange, events, navigation }) => {
+const CalendarForm = ({ value, onChange, events }) => {
+  const rfid = "977237223725";
+  const { apiRequest } = useHttp();
   const [calendar, setCalendar] = useState([]);
-
+  const [dailyExerciseDatas, setDailyExerciseDatas] = useState();
+  const [loading2, setLoading2] = useState(true);
   useEffect(() => {
     setCalendar(buildCalendar(value));
   }, [value]);
 
-  const [selectData, setSelectData] = useState("");
-
+  const getDailyData = useCallback((data) => {
+    setDailyExerciseDatas(data);
+    setLoading2(false);
+  }, []);
   useEffect(() => {
-    let date = "";
-    for (const data of events) {
-      if (value.isSame(data.excerciseDay, "day")) {
-        date = data;
-        setSelectData(data);
-      }
-    }
-    if (value.isSame(date.excerciseDay, "day") !== true) {
-      setSelectData("");
-    }
-  }, [events, value]);
+    apiRequest(
+      {
+        url: `http://i7b110.p.ssafy.io:3010/mobile/calendarDetail/${rfid}/${value.format(
+          "YY-MM-DD"
+        )}`,
+      },
+      getDailyData
+    );
+  }, [apiRequest, getDailyData, value]);
 
-  const exerciseData = [
-    {
-      equipmentName: "런닝머신",
-      totalCount: 0,
-      totalVolume: "0",
-      totalCalorie: "536",
-      totalTime: "75",
-    },
-    {
-      equipmentName: "숄더프레스 머신",
-      totalCount: 50,
-      totalVolume: "4000",
-      totalCalorie: "428",
-      totalTime: "60",
-    },
-    {
-      equipmentName: "체스트 프레스 머신",
-      totalCount: 40,
-      totalVolume: "2600",
-      totalCalorie: "286",
-      totalTime: "40",
-    },
-    {
-      equipmentName: "토탈 힙",
-      totalCount: 25,
-      totalVolume: "975",
-      totalCalorie: "20563",
-      totalTime: "2880",
-    },
-  ];
-
-  const Items = (selectData, exerciseData) => {
+  const Items = (dailyDatas) => {
+    console.log(dailyDatas);
     return (
       <View>
         <Container flexDirection="column" background={"#EDEEF4"}>
@@ -70,13 +44,13 @@ const CalendarForm = ({ value, onChange, events, navigation }) => {
               <View style={styles.column}>
                 <Text style={styles.list}>총횟수</Text>
                 <Text style={styles.detail}>
-                  {selectData?.totalCount || "-"}
+                  {dailyDatas[0]?.totalCount || "-"}
                 </Text>
               </View>
               <View style={styles.column}>
                 <Text style={styles.list}>총볼륨</Text>
                 <Text style={styles.detail}>
-                  {selectData?.totalWeight || "-"}
+                  {dailyDatas[0]?.totalWeight || "-"}
                 </Text>
               </View>
             </View>
@@ -84,19 +58,19 @@ const CalendarForm = ({ value, onChange, events, navigation }) => {
               <View style={styles.column}>
                 <Text style={styles.list}>칼로리</Text>
                 <Text style={styles.detail}>
-                  {selectData?.totalCalorie || "-"}
+                  {dailyDatas[0]?.totalCalorie || "-"}
                 </Text>
               </View>
               <View style={styles.column}>
                 <Text style={styles.list}>시간</Text>
                 <Text style={styles.detail}>
-                  {selectData?.totalCategoryTime || "-"}
+                  {dailyDatas[0]?.totalCategoryTime || "-"}
                 </Text>
               </View>
             </View>
           </View>
         </Container>
-        <DailyExerciseList data={exerciseData} color={"#EDEEF4"} />
+        <DailyExerciseList data={dailyDatas[1]} color={"#EDEEF4"} />
       </View>
     );
   };
@@ -128,10 +102,11 @@ const CalendarForm = ({ value, onChange, events, navigation }) => {
           </View>
         ))}
       </View>
-
-      <ScrollView style={styles.info}>
-        {Items(selectData, exerciseData)}
-      </ScrollView>
+      {loading2 ? (
+        <Text>loading</Text>
+      ) : (
+        <ScrollView style={styles.info}>{Items(dailyExerciseDatas)}</ScrollView>
+      )}
     </View>
   );
 };
