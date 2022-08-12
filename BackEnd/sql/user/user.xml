@@ -35,6 +35,6 @@
 
   <select id="login">
     select * from user
-    where rfidKey = #{rfidKey} and password = #{password}
+    where rfidKey = #{rfidKey} and email = #{email}
   </select>
 </mapper>

@@ -1,0 +1,41 @@
+var conn = require("../../database/db");
+const mybatisMapper = require("mybatis-mapper");
+
+const createJWT = async(req, res) => {
+    console.log(req.param);
+    param = {
+        refreshToken : req.param.refreshToken,
+        email : req.param.email
+    }
+    const format = { language: "sql", indent: "" };
+    const query = mybatisMapper.getStatement( "jwt", "createJWT", param, format)
+    conn.query(query);
+}
+
+const selectJWT = async(req, res) =>{
+    console.log('param', req.param)
+    param = {
+        refreshToken : req.param.refreshToken
+    }
+    const format = { language: "sql", indent: ""};
+    const query = mybatisMapper.getStatement( "jwt", "selectJWT", param, format)
+    const result = await conn.promise().query(query);
+    return result;
+}
+
+const updateJWT = async(req,res) => {
+    console.log('param', req.param)
+    param = {
+        refreshToken : req.param.refreshToken,
+        email : req.param.email
+    }
+    const format = { language: "sql", indent: ""};
+    const query = mybatisMapper.getStatement( "jwt", "updateJWT", param, format);
+    conn.query(query);
+
+}
+module.exports = {
+    createJWT,
+    selectJWT,
+    updateJWT
+}

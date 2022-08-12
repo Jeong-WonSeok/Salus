@@ -5,6 +5,7 @@ var router = express.Router();
 var passport = require('passport');
 const { auth } = require('./authMiddleware');
 const cookieParser = require('cookie-parser');
+const JWTmodel = require('../model/jwt/jwtModel');
 // const controller = require("../controller/user/UserController");
 
 const app = express();
@@ -14,14 +15,13 @@ app.use(cookieParser());
 dotenv.config();
 
 router.get('/payload', auth, (req,res) => {
-  console.log(req.decoded);
-  const rfidKey = req.decoded.rfidKey;
-
+  const email = jwt.verify(req.cookies.token, process.env.JWT_KEY).email;
+  console.log(email);
   return res.status(200).json({
     code:200,
     message: '토큰은 정상입니다.',
     data: {
-      rfidKey : rfidKey,
+      email : email,
     }
   })
 })
@@ -41,19 +41,23 @@ router.post('/login', (req, res, next) => {
 
     const acessToken = jwt.sign({
       type : 'JWT',
-      rfidKey : user[0][0].rfidKey,
+      email : user[0][0].email,
     }, process.env.JWT_KEY, {
       expiresIn: '15m',
       issuer: 'salus'
     });
+    
     const refreshToken = jwt.sign(
       {}, process.env.JWT_KEY, {
         expiresIn: '14d',
         issuer: 'salus'
-      });
+    });
     
-    console.log('acess', acessToken);
-    console.log('refresh', refreshToken);
+    JWTmodel.createJWT( {
+      param : {
+        refreshToken: refreshToken,
+        email: user[0][0].email
+    }})
 
     res.cookie('token', acessToken);
     res.cookie('refreshToken', refreshToken);

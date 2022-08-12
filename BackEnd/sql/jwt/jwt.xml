@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="jwt">  
+    <insert id='createJWT'>
+        insert into
+        token (refreshToken, email)
+        VALUE (#{refreshToken}, #{email});
+    </insert>
+
+    <select id='selectJWT'>
+        select email
+        from token
+        where refreshToken = #{refreshToken}
+    </select>
+
+    <update id="updateJWT">
+        update token
+        set refreshToken = #{refreshToken}
+        where email = #{email}
+    </update>
+</mapper>

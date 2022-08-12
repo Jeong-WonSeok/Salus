@@ -1,6 +1,18 @@
 var conn = require("../../database/db");
 const mybatisMapper = require("mybatis-mapper");
 
+const userLogin = async (req, res) => {
+    console.log(req.body);
+    var param = {
+      rfidKey: req.body.rfidKey,
+      email: req.body.email
+    };
+    const format = { language: "sql", indent: "" };
+    const query = mybatisMapper.getStatement("user", "login", param, format);
+
+    const result = await conn.promise().query(query);
+    return result;
+}
 const mobileLogin = async (req, res) => {
     console.log(req.body);
     var param = {
@@ -8,16 +20,17 @@ const mobileLogin = async (req, res) => {
       email: req.body.email
     };
     const format = { language: "sql", indent: "" };
-    const query = mybatisMapper.getStatement("mobile", "login", param, format);
     conn.query(query, (err, results) => {
         if (err) console.log(err);
         console.log(results[0]);
         if (results.length != 0){
             var rfidKey = results[0].rfidKey;
             return res.redirect("/mobile/user/" + rfidKey);
+        }else {
+            throw Error('로그인 정보가 없습니다.');
         }
       });
-      return ;
+    return;
 }
 
 const mobileData = async(req, res) =>{
@@ -94,5 +107,6 @@ module.exports = {
     calendarData,
     calendarDetailData,
     targetTime,
-    targetVolume
+    targetVolume,
+    userLogin
   };

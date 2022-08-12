@@ -6,18 +6,22 @@ const mobileController = require('../controller/mobile/mobileController');
 
 module.exports = () => {
     passport.use(new LocalStrategy ({
-        usernameField: 'rfidKey',
-        passwordfield: 'password',
+        usernameField: 'email',
+        passwordField: 'rfidKey',
     }, 
-    async (rfidKey, password, done) => {
+    async (email, rfidKey, done) => {
         try{
-            const exUser = await mobileController.mobileLoginData({ user : {
-                rfidKey : rfidKey, 
-                password : password
-            }});
-            console.log('exUser', exUser[0]);
-            if(exUser){
-                if(password === exUser[0][0].password){
+            const exUser = await mobileController.userLogin(
+                { 
+                    body : {
+                        email : email,
+                        rfidKey : rfidKey, 
+                    }
+                });
+            console.log('exUser', exUser[0][0].rfidKey);
+            console.log(rfidKey)
+            if(exUser[0][0]){
+                if(rfidKey == exUser[0][0].rfidKey){
                     console.log('test');
                     done(null, exUser);
                 }else{
@@ -28,7 +32,7 @@ module.exports = () => {
                 console.log('test3');
                 done(null, false, {message : '가입되지 않은 회원입니다.'});
             }
-        }catch (error) {
+        } catch (error) {
             console.error(error);
             done(error);
         }
