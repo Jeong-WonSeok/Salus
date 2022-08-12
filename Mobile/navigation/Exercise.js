@@ -15,8 +15,7 @@ import MuscleMan from "./../components/ExerciseNow/MuscleMan";
 import MuscleWoman from "./../components/ExerciseNow/MuscleWoman";
 import React, { useEffect, useRef, useState } from "react";
 import Animated, { SlideInLeft } from "react-native-reanimated";
-// import io from "socket.io-client";
-import SocketIO from "react-native-socket-io-wrapper";
+import io from "socket.io-client";
 // import LottieView from "lottie-react-native";
 const screenWidth = Dimensions.get("window").width;
 
@@ -40,22 +39,17 @@ const Exercise = () => {
   //     socket.disconnect();
   //   };
   // }, []);
-  const socketIO = new SocketIO.connect("i7b110.p.ssafy.io:3010", {
-    transports: ["websocket"],
-  });
+  const socket = io("i7b110.p.ssafy.io:3010");
   useEffect(() => {
     
-    socketIO.on("test", (data) => {
+    socket.on("test", (data) => {
       console.log(data);
       setCurrentInfo(data[0][0]);
       setExerciseNow(data[1]);
     });
     setLoading(false);
-    return () => {
-      socket.disconnect();
-    };
+    
   }, []);
-  
   
 
   const Items = ({ item }) => {

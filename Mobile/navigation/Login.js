@@ -122,6 +122,7 @@ const Login = ({ navigation }) => {
             </Animated.View>
           </Pressable>
           <Button title="캘린더" onPress={() => navigation.navigate('Calendar')} />
+          <Button title="운동" onPress={() => navigation.navigate('Exercise')} />
         </Container>
       </TouchableWithoutFeedback>
     </KeyboardAvoidingView>

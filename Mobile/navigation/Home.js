@@ -19,6 +19,8 @@ import ExerciseList from '../components/MainExercise/ExerciseList';
 import TimeScroll from '../components/TimeScroll/TimeScroll';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import React, { useState } from 'react';
+import useHttp from '../hooks/useHttp';
+
 
 const Home = ({ navigation }) => {
   const { apiRequest } = useHttp();
@@ -101,6 +103,72 @@ const Home = ({ navigation }) => {
   const minuteHandler = (data) => {
     setNowMinute(data);
   };
+
+  // const getData = useCallback((data) => {
+  //   setData(data);
+  //   setLoading(false);
+  // }, []);
+
+  //데이터 받아오기
+  // useEffect(() => {
+  //   apiRequest(
+  //     {
+  //       url: `http://i7b110.p.ssafy.io:3010/mobile/user${user_id}`,
+  //     },
+  //     getData
+  //   );
+  // }, [apiRequest, getData, myHour, myMinute, myVolume]);
+
+  const timeData = {
+    rfidKEy: user_id,
+    targetTime:
+      (String(myHour).length == 1 ? '0' + myHour : myHour) +
+      ':' +
+      (String(myMinute).length == 1 ? '0' + myMinute : myMinute) +
+      ':' +
+      '00',
+  };
+  const volumeData = {
+    rfidKEy: user_id,
+    targetVolume: myVolume,
+  };
+
+  // 목표 시간 설정
+  const TimeFunc = () => {
+    fetch('http://i7b110.p.ssafy.io:3010/mobile/updateTime', {
+      method: 'POST',
+      body: JSON.stringify(timeData),
+    })
+      .then((response) => response.json())
+      .then((responseJson) => {
+        console.log(responseJson);
+        if (responseJson) {
+          setTimeModal(!timeModal);
+        }
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+
+  // 목표 볼륨 설정
+  const VolumeFunc = () => {
+    fetch('http://i7b110.p.ssafy.io:3010/mobile/updateVolume', {
+      method: 'POST',
+      body: JSON.stringify(volumeData),
+    })
+      .then((response) => response.json())
+      .then((responseJson) => {
+        console.log(responseJson);
+        if (responseJson) {
+          setTimeModal(!volumeModal);
+        }
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+
 
   return (
     <ScrollView>
