@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { Div } from "../../styles/web.style";
+import { Div } from "../../../../src/styles/web.style";
 export const Label = styled.label`
   display: block;
   height: 100%;
@@ -29,7 +29,6 @@ export const StyledDiv = styled(Div)`
   background: linear-gradient(284.21deg, #92a3fd -7.95%, #9dceff 138.55%);
   border-radius: 5px;
   transition: all 0.35s ease;
-  
 `;
 
 export const NewDiv = styled(Div)`
@@ -75,7 +74,6 @@ export const NewDiv = styled(Div)`
     display: none;
   }
 `;
-
 
 export const Section = styled.section`
   background-color: white;
