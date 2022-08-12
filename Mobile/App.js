@@ -3,6 +3,7 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import Exercise from './navigation/Exercise';
 import Home from './navigation/Home';
 import Login from './navigation/Login';
+import SplashScreen from './navigation/SplashScreen';
 import * as React from 'react';
 import Calendar from './navigation/Calendar';
 
@@ -11,12 +12,20 @@ const Stack = createNativeStackNavigator();
 const App = () => {
   return (
     <NavigationContainer>
-      <Stack.Navigator initialRouteName="Login">
+      <Stack.Navigator initialRouteName="SplashScreen">
+        <Stack.Screen
+          name="SplashScreen"
+          component={SplashScreen}
+          options={{
+            headerShown: false,
+          }}
+        />
         <Stack.Screen
           name="Login"
           component={Login}
           options={{
             headerShown: false,
+            animation: 'fade_from_bottom',
           }}
         />
         <Stack.Screen
@@ -24,6 +33,7 @@ const App = () => {
           component={Home}
           options={{
             headerShown: false,
+            animation: 'fade',
           }}
         />
         <Stack.Screen
