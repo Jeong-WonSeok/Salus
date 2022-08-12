@@ -55,7 +55,7 @@ const MuscleWoman = ({ currentInfo }) => {
         <Parts
           source={traps_a}
           opacity={
-            currentInfo?.equipmentEnglishStimulate === "traps" ? "1" : "0"
+            currentInfo?.equipmentEnglishStimulate === "traps" ? 1 : 0
           }
           top={-116.7}
           left={-14.3}
