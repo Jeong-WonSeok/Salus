@@ -106,12 +106,12 @@ const TimePicker = ({ width, buttonHeight, visibleCount, onHour, onMinute, myHou
       <OverlayView />
       <ScrollView {...scrollProps[1]} contentOffset={{ y: myHour * 50 }}>
         {fillEmpty(visibleCount, range(0, 71)).map((item, index) => (
-          <Button label={item} onPress={getOnPress(1, index, item)} dir="left" />
+          <Button label={item} onPress={getOnPress(1, index, item)} dir="left" key={index} />
         ))}
       </ScrollView>
       <ScrollView {...scrollProps[2]} contentOffset={{ y: myMinute * 5 }}>
         {fillEmpty(visibleCount, range(0, 60, 10)).map((item, index) => (
-          <Button label={item} onPress={getOnPress(2, index, item)} />
+          <Button label={item} onPress={getOnPress(2, index, item)} key={index} />
         ))}
       </ScrollView>
     </View>

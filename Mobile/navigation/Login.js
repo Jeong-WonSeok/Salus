@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import {
   Image,
   StyleSheet,
@@ -11,11 +11,14 @@ import {
   TouchableWithoutFeedback,
   KeyboardAvoidingView,
   Platform,
+  Button,
 } from 'react-native';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import { LinearGradient } from 'expo-linear-gradient';
 import { Container } from '../theme/global-theme';
 import { validateEmail, removeWhitespace } from '../utils/login';
 import logo from '../assets/logo/logo.png';
+import axios from 'axios';
 
 const screenWidth = Dimensions.get('window').width;
 const screenHeight = Dimensions.get('window').height;
@@ -41,6 +44,7 @@ const Login = ({ navigation }) => {
   const [rfid, setRfid] = useState('');
   const [emailErrorMessage, setEmailErrorMessage] = useState('');
   const [rfidErrorMessage, setRfidErrorMessage] = useState('');
+  const ref_input2 = useRef();
 
   const handleEmailChange = (email) => {
     clearTimeout(searchWaiting);
@@ -55,6 +59,28 @@ const Login = ({ navigation }) => {
     setRfid(removeWhitespace(rfid));
   };
 
+  const data = {
+    rfidKey: rfid,
+    email: email,
+  };
+
+  const LoginFunc = async () => {
+    axios({
+      url: 'http://i7b110.p.ssafy.io:3010/mobile/login',
+      method: 'post',
+      data: data,
+    })
+      .then((res) => {
+        if (res.data.rfidKey === 'failed') {
+          setRfidErrorMessage('이메일과 카드키 번호를 다시 확인해주세요');
+        } else {
+          AsyncStorage.setItem('@user_id', String(res.data.rfidKey));
+          navigation.replace('Home');
+        }
+      })
+      .catch((err) => console.log(err.message));
+  };
+
   return (
     <KeyboardAvoidingView behavior={Platform.OS === 'ios' ? 'padding' : 'height'} style={styles.container}>
       <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
@@ -67,6 +93,11 @@ const Login = ({ navigation }) => {
             style={emailErrorMessage ? styles.err : styles.input}
             autoCapitalize="none"
             placeholder="이메일"
+            returnKeyType="next"
+            onSubmitEditing={() => {
+              ref_input2.current.focus();
+            }}
+            blurOnSubmit={false}
           />
           <Text style={styles.errtext}>{emailErrorMessage}</Text>
           <TextInput
@@ -74,13 +105,21 @@ const Login = ({ navigation }) => {
             style={rfidErrorMessage ? styles.err : styles.input}
             autoCapitalize="none"
             placeholder="헬스장에서 받은 카드키 번호를 입력해주세요."
+            ref={ref_input2}
           />
           <Text style={styles.errtext}>{rfidErrorMessage}</Text>
-          <Pressable onPressIn={fadeIn} onPressOut={fadeOut} onPress={() => navigation.navigate('Home')}>
-            <Animated.View style={styles.button}>
+          <Pressable
+            onPressIn={fadeIn}
+            onPressOut={fadeOut}
+            onPress={LoginFunc}
+            disabled={emailErrorMessage ? true : false}
+          >
+            <Animated.View style={[styles.button, emailErrorMessage ? styles.disabled : null]}>
               <Text style={styles.text}>로그인</Text>
             </Animated.View>
           </Pressable>
+          <Button title="캘린더" onPress={() => navigation.navigate('Calendar')} />
+          <Button title="메인페이지" onPress={() => navigation.navigate('Home')} />
         </Container>
       </TouchableWithoutFeedback>
     </KeyboardAvoidingView>
@@ -156,6 +195,9 @@ const styles = StyleSheet.create({
   },
   errtext: {
     color: 'red',
+  },
+  disabled: {
+    backgroundColor: '#96989d',
   },
 });
 
