@@ -19,14 +19,22 @@ const CalendarHeader = ({ value, setValue }) => {
   }
   return (
     <View style={styles.header}>
-      <TouchableOpacity onPress={() => setValue(prevMonth())}>
-        <Text>{"<"}</Text>
+      <TouchableOpacity
+        onPress={() => setValue(prevMonth())}
+        style={styles.spacing}
+      >
+        <Text style={styles.text}>{"<"}</Text>
       </TouchableOpacity>
       <View>
-        {currMonthName()} {currYear()}
+        <Text>
+          {currMonthName()} {currYear()}
+        </Text>
       </View>
-      <TouchableOpacity onPress={() => setValue(nextMonth())}>
-        <Text>{">"}</Text>
+      <TouchableOpacity
+        onPress={() => setValue(nextMonth())}
+        style={styles.spacing}
+      >
+        <Text style={styles.text}>{">"}</Text>
       </TouchableOpacity>
     </View>
   );
@@ -38,14 +46,24 @@ const styles = StyleSheet.create({
     backgroundColor: "white",
     textAlign: "center",
     color: "#92a3fd",
-    fontWeight: 700,
+    fontWeight: "bold",
     marginTop: "2.5%",
-    marginBottom: "2.5%",
-    height: "10%",
+    // marginBottom: "2.5%",
+    // height: "10%",
     flexDirection: "row",
     justifyContent: "space-between",
+    height: 50,
   },
-  button: {},
+  spacing: {
+    marginLeft: 5,
+    marginRight: 5,
+    width: "30%",
+    textAlign: "center",
+  },
+  text: {
+    textAlign: "center",
+    fontWeight: "bold",
+  },
 });
 
 export default CalendarHeader;

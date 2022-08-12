@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import CalendarForm from "../components/Calendar/CalendarForm";
+import CalendarForm from "../../../src/components/Calendar/CalendarForm";
 import moment from "moment";
 
 const CalendarPage = () => {
