@@ -27,7 +27,7 @@ const updateIsStarted = async (req, res) =>{
 
 //현재 운동 측정 값 받아오기
 const excerciseData = async (req, res) => {
-  // console.log(req.query)
+  console.log(req.params)
   const param = {
     excerciseDay: req.params.excerciseDay,
     weightNow: req.params.weightNow,

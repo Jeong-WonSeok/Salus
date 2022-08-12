@@ -17,7 +17,7 @@ const mobileLogin = async (req, res) => {
             return res.redirect("/mobile/user/" + rfidKey);
         }
       });
-      return ;
+    return ;
 }
 
 const mobileData = async(req, res) =>{
