@@ -1,6 +1,6 @@
 import React from "react";
-import { Div, CustomDiv } from "../../../src/styles/web.style";
-import MenuTabBar from "../../../src/components/Equipments/MenuTabBar";
+import { Div, CustomDiv } from "../styles/web.style";
+import MenuTabBar from './../components/Equipments/MenuTabBar';
 
 const EquipmentListPage = () => {
   return (

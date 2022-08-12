@@ -1,8 +1,8 @@
-import React, { useState } from "react";
-import styled from "styled-components";
+import React, { useState } from 'react';
+import styled from 'styled-components';
 
-import FindId from "../../../src/components/Auth/FindId";
-import FindPw from "../../../src/components/Auth/FindPw";
+import FindId from '../components/Auth/FindId';
+import FindPw from '../components/Auth/FindPw';
 
 const Wrapper = styled.div`
   width: 785px;
@@ -19,18 +19,18 @@ const Font = styled.span`
   position: relative;
 
   ::after {
-    content: "";
+    content: '';
     position: absolute;
     left: 0;
     bottom: -10px;
-    width: ${(props) => (props.IsFindId ? "100%" : "0px")};
+    width: ${(props) => (props.IsFindId ? '100%' : '0px')};
     height: 4px;
     margin: 5px 0 0;
     transition: all 0.2s ease-in-out;
     transition-duration: 0.3s;
     opacity: 0;
     background: linear-gradient(284.21deg, #92a3fd -7.95%, #9dceff 138.55%);
-    opacity: ${(props) => (props.IsFindId ? "1" : "0")};
+    opacity: ${(props) => (props.IsFindId ? '1' : '0')};
   }
 
   &:hover::after {
@@ -40,10 +40,10 @@ const Font = styled.span`
 `;
 
 const Div = styled.div`
-  margin-bottom: ${(props) => (props.mb ? props.mb + "px" : 0)};
-  margin-top: ${(props) => (props.mt ? props.mt + "px" : 0)};
-  margin-right: ${(props) => (props.mr ? props.mr + "px" : 0)};
-  margin-left: ${(props) => (props.ml ? props.ml + "px" : 0)};
+  margin-bottom: ${(props) => (props.mb ? props.mb + 'px' : 0)};
+  margin-top: ${(props) => (props.mt ? props.mt + 'px' : 0)};
+  margin-right: ${(props) => (props.mr ? props.mr + 'px' : 0)};
+  margin-left: ${(props) => (props.ml ? props.ml + 'px' : 0)};
   width: 100%;
 `;
 
