@@ -22,12 +22,11 @@ const updateIsStarted = async (req, res) =>{
     );
     const result2 = await conn.promise().query(query2);
     return result2;
-  } else return "뭐 없음";
+  }
 };
 
 //현재 운동 측정 값 받아오기
 const excerciseData = async (req, res) => {
-  // console.log(req.params);
   const param = {
     excerciseDay: req.params.excerciseDay,
     weightNow: req.params.weightNow,
@@ -42,7 +41,6 @@ const excerciseData = async (req, res) => {
     format
   );
   conn.query(query, (err, results) => {
-    console.log('select', results);
     if (err) console.log(err);
     //만약 운동데이터가 없다면 새로 만들고 횟수 1 넣어줌
     if (results.length === 0) {
@@ -54,7 +52,6 @@ const excerciseData = async (req, res) => {
       );
       conn.query(query, (err, results) => {
         if (err) console.log(err);
-        // console.log(results);
         return results;
       });
     }
@@ -68,7 +65,6 @@ const excerciseData = async (req, res) => {
       );
       conn.query(query, (err, results) => {
         if (err) console.log(err);
-        
         return results;
       });
     }
@@ -93,25 +89,10 @@ const mobileExcerciseData = async (req, res) =>{
   return result[0];
 }
 
-// // 모바일로 운동데이터 리스트 보냄
-// const mobileExcerciseDataList = async (req, res) =>{
-//   const param = {
-//     rfidKey: req.params.rfidKey,
-//   };
-//   const format = { language: "sql", indent: "" };
-//   const query = mybatisMapper.getStatement(
-//     "dailyexcercise",
-//     "mobileExcerciseDataList",
-//     param,
-//     format
-//   );
-//   const result = await conn.promise().query(query);1
-//   return res.json(result[0]);
-// }
+
 
 module.exports = {
   excerciseData,
   updateIsStarted,
   mobileExcerciseData,
-// mobileExcerciseDataList
 };

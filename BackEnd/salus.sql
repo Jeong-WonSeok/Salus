@@ -61,7 +61,7 @@ CREATE TABLE IF NOT EXISTS `daily_excercise` (
   KEY `FK2_equipmentName` (`equipmentName`),
   KEY `FK_daily_excercise_user` (`rfidKey`),
   CONSTRAINT `FK_daily_excercise_user` FOREIGN KEY (`rfidKey`) REFERENCES `user` (`rfidKey`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=72 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=75 DEFAULT CHARSET=utf8mb4;
 
 -- 테이블 데이터 salus.daily_excercise:~55 rows (대략적) 내보내기
 /*!40000 ALTER TABLE `daily_excercise` DISABLE KEYS */;
@@ -124,7 +124,10 @@ INSERT INTO `daily_excercise` (`dailyExcerciseId`, `equipmentName`, `startTime`,
 	(68, '숄더프레스 머신', '2022-08-11 11:42:45', '2022-08-11 11:52:45', 100, 10, '2022-08-11', '2022-08-11 11:43:09', '2022-08-11 11:43:10', 977237223725),
 	(69, '숄더프레스 머신', '2022-08-11 11:53:00', '2022-08-11 12:03:59', 110, 10, '2022-08-11', '2022-08-11 11:43:31', '2022-08-11 14:02:11', 977237223725),
 	(70, '레그 컬 머신', '2022-08-11 12:05:00', '2022-08-11 12:15:00', 60, 30, '2022-08-11', '2022-08-11 15:18:56', '2022-08-11 15:19:28', 977237223725),
-	(71, '레그 컬 머신', '2022-08-11 12:16:00', '2022-08-11 12:26:00', 70, 20, '2022-08-11', '2022-08-11 15:19:14', '2022-08-11 15:19:30', 977237223725);
+	(71, '레그 컬 머신', '2022-08-11 12:16:00', '2022-08-11 12:26:00', 70, 20, '2022-08-11', '2022-08-11 15:19:14', '2022-08-11 15:19:30', 977237223725),
+	(72, '체스트 프레스 머신', '2022-08-12 11:00:00', '2022-08-12 11:25:00', 60, 50, '2022-08-12', '2022-08-12 10:26:26', '2022-08-12 10:26:27', 977237223725),
+	(73, '토탈 힙', '2022-08-12 11:30:00', '2022-08-12 11:45:00', 40, 30, '2022-08-12', '2022-08-12 10:27:05', '2022-08-12 10:27:06', 977237223725),
+	(74, '런닝머신', '2022-08-12 11:50:00', '2022-08-12 12:30:00', 0, 0, '2022-08-12', '2022-08-12 10:27:47', '2022-08-12 10:27:47', 977237223725);
 /*!40000 ALTER TABLE `daily_excercise` ENABLE KEYS */;
 
 -- 테이블 salus.fitness_equipment 구조 내보내기
@@ -218,7 +221,7 @@ CREATE TABLE IF NOT EXISTS `user` (
 /*!40000 ALTER TABLE `user` DISABLE KEYS */;
 INSERT INTO `user` (`rfidKey`, `email`, `name`, `password`, `phone`, `birthDay`, `gender`, `targetTime`, `targetVolume`, `firstRegist`, `updateRegist`, `weight`) VALUES
 	(11111111, 'tset@gmail.com', '테스트', '1234', '', NULL, '', NULL, NULL, '2022-08-05 14:08:46', '2022-08-05 14:08:48', 0),
-	(977237223725, 'sbpark0402@gmail.com', '박성배', '1234', '01020649961', '1995-11-05', '1', '16:00:00', 60000, '2022-08-04 14:21:10', '2022-08-11 17:01:09', 68);
+	(977237223725, 'sbpark0402@gmail.com', '박성배', '1234', '01020649961', '1995-11-05', '1', '16:00:00', 50000, '2022-08-04 14:21:10', '2022-08-12 00:15:48', 68);
 /*!40000 ALTER TABLE `user` ENABLE KEYS */;
 
 /*!40101 SET SQL_MODE=IFNULL(@OLD_SQL_MODE, '') */;

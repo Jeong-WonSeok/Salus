@@ -1,9 +1,6 @@
 const express = require("express");
 const router = express.Router();
 
-/** KAKAO 로그인 관련 router*/
-const auth = require("./auth");
-
 /** 키오스크 관련 router */
 const kiosk = require("./kiosk");
 
@@ -12,25 +9,11 @@ const excercise = require("./excercise");
 
 /** 모바일 관련 router */
 const mobile = require("./mobile");
-router.get("/", function (req, res) {
-  res.render("main");
-  // res.render("main", { user: req.user });
-});
 
-router.use("/auth", auth);
 router.use("/kiosk", kiosk);
 router.use("/excercise", excercise);
 router.use("/mobile", mobile);
-router.get("/", function (req, res) {
-  res.render("main", { user: req.user });
-});
 
-router.get("/signup", (req, res) => {
-  res.render("signup", { email: req.user.email, name: req.user.displayName });
-});
 
-/** 헬스 기구 관련 router */
-const equipment = require("./equipment");
-router.use("/equip", equipment);
 
 module.exports = router;
