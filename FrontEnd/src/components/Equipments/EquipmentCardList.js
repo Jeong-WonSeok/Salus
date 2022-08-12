@@ -1,8 +1,10 @@
 import React from "react";
 import EquipmentCard from "./EquipmentCard";
-import { Div } from "../../../../src/styles/web.style";
+import { Div } from "./../../styles/web.style";
 
 const EquipmentCardList = ({ equipmentData }) => {
+
+
   return (
     <Div displayDiv="flex" flexWrap="wrap" ml="200px">
       {equipmentData.map((val, idx) => (

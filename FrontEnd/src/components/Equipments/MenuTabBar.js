@@ -1,7 +1,7 @@
 import React, { useState } from "react";
-import { Div, CustomDiv } from "../../../../src/styles/web.style";
-import { Label, StyledDiv, NewDiv, Section } from "./MenuTabBar.style";
-import EquipmentCardList from "./EquipmentCardList";
+import { Div, CustomDiv } from "../../styles/web.style";
+import { Label, StyledDiv, NewDiv, Section } from "./MenuTabBar.style"
+import EquipmentCardList from './EquipmentCardList';
 
 const MenuTabBar = () => {
   const [check, setCheck] = useState("option1");

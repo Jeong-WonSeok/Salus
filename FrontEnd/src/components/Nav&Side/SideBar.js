@@ -1,11 +1,11 @@
-import { NavLink } from "react-router-dom";
+import { NavLink } from 'react-router-dom';
 
-import styled from "styled-components";
+import styled from 'styled-components';
 
-import main from "../../assets/images/nav&side/main.png";
-import note from "../../assets/images/nav&side/note.png";
-import calendar from "../../assets/images/nav&side/calendar.png";
-import fitness from "../../assets/images/nav&side/gym.png";
+import main from '../../assets/images/nav&side/main.png';
+import note from '../../assets/images/nav&side/note.png';
+import calendar from '../../assets/images/nav&side/calendar.png';
+import fitness from '../../assets/images/nav&side/gym.png';
 
 const Div = styled.div`
   background: white;
@@ -42,10 +42,8 @@ const NavStyle = styled(NavLink)`
       -webkit-background-clip: text;
     }
     & .menuImg {
-      -webkit-filter: invert(59%) sepia(61%) saturate(771%) hue-rotate(197deg)
-        brightness(100%) contrast(101%);
-      filter: invert(59%) sepia(61%) saturate(771%) hue-rotate(197deg)
-        brightness(100%) contrast(101%);
+      -webkit-filter: invert(59%) sepia(61%) saturate(771%) hue-rotate(197deg) brightness(100%) contrast(101%);
+      filter: invert(59%) sepia(61%) saturate(771%) hue-rotate(197deg) brightness(100%) contrast(101%);
     }
   }
 `;

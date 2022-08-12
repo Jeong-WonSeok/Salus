@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
-import { CustomDiv, Div } from "../../../../src/styles/web.style";
-import { RoundButton } from "../../../../src/components/Common/RoundButton";
+import { CustomDiv, Div } from "./../../styles/web.style";
+import { RoundButton } from "./../Common/RoundButton";
 
 const Img = styled.img`
   width: 100%;
@@ -10,14 +10,7 @@ const Img = styled.img`
 
 const EquipmentCard = () => {
   return (
-    <CustomDiv
-      mt="20px"
-      ml="50px"
-      mr="50px"
-      mb="60px"
-      divWidth="13%"
-      borderRadius="10px"
-    >
+    <CustomDiv mt="20px" ml="50px" mr="50px" mb="60px" divWidth="13%" borderRadius="10px">
       <CustomDiv
         divWidth="139px"
         divHeight="190px"
