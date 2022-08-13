@@ -1,0 +1,10 @@
+<h1> Main </h1>
+
+<script src = "/socket.io/socket.io.js"></script>
+<script>
+	const socket = io.connect('http://i7b110.p.ssafy.io:3010', {path : '/socket.io'});
+	console.log("소켓 연결");
+	//socket.on('test' , (data) => {
+	//	console.log(data);
+	//});
+</script>

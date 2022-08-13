@@ -1,18 +1,22 @@
 const SocketIO = require('socket.io');
 const exModel = require("../model/excercise/excerciseModel");
 const kioskModel = require("../model/kiosk/kioskModel");
+
 module.exports = (server) => {
-    const io = SocketIO(server, {path: '/socket.io'});
+    const io = SocketIO(server, {path: '/socket.io', cors: {origin:'*'}} );
 	
     io.on('connection', async (socket) => {
         socket.on('rfidLogin', async (data) => {
             io.emit('rfidcheck', data.rfidKey);   
             const todayCheck = await kioskModel.todayCheck({
                 params : { rfidKey : data.rfidKey}
-            })
+            });
             var isLoggedIn = {
                 isLoggedIn : todayCheck[0][0].attendanceCheck
-            }
+            };
+	    const loginCheck = await kioskModel.searchUser({
+		    params : { rfidKey : data.rfidKey }
+	    });
             await socket.emit('rfidLoginRecieved', isLoggedIn)
         });
         socket.on('equipmentStart', async (data) => {
@@ -42,7 +46,7 @@ module.exports = (server) => {
 
         await exModel.excerciseData({
 		params:{
-			excerciseDay : '2022-08-12',
+			excerciseDay : '2022-08-13',
 		        weightNow : 50,
 		        equipmentName : '토탈 힙',
 		        rfidKey: 977237223725
@@ -57,6 +61,8 @@ module.exports = (server) => {
 	})
 	
 	console.log('mobile', mobiledata);
-        socket.emit('test', mobiledata);
+	setInterval( () => {
+		io.emit('test', mobiledata);
+	}, 30000);
     });
 }

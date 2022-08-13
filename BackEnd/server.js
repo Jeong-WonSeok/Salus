@@ -17,6 +17,7 @@ const app = express();
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 
+app.set("view engine", "ejs");
 app.use(
   session({ secret: "MySecret", resave: false, saveUninitialized: true })
 );
@@ -39,3 +40,5 @@ const server = app.listen(3010, () => {
   console.log("Salus Server started 3010");
 });
 webSocket(server);
+
+
