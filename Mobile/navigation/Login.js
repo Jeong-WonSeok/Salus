@@ -13,10 +13,12 @@ import {
   Platform,
   Button,
 } from 'react-native';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import { LinearGradient } from 'expo-linear-gradient';
 import { Container } from '../theme/global-theme';
 import { validateEmail, removeWhitespace } from '../utils/login';
 import logo from '../assets/logo/logo.png';
+import axios from 'axios';
 
 const screenWidth = Dimensions.get('window').width;
 const screenHeight = Dimensions.get('window').height;
@@ -62,26 +64,21 @@ const Login = ({ navigation }) => {
     email: email,
   };
 
-  const LoginFunc = () => {
-    fetch('http://i7b110.p.ssafy.io:3010/mobile/login', {
-      method: 'POST',
-      body: JSON.stringify(data),
+  const LoginFunc = async () => {
+    axios({
+      url: 'http://i7b110.p.ssafy.io:3010/mobile/login',
+      method: 'post',
+      data: data,
     })
-      .then((response) => response.json())
-      .then((responseJson) => {
-        console.log(responseJson);
-        if (responseJson) {
-          AsyncStorage.setItem('user_id', rfid);
-          console.log(rfid);
-          navigation.replace('Home');
-        } else {
+      .then((res) => {
+        if (res.data.rfidKey === 'failed') {
           setRfidErrorMessage('이메일과 카드키 번호를 다시 확인해주세요');
-          console.log('Please check your id or password');
+        } else {
+          AsyncStorage.setItem('@user_id', String(res.data.rfidKey));
+          navigation.replace('Home');
         }
       })
-      .catch((error) => {
-        console.log(error);
-      });
+      .catch((err) => console.log(err.message));
   };
 
   return (
@@ -122,6 +119,7 @@ const Login = ({ navigation }) => {
             </Animated.View>
           </Pressable>
           <Button title="캘린더" onPress={() => navigation.navigate('Calendar')} />
+          <Button title="메인페이지" onPress={() => navigation.navigate('Home')} />
         </Container>
       </TouchableWithoutFeedback>
     </KeyboardAvoidingView>

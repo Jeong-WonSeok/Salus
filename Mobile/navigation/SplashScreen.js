@@ -17,7 +17,10 @@ const SplashScreen = ({ navigation }) => {
     setTimeout(() => {
       setAnimating(false);
       // rfid키가 저장되어 있는 경우 메인페이지로 가고, 아닌경우 로그인 페이지로 이동
-      AsyncStorage.getItem('user_id').then((value) => navigation.replace(value === null ? 'Login' : 'Home'));
+      AsyncStorage.getItem('@user_id').then((value) => {
+        // console.log(value);
+        navigation.replace(value === null ? 'Login' : 'Home');
+      });
     }, 3000);
   }, []);
 

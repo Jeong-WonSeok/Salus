@@ -13,6 +13,11 @@ const List = styled.div`
   background-origin: border-box;
   background-clip: content-box, border-box;
   margin: 0 auto;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  margin-top: 0.5rem;
+  flex: 0 0 auto;
 `;
 
 const Title = styled.div`
@@ -33,7 +38,7 @@ const ExerciseList = (props) => {
 
   return (
     <Div>
-      <List className="d-flex justify-content-around align-items-center mt-2 col-6"
+      <List
       onClick={toggleModal}
       >
         <Title>{props.title}</Title>
