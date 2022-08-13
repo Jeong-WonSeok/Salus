@@ -61,7 +61,7 @@ const Exercise = () => {
           setExerciseNow(data?.data[1]);
         })
         .catch((err) => console.log(err.message));
-    }, 1500);
+    }, 500);
   }, [userId]);
 
   const Items = ({ item }) => {
