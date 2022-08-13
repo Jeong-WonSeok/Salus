@@ -12,12 +12,13 @@ dotenv.config({ path: path.join(__dirname, "/.env") });
 const webSocket = require("./socket/socket");
 
 const app = express();
-passportConfig();
+
 
 // bodyParser
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 
+app.set("view engine", "ejs");
 app.use(
   session({ secret: "MySecret", resave: false, saveUninitialized: true })
 );
@@ -30,7 +31,6 @@ app.use(cors({
 app.use(cookieParser());
 app.use(routers);
 app.use("/", require("./routers"));
-app.use("/auth", require("./routers/auth"));
 
 // swagger
 const { swaggerUi, specs } = require("./swagger/swagger");
@@ -42,3 +42,5 @@ const server = app.listen(3010, () => {
 });
 
 webSocket(server);
+
+

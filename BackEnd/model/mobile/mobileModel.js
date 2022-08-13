@@ -70,6 +70,8 @@ const targetTime = async(req, res)=>{
     const query = mybatisMapper.getStatement("mobile", "targetTime", param, format);
     conn.query(query, (err, results) => {
         if (err) console.log(err);
+	    console.log("성공");
+	    return res.json(results);
       });
 }
 
@@ -83,6 +85,8 @@ const targetVolume = async(req, res)=>{
     const query = mybatisMapper.getStatement("mobile", "targetVolume", param, format);
     conn.query(query, (err, results) => {
         if (err) console.log(err);
+	    console.log("성공");
+	    return res.json(results);
       });
 }
 module.exports = {
