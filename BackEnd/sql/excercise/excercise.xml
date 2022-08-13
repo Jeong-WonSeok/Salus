@@ -54,5 +54,9 @@
     ORDER BY endTime DESC;
     </select>
 
+    <select id="nowtest">
+    SELECT weightNow, equipmentName, rfidKey FROM daily_excercise where rfidKey = #{rfidKey}
+    ORDER BY updateRegist desc LIMIT 1;
+    </select>
 
 </mapper>

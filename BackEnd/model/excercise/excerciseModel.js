@@ -86,13 +86,34 @@ const mobileExcerciseData = async (req, res) =>{
     format
   );
   const result = await conn.promise().query(query);
-  return result[0];
+  return res.json(result[0]);
 }
 
-
+const nowTest = async (req, res) =>{
+  console.log("여기옴");
+  const param = {
+    rfidKey: req.params.rfidKey,
+  };
+  const format = { language: "sql", indent: "" };
+  const query = mybatisMapper.getStatement(
+    "dailyexcercise",
+    "nowtest",
+    param,
+    format
+  );
+  conn.query(query, (err, results) => {
+    if (err) console.log(err);
+    console.log("여기옴2");
+    var weightNow = results[0].weightNow;
+    var equipmentName = results[0].equipmentName;
+    var rfidKey = results[0].rfidKey;
+    return res.redirect("/excercise/mobile/" + weightNow +"/" +equipmentName +"/" + rfidKey);
+  });
+}
 
 module.exports = {
   excerciseData,
   updateIsStarted,
   mobileExcerciseData,
+  nowTest
 };

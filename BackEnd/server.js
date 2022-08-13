@@ -12,7 +12,6 @@ dotenv.config({ path: path.join(__dirname, "/.env") });
 const webSocket = require("./socket/socket");
 
 const app = express();
-passportConfig();
 
 // bodyParser
 app.use(bodyParser.json());
@@ -30,7 +29,6 @@ app.use(cors({
 app.use(cookieParser());
 app.use(routers);
 app.use("/", require("./routers"));
-app.use("/auth", require("./routers/auth"));
 
 // swagger
 const { swaggerUi, specs } = require("./swagger/swagger");
@@ -40,5 +38,4 @@ app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(specs));
 const server = app.listen(3010, () => {
   console.log("Salus Server started 3010");
 });
-
 webSocket(server);
