@@ -1,10 +1,10 @@
-import React from 'react';
-import { CustomDiv, Div } from '../../styles/kiosk.style';
-import styled from 'styled-components';
-import RoundChart from '../RoundChart';
+import React from "react";
+import { CustomDiv, Div } from "../../styles/kiosk.style";
+import styled from "styled-components";
+import RoundChart from "../RoundChart";
 
 const FontCustomDiv = styled(CustomDiv)`
-  font-family: 'Pretendard-Regular';
+  font-family: "Pretendard-Regular";
 `;
 
 const ChartDiv = styled(Div)`
@@ -21,9 +21,9 @@ const ChartDiv = styled(Div)`
 const InfoDiv = styled(Div)`
   position: absolute;
   height: 3vh;
-  width: ${(props) => (props.width ? props.width + 'vw' : '20vw')};
+  width: ${(props) => (props.width ? props.width + "vw" : "20vw")};
   top: 3vh;
-  left: ${(props) => (props.left ? props.left + 'vw' : '')};
+  left: ${(props) => (props.left ? props.left + "vw" : "")};
   padding: 0.7vh;
   display: none;
   background: white;
@@ -32,7 +32,7 @@ const InfoDiv = styled(Div)`
   color: rgba(0, 0, 0, 0.7);
 `;
 
-const StatsWeekly = ({ratioData}) => {
+const StatsWeekly = ({ ratioData }) => {
   return (
     <FontCustomDiv
       divWidth={250}
@@ -117,6 +117,7 @@ const StatsWeekly = ({ratioData}) => {
             <Div displayDiv="flex" flexDirection="column" alignItems="center">
               <Div fontSize="1.5rem">운동 시간</Div>
               <Div fontSize="3rem">{parseInt(ratioData[3] * 100)}</Div>
+              {console.log(ratioData)}
               <Div fontSize="1rem">%</Div>
             </Div>
           </RoundChart>
