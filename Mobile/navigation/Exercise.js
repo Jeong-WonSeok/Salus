@@ -32,17 +32,37 @@ const Exercise = () => {
     gender: "1",
   });
   const [ExerciseNow, setExerciseNow] = useState([]);
-  const socket = io.connect("i7b110.p.ssafy.io:3010");
+  // const socket = io.connect("i7b110.p.ssafy.io:3010");
+  // useEffect(() => {
+  //   socket.on("test", (data) => {
+  //     console.log(data);
+  //     setCurrentInfo(data[0][0]);
+  //     setExerciseNow(data[1]);
+  //   });
+  //   return () => {
+  //     socket.disconnect();
+  //   };
+  // }, []);
+  const [userId, setUserId] = useState();
+
   useEffect(() => {
-    socket.on("test", (data) => {
-      console.log(data);
-      setCurrentInfo(data[0][0]);
-      setExerciseNow(data[1]);
+    AsyncStorage.getItem("@user_id").then((value) => {
+      setUserId(value);
     });
-    return () => {
-      socket.disconnect();
-    };
-  }, []);
+
+    setInterval(() => {
+      axios({
+        method: "get",
+        url: `http://i7b110.p.ssafy.io:3010/excercise/now/977237223725`,
+      })
+        .then((data) => {
+          // console.log(data.data);
+          setCurrentInfo(data?.data[0][0]);
+          setExerciseNow(data?.data[1]);
+        })
+        .catch((err) => console.log(err.message));
+    }, 500);
+  }, [userId]);
 
   const Items = ({ item }) => {
     return (
