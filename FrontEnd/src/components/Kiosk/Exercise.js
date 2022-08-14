@@ -8,6 +8,7 @@ const Div = styled.div`
   border-radius: 0.625rem;
   margin-left: 3.5vw;
   font-family: 'Pretendard-Regular';
+  display: flex;
 `;
 
 const ListDiv = styled.div`
@@ -46,7 +47,7 @@ const Exercise = (props) => {
     }
   });
   return (
-    <Div className="white-bg d-flex">
+    <Div>
       <ListDiv>{even}</ListDiv>
       <ListDiv>{odd}</ListDiv>
     </Div>

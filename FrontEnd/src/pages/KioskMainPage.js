@@ -18,7 +18,7 @@ import { useEffect } from "react";
 import { useCallback } from "react";
 import { ChartCalc } from "./../api-request/functions";
 import LoadingText from "./../components/Kiosk/LoadingText";
-import { useNavigate } from 'react-router-dom';
+import { useNavigate } from "react-router-dom";
 
 const HomeDiv = styled(Div)`
   position: absolute;
@@ -41,9 +41,9 @@ const KioskMainPage = () => {
   const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
   const removeRFID = () => {
-    localStorage.removeItem('RFID')
+    localStorage.removeItem("RFID");
     navigate("/kiosk/login");
-  }
+  };
 
   const getEquipmentData = useCallback((data) => {
     setEquipmentData(data);
@@ -51,10 +51,11 @@ const KioskMainPage = () => {
   }, []);
   //데이터 요청보내는 로직
   useEffect(() => {
-    // console.log(localStorage.getItem("RFID"));
     apiRequest(
       {
-        url: `http://i7b110.p.ssafy.io:3010/kiosk/login/${localStorage.getItem("RFID")}`,
+        url: `http://i7b110.p.ssafy.io:3010/kiosk/login/${parseInt(
+          JSON.parse(localStorage.getItem("RFID"))?.rfidKey
+        )}`,
       },
       getEquipmentData
     );

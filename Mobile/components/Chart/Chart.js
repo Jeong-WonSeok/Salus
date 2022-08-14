@@ -22,7 +22,7 @@ export const LChart = ({ data }) => {
       chartConfig={{
         backgroundGradientFrom: '#9dceff',
         backgroundGradientTo: '#92a3fd',
-        decimalPlaces: 2, // optional, defaults to 2dp
+        decimalPlaces: 0, // optional, defaults to 2dp
         color: (opacity = 1) => `rgba(255, 255, 255, ${opacity})`,
       }}
       bezier

@@ -17,32 +17,158 @@ import { todayFormal } from '../utils/todayFormal';
 import { LChart, PChart } from '../components/Chart/Chart';
 import ExerciseList from '../components/MainExercise/ExerciseList';
 import TimeScroll from '../components/TimeScroll/TimeScroll';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import React, { useState } from 'react';
+import useHttp from '../hooks/useHttp';
+
 
 const Home = ({ navigation }) => {
+  const { apiRequest } = useHttp();
+  const [loading, setLoading] = useState(true);
+  const [data, setData] = useState([
+    [
+      {
+        excerciseDay: '22-08-08',
+        totalVolume: '4200',
+      },
+      {
+        excerciseDay: '22-08-09',
+        totalVolume: '5250',
+      },
+      {
+        excerciseDay: '22-08-10',
+        totalVolume: '9850',
+      },
+      {
+        excerciseDay: '22-08-11',
+        totalVolume: '5300',
+      },
+    ],
+    [
+      {
+        targetTime: '16:00',
+        targetVolume: 60000,
+      },
+    ],
+    [
+      {
+        percentTime: '37',
+        percentVolume: '41',
+      },
+    ],
+    [
+      {
+        equipmentName: '레그 컬 머신',
+        totalCount: '50',
+        totalVolume: '3200',
+        carorie: '143',
+        totalTime: '20',
+      },
+      {
+        equipmentName: '숄더프레스 머신',
+        totalCount: '20',
+        totalVolume: '2100',
+        carorie: '150',
+        totalTime: '21',
+      },
+    ],
+  ]);
+  // const user_id = AsyncStorage.getItem('user_id');
+  const user_id = '977231111725';
+
   const thisweek = [26, 63, 7, 68, 50, 37, 100];
-  const timeGoal = 0.59;
-  const volumeGoal = 0.45;
-  const exerciseData = [
-    { title: '숄더 프레스', reps: 10, volume: 200, calorie: 10, time: 200 },
-    { title: '레그 프레스', reps: 10, volume: 200, calorie: 10, time: 200 },
-    { title: '바벨 로우', reps: 10, volume: 200, calorie: 10, time: 200 },
-  ];
-  const usergoal = { hour: 1, minute: 20, volume: 20 };
+  const timePercent = Number('0.' + data[2][0].percentTime);
+  const volumePercent = Number('0.' + data[2][0].percentVolume);
+  const exerciseData = data[3][0];
+  const targetHour = Number(data[1][0].targetTime.slice(0, 2));
+  const targetMinute = Number(data[1][0].targetTime.slice(3));
+  const targetVolume = data[1][0].targetVolume;
+
   const [timeModal, setTimeModal] = useState(false);
   const [volumeModal, setVolumeModal] = useState(false);
-  const [myHour, setMyHour] = useState(usergoal.hour);
-  const [myMinute, setMyMinute] = useState(usergoal.minute);
-  const [myVolume, setMyVolume] = useState(usergoal.volume);
-  const [nowHour, setNowHour] = useState(usergoal.hour);
-  const [nowMinute, setNowMinute] = useState(usergoal.minute);
-  const [nowVolume, setNowVolume] = useState(usergoal.volume);
+
+  // 완료 누르면 설정되는 목표 (데이터에 저장됨)
+  const [myHour, setMyHour] = useState(targetHour);
+  const [myMinute, setMyMinute] = useState(targetMinute);
+  const [myVolume, setMyVolume] = useState(targetVolume);
+
+  // 유저가 입력한 목표 (취소 누르면 날아감, 데이터에 저장 X)
+  const [nowHour, setNowHour] = useState(targetHour);
+  const [nowMinute, setNowMinute] = useState(targetMinute);
+  const [nowVolume, setNowVolume] = useState(targetVolume);
+
   const hourHandler = (data) => {
     setNowHour(data);
   };
   const minuteHandler = (data) => {
     setNowMinute(data);
   };
+
+  // const getData = useCallback((data) => {
+  //   setData(data);
+  //   setLoading(false);
+  // }, []);
+
+  //데이터 받아오기
+  // useEffect(() => {
+  //   apiRequest(
+  //     {
+  //       url: `http://i7b110.p.ssafy.io:3010/mobile/user${user_id}`,
+  //     },
+  //     getData
+  //   );
+  // }, [apiRequest, getData, myHour, myMinute, myVolume]);
+
+  const timeData = {
+    rfidKEy: user_id,
+    targetTime:
+      (String(myHour).length == 1 ? '0' + myHour : myHour) +
+      ':' +
+      (String(myMinute).length == 1 ? '0' + myMinute : myMinute) +
+      ':' +
+      '00',
+  };
+  const volumeData = {
+    rfidKEy: user_id,
+    targetVolume: myVolume,
+  };
+
+  // 목표 시간 설정
+  const TimeFunc = () => {
+    fetch('http://i7b110.p.ssafy.io:3010/mobile/updateTime', {
+      method: 'POST',
+      body: JSON.stringify(timeData),
+    })
+      .then((response) => response.json())
+      .then((responseJson) => {
+        console.log(responseJson);
+        if (responseJson) {
+          setTimeModal(!timeModal);
+        }
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+
+  // 목표 볼륨 설정
+  const VolumeFunc = () => {
+    fetch('http://i7b110.p.ssafy.io:3010/mobile/updateVolume', {
+      method: 'POST',
+      body: JSON.stringify(volumeData),
+    })
+      .then((response) => response.json())
+      .then((responseJson) => {
+        console.log(responseJson);
+        if (responseJson) {
+          setTimeModal(!volumeModal);
+        }
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+
 
   return (
     <ScrollView>
@@ -68,7 +194,7 @@ const Home = ({ navigation }) => {
                 onPress={() => {
                   setMyHour(nowHour);
                   setMyMinute(nowMinute);
-                  setTimeModal(!timeModal);
+                  TimeFunc;
                 }}
               >
                 <Text style={styles.textStyle}>완료</Text>
@@ -108,6 +234,7 @@ const Home = ({ navigation }) => {
                 onPress={() => {
                   setMyVolume(nowVolume);
                   setVolumeModal(!volumeModal);
+                  VolumeFunc;
                 }}
               >
                 <Text style={styles.textStyle}>완료</Text>
@@ -145,22 +272,21 @@ const Home = ({ navigation }) => {
             <Container justifyContent="space-around">
               <Pressable onPress={() => setTimeModal(true)}>
                 <Container flexDirection="column">
-                  <PChart data={timeGoal} />
+                  <PChart data={timePercent} />
                   <Text style={styles.goal}>시간</Text>
                 </Container>
               </Pressable>
               <Pressable onPress={() => setVolumeModal(true)}>
                 <Container flexDirection="column">
-                  <PChart data={volumeGoal} />
+                  <PChart data={volumePercent} />
                   <Text style={styles.goal}>볼륨</Text>
                 </Container>
               </Pressable>
             </Container>
           </Container>
           <Container flex={5} flexDirection="column">
-            <Container justifyContent="space-between" mb={5}>
-              <Text style={styles.exercise}>완료한 운동</Text>
-              <Text style={styles.detail}>상세보기 &gt;</Text>
+            <Container mb={5}>
+              <Text style={styles.exercise}>오늘 완료한 운동</Text>
             </Container>
             <Container>
               <ExerciseList data={exerciseData} />
