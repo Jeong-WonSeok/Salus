@@ -48,7 +48,7 @@ const styles = StyleSheet.create({
     left: 0,
     right: 0,
     top: 0,
-    height: screenHeight,
+    flex: 1,
   },
 });
 

@@ -75,7 +75,7 @@ const Home = ({ navigation }) => {
   };
   const thisWeekHandler = (data) => {
     const weekList = [0, 0, 0, 0, 0, 0, 0];
-    const days = [0, 1, 2, 3, 4, 5, 6];
+    const days = [1, 2, 3, 4, 5, 6, 7];
     check = () => {
       for (const day of days) {
         for (const record of data[0]) {
@@ -181,136 +181,138 @@ const Home = ({ navigation }) => {
   return (
     <Fragment>
       {!loading ? (
-        <ScrollView style={styles.scrollview}>
-          <Modal
-            animationType="slide"
-            transparent={true}
-            visible={timeModal}
-            onRequestClose={() => {
-              Alert.alert('Modal has been closed.');
-              setTimeModal(!timeModal);
-            }}
-          >
-            <View style={styles.centeredView}>
-              <View style={styles.modalView}>
-                <Text style={styles.modalText}>이번주 목표 시간 설정</Text>
-                <TimeScroll onHour={hourHandler} onMinute={minuteHandler} myHour={myHour} myMinute={myMinute} />
-                <View style={styles.modal}>
-                  <Pressable style={styles.buttonCancle} onPress={() => setTimeModal(!timeModal)}>
-                    <Text style={styles.textStyle}>취소</Text>
-                  </Pressable>
-                  <Pressable
-                    style={styles.buttonSubmit}
-                    onPress={() => {
-                      TimeFunc();
-                    }}
-                  >
-                    <Text style={styles.textStyle}>완료</Text>
-                  </Pressable>
+        <View style={styles.container}>
+          <ScrollView style={styles.scrollview}>
+            <Modal
+              animationType="slide"
+              transparent={true}
+              visible={timeModal}
+              onRequestClose={() => {
+                Alert.alert('Modal has been closed.');
+                setTimeModal(!timeModal);
+              }}
+            >
+              <View style={styles.centeredView}>
+                <View style={styles.modalView}>
+                  <Text style={styles.modalText}>이번주 목표 시간 설정</Text>
+                  <TimeScroll onHour={hourHandler} onMinute={minuteHandler} myHour={myHour} myMinute={myMinute} />
+                  <View style={styles.modal}>
+                    <Pressable style={styles.buttonCancle} onPress={() => setTimeModal(!timeModal)}>
+                      <Text style={styles.textStyle}>취소</Text>
+                    </Pressable>
+                    <Pressable
+                      style={styles.buttonSubmit}
+                      onPress={() => {
+                        TimeFunc();
+                      }}
+                    >
+                      <Text style={styles.textStyle}>완료</Text>
+                    </Pressable>
+                  </View>
                 </View>
               </View>
-            </View>
-          </Modal>
-          <Modal
-            animationType="slide"
-            transparent={true}
-            visible={volumeModal}
-            onRequestClose={() => {
-              Alert.alert('Modal has been closed.');
-              setVolumeModal(!volumeModal);
-            }}
-          >
-            <View style={styles.centeredView}>
-              <View style={styles.modalViewVolume}>
-                <Text style={styles.modalText}>이번주 목표 볼륨 설정</Text>
-                <View style={styles.modal}>
-                  <TextInput
-                    style={styles.input}
-                    onChangeText={(text) => {
-                      setNowVolume(Number(text));
-                    }}
-                    defaultValue={String(myVolume)}
-                    keyboardType="numeric"
-                    autoFocus={true}
-                  />
-                  <Text style={styles.unit}>Kg</Text>
-                </View>
-                <View style={styles.modal}>
-                  <Pressable style={styles.buttonCancle} onPress={() => setVolumeModal(!volumeModal)}>
-                    <Text style={styles.textStyle}>취소</Text>
-                  </Pressable>
-                  <Pressable
-                    style={styles.buttonSubmit}
-                    onPress={() => {
-                      setVolumeModal(!volumeModal);
-                      VolumeFunc();
-                    }}
-                  >
-                    <Text style={styles.textStyle}>완료</Text>
-                  </Pressable>
+            </Modal>
+            <Modal
+              animationType="slide"
+              transparent={true}
+              visible={volumeModal}
+              onRequestClose={() => {
+                Alert.alert('Modal has been closed.');
+                setVolumeModal(!volumeModal);
+              }}
+            >
+              <View style={styles.centeredView}>
+                <View style={styles.modalViewVolume}>
+                  <Text style={styles.modalText}>이번주 목표 볼륨 설정</Text>
+                  <View style={styles.modal}>
+                    <TextInput
+                      style={styles.input}
+                      onChangeText={(text) => {
+                        setNowVolume(Number(text));
+                      }}
+                      defaultValue={String(myVolume)}
+                      keyboardType="numeric"
+                      autoFocus={true}
+                    />
+                    <Text style={styles.unit}>Kg</Text>
+                  </View>
+                  <View style={styles.modal}>
+                    <Pressable style={styles.buttonCancle} onPress={() => setVolumeModal(!volumeModal)}>
+                      <Text style={styles.textStyle}>취소</Text>
+                    </Pressable>
+                    <Pressable
+                      style={styles.buttonSubmit}
+                      onPress={() => {
+                        setVolumeModal(!volumeModal);
+                        VolumeFunc();
+                      }}
+                    >
+                      <Text style={styles.textStyle}>완료</Text>
+                    </Pressable>
+                  </View>
                 </View>
               </View>
-            </View>
-          </Modal>
-          <Container flexDirection="column">
-            <Container flex={1} justifyContent="space-between" mt={40} mb={10}>
-              <Text style={styles.logo}>Salus</Text>
-              <View>
-                <TouchableOpacity
-                  onPress={() => {
-                    navigation.navigate('Calendar');
-                  }}
-                >
-                  <Image source={calendar} style={styles.image} />
-                </TouchableOpacity>
-                <Text style={styles.calendartext}>캘린더</Text>
-              </View>
-            </Container>
-            <Container flex={9} flexDirection="column">
-              <Container flex={6} flexDirection="column">
-                <Container justifyContent="space-between">
-                  <Text style={styles.exercise}>이번주 운동(볼륨)</Text>
-                  <Text style={styles.week}>{todayFormal()}</Text>
-                </Container>
+            </Modal>
+            <Container flexDirection="column">
+              <Container flex={1} justifyContent="space-between" mt={40} mb={10}>
+                <Text style={styles.logo}>Salus</Text>
                 <View>
-                  <LChart data={thisweek} />
+                  <TouchableOpacity
+                    onPress={() => {
+                      navigation.navigate('Calendar');
+                    }}
+                  >
+                    <Image source={calendar} style={styles.image} />
+                  </TouchableOpacity>
+                  <Text style={styles.calendartext}>캘린더</Text>
                 </View>
               </Container>
-              <Container flex={3} flexDirection="column" mt={10} mb={10}>
-                <Text style={styles.exercise}>이번주 목표</Text>
-                <Container justifyContent="space-around">
-                  <Pressable onPress={() => setTimeModal(true)}>
-                    <Container flexDirection="column">
-                      <PChart data={percentTime} />
-                      <Text style={styles.goal}>시간</Text>
-                    </Container>
-                  </Pressable>
-                  <Pressable onPress={() => setVolumeModal(true)}>
-                    <Container flexDirection="column">
-                      <PChart data={percentVolume} />
-                      <Text style={styles.goal}>볼륨</Text>
-                    </Container>
-                  </Pressable>
+              <Container flex={9} flexDirection="column">
+                <Container flex={6} flexDirection="column">
+                  <Container justifyContent="space-between">
+                    <Text style={styles.exercise}>이번주 운동(볼륨)</Text>
+                    <Text style={styles.week}>{todayFormal()}</Text>
+                  </Container>
+                  <View>
+                    <LChart data={thisweek} />
+                  </View>
                 </Container>
+                <Container flex={3} flexDirection="column" mt={10} mb={10}>
+                  <Text style={styles.exercise}>이번주 목표</Text>
+                  <Container justifyContent="space-around">
+                    <Pressable onPress={() => setTimeModal(true)}>
+                      <Container flexDirection="column">
+                        <PChart data={percentTime} />
+                        <Text style={styles.goal}>시간</Text>
+                      </Container>
+                    </Pressable>
+                    <Pressable onPress={() => setVolumeModal(true)}>
+                      <Container flexDirection="column">
+                        <PChart data={percentVolume} />
+                        <Text style={styles.goal}>볼륨</Text>
+                      </Container>
+                    </Pressable>
+                  </Container>
+                </Container>
+                <Container flex={5} flexDirection="column">
+                  <Container mb={5}>
+                    <Text style={styles.exercise}>오늘 완료한 운동</Text>
+                  </Container>
+                  <Container>
+                    <ExerciseList data={exercise} />
+                  </Container>
+                </Container>
+                <Button title="go to CurrentExercise" onPress={() => navigation.navigate('Exercise')} />
+                <Pressable onPressIn={fadeIn} onPressOut={fadeOut} onPress={LogoutFunc}>
+                  <Animated.View style={styles.button}>
+                    <Text style={styles.text}>로그아웃</Text>
+                  </Animated.View>
+                </Pressable>
               </Container>
-              <Container flex={5} flexDirection="column">
-                <Container mb={5}>
-                  <Text style={styles.exercise}>오늘 완료한 운동</Text>
-                </Container>
-                <Container>
-                  <ExerciseList data={exercise} />
-                </Container>
-              </Container>
-              <Button title="go to CurrentExercise" onPress={() => navigation.navigate('Exercise')} />
-              <Pressable onPressIn={fadeIn} onPressOut={fadeOut} onPress={LogoutFunc}>
-                <Animated.View style={styles.button}>
-                  <Text style={styles.text}>로그아웃</Text>
-                </Animated.View>
-              </Pressable>
+              <StatusBar style="dark" />
             </Container>
-            <StatusBar style="dark" />
-          </Container>
-        </ScrollView>
+          </ScrollView>
+        </View>
       ) : (
         <Container flexDirection="column">
           <LinearGradient colors={['#92a3fd', '#9dceff']} style={styles.background} />
@@ -324,12 +326,15 @@ const Home = ({ navigation }) => {
 };
 
 const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+  },
   scrollview: {
     position: 'absolute',
     left: 0,
     right: 0,
     top: 0,
-    height: screenHeight,
+    flex: 1,
     backgroundColor: 'white',
   },
   logo: {
