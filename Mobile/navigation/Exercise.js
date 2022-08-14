@@ -9,13 +9,15 @@ import {
   FlatList,
   SafeAreaView,
 } from "react-native";
-import { StyleSheet } from "react-native";
+import { StyleSheet, Vibration } from "react-native";
 import { Container } from "./../theme/global-theme";
 import MuscleMan from "./../components/ExerciseNow/MuscleMan";
 import MuscleWoman from "./../components/ExerciseNow/MuscleWoman";
 import React, { useEffect, useRef, useState } from "react";
 import Animated, { SlideInLeft } from "react-native-reanimated";
 import io from "socket.io-client";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import axios from 'axios'
 // import LottieView from "lottie-react-native";
 const screenWidth = Dimensions.get("window").width;
 
@@ -35,6 +37,7 @@ const Exercise = () => {
   //   };
   // }, []);
   const [userId, setUserId] = useState();
+  // const [counter, setCounter] = useState(0)
 
   useEffect(() => {
     AsyncStorage.getItem("@user_id").then((value) => {
@@ -50,11 +53,23 @@ const Exercise = () => {
           // console.log(data.data);
           setCurrentInfo(data?.data[0][0]);
           setExerciseNow(data?.data[1]);
+          if(data?.data[0][0] !== 0 && state % 5 === 4) {
+            Vibration.vibrate(700, false);
+          }
         })
         .catch((err) => console.log(err.message));
     }, 500);
   }, [userId]);
-
+  // useEffect(() => {
+  //   setInterval(() => {
+  //     setCounter((state) => {
+  //       if (state !== 0 && state % 5 === 4) {
+  //         Vibration.vibrate(700, false);
+  //       }
+  //       return (state + 1)
+  //     });
+  //   }, 1500);
+  // }, [])
   const Items = ({ item }) => {
     return (
       <Animated.View entering={SlideInLeft} style={[styles.modalView]}>
@@ -73,7 +88,6 @@ const Exercise = () => {
   };
 
   const [modalVisible, setModalVisible] = useState(false);
-  if (loading) {return <Text>Loading</Text>}
   return (
     <Container alignItems="stretch" flexDirection="column">
       <Container flex={2.8} flexDirection="column" style={styles.boxStyle}>
@@ -83,6 +97,7 @@ const Exercise = () => {
             <Text style={styles.category}>횟수</Text>
             <Text style={styles.count}>
               {currentInfo?.countNow ? currentInfo.countNow : 0}
+              {/* {currentInfo?.countNow ? currentInfo.countNow : counter} */}
             </Text>
           </Container>
           <Container flexDirection="column" borderRadius={10}>
