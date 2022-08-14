@@ -8,6 +8,7 @@ import {
   Pressable,
   FlatList,
   SafeAreaView,
+  Vibration,
 } from "react-native";
 import { StyleSheet } from "react-native";
 import { Container } from "./../theme/global-theme";
@@ -15,14 +16,18 @@ import MuscleMan from "./../components/ExerciseNow/MuscleMan";
 import MuscleWoman from "./../components/ExerciseNow/MuscleWoman";
 import React, { useEffect, useRef, useState } from "react";
 import Animated, { SlideInLeft } from "react-native-reanimated";
-import io from "socket.io-client";
+import axios from "axios";
+// import io from "socket.io-client";
 // import LottieView from "lottie-react-native";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 const screenWidth = Dimensions.get("window").width;
-
+let cnt = 0;
 const Exercise = () => {
   // const animation = useRef(null);
   const [currentInfo, setCurrentInfo] = useState({});
   const [ExerciseNow, setExerciseNow] = useState([]);
+  const [count, setCount] = useState(0);
+  const [loading, setLoading] = useState(false);
   // const socket = io.connect("i7b110.p.ssafy.io:3010");
   // useEffect(() => {
   //   socket.on("test", (data) => {
@@ -37,23 +42,41 @@ const Exercise = () => {
   const [userId, setUserId] = useState();
 
   useEffect(() => {
+    setInterval(() => {
+      cnt = cnt + 1;
+    }, 1500);
+  }, []);
+
+  useEffect(() => {
     AsyncStorage.getItem("@user_id").then((value) => {
       setUserId(value);
+      console.log(value)
     });
 
     setInterval(() => {
       axios({
         method: "get",
-        url: `http://i7b110.p.ssafy.io:3010/excercise/now/977237223725`,
+        url: `http://i7b110.p.ssafy.io:3010/excercise/now/${userId}`,
       })
         .then((data) => {
           // console.log(data.data);
           setCurrentInfo(data?.data[0][0]);
           setExerciseNow(data?.data[1]);
+          console.log("hi");
+          if (
+            count !== 0 &&
+            data?.data[0][0].countNow % 5 === 0 &&
+            data?.data[0][0].countNow === count
+          ) {
+            Vibration.vibrate();
+          } else {
+            setCount(data?.data[0][0].countNow);
+          }
+          setLoading(false);
         })
         .catch((err) => console.log(err.message));
-    }, 500);
-  }, [userId]);
+    }, 1500);
+  }, [userId, count]);
 
   const Items = ({ item }) => {
     return (
@@ -73,7 +96,9 @@ const Exercise = () => {
   };
 
   const [modalVisible, setModalVisible] = useState(false);
-  if (loading) {return <Text>Loading</Text>}
+  if (loading) {
+    return <Text>Loading</Text>;
+  }
   return (
     <Container alignItems="stretch" flexDirection="column">
       <Container flex={2.8} flexDirection="column" style={styles.boxStyle}>
@@ -82,7 +107,8 @@ const Exercise = () => {
           <Container flexDirection="column" borderRadius={10}>
             <Text style={styles.category}>횟수</Text>
             <Text style={styles.count}>
-              {currentInfo?.countNow ? currentInfo.countNow : 0}
+              {/* {currentInfo?.countNow ? currentInfo.countNow : 0} */}
+              {count}
             </Text>
           </Container>
           <Container flexDirection="column" borderRadius={10}>
@@ -311,9 +337,9 @@ const styles = StyleSheet.create({
     justifyContent: "center",
   },
   ModalClose: {
-    position: 'absolute',
+    position: "absolute",
     bottom: 35,
-    left: screenWidth/2 - 108,
+    left: screenWidth / 2 - 108,
   },
 });
 

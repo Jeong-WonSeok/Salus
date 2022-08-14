@@ -35,7 +35,8 @@
     "react-native-text-gradient": "^0.1.7",
     "react-native-web": "0.17.7",
     "socket.io-client": "^4.5.1",
-    "styled-components": "^5.3.5"
+    "styled-components": "^5.3.5",
+    "expo-notifications": "~0.15.4"
   },
   "devDependencies": {
     "@babel/core": "^7.12.9"
