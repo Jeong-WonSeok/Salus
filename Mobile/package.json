@@ -36,7 +36,8 @@
     "socket.io-client": "^4.5.1",
     "styled-components": "^5.3.5",
     "expo-notifications": "~0.15.4",
-    "expo-linear-gradient": "~11.3.0"
+    "expo-linear-gradient": "~11.3.0",
+    "expo-updates": "~0.13.4"
   },
   "devDependencies": {
     "@babel/core": "^7.12.9"
