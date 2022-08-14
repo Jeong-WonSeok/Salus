@@ -93,44 +93,45 @@ const Login = ({ navigation }) => {
           <LinearGradient
             colors={["#92a3fd", "#9dceff"]}
             style={styles.background}
-          />
-          <Image source={logo} style={styles.logo} />
-          <TextInput
-            onChangeText={handleEmailChange}
-            keyboardType="email-address"
-            style={emailErrorMessage ? styles.err : styles.input}
-            autoCapitalize="none"
-            placeholder="이메일"
-            returnKeyType="next"
-            onSubmitEditing={() => {
-              ref_input2.current.focus();
-            }}
-            blurOnSubmit={false}
-          />
-          <Text style={styles.errtext}>{emailErrorMessage}</Text>
-          <TextInput
-            onChangeText={handleRfidChange}
-            style={rfidErrorMessage ? styles.err : styles.input}
-            autoCapitalize="none"
-            placeholder="헬스장에서 받은 카드키 번호를 입력해주세요."
-            ref={ref_input2}
-          />
-          <Text style={styles.errtext}>{rfidErrorMessage}</Text>
-          <Pressable
-            onPressIn={fadeIn}
-            onPressOut={fadeOut}
-            onPress={LoginFunc}
-            disabled={emailErrorMessage ? true : false}
           >
-            <Animated.View
-              style={[
-                styles.button,
-                emailErrorMessage ? styles.disabled : null,
-              ]}
+            <Image source={logo} style={styles.logo} />
+            <TextInput
+              onChangeText={handleEmailChange}
+              keyboardType="email-address"
+              style={emailErrorMessage ? styles.err : styles.input}
+              autoCapitalize="none"
+              placeholder="이메일"
+              returnKeyType="next"
+              onSubmitEditing={() => {
+                ref_input2.current.focus();
+              }}
+              blurOnSubmit={false}
+            />
+            <Text style={styles.errtext}>{emailErrorMessage}</Text>
+            <TextInput
+              onChangeText={handleRfidChange}
+              style={rfidErrorMessage ? styles.err : styles.input}
+              autoCapitalize="none"
+              placeholder="헬스장에서 받은 카드키 번호를 입력해주세요."
+              ref={ref_input2}
+            />
+            <Text style={styles.errtext}>{rfidErrorMessage}</Text>
+            <Pressable
+              onPressIn={fadeIn}
+              onPressOut={fadeOut}
+              onPress={LoginFunc}
+              disabled={emailErrorMessage ? true : false}
             >
-              <Text style={styles.text}>로그인</Text>
-            </Animated.View>
-          </Pressable>
+              <Animated.View
+                style={[
+                  styles.button,
+                  emailErrorMessage ? styles.disabled : null,
+                ]}
+              >
+                <Text style={styles.text}>로그인</Text>
+              </Animated.View>
+            </Pressable>
+          </LinearGradient>
         </Container>
       </TouchableWithoutFeedback>
     </KeyboardAvoidingView>
@@ -142,11 +143,10 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   background: {
-    position: "absolute",
-    left: 0,
-    right: 0,
-    top: 0,
-    flex: 1,
+    width: screenWidth,
+    height: '100%',
+    justifyContent: 'center',
+    alignItems: 'center',
   },
   logo: {
     width: screenWidth * 0.8,
