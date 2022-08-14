@@ -55,9 +55,10 @@ const KioskMainPage = () => {
   useEffect(() => {
     apiRequest(
       {
-        url: `http://i7b110.p.ssafy.io:3010/kiosk/login/${parseInt(
-          JSON.parse(localStorage.getItem("RFID"))?.rfidKey
-        )}`,
+        // url: `http://i7b110.p.ssafy.io:3010/kiosk/login/${parseInt(
+        //   JSON.parse(localStorage.getItem("RFID"))?.rfidKey
+        // )}`,
+        url: "http://i7b110.p.ssafy.io:3010/kiosk/login/977237223725",
       },
       getEquipmentData
     );
@@ -118,6 +119,10 @@ const KioskMainPage = () => {
                     setDailyDatas(equipmentData[0], selectedDate)[1]
                   }
                   chartData={equipmentData[4]}
+                  guide={{
+                    name: "",
+                    value: 1500,
+                  }}
                 />
               </Div>
             ) : (
