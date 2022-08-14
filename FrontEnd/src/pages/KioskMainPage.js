@@ -36,7 +36,7 @@ const KioskMainPage = () => {
   const { apiRequest } = useHttp();
   const [equipmentData, setEquipmentData] = useState();
   const [isBoard, setIsBoard] = useState(true);
-  const [selectedDate, setSelectedDate] = useState(moment().format("YY-MM-DD"));
+  const [selectedDate, setSelectedDate] = useState(moment().format('YY-MM-DD'));
   const [value, setValue] = useState(moment());
   const [loading, setLoading] = useState(true);
   const [back, setBack] = useState(false);
@@ -61,7 +61,6 @@ const KioskMainPage = () => {
       },
       getEquipmentData
     );
-    
     setTimeout(() => {
       setBack(true);
     }, 7000);
@@ -85,59 +84,31 @@ const KioskMainPage = () => {
         <Fragment>
           <CustomDiv>
             <NavKiosk />
-            <CustomDiv
-              displayDiv="flex"
-              mt={20}
-              mr={30}
-              ml={30}
-              borderRadius="10px"
-              justifyContent="space-between"
-            >
+            <CustomDiv displayDiv="flex" mt={20} mr={30} ml={30} borderRadius="10px" justifyContent="space-between">
               <StatsMuscle
                 muscle={setDailyDatas(equipmentData[0], selectedDate)[0]}
                 date={selectedDate}
                 gender={parseInt(equipmentData[0][0].gender)}
               />
-              <StatsWeekly
-                ratioData={ChartCalc(
-                  equipmentData[1],
-                  equipmentData[2],
-                  equipmentData[3][0]
-                )}
-              />
+              <StatsWeekly ratioData={ChartCalc(equipmentData[1], equipmentData[2], equipmentData[3][0])} />
             </CustomDiv>
             <SelectBoardView onSelectData={saveBoadHandler} />
             {isBoard ? (
               <Div mt={10}>
-                <WeeklySummary
-                  datas={equipmentData[0]}
-                  onChange={getData}
-                  date={selectedDate}
-                />
+                <WeeklySummary datas={equipmentData[0]} onChange={getData} date={selectedDate} />
                 <Exercise
-                  exerciseList={
-                    setDailyDatas(equipmentData[0], selectedDate)[1]
-                  }
+                  exerciseList={setDailyDatas(equipmentData[0], selectedDate)[1]}
                   chartData={equipmentData[4]}
                 />
               </Div>
             ) : (
               <Div mt={10}>
-                <CalendarForm
-                  events={equipmentData[5]}
-                  value={value}
-                  onChange={setValue}
-                />
+                <CalendarForm events={equipmentData[5]} value={value} onChange={setValue} />
               </Div>
             )}
           </CustomDiv>
           <HomeDiv displayDiv="flex" justifyContent="center">
-            <ButtonComponent
-              buttonText="홈"
-              buttonWidth="35vw"
-              buttonHeight="3vh"
-              onClick={removeRFID}
-            />
+            <ButtonComponent buttonText="홈" buttonWidth="35vw" buttonHeight="3vh" onClick={removeRFID} />
           </HomeDiv>
         </Fragment>
       ) : (

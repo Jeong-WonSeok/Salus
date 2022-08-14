@@ -79,10 +79,7 @@ const Home = ({ navigation }) => {
     check = () => {
       for (const day of days) {
         for (const record of data[0]) {
-          if (
-            moment().startOf("week").add(day, "day").format("YY-MM-DD") ===
-            record.excerciseDay
-          ) {
+          if (moment().startOf('week').add(day, 'day').format('YY-MM-DD') === record.excerciseDay) {
             weekList[day] = record.totalVolume;
           }
         }
@@ -106,7 +103,7 @@ const Home = ({ navigation }) => {
 
   // 페이지 렌더시 첫 데이터 받아오기
   useEffect(() => {
-    AsyncStorage.getItem("@user_id").then((value) => {
+    AsyncStorage.getItem('@user_id').then((value) => {
       console.log(value);
       setUserId(value);
     });
@@ -122,11 +119,11 @@ const Home = ({ navigation }) => {
   const timeData = {
     rfidKey: userId,
     targetTime:
-      (String(nowHour).length == 1 ? "0" + nowHour : nowHour) +
-      ":" +
-      (String(nowMinute).length == 1 ? "0" + nowMinute : nowMinute) +
-      ":" +
-      "00",
+      (String(nowHour).length == 1 ? '0' + nowHour : nowHour) +
+      ':' +
+      (String(nowMinute).length == 1 ? '0' + nowMinute : nowMinute) +
+      ':' +
+      '00',
   };
   const volumeData = {
     rfidKey: userId,
@@ -137,12 +134,12 @@ const Home = ({ navigation }) => {
   const TimeFunc = async () => {
     setTimeModal(false);
     axios({
-      url: "http://i7b110.p.ssafy.io:3010/mobile/updateTime",
-      method: "post",
+      url: 'http://i7b110.p.ssafy.io:3010/mobile/updateTime',
+      method: 'post',
       data: timeData,
     })
       .then(() => {
-        console.log("time");
+        console.log('time');
         apiRequest(
           {
             url: `http://i7b110.p.ssafy.io:3010/mobile/user/${userId}`,
@@ -158,12 +155,12 @@ const Home = ({ navigation }) => {
   // 목표 볼륨 설정
   const VolumeFunc = async () => {
     axios({
-      url: "http://i7b110.p.ssafy.io:3010/mobile/updateVolume",
-      method: "POST",
+      url: 'http://i7b110.p.ssafy.io:3010/mobile/updateVolume',
+      method: 'POST',
       data: volumeData,
     })
       .then(() => {
-        console.log("volume");
+        console.log('volume');
         apiRequest(
           {
             url: `http://i7b110.p.ssafy.io:3010/mobile/user/${userId}`,
@@ -177,8 +174,8 @@ const Home = ({ navigation }) => {
   };
 
   const LogoutFunc = () => {
-    AsyncStorage.removeItem("@user_id");
-    navigation.navigate("SplashScreen");
+    AsyncStorage.removeItem('@user_id');
+    navigation.navigate('SplashScreen');
   };
 
   return (
@@ -190,24 +187,16 @@ const Home = ({ navigation }) => {
             transparent={true}
             visible={timeModal}
             onRequestClose={() => {
-              Alert.alert("Modal has been closed.");
+              Alert.alert('Modal has been closed.');
               setTimeModal(!timeModal);
             }}
           >
             <View style={styles.centeredView}>
               <View style={styles.modalView}>
                 <Text style={styles.modalText}>이번주 목표 시간 설정</Text>
-                <TimeScroll
-                  onHour={hourHandler}
-                  onMinute={minuteHandler}
-                  myHour={myHour}
-                  myMinute={myMinute}
-                />
+                <TimeScroll onHour={hourHandler} onMinute={minuteHandler} myHour={myHour} myMinute={myMinute} />
                 <View style={styles.modal}>
-                  <Pressable
-                    style={styles.buttonCancle}
-                    onPress={() => setTimeModal(!timeModal)}
-                  >
+                  <Pressable style={styles.buttonCancle} onPress={() => setTimeModal(!timeModal)}>
                     <Text style={styles.textStyle}>취소</Text>
                   </Pressable>
                   <Pressable
@@ -227,7 +216,7 @@ const Home = ({ navigation }) => {
             transparent={true}
             visible={volumeModal}
             onRequestClose={() => {
-              Alert.alert("Modal has been closed.");
+              Alert.alert('Modal has been closed.');
               setVolumeModal(!volumeModal);
             }}
           >
@@ -247,10 +236,7 @@ const Home = ({ navigation }) => {
                   <Text style={styles.unit}>Kg</Text>
                 </View>
                 <View style={styles.modal}>
-                  <Pressable
-                    style={styles.buttonCancle}
-                    onPress={() => setVolumeModal(!volumeModal)}
-                  >
+                  <Pressable style={styles.buttonCancle} onPress={() => setVolumeModal(!volumeModal)}>
                     <Text style={styles.textStyle}>취소</Text>
                   </Pressable>
                   <Pressable
@@ -272,7 +258,7 @@ const Home = ({ navigation }) => {
               <View>
                 <TouchableOpacity
                   onPress={() => {
-                    navigation.navigate("Calendar");
+                    navigation.navigate('Calendar');
                   }}
                 >
                   <Image source={calendar} style={styles.image} />
@@ -315,15 +301,8 @@ const Home = ({ navigation }) => {
                   <ExerciseList data={exercise} />
                 </Container>
               </Container>
-              <Button
-                title="go to CurrentExercise"
-                onPress={() => navigation.navigate("Exercise")}
-              />
-              <Pressable
-                onPressIn={fadeIn}
-                onPressOut={fadeOut}
-                onPress={LogoutFunc}
-              >
+              <Button title="go to CurrentExercise" onPress={() => navigation.navigate('Exercise')} />
+              <Pressable onPressIn={fadeIn} onPressOut={fadeOut} onPress={LogoutFunc}>
                 <Animated.View style={styles.button}>
                   <Text style={styles.text}>로그아웃</Text>
                 </Animated.View>
@@ -334,18 +313,10 @@ const Home = ({ navigation }) => {
         </ScrollView>
       ) : (
         <Container flexDirection="column">
-          <LinearGradient
-            colors={["#92a3fd", "#9dceff"]}
-            style={styles.background}
-          />
+          <LinearGradient colors={['#92a3fd', '#9dceff']} style={styles.background} />
           <Image source={logo} style={styles.loadinglogo} />
           <Text style={styles.loadingtext}>운동기록 로딩중...</Text>
-          <ActivityIndicator
-            animating={true}
-            color="white"
-            size="large"
-            style={styles.activityIndicator}
-          />
+          <ActivityIndicator animating={true} color="white" size="large" style={styles.activityIndicator} />
         </Container>
       )}
     </Fragment>
@@ -354,12 +325,12 @@ const Home = ({ navigation }) => {
 
 const styles = StyleSheet.create({
   scrollview: {
-    position: "absolute",
+    position: 'absolute',
     left: 0,
     right: 0,
     top: 0,
     height: screenHeight,
-    backgroundColor: "white",
+    backgroundColor: 'white',
   },
   logo: {
     color: "#92a3fd",
@@ -502,6 +473,40 @@ const styles = StyleSheet.create({
     backgroundColor: "transparent",
     fontSize: 18,
     color: "#fff",
+  },
+  loadinglogo: {
+    width: screenWidth * 0.8,
+    height: (screenWidth * 0.8) / 2.6,
+    marginBottom: 50,
+  },
+  activityIndicator: {
+    alignItems: 'center',
+    height: 80,
+  },
+  background: {
+    position: 'absolute',
+    left: 0,
+    right: 0,
+    top: 0,
+    height: screenHeight,
+  },
+  loadingtext: {
+    color: 'white',
+  },
+  button: {
+    opacity: animated,
+    width: screenWidth * 0.6,
+    height: 48,
+    padding: 15,
+    alignItems: 'center',
+    borderRadius: 30,
+    marginTop: 50,
+    backgroundColor: '#7a91ff',
+  },
+  text: {
+    backgroundColor: 'transparent',
+    fontSize: 18,
+    color: '#fff',
   },
 });
 
