@@ -80,5 +80,4 @@ SELECT DATE_FORMAT(d.excerciseDay,'%y-%m-%d') as "excerciseDay", e.equipmentCate
   WHERE rfidKey = #{rfidKey}
   AND excerciseDay = DATE_FORMAT(NOW(),'%y-%m-%d')
   </select>
-
 </mapper>

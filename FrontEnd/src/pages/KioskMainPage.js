@@ -1,24 +1,24 @@
-import React, { Fragment, useState } from 'react';
-import { CustomDiv } from '../styles/kiosk.style';
-import StatsWeekly from '../components/Kiosk/StatsWeekly';
-import StatsMuscle from './../components/Kiosk/StatsMuscle';
-import NavKiosk from './../components/Kiosk/NavKiosk';
-import SelectBoardView from '../components/Kiosk/SelectBoardView';
-import WeeklySummary from './../components/Kiosk/WeeklySummary';
-import Exercise from '../components/Kiosk/Exercise';
-import { createGlobalStyle } from 'styled-components';
-import { Div } from './../styles/kiosk.style';
-import CalendarForm from './../components/Calendar/CalendarForm';
-import moment from 'moment';
-import ButtonComponent from './../components/Common/ButtonComponent';
-import setDailyDatas from '../components/Kiosk/KioskFuntions/setDailyDatas';
-import styled from 'styled-components';
-import useHttp from './../customHooks/useHttp';
-import { useEffect } from 'react';
-import { useCallback } from 'react';
-import { ChartCalc } from './../api-request/functions';
-import LoadingText from './../components/Kiosk/LoadingText';
-import { useNavigate } from 'react-router-dom';
+import React, { Fragment, useState } from "react";
+import { CustomDiv } from "../styles/kiosk.style";
+import StatsWeekly from "../components/Kiosk/StatsWeekly";
+import StatsMuscle from "./../components/Kiosk/StatsMuscle";
+import NavKiosk from "./../components/Kiosk/NavKiosk";
+import SelectBoardView from "../components/Kiosk/SelectBoardView";
+import WeeklySummary from "./../components/Kiosk/WeeklySummary";
+import Exercise from "../components/Kiosk/Exercise";
+import { createGlobalStyle } from "styled-components";
+import { Div } from "./../styles/kiosk.style";
+import CalendarForm from "./../components/Calendar/CalendarForm";
+import moment from "moment";
+import ButtonComponent from "./../components/Common/ButtonComponent";
+import setDailyDatas from "../components/Kiosk/KioskFuntions/setDailyDatas";
+import styled from "styled-components";
+import useHttp from "./../customHooks/useHttp";
+import { useEffect } from "react";
+import { useCallback } from "react";
+import { ChartCalc } from "./../api-request/functions";
+import LoadingText from "./../components/Kiosk/LoadingText";
+import { useNavigate } from "react-router-dom";
 
 const HomeDiv = styled(Div)`
   position: absolute;
@@ -42,8 +42,8 @@ const KioskMainPage = () => {
   const [back, setBack] = useState(false);
   const navigate = useNavigate();
   const removeRFID = () => {
-    localStorage.removeItem('RFID');
-    navigate('/kiosk/login');
+    localStorage.removeItem("RFID");
+    navigate("/kiosk/login");
     setBack(false);
   };
 
