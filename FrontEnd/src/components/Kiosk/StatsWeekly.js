@@ -117,6 +117,7 @@ const StatsWeekly = ({ ratioData }) => {
             <Div displayDiv="flex" flexDirection="column" alignItems="center">
               <Div fontSize="1.5rem">운동 시간</Div>
               <Div fontSize="3rem">{parseInt(ratioData[3] * 100)}</Div>
+              {console.log(ratioData)}
               <Div fontSize="1rem">%</Div>
             </Div>
           </RoundChart>
