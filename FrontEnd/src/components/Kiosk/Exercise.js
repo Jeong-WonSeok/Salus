@@ -1,13 +1,13 @@
-import styled from 'styled-components';
+import styled from "styled-components";
 
-import ExerciseList from './ExerciseList';
+import ExerciseList from "./ExerciseList";
 
 const Div = styled.div`
   width: 93vw;
   height: 20.8vh;
   border-radius: 0.625rem;
   margin-left: 3.5vw;
-  font-family: 'Pretendard-Regular';
+  font-family: "Pretendard-Regular";
   display: flex;
   // background-color: white;
   background-image: linear-gradient(to top, #e6eaff 20%, white 100%);
@@ -18,7 +18,7 @@ const Divnone = styled.div`
   height: 20.8vh;
   border-radius: 0.625rem;
   margin-left: 3.5vw;
-  font-family: 'Pretendard-Regular';
+  font-family: "Pretendard-Regular";
   display: flex;
   background-image: linear-gradient(to top, #e6eaff 20%, white 100%);
   justify-content: center;
@@ -52,6 +52,7 @@ const Exercise = (props) => {
             time={exercise.time}
             chartData={props.chartData}
             key={`${exercise.title}${index}`}
+            guide={props.guide}
           />
         );
       } else {
@@ -68,6 +69,7 @@ const Exercise = (props) => {
             time={exercise.time}
             chartData={props.chartData}
             key={`${exercise.title}${index}`}
+            guide={props.guide}
           />
         );
       } else {
