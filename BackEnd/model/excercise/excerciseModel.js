@@ -22,12 +22,11 @@ const updateIsStarted = async (req, res) =>{
     );
     const result2 = await conn.promise().query(query2);
     return result2;
-  } else return "뭐 없음";
+  }
 };
 
 //현재 운동 측정 값 받아오기
 const excerciseData = async (req, res) => {
-  // console.log(req.query)
   const param = {
     excerciseDay: req.params.excerciseDay,
     weightNow: req.params.weightNow,
@@ -42,10 +41,9 @@ const excerciseData = async (req, res) => {
     format
   );
   conn.query(query, (err, results) => {
-    console.log('select', results);
     if (err) console.log(err);
     //만약 운동데이터가 없다면 새로 만들고 횟수 1 넣어줌
-    else if (results.length === 0) {
+    if (results.length === 0) {
       const query = mybatisMapper.getStatement(
         "dailyexcercise",
         "insertExcercise",
@@ -54,8 +52,7 @@ const excerciseData = async (req, res) => {
       );
       conn.query(query, (err, results) => {
         if (err) console.log(err);
-        // console.log(results);
-        return res.json(results);
+        return results;
       });
     }
     //만약 운동데이터가 있다면 카운트 + 1
@@ -68,14 +65,58 @@ const excerciseData = async (req, res) => {
       );
       conn.query(query, (err, results) => {
         if (err) console.log(err);
-        console.log(results);
-        return res.json(results);
+        return results;
       });
     }
   });
+
 };
+// 모바일로 운동데이터 보냄
+const mobileExcerciseData = async (req, res) =>{
+  const param = {
+    weightNow: req.params.weightNow,
+    equipmentName: req.params.equipmentName,
+    rfidKey: req.params.rfidKey,
+  };
+  const format = { language: "sql", indent: "" };
+  const query = mybatisMapper.getStatement(
+    "dailyexcercise",
+    "mobileExcerciseData",
+    param,
+    format
+  );
+  const result = await conn.promise().query(query);
+	 conn.query(query, (err, results) => {
+		     if (err) console.log(err);
+		 return res.json(results);
+	 });
+}
+
+const nowTest = async (req, res) =>{
+  console.log("여기옴");
+  const param = {
+    rfidKey: req.params.rfidKey,
+  };
+  const format = { language: "sql", indent: "" };
+  const query = mybatisMapper.getStatement(
+    "dailyexcercise",
+    "nowtest",
+    param,
+    format
+  );
+  conn.query(query, (err, results) => {
+    if (err) console.log(err);
+    console.log("여기옴2");
+    var weightNow = results[0].weightNow;
+    var equipmentName = results[0].equipmentName;
+    var rfidKey = results[0].rfidKey;
+    return res.redirect("/excercise/mobile/" + weightNow +"/" +equipmentName +"/" + rfidKey);
+  });
+}
 
 module.exports = {
   excerciseData,
-  updateIsStarted
+  updateIsStarted,
+  mobileExcerciseData,
+  nowTest
 };
