@@ -8,20 +8,19 @@ import {
   Pressable,
   FlatList,
   SafeAreaView,
-  Vibration,
 } from "react-native";
-import { StyleSheet } from "react-native";
+import { StyleSheet, Vibration } from "react-native";
 import { Container } from "./../theme/global-theme";
 import MuscleMan from "./../components/ExerciseNow/MuscleMan";
 import MuscleWoman from "./../components/ExerciseNow/MuscleWoman";
 import React, { useEffect, useRef, useState } from "react";
 import Animated, { SlideInLeft } from "react-native-reanimated";
-import axios from "axios";
-// import io from "socket.io-client";
-// import LottieView from "lottie-react-native";
+import io from "socket.io-client";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import axios from 'axios'
+// import LottieView from "lottie-react-native";
 const screenWidth = Dimensions.get("window").width;
-let cnt = 0;
+
 const Exercise = () => {
   // const animation = useRef(null);
   const [currentInfo, setCurrentInfo] = useState({});
@@ -42,15 +41,8 @@ const Exercise = () => {
   const [userId, setUserId] = useState();
 
   useEffect(() => {
-    setInterval(() => {
-      cnt = cnt + 1;
-    }, 1500);
-  }, []);
-
-  useEffect(() => {
     AsyncStorage.getItem("@user_id").then((value) => {
       setUserId(value);
-      console.log(value)
     });
 
     setInterval(() => {

@@ -62,8 +62,9 @@ const KioskMainPage = () => {
       getEquipmentData
     );
     setTimeout(() => {
-      setBack(true);
-    }, 7000);
+      setBack(true)
+    }, 7000)
+
   }, [apiRequest, getEquipmentData]);
 
   // Boad / Calender 선택
@@ -84,7 +85,14 @@ const KioskMainPage = () => {
         <Fragment>
           <CustomDiv>
             <NavKiosk />
-            <CustomDiv displayDiv="flex" mt={20} mr={30} ml={30} borderRadius="10px" justifyContent="space-between">
+            <CustomDiv
+              displayDiv="flex"
+              mt={20}
+              mr={30}
+              ml={30}
+              borderRadius="10px"
+              justifyContent="space-between"
+            >
               <StatsMuscle
                 muscle={setDailyDatas(equipmentData[0], selectedDate)[0]}
                 date={selectedDate}
@@ -95,24 +103,41 @@ const KioskMainPage = () => {
             <SelectBoardView onSelectData={saveBoadHandler} />
             {isBoard ? (
               <Div mt={10}>
-                <WeeklySummary datas={equipmentData[0]} onChange={getData} date={selectedDate} />
+                <WeeklySummary
+                  datas={equipmentData[0]}
+                  onChange={getData}
+                  date={selectedDate}
+                />
                 <Exercise
-                  exerciseList={setDailyDatas(equipmentData[0], selectedDate)[1]}
+                  exerciseList={
+                    setDailyDatas(equipmentData[0], selectedDate)[1]
+                  }
                   chartData={equipmentData[4]}
                 />
               </Div>
             ) : (
               <Div mt={10}>
-                <CalendarForm events={equipmentData[5]} value={value} onChange={setValue} />
+                <CalendarForm
+                  events={equipmentData[5]}
+                  value={value}
+                  onChange={setValue}
+                />
               </Div>
             )}
           </CustomDiv>
           <HomeDiv displayDiv="flex" justifyContent="center">
-            <ButtonComponent buttonText="홈" buttonWidth="35vw" buttonHeight="3vh" onClick={removeRFID} />
+            <ButtonComponent
+              buttonText="홈"
+              buttonWidth="35vw"
+              buttonHeight="3vh"
+              onClick={removeRFID}
+            />
           </HomeDiv>
         </Fragment>
       ) : (
-        <LoadingText>{back ? removeRFID() : null}</LoadingText>
+        <LoadingText>
+          {back ? removeRFID() : null}
+        </LoadingText>
       )}
     </Fragment>
   );
