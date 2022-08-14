@@ -58,6 +58,7 @@ const searchUser = async (req, res) => {
 
 //오늘 운동 데이터 받아오기
 const DailyData = async (req, res) => {
+	console.log('check', req.params);
   var param = {
     rfidKey: req.params.rfidKey,
   };
@@ -97,10 +98,9 @@ const todayCheck = async(req, res)=>{
     param,
     format
   );
-  conn.query(query, (err, results) => {
-    if (err) console.log(err);
-    return results;
-  });
+  const result = await conn.promise().query(query);
+	console.log(result[0][0]);
+	return result[0][0];
 }
 
 module.exports = {
