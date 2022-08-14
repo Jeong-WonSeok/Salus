@@ -6,6 +6,15 @@ import Login from './navigation/Login';
 import SplashScreen from './navigation/SplashScreen';
 import * as React from 'react';
 import Calendar from './navigation/Calendar';
+import * as Notifications from "expo-notifications";
+
+Notifications.setNotificationHandler({
+  handleNotification: async () => ({
+    shouldShowAlert: true,
+    shouldPlaySound: false,
+    shouldSetBadge: false,
+  }),
+});
 
 const Stack = createNativeStackNavigator();
 
