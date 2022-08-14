@@ -135,7 +135,7 @@ const styles = StyleSheet.create({
     left: 0,
     right: 0,
     top: 0,
-    flex: 1,
+    height: screenHeight,
   },
   logo: {
     width: screenWidth * 0.8,

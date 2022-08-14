@@ -4,7 +4,7 @@ import ReactDOM from "react-dom";
 import styled, { keyframes } from "styled-components";
 import setChartData from "../LineChart/function/build";
 import LineChart from "../LineChart/LineChart";
-import { getMonthlyVolume } from "./../../api-request/functions";
+import { getMonthlyVolume } from './../../api-request/functions';
 
 const BackDropDiv = styled.div`
   position: fixed;
@@ -50,7 +50,7 @@ const Backdrop = (props) => {
 
 const ModalOverlay = (props) => {
   if (!props.open) return null;
-  const filteredData = getMonthlyVolume(props.chartData, props.title);
+  const filteredData = getMonthlyVolume(props.chartData, props.title)
   const data = setChartData(filteredData);
   return (
     <ModalDiv className="modal-active">
@@ -65,27 +65,6 @@ const ModalOverlay = (props) => {
       >
         {props.title}
       </h2>
-      <h5
-        style={{
-          marginBottom: "-2.3em",
-          color: "#5a5a5a",
-          marginTop: "1em",
-          marginLeft: "6em",
-        }}
-      >
-        <b style={{ color: "#8DA1FF" }}>◼</b> 회원님 기록
-      </h5>
-      <h5
-        style={{
-          marginBottom: "-5em",
-          color: "#5a5a5a",
-          marginTop: "3em",
-          marginLeft: "6em",
-        }}
-      >
-        <b style={{ color: "#f06875" }}>◼</b> 20대 남성 권장 운동량
-      </h5>
-
       <LineChart
         width={500}
         height={345}
@@ -93,8 +72,6 @@ const ModalOverlay = (props) => {
         horizontalGuides={4}
         precision={0}
         verticalGuides={1}
-        guide={props.guide}
-        unit={props.unit}
       />
     </ModalDiv>
   );
@@ -109,12 +86,10 @@ const ExerciseModal = (props) => {
       )}
       {ReactDOM.createPortal(
         <ModalOverlay
-          chartData={props.chartData}
+          chartData = {props.chartData}
           toggleModal={props.toggleModal}
           open={props.open}
           title={props.title}
-          guide={props.guide}
-          unit={props.unit}
         />,
         document.getElementById("overlay-root")
       )}
