@@ -19,6 +19,7 @@ import { useCallback } from "react";
 import { ChartCalc } from "./../api-request/functions";
 import LoadingText from "./../components/Kiosk/LoadingText";
 import { useNavigate } from "react-router-dom";
+import { set } from "immer/dist/internal";
 
 const HomeDiv = styled(Div)`
   position: absolute;
@@ -61,6 +62,9 @@ const KioskMainPage = () => {
       },
       getEquipmentData
     );
+    setTimeout(() => {
+      setBack(true)
+    }, 7000)
 
   }, [apiRequest, getEquipmentData]);
 
