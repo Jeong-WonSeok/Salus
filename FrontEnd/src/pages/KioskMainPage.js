@@ -39,10 +39,12 @@ const KioskMainPage = () => {
   const [selectedDate, setSelectedDate] = useState(moment().format("YY-MM-DD"));
   const [value, setValue] = useState(moment());
   const [loading, setLoading] = useState(true);
+  const [back, setBack] = useState(false);
   const navigate = useNavigate();
   const removeRFID = () => {
     localStorage.removeItem("RFID");
     navigate("/kiosk/login");
+    setBack(false);
   };
 
   const getEquipmentData = useCallback((data) => {
@@ -59,6 +61,9 @@ const KioskMainPage = () => {
       },
       getEquipmentData
     );
+    setTimeout(() => {
+      setBack(true);
+    }, 7000);
   }, [apiRequest, getEquipmentData]);
 
   // Boad / Calender 선택
@@ -135,7 +140,7 @@ const KioskMainPage = () => {
           </HomeDiv>
         </Fragment>
       ) : (
-        <LoadingText />
+        <LoadingText>{back ? removeRFID() : null}</LoadingText>
       )}
     </Fragment>
   );
