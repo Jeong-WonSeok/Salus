@@ -16,7 +16,7 @@ import {
 import { StatusBar } from "expo-status-bar";
 import { Container } from "../theme/global-theme";
 import calendar from "../assets/main/calendar.png";
-import workout from "../assets/main/workout.jpg";
+import workout from "../assets/main/workout.png";
 import { todayFormal } from "../utils/todayFormal";
 import { LChart, PChart } from "../components/Chart/Chart";
 import ExerciseList from "../components/MainExercise/ExerciseList";
@@ -106,10 +106,8 @@ const Home = ({ navigation }) => {
   // 페이지 렌더시 첫 데이터 받아오기
   useEffect(() => {
     AsyncStorage.getItem("@user_id").then((value) => {
-      console.log(value);
       setUserId(value);
     });
-    console.log(userId);
     apiRequest(
       {
         url: `http://i7b110.p.ssafy.io:3010/mobile/user/${userId}`,
@@ -141,7 +139,6 @@ const Home = ({ navigation }) => {
       data: timeData,
     })
       .then(() => {
-        console.log("time");
         apiRequest(
           {
             url: `http://i7b110.p.ssafy.io:3010/mobile/user/${userId}`,
@@ -162,7 +159,6 @@ const Home = ({ navigation }) => {
       data: volumeData,
     })
       .then(() => {
-        console.log("volume");
         apiRequest(
           {
             url: `http://i7b110.p.ssafy.io:3010/mobile/user/${userId}`,
@@ -275,9 +271,9 @@ const Home = ({ navigation }) => {
                       navigation.navigate("Exercise");
                     }}
                   >
-                    <Image source={workout} style={styles.image} />
+                    <Image source={workout} style={styles.imageWorkout} resizeMode="contain"/>
                   </TouchableOpacity>
-                  <Text style={styles.calendartext}>운동</Text>
+                  <Text style={styles.workoutText}>운동</Text>
                 </View>
                 <View>
                   <TouchableOpacity
@@ -383,6 +379,12 @@ const styles = StyleSheet.create({
   },
   calendartext: {
     marginRight: "6%",
+    fontSize: 12,
+    color: "#96989d",
+  },
+  workoutText: {
+    marginRight: 20,
+    paddingLeft: 5,
     fontSize: 12,
     color: "#96989d",
   },
@@ -551,6 +553,11 @@ const styles = StyleSheet.create({
   iconStyle: {
     flexDirection: "row",
   },
+  imageWorkout: {
+    width: 30,
+    height: 30,
+    marginRight: 10,
+  }
 });
 
 export default Home;

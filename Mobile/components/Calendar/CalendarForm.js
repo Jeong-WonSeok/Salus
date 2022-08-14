@@ -35,7 +35,6 @@ const CalendarForm = ({ value, onChange, events }) => {
   }, [apiRequest, getDailyData, value]);
 
   const Items = (dailyDatas) => {
-    console.log(dailyDatas);
     return (
       <View>
         <Container flexDirection="column" background={"#EDEEF4"}>
