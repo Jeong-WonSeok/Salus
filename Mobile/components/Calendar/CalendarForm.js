@@ -43,13 +43,13 @@ const CalendarForm = ({ value, onChange, events }) => {
               <View style={styles.column}>
                 <Text style={styles.list}>총횟수</Text>
                 <Text style={styles.detail}>
-                  {dailyDatas[0]?.totalCount || "-"}
+                  {dailyDatas[0][0]?.totalCount || "-"}
                 </Text>
               </View>
               <View style={styles.column}>
                 <Text style={styles.list}>총볼륨</Text>
                 <Text style={styles.detail}>
-                  {dailyDatas[0]?.totalWeight || "-"}
+                  {dailyDatas[0][0]?.totalVolume || "-"}
                 </Text>
               </View>
             </View>
@@ -57,13 +57,13 @@ const CalendarForm = ({ value, onChange, events }) => {
               <View style={styles.column}>
                 <Text style={styles.list}>칼로리</Text>
                 <Text style={styles.detail}>
-                  {dailyDatas[0]?.totalCalorie || "-"}
+                  {dailyDatas[0][0]?.totalCalorie || "-"}
                 </Text>
               </View>
               <View style={styles.column}>
                 <Text style={styles.list}>시간</Text>
                 <Text style={styles.detail}>
-                  {dailyDatas[0]?.totalCategoryTime || "-"}
+                  {dailyDatas[0][0]?.totalTime || "-"}
                 </Text>
               </View>
             </View>

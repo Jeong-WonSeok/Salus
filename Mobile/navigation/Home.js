@@ -322,10 +322,6 @@ const Home = ({ navigation }) => {
                   <ExerciseList data={exercise} />
                 </Container>
               </Container>
-              <Button
-                title="go to CurrentExercise"
-                onPress={() => navigation.navigate("Exercise")}
-              />
               <Pressable
                 onPressIn={fadeIn}
                 onPressOut={fadeOut}
@@ -536,7 +532,7 @@ const styles = StyleSheet.create({
     padding: 15,
     alignItems: "center",
     borderRadius: 30,
-    marginTop: 50,
+    marginTop: 30,
     backgroundColor: "#7a91ff",
   },
   text: {

@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef } from "react";
 import {
   Image,
   StyleSheet,
@@ -12,16 +12,16 @@ import {
   KeyboardAvoidingView,
   Platform,
   Button,
-} from 'react-native';
-import AsyncStorage from '@react-native-async-storage/async-storage';
-import { LinearGradient } from 'expo-linear-gradient';
-import { Container } from '../theme/global-theme';
-import { validateEmail, removeWhitespace } from '../utils/login';
-import logo from '../assets/logo/logo.png';
-import axios from 'axios';
+} from "react-native";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import { LinearGradient } from "expo-linear-gradient";
+import { Container } from "../theme/global-theme";
+import { validateEmail, removeWhitespace } from "../utils/login";
+import logo from "../assets/logo/logo.png";
+import axios from "axios";
 
-const screenWidth = Dimensions.get('window').width;
-const screenHeight = Dimensions.get('window').height;
+const screenWidth = Dimensions.get("window").width;
+const screenHeight = Dimensions.get("window").height;
 
 const animated = new Animated.Value(1);
 const fadeIn = () => {
@@ -40,10 +40,10 @@ const fadeOut = () => {
 };
 
 const Login = ({ navigation }) => {
-  const [email, setEmail] = useState('');
-  const [rfid, setRfid] = useState('');
-  const [emailErrorMessage, setEmailErrorMessage] = useState('');
-  const [rfidErrorMessage, setRfidErrorMessage] = useState('');
+  const [email, setEmail] = useState("");
+  const [rfid, setRfid] = useState("");
+  const [emailErrorMessage, setEmailErrorMessage] = useState("");
+  const [rfidErrorMessage, setRfidErrorMessage] = useState("");
   const ref_input2 = useRef();
 
   const handleEmailChange = (email) => {
@@ -51,7 +51,9 @@ const Login = ({ navigation }) => {
     const searchWaiting = setTimeout(() => {
       const changedEmail = removeWhitespace(email);
       setEmail(changedEmail);
-      setEmailErrorMessage(validateEmail(changedEmail) ? '' : '이메일 형식을 확인해주세요!');
+      setEmailErrorMessage(
+        validateEmail(changedEmail) ? "" : "이메일 형식을 확인해주세요!"
+      );
     }, 2000);
   };
 
@@ -66,26 +68,32 @@ const Login = ({ navigation }) => {
 
   const LoginFunc = async () => {
     axios({
-      url: 'http://i7b110.p.ssafy.io:3010/mobile/login',
-      method: 'post',
+      url: "http://i7b110.p.ssafy.io:3010/mobile/login",
+      method: "post",
       data: data,
     })
       .then((res) => {
-        if (res.data.rfidKey === 'failed') {
-          setRfidErrorMessage('이메일과 카드키 번호를 다시 확인해주세요');
+        if (res.data.rfidKey === "failed") {
+          setRfidErrorMessage("이메일과 카드키 번호를 다시 확인해주세요");
         } else {
-          AsyncStorage.setItem('@user_id', String(res.data.rfidKey));
-          navigation.replace('Home');
+          AsyncStorage.setItem("@user_id", String(res.data.rfidKey));
+          navigation.replace("Home");
         }
       })
       .catch((err) => console.log(err.message));
   };
 
   return (
-    <KeyboardAvoidingView behavior={Platform.OS === 'ios' ? 'padding' : 'height'} style={styles.container}>
+    <KeyboardAvoidingView
+      behavior={Platform.OS === "ios" ? "padding" : "height"}
+      style={styles.container}
+    >
       <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
         <Container flexDirection="column">
-          <LinearGradient colors={['#92a3fd', '#9dceff']} style={styles.background} />
+          <LinearGradient
+            colors={["#92a3fd", "#9dceff"]}
+            style={styles.background}
+          />
           <Image source={logo} style={styles.logo} />
           <TextInput
             onChangeText={handleEmailChange}
@@ -114,12 +122,15 @@ const Login = ({ navigation }) => {
             onPress={LoginFunc}
             disabled={emailErrorMessage ? true : false}
           >
-            <Animated.View style={[styles.button, emailErrorMessage ? styles.disabled : null]}>
+            <Animated.View
+              style={[
+                styles.button,
+                emailErrorMessage ? styles.disabled : null,
+              ]}
+            >
               <Text style={styles.text}>로그인</Text>
             </Animated.View>
           </Pressable>
-          <Button title="캘린더" onPress={() => navigation.navigate('Calendar')} />
-          <Button title="메인페이지" onPress={() => navigation.navigate('Home')} />
         </Container>
       </TouchableWithoutFeedback>
     </KeyboardAvoidingView>
@@ -131,7 +142,7 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   background: {
-    position: 'absolute',
+    position: "absolute",
     left: 0,
     right: 0,
     top: 0,
@@ -148,9 +159,9 @@ const styles = StyleSheet.create({
     margin: 12,
     padding: 10,
     paddingStart: 20,
-    backgroundColor: 'white',
+    backgroundColor: "white",
     borderRadius: 8,
-    shadowColor: '#000',
+    shadowColor: "#000",
     shadowOffset: {
       width: 0,
       height: 2,
@@ -159,7 +170,7 @@ const styles = StyleSheet.create({
     shadowRadius: 3.84,
     elevation: 5,
     borderWidth: 1,
-    borderColor: 'red',
+    borderColor: "red",
   },
   input: {
     height: 48,
@@ -167,9 +178,9 @@ const styles = StyleSheet.create({
     margin: 12,
     padding: 10,
     paddingStart: 20,
-    backgroundColor: 'white',
+    backgroundColor: "white",
     borderRadius: 8,
-    shadowColor: '#000',
+    shadowColor: "#000",
     shadowOffset: {
       width: 0,
       height: 2,
@@ -183,21 +194,21 @@ const styles = StyleSheet.create({
     width: screenWidth * 0.6,
     height: 48,
     padding: 15,
-    alignItems: 'center',
+    alignItems: "center",
     borderRadius: 30,
     marginTop: 50,
-    backgroundColor: '#7a91ff',
+    backgroundColor: "#7a91ff",
   },
   text: {
-    backgroundColor: 'transparent',
+    backgroundColor: "transparent",
     fontSize: 18,
-    color: '#fff',
+    color: "#fff",
   },
   errtext: {
-    color: 'red',
+    color: "red",
   },
   disabled: {
-    backgroundColor: '#96989d',
+    backgroundColor: "#96989d",
   },
 });
 
