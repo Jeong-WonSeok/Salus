@@ -61,6 +61,7 @@ const KioskMainPage = () => {
       },
       getEquipmentData
     );
+    
     setTimeout(() => {
       setBack(true);
     }, 7000);
