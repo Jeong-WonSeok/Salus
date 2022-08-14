@@ -1,14 +1,15 @@
-import { useState } from 'react';
-import styled from 'styled-components';
-import ExerciseModal from './ExerciseModal';
-import { Div } from './../../styles/web.style';
+import { useState } from "react";
+import styled from "styled-components";
+import ExerciseModal from "./ExerciseModal";
+import { Div } from "./../../styles/web.style";
 
 const List = styled.div`
   width: 90%;
   height: 4vh;
   border: solid 0.125rem transparent;
   border-radius: 0.3125rem;
-  background-image: linear-gradient(#fff, #fff), linear-gradient(284.21deg, #92a3fd -7.95%, #9dceff 138.55%);
+  background-image: linear-gradient(#fff, #fff),
+    linear-gradient(284.21deg, #92a3fd -7.95%, #9dceff 138.55%);
   background-origin: border-box;
   background-clip: content-box, border-box;
   margin: 0 auto;
@@ -46,14 +47,21 @@ const ExerciseList = (props) => {
   const toggleModal = () => {
     setOpenModal((state) => !state);
   };
-  if (props.title === '로잉머신' || props.title === '런닝머신') {
+  if (props.title === "로잉머신" || props.title === "런닝머신") {
     return (
       <Div>
         <List onClick={toggleModal}>
           <Title2>{props.title}</Title2>
           <Text>{props.time} 분</Text>
         </List>
-        <ExerciseModal open={openModal} toggleModal={toggleModal} title={props.title} chartData={props.chartData} />
+        <ExerciseModal
+          open={openModal}
+          toggleModal={toggleModal}
+          title={props.title}
+          chartData={props.chartData}
+          guide={props.guide.value}
+          unit={"분"}
+        />
       </Div>
     );
   } else {
@@ -64,7 +72,14 @@ const ExerciseList = (props) => {
           <Text>{props.volume} Vol</Text>
           <Text>{props.reps} 회</Text>
         </List>
-        <ExerciseModal open={openModal} toggleModal={toggleModal} title={props.title} chartData={props.chartData} />
+        <ExerciseModal
+          open={openModal}
+          toggleModal={toggleModal}
+          title={props.title}
+          chartData={props.chartData}
+          guide={props.guide.value}
+          unit={"Vol"}
+        />
       </Div>
     );
   }
