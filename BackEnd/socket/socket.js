@@ -44,25 +44,25 @@ module.exports = (server) => {
             socket.emit('equipmentRecieved', isStarted[0][0]);
         })
 
-        await exModel.excerciseData({
-		params:{
-			excerciseDay : '2022-08-13',
-		        weightNow : 50,
-		        equipmentName : '토탈 힙',
-		        rfidKey: 977237223725
-		}
-	})
-	const mobiledata = await exModel.mobileExcerciseData( {
-		params : {
-			weightNow : 50,
-			equipmentName: "토탈 힙",
-			rfidKey: "977237223725"
-		}
-	})
+        //await exModel.excerciseData({
+	//	params:{
+	//		excerciseDay : '2022-08-13',
+	//	        weightNow : 50,
+	//	        equipmentName : '토탈 힙',
+	//	        rfidKey: 977237223725
+	//	}
+	//})
+	//const mobiledata = await exModel.mobileExcerciseData( {
+	//	params : {
+	//		weightNow : 50,
+	//		equipmentName: "토탈 힙",
+	//		rfidKey: "977237223725"
+	//	}
+	//})
 	
-	console.log('mobile', mobiledata);
-	setInterval( () => {
-		io.emit('test', mobiledata);
-	}, 30000);
+	//console.log('mobile', mobiledata);
+	//setInterval( () => {
+	//	io.emit('test', mobiledata);
+	//}, 30000);
     });
 }

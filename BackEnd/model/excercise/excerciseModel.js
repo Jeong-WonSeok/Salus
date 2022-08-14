@@ -86,7 +86,10 @@ const mobileExcerciseData = async (req, res) =>{
     format
   );
   const result = await conn.promise().query(query);
-  return res.json(result[0]);
+	 conn.query(query, (err, results) => {
+		     if (err) console.log(err);
+		 return res.json(results);
+	 });
 }
 
 const nowTest = async (req, res) =>{
