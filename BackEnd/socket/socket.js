@@ -8,7 +8,7 @@ module.exports = (server) => {
     io.on('connection', async (socket) => {
         socket.on('rfidLogin', async (data) => {
 		console.log(data);
-            io.emit('rfidcheck', data.rfidKey);   
+            io.emit('rfidcheck', data);   
             const todayCheck = await kioskModel.todayCheck({
                  params : { rfidKey : data.rfidKey}
 	    });

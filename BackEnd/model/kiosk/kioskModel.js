@@ -3,7 +3,8 @@ const mybatisMapper = require("mybatis-mapper");
 
 
 const searchUser = async (req, res) => {
-  var param = {
+  console.log("user:" + req.params.rfidKey);
+	var param = {
     rfidKey: req.params.rfidKey,
   };
   const format = { language: "sql", indent: "" };
