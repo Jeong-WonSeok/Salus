@@ -18,7 +18,7 @@ import { useEffect } from "react";
 import { useCallback } from "react";
 import { ChartCalc } from "./../api-request/functions";
 import LoadingText from "./../components/Kiosk/LoadingText";
-import { useNavigate, Navigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 const HomeDiv = styled(Div)`
   position: absolute;
@@ -44,6 +44,7 @@ const KioskMainPage = () => {
   const removeRFID = () => {
     localStorage.removeItem("RFID");
     navigate("/kiosk/login");
+    setBack(false);
   };
 
   const getEquipmentData = useCallback((data) => {
@@ -60,9 +61,7 @@ const KioskMainPage = () => {
       },
       getEquipmentData
     );
-    setTimeout(() => {
-      setBack(true);
-    }, 7500);
+
   }, [apiRequest, getEquipmentData]);
 
   // Boad / Calender 선택
@@ -140,7 +139,7 @@ const KioskMainPage = () => {
         </Fragment>
       ) : (
         <LoadingText>
-          {back ? <Navigate to="/kiosk" replace={true} /> : null}
+          {back ? removeRFID() : null}
         </LoadingText>
       )}
     </Fragment>
