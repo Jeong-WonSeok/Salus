@@ -16,52 +16,69 @@ import MuscleWoman from "./../components/ExerciseNow/MuscleWoman";
 import React, { useEffect, useRef, useState } from "react";
 import Animated, { SlideInLeft } from "react-native-reanimated";
 import io from "socket.io-client";
-import AsyncStorage from "@react-native-async-storage/async-storage";
-import axios from "axios";
+// import AsyncStorage from "@react-native-async-storage/async-storage";
+// import axios from "axios";
 import * as Notifications from "expo-notifications";
 // import LottieView from "lottie-react-native";
 const screenWidth = Dimensions.get("window").width;
 
 const Exercise = () => {
   // const animation = useRef(null);
-  const [currentInfo, setCurrentInfo] = useState({});
+  const [currentInfo, setCurrentInfo] = useState(null);
   const [ExerciseNow, setExerciseNow] = useState([]);
   const [count, setCount] = useState(0);
   const [loading, setLoading] = useState(false);
-  // const socket = io.connect("i7b110.p.ssafy.io:3010");
+  const [minutes, setMinutes] = useState(0);
+  const [seconds, setSeconds] = useState(0);
+  const [timeTicking, setTimeTicking] = useState(0);
+
+  // const [userId, setUserId] = useState();
   // useEffect(() => {
-  //   socket.on("test", (data) => {
-  //     console.log(data);
-  //     setCurrentInfo(data[0][0]);
-  //     setExerciseNow(data[1]);
+  //   AsyncStorage.getItem("@user_id").then((value) => {
+  //     setUserId(value);
   //   });
-  //   return () => {
-  //     socket.disconnect();
-  //   };
   // }, []);
-  const [userId, setUserId] = useState();
+
+  // useEffect(() => {
+  //   let interval = setInterval(() => {
+  //     if (userId) {
+  //       axios({
+  //         method: "get",
+  //         url: `http://i7b110.p.ssafy.io:3010/excercise/now/${userId}`,
+  //       })
+  //         .then((data) => {
+  //           setCount(data?.data[0][0].countNow);
+  //           setCurrentInfo(data?.data[0][0]);
+  //           setExerciseNow(data?.data[1]);
+  //           setTimeTicking(data?.data[2][0].isStarted);
+  //           setLoading(false);
+  //         })
+  //         .catch((err) => console.log(err.message));
+  //     }
+  //   }, 1000);
+  //   return () => {
+  //     clearInterval(interval);
+  //   };
+  // }, [userId]);
+
+  const socket = io.connect(`http://i7b110.p.ssafy.io:3010`);
   useEffect(() => {
-    AsyncStorage.getItem("@user_id").then((value) => {
-      setUserId(value);
+    socket.on("test", (data) => {
+      setCount(data[0][0].countNow);
+      setCurrentInfo(data[0][0]);
+      setExerciseNow(data[1]);
+      if (!timeTicking && data[2][0].isStarted == 1) {
+        setTimeTicking(data[2][0].isStarted);
+      } else if (timeTicking && data[2][0].isStarted === 0) {
+        setTimeTicking(data[2][0].isStarted);
+  
+      }
+      setLoading(false);
     });
+    return () => {
+      socket.disconnect();
+    };
   }, []);
-  useEffect(() => {
-    if (userId) {
-      setInterval(() => {
-        axios({
-          method: "get",
-          url: `http://i7b110.p.ssafy.io:3010/excercise/now/${userId}`,
-        })
-          .then((data) => {
-            setCount(data?.data[0][0].countNow);
-            setCurrentInfo(data?.data[0][0]);
-            setExerciseNow(data?.data[1]);
-            setLoading(false);
-          })
-          .catch((err) => console.log(err.message));
-      }, 1000);
-    }
-  }, [userId]);
 
   const Items = ({ item }) => {
     return (
@@ -82,17 +99,35 @@ const Exercise = () => {
   async function countNotification() {
     await Notifications.scheduleNotificationAsync({
       content: {
-        title: `${currentInfo?.equipmentName} ${count+5}회!`,
-        body: `${currentInfo?.equipmentName} ${count+5}회 완료했습니다.`,
+        title: `${currentInfo?.equipmentName} ${count}회!`,
+        body: `${currentInfo?.equipmentName} ${count}회 완료했습니다.`,
       },
       trigger: { seconds: 1 },
     });
   }
   useEffect(() => {
-    if (count !== 0 && count % 5 === 0) {
-      countNotification()
+    if (count !== 0 && count % 5 === 0 && count && currentInfo?.quipmentName) {
+      countNotification();
     }
   }, [count]);
+
+  useEffect(() => {
+    const countdown = setInterval(() => {
+      setSeconds(parseInt(seconds) + 1);
+
+      if (parseInt(seconds) === 60) {
+        
+          if (minutes < 10) {
+            setMinutes(`0${parseInt(minutes) + 1}`);
+          } else {
+            setMinutes(parseInt(minutes) + 1);
+          }
+          setSeconds(0);
+      }
+    }, 1000);
+    return () => clearInterval(countdown);
+  }, [minutes, seconds]);
+
   const [modalVisible, setModalVisible] = useState(false);
   if (loading) {
     return <Text>Loading</Text>;
@@ -123,7 +158,11 @@ const Exercise = () => {
           <Container flexDirection="column" borderRadius={10}>
             <Text style={styles.category}>시간</Text>
             <Text style={styles.count}>
-              {currentInfo?.exTime ? currentInfo.exTime : "00:00"}
+              {timeTicking
+                ? `${minutes}: ${seconds < 10 ? `0${seconds}` : seconds}`
+                : currentInfo?.exTime
+                ? currentInfo?.exTime
+                : "00:00"}
             </Text>
           </Container>
         </Container>
