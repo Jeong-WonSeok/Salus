@@ -35,7 +35,7 @@ const LineChart = ({
 
   const guideY =
     chartHeight - (value / maximumYFromData) * chartHeight + padding;
-  const guidePoints = `45,${guideY} 455,${guideY}`;
+  const guidePoints = `${padding},${guideY} ${chartWidth + padding},${guideY}`;
   const points = data
     .map((element) => {
       const x = maximumXFromData
@@ -117,7 +117,7 @@ const LineChart = ({
         <circle
           data-value="7.2"
           r="6"
-          cx={45}
+          cx={padding}
           cy={guideY}
           stroke="#fff"
           fill="#f06875"
@@ -125,7 +125,7 @@ const LineChart = ({
         <circle
           data-value="7.2"
           r="6"
-          cx={455}
+          cx={chartWidth + padding}
           cy={guideY}
           stroke="#fff"
           fill="#f06875"

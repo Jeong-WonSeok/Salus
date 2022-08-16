@@ -141,7 +141,7 @@ const Exercise = () => {
   return (
     <Container alignItems="stretch" flexDirection="column">
       <Container flex={2.8} flexDirection="column" style={styles.boxStyle}>
-        <Text style={styles.title}>{currentInfo?.equipmentName}</Text>
+        <Text style={styles.title}>{currentInfo?.equipmentName ? currentInfo?.equipmentName : '운동 정보 없음'}</Text>
         <Container justifyContent="space-between" borderRadius={10}>
           <Container flexDirection="column" borderRadius={10}>
             <Text style={styles.category}>횟수</Text>

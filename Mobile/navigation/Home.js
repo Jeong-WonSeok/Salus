@@ -362,7 +362,7 @@ const styles = StyleSheet.create({
     left: 0,
     right: 0,
     top: 27,
-    height: "100%",
+    height: screenHeight-7,
     backgroundColor: "white",
   },
   logo: {
