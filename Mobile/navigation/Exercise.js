@@ -63,22 +63,30 @@ const Exercise = () => {
 
   const socket = io.connect(`http://i7b110.p.ssafy.io:3010`);
   useEffect(() => {
-    socket.on("test", (data) => {
+    socket.on("mobileData", (data) => {
       setCount(data[0][0].countNow);
       setCurrentInfo(data[0][0]);
       setExerciseNow(data[1]);
-      if (!timeTicking && data[2][0].isStarted == 1) {
-        setTimeTicking(data[2][0].isStarted);
-      } else if (timeTicking && data[2][0].isStarted === 0) {
-        setTimeTicking(data[2][0].isStarted);
-  
-      }
+      
       setLoading(false);
     });
     return () => {
       socket.disconnect();
     };
   }, []);
+  useEffect(() => {
+    socket.on('equipmentRecieved', (data) => {
+      if (!timeTicking && data[2][0].isStarted == 1) {
+        setTimeTicking(data[2][0].isStarted);
+      } else if (timeTicking && data[2][0].isStarted === 0) {
+        setTimeTicking(data[2][0].isStarted);
+      }
+    })
+
+    return () => {
+      socket.disconnect();
+    }
+  }, [timeTicking]);
 
   const Items = ({ item }) => {
     return (
@@ -106,7 +114,7 @@ const Exercise = () => {
     });
   }
   useEffect(() => {
-    if (count !== 0 && count % 5 === 0 && count && currentInfo?.quipmentName) {
+    if (count !== 0 && count % 5 === 0) {
       countNotification();
     }
   }, [count]);
@@ -116,13 +124,12 @@ const Exercise = () => {
       setSeconds(parseInt(seconds) + 1);
 
       if (parseInt(seconds) === 60) {
-        
-          if (minutes < 10) {
-            setMinutes(`0${parseInt(minutes) + 1}`);
-          } else {
-            setMinutes(parseInt(minutes) + 1);
-          }
-          setSeconds(0);
+        if (minutes < 10) {
+          setMinutes(`0${parseInt(minutes) + 1}`);
+        } else {
+          setMinutes(parseInt(minutes) + 1);
+        }
+        setSeconds(0);
       }
     }, 1000);
     return () => clearInterval(countdown);

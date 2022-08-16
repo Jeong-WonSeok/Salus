@@ -151,6 +151,7 @@ const Home = ({ navigation }) => {
       });
   };
 
+
   // 목표 볼륨 설정
   const VolumeFunc = async () => {
     axios({
@@ -170,6 +171,14 @@ const Home = ({ navigation }) => {
         console.log(error);
       });
   };
+  //잘못된 RFID가 넘어오면 로그인으로 되돌아감
+  // useEffect(() => {
+  //   const timeout = setTimeout(() => {
+  //     AsyncStorage.clear();
+  //     navigation.navigate("Login");
+  //   }, 15000);
+  // }, [loading]);
+
 
   const LogoutFunc = () => {
     AsyncStorage.removeItem("@user_id");
@@ -178,6 +187,7 @@ const Home = ({ navigation }) => {
 
   return (
     <Fragment>
+      <StatusBar />
       {!loading ? (
         <ScrollView style={styles.scrollview}>
           <Modal
@@ -262,7 +272,7 @@ const Home = ({ navigation }) => {
             </View>
           </Modal>
           <Container flexDirection="column">
-            <Container flex={1} justifyContent="space-between" mt={40} mb={10}>
+            <Container flex={1} justifyContent="space-between" mb={10}>
               <Text style={styles.logo}>Salus</Text>
               <View style={styles.iconStyle}>
                 <View>
@@ -271,7 +281,11 @@ const Home = ({ navigation }) => {
                       navigation.navigate("Exercise");
                     }}
                   >
-                    <Image source={workout} style={styles.imageWorkout} resizeMode="contain"/>
+                    <Image
+                      source={workout}
+                      style={styles.imageWorkout}
+                      resizeMode="contain"
+                    />
                   </TouchableOpacity>
                   <Text style={styles.workoutText}>운동</Text>
                 </View>
@@ -336,10 +350,11 @@ const Home = ({ navigation }) => {
           </Container>
         </ScrollView>
       ) : (
-        <Container flexDirection="column">
+        <Container flexDirection="column" style={styles.background}>
+          <StatusBar />
           <LinearGradient
             colors={["#92a3fd", "#9dceff"]}
-            style={styles.background}
+            style={styles.linearBack}
           />
           <Image source={logo} style={styles.loadinglogo} />
           <Text style={styles.loadingtext}>운동기록 로딩중...</Text>
@@ -360,13 +375,13 @@ const styles = StyleSheet.create({
     position: "absolute",
     left: 0,
     right: 0,
-    top: 0,
-    height: screenHeight,
+    top: 30,
+    height: "100%",
     backgroundColor: "white",
   },
   logo: {
-    color: '#92a3fd',
-    marginLeft: '5%',
+    color: "#92a3fd",
+    marginLeft: "5%",
     fontSize: 40,
   },
   image: {
@@ -378,35 +393,35 @@ const styles = StyleSheet.create({
     fontSize: 12,
     color: "#96989d",
   },
-  week: { marginEnd: '5%', marginStart: '5%' },
+  week: { marginEnd: "5%", marginStart: "5%" },
   exercise: {
-    marginHorizontal: '5%',
+    marginHorizontal: "5%",
     fontSize: 16,
   },
   detail: {
-    color: '#96989d',
-    marginEnd: '5%',
+    color: "#96989d",
+    marginEnd: "5%",
   },
   goal: {
     fontSize: 15,
-    marginVertical: '5%',
+    marginVertical: "5%",
   },
   centeredView: {
     flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: 'rgba(0, 0, 0, 0.5)',
+    justifyContent: "center",
+    alignItems: "center",
+    backgroundColor: "rgba(0, 0, 0, 0.5)",
   },
   modal: {
-    flexDirection: 'row',
+    flexDirection: "row",
   },
   modalView: {
     margin: 20,
-    backgroundColor: 'white',
+    backgroundColor: "white",
     borderRadius: 20,
     padding: 35,
-    alignItems: 'center',
-    shadowColor: '#000',
+    alignItems: "center",
+    shadowColor: "#000",
     shadowOffset: {
       width: 0,
       height: 2,
@@ -418,11 +433,11 @@ const styles = StyleSheet.create({
   modalViewVolume: {
     marginBottom: 100,
     margin: 20,
-    backgroundColor: 'white',
+    backgroundColor: "white",
     borderRadius: 20,
     padding: 35,
-    alignItems: 'center',
-    shadowColor: '#000',
+    alignItems: "center",
+    shadowColor: "#000",
     shadowOffset: {
       width: 0,
       height: 2,
@@ -435,7 +450,7 @@ const styles = StyleSheet.create({
     borderRadius: 20,
     padding: 10,
     elevation: 2,
-    backgroundColor: '#92a3fd',
+    backgroundColor: "#92a3fd",
     width: 100,
     marginHorizontal: 3,
   },
@@ -443,18 +458,18 @@ const styles = StyleSheet.create({
     borderRadius: 20,
     padding: 10,
     elevation: 2,
-    backgroundColor: '#c0c2c4',
+    backgroundColor: "#c0c2c4",
     width: 100,
     marginHorizontal: 3,
   },
   textStyle: {
-    color: 'white',
-    fontWeight: 'bold',
-    textAlign: 'center',
+    color: "white",
+    fontWeight: "bold",
+    textAlign: "center",
   },
   modalText: {
     marginBottom: 15,
-    textAlign: 'center',
+    textAlign: "center",
   },
   input: {
     height: 40,
@@ -462,13 +477,13 @@ const styles = StyleSheet.create({
     borderRadius: 8,
     padding: 10,
     width: 280,
-    backgroundColor: '#f8f9fd',
+    backgroundColor: "#f8f9fd",
     borderWidth: 1,
-    borderColor: 'rgba(99, 126, 255, 0.5)',
+    borderColor: "rgba(99, 126, 255, 0.5)",
   },
   unit: {
-    textAlignVertical: 'center',
-    fontWeight: 'bold',
+    textAlignVertical: "center",
+    fontWeight: "bold",
     lineHeight: 65,
     color: "#rgba(99, 126, 255, 0.5)",
   },
@@ -480,13 +495,6 @@ const styles = StyleSheet.create({
   activityIndicator: {
     alignItems: "center",
     height: 80,
-  },
-  background: {
-    position: "absolute",
-    left: 0,
-    right: 0,
-    top: 0,
-    height: screenHeight,
   },
   loadingtext: {
     color: "white",
@@ -519,8 +527,15 @@ const styles = StyleSheet.create({
     position: "absolute",
     left: 0,
     right: 0,
+    top: 30,
+    height: "100%",
+  },
+  linearBack: {
+    position: "absolute",
+    left: 0,
+    right: 0,
     top: 0,
-    height: screenHeight,
+    height: "100%",
   },
   loadingtext: {
     color: "white",
@@ -547,7 +562,7 @@ const styles = StyleSheet.create({
     width: 30,
     height: 30,
     marginRight: 10,
-  }
+  },
 });
 
 export default Home;

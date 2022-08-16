@@ -22,31 +22,19 @@ const SplashScreen = ({ navigation }) => {
       });
     }, 3000);
   }, []);
-  useEffect(() => {
-    const timeout = setTimeout(() => {
-    
-    AsyncStorage.clear();
-    navigation.navigate('Login');
-    }, 7000);
-
-    return () => {
-      clearTimeout(timeout)
-    }
-  }, []);
+  
 
   return (
     <Container flexDirection="column">
-      <LinearGradient
-        colors={["#92a3fd", "#9dceff"]}
-        style={styles.background}
-      />
-      <Image source={logo} style={styles.logo} />
-      <ActivityIndicator
-        animating={animating}
-        color="white"
-        size="large"
-        style={styles.activityIndicator}
-      />
+      <LinearGradient colors={["#92a3fd", "#9dceff"]} style={styles.background}>
+        <Image source={logo} style={styles.logo} />
+        <ActivityIndicator
+          animating={animating}
+          color="white"
+          size="large"
+          style={styles.activityIndicator}
+        />
+      </LinearGradient>
     </Container>
   );
 };
@@ -62,11 +50,10 @@ const styles = StyleSheet.create({
     height: 80,
   },
   background: {
-    position: "absolute",
-    left: 0,
-    right: 0,
-    top: 0,
-    flex: 1,
+    width: screenWidth,
+    height: "100%",
+    justifyContent: "center",
+    alignItems: "center",
   },
 });
 

@@ -17,11 +17,11 @@ const ExerciseList = ({ data }) => {
     const exer = data.map((exercise, index) => {
       return (
         <Exercise
-          title={exercise.title}
-          reps={exercise.reps}
-          volume={exercise.volume}
+          title={exercise.equipmentName}
+          reps={exercise.totalCount}
+          volume={exercise.totalVolume}
           calorie={exercise.calorie}
-          time={exercise.time}
+          time={exercise.totalTime}
           key={index}
         />
       );

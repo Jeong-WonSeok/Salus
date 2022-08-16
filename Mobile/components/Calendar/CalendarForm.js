@@ -9,8 +9,7 @@ import DailyExerciseList from "./Components/DailyExerciseList";
 import { Container } from "../../theme/global-theme";
 import useHttp from "../../hooks/useHttp";
 
-const CalendarForm = ({ value, onChange, events }) => {
-  const rfid = "977237223725";
+const CalendarForm = ({ value, onChange, events, rfid }) => {
   const { apiRequest } = useHttp();
   const [calendar, setCalendar] = useState([]);
   const [dailyExerciseDatas, setDailyExerciseDatas] = useState();
