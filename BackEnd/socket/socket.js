@@ -4,12 +4,7 @@ const kioskModel = require("../model/kiosk/kioskModel");
 
 module.exports = (server) => {
     const io = SocketIO(server, {path: '/socket.io', cors: {origin:'*'}} );
-    const testData = {
-    	rfidKey: 1063865758496
-    };
-	console.log(testData);
 	io.on('connection', async (socket) => {
-	    io.emit('rfidcheck', testData);
 	    socket.on('rfidLogin', async (data) => {
 		console.log(data);
             io.emit('rfidcheck', data);   

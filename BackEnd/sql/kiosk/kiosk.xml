@@ -38,7 +38,7 @@ AND
         DATE_FORMAT((SELECT ADDDATE(NOW(), - WEEKDAY(NOW()) + 0 )), '%Y-%m-%d')
     AND
         DATE_FORMAT((SELECT ADDDATE(NOW(), - WEEKDAY(NOW()) + 6 )), '%Y-%m-%d');
-SELECT month(excerciseDay) AS "month", equipmentName, Round(if(weightNow, sum(weightNow * countNow),  SUM(ROUND((HOUR(TIMEDIFF(endtime, startTime)) * 60 )+ (second(TIMEDIFF(endtime, startTime)) + MINUTE(TIMEDIFF(endtime, startTime)) * 60) / 60))) / COUNT(*)) AS "averageVolume"
+SELECT month(excerciseDay) AS "month", equipmentName, Round(if(weightNow, sum(weightNow * countNow),  SUM(ROUND((HOUR(TIMEDIFF(endtime, startTime)) * 60 )+ (second(TIMEDIFF(endtime, startTime)) + MINUTE(TIMEDIFF(endtime, startTime)) * 60) / 60))) / COUNT(DISTINCT excerciseDay)) AS "averageVolume"
 FROM daily_excercise
 WHERE equipmentName IN (
 	SELECT equipmentName FROM daily_excercise
