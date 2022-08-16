@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Text, View, StyleSheet, ScrollView, TouchableWithoutFeedback } from 'react-native';
 import { debounce, range } from 'lodash';
 
@@ -42,6 +42,11 @@ const TimeScroll = ({ onHour, onMinute, myHour, myMinute }) => {
 
 const TimePicker = ({ width, buttonHeight, visibleCount, onHour, onMinute, myHour, myMinute }) => {
   const refs = React.useRef(Array.from({ length: 3 }).map(() => React.createRef()));
+
+  useEffect(() => {
+    refs.current[1].current.scrollTo({ y: myHour * 50 });
+    refs.current[2].current.scrollTo({ y: myMinute * 5 });
+  }, [myHour, myMinute]);
 
   const getOnScrollStop = (index) => (offsetY, label) => {
     const CENTER_POSITION = getCenterPosition(offsetY);
@@ -104,12 +109,12 @@ const TimePicker = ({ width, buttonHeight, visibleCount, onHour, onMinute, myHou
   return (
     <View style={[styles.container, { width, height: visibleCount * buttonHeight }]}>
       <OverlayView />
-      <ScrollView {...scrollProps[1]} contentOffset={{ y: myHour * 50 }}>
+      <ScrollView {...scrollProps[1]}>
         {fillEmpty(visibleCount, range(0, 71)).map((item, index) => (
           <Button label={item} onPress={getOnPress(1, index, item)} dir="left" key={index} />
         ))}
       </ScrollView>
-      <ScrollView {...scrollProps[2]} contentOffset={{ y: myMinute * 5 }}>
+      <ScrollView {...scrollProps[2]}>
         {fillEmpty(visibleCount, range(0, 60, 10)).map((item, index) => (
           <Button label={item} onPress={getOnPress(2, index, item)} key={index} />
         ))}
