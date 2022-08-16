@@ -54,7 +54,6 @@ const searchUser = async (req, res) => {
         }
       });
     }
-    console.log("KIOSKMODEL TEST");
     const rfidKey = results[0].rfidKey;
     return res.redirect("/kiosk/daily/" + rfidKey);
   });
