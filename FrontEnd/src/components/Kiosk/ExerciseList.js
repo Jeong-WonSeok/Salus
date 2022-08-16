@@ -59,7 +59,7 @@ const ExerciseList = (props) => {
           toggleModal={toggleModal}
           title={props.title}
           chartData={props.chartData}
-          guide={props.guide.value}
+          guide={props.guide}
           unit={"분"}
         />
       </Div>
@@ -77,7 +77,7 @@ const ExerciseList = (props) => {
           toggleModal={toggleModal}
           title={props.title}
           chartData={props.chartData}
-          guide={props.guide.value}
+          guide={props.guide}
           unit={"Vol"}
         />
       </Div>
