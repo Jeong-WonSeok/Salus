@@ -53,6 +53,15 @@ SELECT DATE_FORMAT(d.excerciseDay,'%y-%m-%d') as "excerciseDay", e.equipmentCate
     MONTH(d.excerciseDay) = MONTH(NOW())
     AND d.rfidKey = #{rfidKey}
     GROUP BY d.excerciseDay;
+	  SELECT s.equipmentName, s.standardVolume, s.gender FROM standard AS s JOIN user AS u ON s.level = u.level AND s.bodyWeight = ROUND((u.weight)/5) * 5 AND u.rfidKey = #{rfidKey} 
+	  AND s.gender = u.gender
+	  WHERE s.equipmentName
+	  IN( SELECT d.equipmentName FROM daily_excercise AS d
+	       WHERE d.excerciseDay BETWEEN CONVERT( DATE_SUB(NOW(), INTERVAL 4 DAY), DATE )
+	       and 
+	       CONVERT(NOW(), DATE)
+	  AND d.rfidKey = #{rfidKey}
+	  ) 
   </select>
   <select id="equipMonthData">
   SELECT (weightNow * countNow) AS "volume", DATE_FORMAT(excerciseDay,'%y-%m-%d') AS "excerciseDay" FROM daily_excercise

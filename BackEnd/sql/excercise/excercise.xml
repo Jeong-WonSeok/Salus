@@ -58,7 +58,7 @@
     WHERE equipmentName = #{equipmentName};
     </select>
 
-    <select id="nowtest">
+    <select id="excerciseNowData">
     SELECT weightNow, equipmentName, rfidKey FROM daily_excercise where rfidKey = #{rfidKey}
     ORDER BY updateRegist desc LIMIT 1;
     </select>
