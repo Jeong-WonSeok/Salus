@@ -4,8 +4,12 @@ const kioskModel = require("../model/kiosk/kioskModel");
 
 module.exports = (server) => {
     const io = SocketIO(server, {path: '/socket.io', cors: {origin:'*'}} );
-	
-    io.on('connection', async (socket) => {
+    const testData = {
+    	rfidKey: 1063865758496
+    };
+	console.log(testData);
+	io.on('connection', async (socket) => {
+	    io.emit('rfidcheck', testData);
 	    socket.on('rfidLogin', async (data) => {
 		console.log(data);
             io.emit('rfidcheck', data);   
@@ -15,7 +19,6 @@ module.exports = (server) => {
 		console.log("socket : " + todayCheck);
             socket.emit('rfidLoginRecieved', todayCheck);
         });
-	    
         socket.on('equipmentStart', async (data) => {
 		console.log("equipmentStart : " + data);
             const isStarted = await exModel.updateIsStarted( {
