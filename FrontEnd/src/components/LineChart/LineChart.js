@@ -3,7 +3,6 @@ import VerticalGuides from "./VerticalGuides";
 import HorizontalGuides from "./HorizontalGuides";
 import LabelsXAxis from "./LabelsXAxis";
 import LabelsYAxis from "./LabelsYAxis";
-
 const LineChart = ({
   data,
   height = 200,
@@ -11,27 +10,20 @@ const LineChart = ({
   horizontalGuides: hg,
   verticalGuides: vg,
   precision = 0,
-  guide,
-  unit,
 }) => {
   const STROKE = 2.5;
   const FONT_SIZE = width / 50;
   const maximumXFromData = Math.max(...data.map((e) => e.x));
-  const maximumYFromData = Math.max(...data.map((e) => e.y), guide);
+  const maximumYFromData = Math.max(...data.map((e) => e.y));
   const digits =
     parseFloat(maximumYFromData.toString()).toFixed(precision).length + 1;
   const padding = (FONT_SIZE + digits) * 3;
   const chartWidth = width - padding * 2;
   const chartHeight = height - padding * 2;
 
-  const guideY =
-    chartHeight - (guide / maximumYFromData) * chartHeight + padding;
-  const guidePoints = `45,${guideY} 455,${guideY}`;
   const points = data
     .map((element) => {
-      const x = maximumXFromData
-        ? (element.x / maximumXFromData) * chartWidth + padding
-        : padding;
+      const x = maximumXFromData ? (element.x / maximumXFromData) * chartWidth + padding : padding;
       const y =
         chartHeight - (element.y / maximumYFromData) * chartHeight + padding;
       return `${x},${y}`;
@@ -39,9 +31,7 @@ const LineChart = ({
     .join(" ");
 
   const dotPoints = data.map((element) => {
-    const x = maximumXFromData
-      ? (element.x / maximumXFromData) * chartWidth + padding
-      : padding;
+    const x = maximumXFromData ? (element.x / maximumXFromData) * chartWidth + padding: padding;
     const y =
       chartHeight - (element.y / maximumYFromData) * chartHeight + padding;
     const arr = [];
@@ -81,7 +71,14 @@ const LineChart = ({
         chartWidth={chartWidth}
       />
       <YAxis />
-
+      <LabelsYAxis
+        hg={hg}
+        FONT_SIZE={FONT_SIZE}
+        chartHeight={chartHeight}
+        padding={padding}
+        maximumYFromData={maximumYFromData}
+        precision={precision}
+      />
       {vg && (
         <VerticalGuides
           vg={vg}
@@ -97,38 +94,13 @@ const LineChart = ({
         width={width}
         chartHeight={chartHeight}
       />
-      <polyline
-        fill="none"
-        stroke="#f06875"
-        strokeWidth={STROKE}
-        points={guidePoints}
-      />
 
-      <g>
-        <circle
-          data-value="7.2"
-          r="6"
-          cx={45}
-          cy={guideY}
-          stroke="#fff"
-          fill="#f06875"
-        ></circle>
-        <circle
-          data-value="7.2"
-          r="6"
-          cx={455}
-          cy={guideY}
-          stroke="#fff"
-          fill="#f06875"
-        ></circle>
-      </g>
       <polyline
         fill="none"
         stroke="#8DA1FF"
         strokeWidth={STROKE}
         points={points}
       />
-
       <g>
         {dotPoints.map((dot, index) => (
           <circle
@@ -142,28 +114,6 @@ const LineChart = ({
           ></circle>
         ))}
       </g>
-      <text
-        x={350}
-        y={guideY + 15}
-        style={{
-          fill: "#f06875",
-          fontSize: FONT_SIZE + 5,
-          fontFamily: "Helvetica",
-        }}
-        stroke="#000"
-        strokeWidth={0.05}
-      >
-        {guide} {unit}
-      </text>
-      <LabelsYAxis
-        hg={hg}
-        FONT_SIZE={FONT_SIZE}
-        chartHeight={chartHeight}
-        padding={padding}
-        maximumYFromData={maximumYFromData}
-        precision={precision}
-        unit={unit}
-      />
     </svg>
   );
 };

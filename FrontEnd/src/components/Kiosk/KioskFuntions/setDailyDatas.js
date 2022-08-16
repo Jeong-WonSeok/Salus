@@ -7,9 +7,8 @@ const setDailyDatas = (data, date, type) => {
         title: excercise.excerciseName,
         volume: excercise.weightNow * excercise.countNow,
         reps: excercise.countNow,
-        time: excercise.excerciseTime,
       });
-      useMuscle.add(excercise.excerciseEnglishStimulate.split(', '));
+      useMuscle.add(excercise.excerciseEnglishStimulate.split(", "));
     }
   }
   const newArr = new Set();
