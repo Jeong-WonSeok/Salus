@@ -95,6 +95,7 @@ const ModalOverlay = (props) => {
         verticalGuides={1}
         guide={props.guide}
         unit={props.unit}
+        name={props.title}
       />
     </ModalDiv>
   );

@@ -119,10 +119,7 @@ const KioskMainPage = () => {
                     setDailyDatas(equipmentData[0], selectedDate)[1]
                   }
                   chartData={equipmentData[4]}
-                  guide={{
-                    name: "",
-                    value: 1500,
-                  }}
+                  guide={equipmentData[6]}
                 />
               </Div>
             ) : (

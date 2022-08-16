@@ -13,11 +13,21 @@ const LineChart = ({
   precision = 0,
   guide,
   unit,
+  name,
 }) => {
+  console.log(guide);
+  let value = 0;
+  for (const data of guide) {
+    if (data.equipmentName === name) {
+      value = data.standardVolume;
+      break;
+    }
+  }
   const STROKE = 2.5;
   const FONT_SIZE = width / 50;
   const maximumXFromData = Math.max(...data.map((e) => e.x));
-  const maximumYFromData = Math.max(...data.map((e) => e.y), guide);
+  const maximumYFromData = Math.max(...data.map((e) => e.y), value);
+
   const digits =
     parseFloat(maximumYFromData.toString()).toFixed(precision).length + 1;
   const padding = (FONT_SIZE + digits) * 3;
@@ -25,7 +35,7 @@ const LineChart = ({
   const chartHeight = height - padding * 2;
 
   const guideY =
-    chartHeight - (guide / maximumYFromData) * chartHeight + padding;
+    chartHeight - (value / maximumYFromData) * chartHeight + padding;
   const guidePoints = `45,${guideY} 455,${guideY}`;
   const points = data
     .map((element) => {
@@ -153,7 +163,7 @@ const LineChart = ({
         stroke="#000"
         strokeWidth={0.05}
       >
-        {guide} {unit}
+        {value} {unit}
       </text>
       <LabelsYAxis
         hg={hg}
