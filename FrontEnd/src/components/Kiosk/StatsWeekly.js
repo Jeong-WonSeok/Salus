@@ -67,7 +67,7 @@ const StatsWeekly = ({ ratioData }) => {
             </CustomDiv>
           </RoundChart>
           <InfoDiv className="infoDiv" left={-20}>
-            헬스장 회원의 평균 유산소 운동 시간 대비 회원님의 운동량입니다.
+            헬스장 회원의 평균 유산소 운동 시간 대비 회원님의 유산소 운동 시간입니다.
           </InfoDiv>
         </ChartDiv>
         <ChartDiv displayDiv="flex" mb={10}>

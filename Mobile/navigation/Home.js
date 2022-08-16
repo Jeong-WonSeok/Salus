@@ -16,6 +16,7 @@ import {
 import { StatusBar } from "expo-status-bar";
 import { Container } from "../theme/global-theme";
 import calendar from "../assets/main/calendar.png";
+import workout from "../assets/main/workout.png";
 import { todayFormal } from "../utils/todayFormal";
 import { LChart, PChart } from "../components/Chart/Chart";
 import ExerciseList from "../components/MainExercise/ExerciseList";
@@ -32,20 +33,6 @@ const screenWidth = Dimensions.get("window").width;
 const screenHeight = Dimensions.get("window").height;
 
 const animated = new Animated.Value(1);
-const fadeIn = () => {
-  Animated.timing(animated, {
-    toValue: 0.4,
-    duration: 10,
-    useNativeDriver: true,
-  }).start();
-};
-const fadeOut = () => {
-  Animated.timing(animated, {
-    toValue: 1,
-    duration: 200,
-    useNativeDriver: true,
-  }).start();
-};
 
 const Home = ({ navigation }) => {
   const { apiRequest } = useHttp();
@@ -66,7 +53,11 @@ const Home = ({ navigation }) => {
   const [nowHour, setNowHour] = useState("0");
   const [nowMinute, setNowMinute] = useState("0");
   const [nowVolume, setNowVolume] = useState();
-
+  useEffect(() => {
+    AsyncStorage.getItem("@user_id").then((value) => {
+      setUserId(value);
+    });
+  }, []);
   const hourHandler = (data) => {
     setNowHour(data);
   };
@@ -75,7 +66,7 @@ const Home = ({ navigation }) => {
   };
   const thisWeekHandler = (data) => {
     const weekList = [0, 0, 0, 0, 0, 0, 0];
-    const days = [0, 1, 2, 3, 4, 5, 6];
+    const days = [1, 2, 3, 4, 5, 6, 7];
     check = () => {
       for (const day of days) {
         for (const record of data[0]) {
@@ -92,7 +83,6 @@ const Home = ({ navigation }) => {
     return weekList;
   };
   const getData = useCallback((res) => {
-    console.log(res);
     setThisWeek(thisWeekHandler(res));
     setMyHour(Number(res[1][0].targetTime.slice(0, 2)));
     setMyMinute(Number(res[1][0].targetTime.slice(3)));
@@ -101,16 +91,11 @@ const Home = ({ navigation }) => {
     setPercentVolume(Number(res[2][0].percentVolume) * 0.01);
     setExercise(res[3]);
     setLoading(false);
-    console.log(loading);
   }, []);
 
   // 페이지 렌더시 첫 데이터 받아오기
+
   useEffect(() => {
-    AsyncStorage.getItem("@user_id").then((value) => {
-      console.log(value);
-      setUserId(value);
-    });
-    console.log(userId);
     apiRequest(
       {
         url: `http://i7b110.p.ssafy.io:3010/mobile/user/${userId}`,
@@ -142,7 +127,6 @@ const Home = ({ navigation }) => {
       data: timeData,
     })
       .then(() => {
-        console.log("time");
         apiRequest(
           {
             url: `http://i7b110.p.ssafy.io:3010/mobile/user/${userId}`,
@@ -163,7 +147,6 @@ const Home = ({ navigation }) => {
       data: volumeData,
     })
       .then(() => {
-        console.log("volume");
         apiRequest(
           {
             url: `http://i7b110.p.ssafy.io:3010/mobile/user/${userId}`,
@@ -175,6 +158,20 @@ const Home = ({ navigation }) => {
         console.log(error);
       });
   };
+  //잘못된 RFID가 넘어오면 로그인으로 되돌아감
+  useEffect(() => {
+    const timeout = setTimeout(() => {
+      AsyncStorage.clear();
+      navigation.navigate("Login");
+    }, 10000);
+
+    if (!loading) {
+      clearTimeout(timeout);
+    }
+    return () => {
+      clearTimeout(timeout);
+    }
+  }, [loading]);
 
   const LogoutFunc = () => {
     AsyncStorage.removeItem("@user_id");
@@ -183,6 +180,7 @@ const Home = ({ navigation }) => {
 
   return (
     <Fragment>
+      <StatusBar />
       {!loading ? (
         <ScrollView style={styles.scrollview}>
           <Modal
@@ -207,6 +205,7 @@ const Home = ({ navigation }) => {
                   <Pressable
                     style={styles.buttonCancle}
                     onPress={() => setTimeModal(!timeModal)}
+                  
                   >
                     <Text style={styles.textStyle}>취소</Text>
                   </Pressable>
@@ -267,17 +266,35 @@ const Home = ({ navigation }) => {
             </View>
           </Modal>
           <Container flexDirection="column">
-            <Container flex={1} justifyContent="space-between" mt={40} mb={10}>
-              <Text style={styles.logo}>Salus</Text>
-              <View>
-                <TouchableOpacity
-                  onPress={() => {
-                    navigation.navigate("Calendar");
-                  }}
-                >
-                  <Image source={calendar} style={styles.image} />
-                </TouchableOpacity>
-                <Text style={styles.calendartext}>캘린더</Text>
+            <Container flex={1} justifyContent="space-between" mb={10}>
+              <TouchableOpacity onPress={LogoutFunc}>
+                <Text style={styles.logo}>Salus</Text>
+              </TouchableOpacity>
+              <View style={styles.iconStyle}>
+                <View>
+                  <TouchableOpacity
+                    onPress={() => {
+                      navigation.navigate("Exercise");
+                    }}
+                  >
+                    <Image
+                      source={workout}
+                      style={styles.imageWorkout}
+                      resizeMode="contain"
+                    />
+                    <Text style={styles.workoutText}>운동</Text>
+                  </TouchableOpacity>
+                </View>
+                <View>
+                  <TouchableOpacity
+                    onPress={() => {
+                      navigation.navigate("Calendar");
+                    }}
+                  >
+                    <Image source={calendar} style={styles.image} />
+                    <Text style={styles.calendartext}>캘린더</Text>
+                  </TouchableOpacity>
+                </View>
               </View>
             </Container>
             <Container flex={9} flexDirection="column">
@@ -315,28 +332,16 @@ const Home = ({ navigation }) => {
                   <ExerciseList data={exercise} />
                 </Container>
               </Container>
-              <Button
-                title="go to CurrentExercise"
-                onPress={() => navigation.navigate("Exercise")}
-              />
-              <Pressable
-                onPressIn={fadeIn}
-                onPressOut={fadeOut}
-                onPress={LogoutFunc}
-              >
-                <Animated.View style={styles.button}>
-                  <Text style={styles.text}>로그아웃</Text>
-                </Animated.View>
-              </Pressable>
             </Container>
             <StatusBar style="dark" />
           </Container>
         </ScrollView>
       ) : (
-        <Container flexDirection="column">
+        <Container flexDirection="column" style={styles.background}>
+          <StatusBar />
           <LinearGradient
             colors={["#92a3fd", "#9dceff"]}
-            style={styles.background}
+            style={styles.linearBack}
           />
           <Image source={logo} style={styles.loadinglogo} />
           <Text style={styles.loadingtext}>운동기록 로딩중...</Text>
@@ -357,8 +362,8 @@ const styles = StyleSheet.create({
     position: "absolute",
     left: 0,
     right: 0,
-    top: 0,
-    height: screenHeight,
+    top: 27,
+    height: "100%",
     backgroundColor: "white",
   },
   logo: {
@@ -371,10 +376,17 @@ const styles = StyleSheet.create({
     height: 30,
   },
   calendartext: {
-    marginRight: "6%",
+    marginRight: "5%",
     fontSize: 12,
     color: "#96989d",
   },
+  workoutText: {
+    marginRight: 15,
+    paddingLeft: 6,
+    fontSize: 12,
+    color: "#96989d",
+  },
+
   week: { marginEnd: "5%", marginStart: "5%" },
   exercise: {
     marginHorizontal: "5%",
@@ -478,13 +490,6 @@ const styles = StyleSheet.create({
     alignItems: "center",
     height: 80,
   },
-  background: {
-    position: "absolute",
-    left: 0,
-    right: 0,
-    top: 0,
-    height: screenHeight,
-  },
   loadingtext: {
     color: "white",
   },
@@ -502,6 +507,56 @@ const styles = StyleSheet.create({
     backgroundColor: "transparent",
     fontSize: 18,
     color: "#fff",
+  },
+  loadinglogo: {
+    width: screenWidth * 0.8,
+    height: (screenWidth * 0.8) / 2.6,
+    marginBottom: 50,
+  },
+  activityIndicator: {
+    alignItems: "center",
+    height: 80,
+  },
+  background: {
+    position: "absolute",
+    left: 0,
+    right: 0,
+    top: 0,
+    height: "100%",
+  },
+  linearBack: {
+    position: "absolute",
+    left: 0,
+    right: 0,
+    top: 0,
+    height: "100%",
+  },
+  loadingtext: {
+    color: "white",
+  },
+  button: {
+    opacity: animated,
+    width: screenWidth * 0.6,
+    height: 48,
+    padding: 15,
+    alignItems: "center",
+    borderRadius: 30,
+    marginTop: 30,
+    backgroundColor: "#7a91ff",
+  },
+  text: {
+    backgroundColor: "transparent",
+    fontSize: 18,
+    color: "#fff",
+  },
+  iconStyle: {
+    flexDirection: "row",
+  },
+  imageWorkout: {
+    marginLeft: 2,
+    width: 25,
+    height: 30,
+    marginRight: 10,
   },
 });
 

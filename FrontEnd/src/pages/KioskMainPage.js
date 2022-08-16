@@ -62,8 +62,9 @@ const KioskMainPage = () => {
       getEquipmentData
     );
     setTimeout(() => {
-      setBack(true);
-    }, 7000);
+      setBack(true)
+    }, 7000)
+
   }, [apiRequest, getEquipmentData]);
 
   // Boad / Calender 선택
@@ -140,7 +141,9 @@ const KioskMainPage = () => {
           </HomeDiv>
         </Fragment>
       ) : (
-        <LoadingText>{back ? removeRFID() : null}</LoadingText>
+        <LoadingText>
+          {back ? removeRFID() : null}
+        </LoadingText>
       )}
     </Fragment>
   );

@@ -50,15 +50,15 @@ const Parts = styled.Image`
 const MuscleMan = ({ currentInfo }) => {
   let screenWidth = Dimensions.get("window").width;
   let screenHeight = Dimensions.get("window").height;
-
+  const splitInfo = currentInfo?.equipmentEnglishStimulate
+    ? currentInfo?.equipmentEnglishStimulate.split(", ")
+    : [];
   return (
     <Container alignItems="stretch">
       <Container flex={1} width={screenWidth} height="60%">
         <Parts
           source={traps_a}
-          opacity={
-            currentInfo?.equipmentEnglishStimulate === "traps" ? 1 : 0
-          }
+          opacity={splitInfo.includes("traps") ? 1 : 0}
           top={-91.5}
           left={-14.5}
           resizeMode="contain"
@@ -66,7 +66,7 @@ const MuscleMan = ({ currentInfo }) => {
         />
         <Parts
           source={traps_b}
-          opacity={currentInfo?.equipmentEnglishStimulate === "traps" ? 1 : 0}
+          opacity={splitInfo.includes("traps") ? 1 : 0}
           top={-91}
           left={14}
           scale="scale(0.065)"
@@ -74,9 +74,7 @@ const MuscleMan = ({ currentInfo }) => {
         />
         <Parts
           source={shoulders_a}
-          opacity={
-            currentInfo?.equipmentEnglishStimulate === "shoulders" ? 1 : 0
-          }
+          opacity={splitInfo.includes("shoulders") ? 1 : 0}
           top={-69}
           left={-36.5}
           scale="scale(0.1046)"
@@ -84,9 +82,7 @@ const MuscleMan = ({ currentInfo }) => {
         />
         <Parts
           source={shoulders_b}
-          opacity={
-            currentInfo?.equipmentEnglishStimulate === "shoulders" ? 1 : 0
-          }
+          opacity={splitInfo.includes("shoulders") ? 1 : 0}
           top={-69}
           left={36.3}
           scale="scale(0.1046)"
@@ -94,7 +90,7 @@ const MuscleMan = ({ currentInfo }) => {
         />
         <Parts
           source={pecs}
-          opacity={currentInfo?.equipmentEnglishStimulate === "pecs" ? 1 : 0}
+          opacity={splitInfo.includes("pecs") ? 1 : 0}
           width={77.5}
           height={40.5}
           top={66.5}
@@ -104,7 +100,7 @@ const MuscleMan = ({ currentInfo }) => {
         />
         <Parts
           source={biceps_a}
-          opacity={currentInfo?.equipmentEnglishStimulate === "biceps" ? 1 : 0}
+          opacity={splitInfo.includes("biceps") ? 1 : 0}
           top={-38}
           left={-47.5}
           scale="scale(0.133)"
@@ -112,7 +108,7 @@ const MuscleMan = ({ currentInfo }) => {
         />
         <Parts
           source={biceps_b}
-          opacity={currentInfo?.equipmentEnglishStimulate === "biceps" ? 1 : 0}
+          opacity={splitInfo.includes("biceps") ? 1 : 0}
           top={-38}
           left={47.5}
           scale="scale(0.133)"
@@ -120,7 +116,7 @@ const MuscleMan = ({ currentInfo }) => {
         />
         <Parts
           source={forearm_a}
-          opacity={currentInfo?.equipmentEnglishStimulate === "forearm" ? 1 : 0}
+          opacity={splitInfo.includes("forearm") ? 1 : 0}
           top={-1.85}
           left={-64.7}
           scale="scale(0.175)"
@@ -128,7 +124,7 @@ const MuscleMan = ({ currentInfo }) => {
         />
         <Parts
           source={forearm_b}
-          opacity={currentInfo?.equipmentEnglishStimulate === "forearm" ? 1 : 0}
+          opacity={splitInfo.includes("forearm") ? 1 : 0}
           top={-1.85}
           left={64.1}
           scale="scale(0.175)"
@@ -136,9 +132,7 @@ const MuscleMan = ({ currentInfo }) => {
         />
         <Parts
           source={obliques}
-          opacity={
-            currentInfo?.equipmentEnglishStimulate === "obliques" ? 1 : 0
-          }
+          opacity={splitInfo.includes("obliques") ? 1 : 0}
           top={-25.4}
           left={-1}
           scale="scale(0.166)"
@@ -146,7 +140,7 @@ const MuscleMan = ({ currentInfo }) => {
         />
         <Parts
           source={quads_a}
-          opacity={currentInfo?.equipmentEnglishStimulate === "quads" ? 1 : 0}
+          opacity={splitInfo.includes("quads") ? 1 : 0}
           top={57.3}
           left={-23.4}
           scale="scale(0.308)"
@@ -154,7 +148,7 @@ const MuscleMan = ({ currentInfo }) => {
         />
         <Parts
           source={quads_b}
-          opacity={currentInfo?.equipmentEnglishStimulate === "quads" ? 1 : 0}
+          opacity={splitInfo.includes("quads") ? 1 : 0}
           top={57.3}
           left={23.2}
           scale="scale(0.309)"
@@ -162,7 +156,7 @@ const MuscleMan = ({ currentInfo }) => {
         />
         <Parts
           source={calves_a}
-          opacity={currentInfo?.equipmentEnglishStimulate === "calves" ? 1 : 0}
+          opacity={splitInfo.includes("calves") ? 1 : 0}
           top={150}
           left={-31.9}
           scale="scale(0.245)"
@@ -170,7 +164,7 @@ const MuscleMan = ({ currentInfo }) => {
         />
         <Parts
           source={calves_b}
-          opacity={currentInfo?.equipmentEnglishStimulate === "calves" ? 1 : 0}
+          opacity={splitInfo.includes("calves") ? 1 : 0}
           top={150.2}
           left={31.7}
           scale="scale(0.245)"
@@ -181,7 +175,7 @@ const MuscleMan = ({ currentInfo }) => {
       <Container flex={1} width={screenWidth} height="60%">
         <Parts
           source={back_traps_a}
-          opacity={currentInfo?.equipmentEnglishStimulate === "traps" ? 1 : 0}
+          opacity={splitInfo.includes("traps") ? 1 : 0}
           top={-98}
           left={0}
           scale="scale(0.124)"
@@ -189,7 +183,7 @@ const MuscleMan = ({ currentInfo }) => {
         />
         <Parts
           source={back_traps_b}
-          opacity={currentInfo?.equipmentEnglishStimulate === "traps" ? 1 : 0}
+          opacity={splitInfo.includes("traps") ? 1 : 0}
           top={-62.2}
           left={1}
           scale="scale(0.214)"
@@ -197,9 +191,7 @@ const MuscleMan = ({ currentInfo }) => {
         />
         <Parts
           source={back_shoulders_a}
-          opacity={
-            currentInfo?.equipmentEnglishStimulate === "shoulders" ? 1 : 0
-          }
+          opacity={splitInfo.includes("shoulders") ? 1 : 0}
           top={-72.6}
           left={-38.3}
           scale="scale(0.105)"
@@ -207,9 +199,7 @@ const MuscleMan = ({ currentInfo }) => {
         />
         <Parts
           source={back_shoulders_b}
-          opacity={
-            currentInfo?.equipmentEnglishStimulate === "shoulders" ? 1 : 0
-          }
+          opacity={splitInfo.includes("shoulders") ? 1 : 0}
           top={-72.6}
           left={39.3}
           scale="scale(0.105)"
@@ -217,7 +207,7 @@ const MuscleMan = ({ currentInfo }) => {
         />
         <Parts
           source={triceps_a}
-          opacity={currentInfo?.equipmentEnglishStimulate === "triceps" ? 1 : 0}
+          opacity={splitInfo.includes("triceps") ? 1 : 0}
           top={-42.5}
           left={-49.1}
           scale="scale(0.146)"
@@ -225,7 +215,7 @@ const MuscleMan = ({ currentInfo }) => {
         />
         <Parts
           source={triceps_b}
-          opacity={currentInfo?.equipmentEnglishStimulate === "triceps" ? 1 : 0}
+          opacity={splitInfo.includes("triceps") ? 1 : 0}
           top={-42.3}
           left={50.7}
           scale="scale(0.147)"
@@ -233,7 +223,7 @@ const MuscleMan = ({ currentInfo }) => {
         />
         <Parts
           source={back_lats_a}
-          opacity={currentInfo?.equipmentEnglishStimulate === "lats" ? 1 : 0}
+          opacity={splitInfo.includes("lats") ? 1 : 0}
           top={-25.7}
           left={-18.5}
           scale="scale(0.202)"
@@ -241,7 +231,7 @@ const MuscleMan = ({ currentInfo }) => {
         />
         <Parts
           source={back_lats_b}
-          opacity={currentInfo?.equipmentEnglishStimulate === "lats" ? 1 : 0}
+          opacity={splitInfo.includes("lats") ? 1 : 0}
           top={-25.7}
           left={20.2}
           scale="scale(0.202)"
@@ -249,7 +239,7 @@ const MuscleMan = ({ currentInfo }) => {
         />
         <Parts
           source={back_lower}
-          opacity={currentInfo?.equipmentEnglishStimulate === "lower" ? 1 : 0}
+          opacity={splitInfo.includes("lower") ? 1 : 0}
           top={-4.5}
           left={0.5}
           scale="scale(0.164)"
@@ -257,9 +247,7 @@ const MuscleMan = ({ currentInfo }) => {
         />
         <Parts
           source={back_forearms_a}
-          opacity={
-            currentInfo?.equipmentEnglishStimulate === "forearms" ? 1 : 0
-          }
+          opacity={splitInfo.includes("forearms") ? 1 : 0}
           top={3.1}
           left={-68}
           scale="scale(0.193)"
@@ -267,9 +255,7 @@ const MuscleMan = ({ currentInfo }) => {
         />
         <Parts
           source={back_forearms_b}
-          opacity={
-            currentInfo?.equipmentEnglishStimulate === "forearms" ? 1 : 0
-          }
+          opacity={splitInfo.includes("forearms") ? 1 : 0}
           top={3.2}
           left={69}
           scale="scale(0.19)"
@@ -277,7 +263,7 @@ const MuscleMan = ({ currentInfo }) => {
         />
         <Parts
           source={back_glutes}
-          opacity={currentInfo?.equipmentEnglishStimulate === "glutes" ? 1 : 0}
+          opacity={splitInfo.includes("glutes") ? 1 : 0}
           top={31.5}
           left={0.5}
           scale="scale(0.197)"
@@ -285,9 +271,7 @@ const MuscleMan = ({ currentInfo }) => {
         />
         <Parts
           source={back_hamstrings_a}
-          opacity={
-            currentInfo?.equipmentEnglishStimulate === "hamstrings" ? 1 : 0
-          }
+          opacity={splitInfo.includes("hamstrings") ? 1 : 0}
           top={81.5}
           left={-22}
           scale="scale(0.309)"
@@ -295,9 +279,7 @@ const MuscleMan = ({ currentInfo }) => {
         />
         <Parts
           source={back_hamstrings_b}
-          opacity={
-            currentInfo?.equipmentEnglishStimulate === "hamstrings" ? 1 : 0
-          }
+          opacity={splitInfo.includes("hamstrings") ? 1 : 0}
           top={82}
           left={23.4}
           scale="scale(0.305)"
@@ -305,7 +287,7 @@ const MuscleMan = ({ currentInfo }) => {
         />
         <Parts
           source={back_calves_a}
-          opacity={currentInfo?.equipmentEnglishStimulate === "calves" ? 1 : 0}
+          opacity={splitInfo.includes("calves") ? 1 : 0}
           top={138}
           left={-37.7}
           scale="scale(0.186)"
@@ -313,7 +295,7 @@ const MuscleMan = ({ currentInfo }) => {
         />
         <Parts
           source={back_calves_b}
-          opacity={currentInfo?.equipmentEnglishStimulate === "calves" ? 1 : 0}
+          opacity={splitInfo.includes("calves") ? 1 : 0}
           top={138}
           left={39.2}
           scale="scale(0.186)"
