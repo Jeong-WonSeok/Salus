@@ -39,7 +39,7 @@ const searchUser = async (req, res) => {
             const rfidKey = results[0].rfidKey;
             return res.redirect("/kiosk/daily/" + rfidKey);
           });
-        } else {
+        } else if (results2[0].attendanceCheck === 1) {
           const query4 = mybatisMapper.getStatement(
             "kiosk",
             "attendanceExit",
@@ -54,6 +54,9 @@ const searchUser = async (req, res) => {
         }
       });
     }
+    console.log("KIOSKMODEL TEST");
+    const rfidKey = results[0].rfidKey;
+    return res.redirect("/kiosk/daily/" + rfidKey);
   });
 };
 
