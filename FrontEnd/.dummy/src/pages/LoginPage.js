@@ -84,7 +84,6 @@ const LoginPage = () => {
   const classList = ['d-flex'];
   const SubmitHandler = (e) => {
     e.preventDefault();
-    console.log(e);
   };
 
   return (

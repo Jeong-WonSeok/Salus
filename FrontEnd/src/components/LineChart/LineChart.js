@@ -15,7 +15,6 @@ const LineChart = ({
   unit,
   name,
 }) => {
-  console.log(guide);
   let value = 0;
   for (const data of guide) {
     if (data.equipmentName === name) {
