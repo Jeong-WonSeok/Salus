@@ -196,21 +196,14 @@ const Home = ({ navigation }) => {
               <View style={styles.modalView}>
                 <Text style={styles.modalText}>이번주 목표 시간 설정</Text>
                 <TimeScroll
-                 
                   onHour={hourHandler}
-                 
                   onMinute={minuteHandler}
-                 
                   myHour={myHour}
-                 
                   myMinute={myMinute}
-               
                 />
                 <View style={styles.modal}>
                   <Pressable
-                   
                     style={styles.buttonCancle}
-                   
                     onPress={() => setTimeModal(!timeModal)}
                   
                   >
@@ -254,11 +247,8 @@ const Home = ({ navigation }) => {
                 </View>
                 <View style={styles.modal}>
                   <Pressable
-                   
                     style={styles.buttonCancle}
-                   
                     onPress={() => setVolumeModal(!volumeModal)}
-                  
                   >
                     <Text style={styles.textStyle}>취소</Text>
                   </Pressable>
@@ -356,15 +346,10 @@ const Home = ({ navigation }) => {
           <Image source={logo} style={styles.loadinglogo} />
           <Text style={styles.loadingtext}>운동기록 로딩중...</Text>
           <ActivityIndicator
-           
             animating={true}
-           
             color="white"
-           
             size="large"
-           
             style={styles.activityIndicator}
-         
           />
         </Container>
       )}
@@ -532,8 +517,6 @@ const styles = StyleSheet.create({
     alignItems: "center",
     height: 80,
   },
-<<<<<<< HEAD
-=======
   background: {
     position: "absolute",
     left: 0,
@@ -548,7 +531,6 @@ const styles = StyleSheet.create({
     top: 0,
     height: "100%",
   },
->>>>>>> bd997687e72238298f2c74194f7ceca75437a186
   loadingtext: {
     color: "white",
   },
