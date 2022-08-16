@@ -21,7 +21,7 @@
     AND
         DATE_FORMAT((SELECT ADDDATE(NOW(), - WEEKDAY(NOW()) + 6 )), '%Y-%m-%d')
     GROUP BY e.equipmentCategory;
-    SELECT ROUND(SUM(ABS(HOUR(TIMEDIFF(endtime, startTime)) * 60 )+ (second(TIMEDIFF(endtime, startTime)) + MINUTE(TIMEDIFF(endtime, startTime)) * 60) / 60)) AS "AllTotalCategoryTime", e.equipmentCategory AS "excerciseCategory"from daily_excercise AS d 
+	  SELECT ROUND(ROUND(SUM(ABS(HOUR(TIMEDIFF(endtime, startTime)) * 60 )+ (second(TIMEDIFF(endtime, startTime)) + MINUTE(TIMEDIFF(endtime, startTime)) * 60) / 60)) / COUNT(DISTINCT d.rfidKey)) AS "AllTotalCategoryTime", e.equipmentCategory AS "excerciseCategory"from daily_excercise AS d 
     LEFT JOIN fitness_equipment AS e ON d.equipmentName = e.equipmentName 
     where
     d.excerciseDay 
