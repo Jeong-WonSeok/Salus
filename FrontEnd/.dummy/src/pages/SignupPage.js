@@ -54,7 +54,6 @@ const SignupPage = () => {
       let parts = store.target.value.split("-");
       let dateVal = new Date(parts[0], parts[1] - 1, parts[2]);
       setBodyData({ ...bodyData, birthDay: dateVal });
-      console.log(bodyData);
     } 
     
     else if (type === "checkbox") {
@@ -81,7 +80,6 @@ const SignupPage = () => {
 
   const SubmitHandler = (e) => {
     e.preventDefault();
-    console.log(e.target[0]);
   };
 
   return (

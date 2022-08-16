@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { LogoDiv, Div } from '../../styles/kiosk.style';
+import { Div } from '../../styles/kiosk.style';
 import moment from 'moment';
 import styled from 'styled-components';
 import logoMain from './../../assets/images/logo/logo-main.png'
