@@ -29,24 +29,10 @@ import logo from "../assets/logo/logo.png";
 import moment from "moment";
 import axios from "axios";
 
-const screenWidth = Dimensions.get('window').width;
-const screenHeight = Dimensions.get('window').height;
+const screenWidth = Dimensions.get("window").width;
+const screenHeight = Dimensions.get("window").height;
 
 const animated = new Animated.Value(1);
-const fadeIn = () => {
-  Animated.timing(animated, {
-    toValue: 0.4,
-    duration: 10,
-    useNativeDriver: true,
-  }).start();
-};
-const fadeOut = () => {
-  Animated.timing(animated, {
-    toValue: 1,
-    duration: 200,
-    useNativeDriver: true,
-  }).start();
-};
 
 const Home = ({ navigation }) => {
   const { apiRequest } = useHttp();
@@ -60,14 +46,18 @@ const Home = ({ navigation }) => {
   const [percentVolume, setPercentVolume] = useState();
   const [exercise, setExercise] = useState();
   // 완료 누르면 설정되는 목표 (데이터에 저장됨)
-  const [myHour, setMyHour] = useState('0');
-  const [myMinute, setMyMinute] = useState('0');
+  const [myHour, setMyHour] = useState("0");
+  const [myMinute, setMyMinute] = useState("0");
   const [myVolume, setMyVolume] = useState();
   // 유저가 입력한 목표 (취소 누르면 날아감, 데이터에 저장 X)
-  const [nowHour, setNowHour] = useState('0');
-  const [nowMinute, setNowMinute] = useState('0');
+  const [nowHour, setNowHour] = useState("0");
+  const [nowMinute, setNowMinute] = useState("0");
   const [nowVolume, setNowVolume] = useState();
-
+  useEffect(() => {
+    AsyncStorage.getItem("@user_id").then((value) => {
+      setUserId(value);
+    });
+  }, []);
   const hourHandler = (data) => {
     setNowHour(data);
   };
@@ -104,10 +94,8 @@ const Home = ({ navigation }) => {
   }, []);
 
   // 페이지 렌더시 첫 데이터 받아오기
+
   useEffect(() => {
-    AsyncStorage.getItem("@user_id").then((value) => {
-      setUserId(value);
-    });
     apiRequest(
       {
         url: `http://i7b110.p.ssafy.io:3010/mobile/user/${userId}`,
@@ -151,7 +139,6 @@ const Home = ({ navigation }) => {
       });
   };
 
-
   // 목표 볼륨 설정
   const VolumeFunc = async () => {
     axios({
@@ -172,13 +159,19 @@ const Home = ({ navigation }) => {
       });
   };
   //잘못된 RFID가 넘어오면 로그인으로 되돌아감
-  // useEffect(() => {
-  //   const timeout = setTimeout(() => {
-  //     AsyncStorage.clear();
-  //     navigation.navigate("Login");
-  //   }, 15000);
-  // }, [loading]);
+  useEffect(() => {
+    const timeout = setTimeout(() => {
+      AsyncStorage.clear();
+      navigation.navigate("Login");
+    }, 10000);
 
+    if (!loading) {
+      clearTimeout(timeout);
+    }
+    return () => {
+      clearTimeout(timeout);
+    }
+  }, [loading]);
 
   const LogoutFunc = () => {
     AsyncStorage.removeItem("@user_id");
@@ -273,7 +266,9 @@ const Home = ({ navigation }) => {
           </Modal>
           <Container flexDirection="column">
             <Container flex={1} justifyContent="space-between" mb={10}>
-              <Text style={styles.logo}>Salus</Text>
+              <TouchableOpacity onPress={LogoutFunc}>
+                <Text style={styles.logo}>Salus</Text>
+              </TouchableOpacity>
               <View style={styles.iconStyle}>
                 <View>
                   <TouchableOpacity
@@ -286,8 +281,8 @@ const Home = ({ navigation }) => {
                       style={styles.imageWorkout}
                       resizeMode="contain"
                     />
+                    <Text style={styles.workoutText}>운동</Text>
                   </TouchableOpacity>
-                  <Text style={styles.workoutText}>운동</Text>
                 </View>
                 <View>
                   <TouchableOpacity
@@ -296,8 +291,8 @@ const Home = ({ navigation }) => {
                     }}
                   >
                     <Image source={calendar} style={styles.image} />
+                    <Text style={styles.calendartext}>캘린더</Text>
                   </TouchableOpacity>
-                  <Text style={styles.calendartext}>캘린더</Text>
                 </View>
               </View>
             </Container>
@@ -336,15 +331,6 @@ const Home = ({ navigation }) => {
                   <ExerciseList data={exercise} />
                 </Container>
               </Container>
-              <Pressable
-                onPressIn={fadeIn}
-                onPressOut={fadeOut}
-                onPress={LogoutFunc}
-              >
-                <Animated.View style={styles.button}>
-                  <Text style={styles.text}>로그아웃</Text>
-                </Animated.View>
-              </Pressable>
             </Container>
             <StatusBar style="dark" />
           </Container>
@@ -375,7 +361,7 @@ const styles = StyleSheet.create({
     position: "absolute",
     left: 0,
     right: 0,
-    top: 30,
+    top: 27,
     height: "100%",
     backgroundColor: "white",
   },
@@ -389,10 +375,17 @@ const styles = StyleSheet.create({
     height: 30,
   },
   calendartext: {
-    marginRight: "6%",
+    marginRight: "5%",
     fontSize: 12,
     color: "#96989d",
   },
+  workoutText: {
+    marginRight: 15,
+    paddingLeft: 6,
+    fontSize: 12,
+    color: "#96989d",
+  },
+
   week: { marginEnd: "5%", marginStart: "5%" },
   exercise: {
     marginHorizontal: "5%",
@@ -527,7 +520,7 @@ const styles = StyleSheet.create({
     position: "absolute",
     left: 0,
     right: 0,
-    top: 30,
+    top: 0,
     height: "100%",
   },
   linearBack: {
@@ -559,7 +552,8 @@ const styles = StyleSheet.create({
     flexDirection: "row",
   },
   imageWorkout: {
-    width: 30,
+    marginLeft: 2,
+    width: 25,
     height: 30,
     marginRight: 10,
   },

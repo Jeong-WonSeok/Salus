@@ -67,7 +67,6 @@ const Exercise = () => {
       setCount(data[0][0].countNow);
       setCurrentInfo(data[0][0]);
       setExerciseNow(data[1]);
-      
       setLoading(false);
     });
     return () => {
@@ -76,10 +75,10 @@ const Exercise = () => {
   }, []);
   useEffect(() => {
     socket.on('equipmentRecieved', (data) => {
-      if (!timeTicking && data[2][0].isStarted == 1) {
-        setTimeTicking(data[2][0].isStarted);
-      } else if (timeTicking && data[2][0].isStarted === 0) {
-        setTimeTicking(data[2][0].isStarted);
+      if (!timeTicking && data.isStarted == 1) {
+        setTimeTicking(data.isStarted);
+      } else if (timeTicking && data.isStarted == 0) {
+        setTimeTicking(data.isStarted);
       }
     })
 
@@ -149,7 +148,7 @@ const Exercise = () => {
             <Text style={styles.count}>{count ? count : 0}</Text>
           </Container>
           <Container flexDirection="column" borderRadius={10}>
-            <Text style={styles.category}>볼륨</Text>
+            <Text style={styles.category}>중량</Text>
             <Text style={styles.count}>
               {currentInfo?.weightNow ? currentInfo.weightNow : 0}
             </Text>

@@ -31,7 +31,7 @@ const CalendarForm = ({ value, onChange, events, rfid }) => {
       },
       getDailyData
     );
-  }, [apiRequest, getDailyData, value]);
+  }, [apiRequest, getDailyData, value, rfid]);
 
   const Items = (dailyDatas) => {
     return (
@@ -112,6 +112,7 @@ const CalendarForm = ({ value, onChange, events, rfid }) => {
 const styles = StyleSheet.create({
   pages: {
     width: "100%",
+    marginTop: 27,
   },
   calendar: {
     width: "100%",
