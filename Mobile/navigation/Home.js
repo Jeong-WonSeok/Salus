@@ -12,40 +12,27 @@ import {
   Dimensions,
   ActivityIndicator,
   Animated,
-} from 'react-native';
-import { StatusBar } from 'expo-status-bar';
-import { Container } from '../theme/global-theme';
-import calendar from '../assets/main/calendar.png';
-import { todayFormal } from '../utils/todayFormal';
-import { LChart, PChart } from '../components/Chart/Chart';
-import ExerciseList from '../components/MainExercise/ExerciseList';
-import TimeScroll from '../components/TimeScroll/TimeScroll';
-import AsyncStorage from '@react-native-async-storage/async-storage';
-import React, { Fragment, useState, useCallback, useEffect } from 'react';
-import useHttp from '../hooks/useHttp';
-import { LinearGradient } from 'expo-linear-gradient';
-import logo from '../assets/logo/logo.png';
-import moment from 'moment';
-import axios from 'axios';
+} from "react-native";
+import { StatusBar } from "expo-status-bar";
+import { Container } from "../theme/global-theme";
+import calendar from "../assets/main/calendar.png";
+import workout from "../assets/main/workout.png";
+import { todayFormal } from "../utils/todayFormal";
+import { LChart, PChart } from "../components/Chart/Chart";
+import ExerciseList from "../components/MainExercise/ExerciseList";
+import TimeScroll from "../components/TimeScroll/TimeScroll";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import React, { Fragment, useState, useCallback, useEffect } from "react";
+import useHttp from "../hooks/useHttp";
+import { LinearGradient } from "expo-linear-gradient";
+import logo from "../assets/logo/logo.png";
+import moment from "moment";
+import axios from "axios";
 
-const screenWidth = Dimensions.get('window').width;
-const screenHeight = Dimensions.get('window').height;
+const screenWidth = Dimensions.get("window").width;
+const screenHeight = Dimensions.get("window").height;
 
 const animated = new Animated.Value(1);
-const fadeIn = () => {
-  Animated.timing(animated, {
-    toValue: 0.4,
-    duration: 10,
-    useNativeDriver: true,
-  }).start();
-};
-const fadeOut = () => {
-  Animated.timing(animated, {
-    toValue: 1,
-    duration: 200,
-    useNativeDriver: true,
-  }).start();
-};
 
 const Home = ({ navigation }) => {
   const { apiRequest } = useHttp();
@@ -59,14 +46,18 @@ const Home = ({ navigation }) => {
   const [percentVolume, setPercentVolume] = useState();
   const [exercise, setExercise] = useState();
   // 완료 누르면 설정되는 목표 (데이터에 저장됨)
-  const [myHour, setMyHour] = useState('0');
-  const [myMinute, setMyMinute] = useState('0');
+  const [myHour, setMyHour] = useState("0");
+  const [myMinute, setMyMinute] = useState("0");
   const [myVolume, setMyVolume] = useState();
   // 유저가 입력한 목표 (취소 누르면 날아감, 데이터에 저장 X)
-  const [nowHour, setNowHour] = useState('0');
-  const [nowMinute, setNowMinute] = useState('0');
+  const [nowHour, setNowHour] = useState("0");
+  const [nowMinute, setNowMinute] = useState("0");
   const [nowVolume, setNowVolume] = useState();
-
+  useEffect(() => {
+    AsyncStorage.getItem("@user_id").then((value) => {
+      setUserId(value);
+    });
+  }, []);
   const hourHandler = (data) => {
     setNowHour(data);
   };
@@ -79,7 +70,10 @@ const Home = ({ navigation }) => {
     check = () => {
       for (const day of days) {
         for (const record of data[0]) {
-          if (moment().startOf('week').add(day, 'day').format('YY-MM-DD') === record.excerciseDay) {
+          if (
+            moment().startOf("week").add(day, "day").format("YY-MM-DD") ===
+            record.excerciseDay
+          ) {
             weekList[day] = record.totalVolume;
           }
         }
@@ -89,7 +83,6 @@ const Home = ({ navigation }) => {
     return weekList;
   };
   const getData = useCallback((res) => {
-    console.log(res);
     setThisWeek(thisWeekHandler(res));
     setMyHour(Number(res[1][0].targetTime.slice(0, 2)));
     setMyMinute(Number(res[1][0].targetTime.slice(3)));
@@ -98,16 +91,11 @@ const Home = ({ navigation }) => {
     setPercentVolume(Number(res[2][0].percentVolume) * 0.01);
     setExercise(res[3]);
     setLoading(false);
-    console.log(loading);
   }, []);
 
   // 페이지 렌더시 첫 데이터 받아오기
+
   useEffect(() => {
-    AsyncStorage.getItem('@user_id').then((value) => {
-      console.log(value);
-      setUserId(value);
-    });
-    console.log(userId);
     apiRequest(
       {
         url: `http://i7b110.p.ssafy.io:3010/mobile/user/${userId}`,
@@ -119,11 +107,11 @@ const Home = ({ navigation }) => {
   const timeData = {
     rfidKey: userId,
     targetTime:
-      (String(nowHour).length == 1 ? '0' + nowHour : nowHour) +
-      ':' +
-      (String(nowMinute).length == 1 ? '0' + nowMinute : nowMinute) +
-      ':' +
-      '00',
+      (String(nowHour).length == 1 ? "0" + nowHour : nowHour) +
+      ":" +
+      (String(nowMinute).length == 1 ? "0" + nowMinute : nowMinute) +
+      ":" +
+      "00",
   };
   const volumeData = {
     rfidKey: userId,
@@ -134,12 +122,11 @@ const Home = ({ navigation }) => {
   const TimeFunc = async () => {
     setTimeModal(false);
     axios({
-      url: 'http://i7b110.p.ssafy.io:3010/mobile/updateTime',
-      method: 'post',
+      url: "http://i7b110.p.ssafy.io:3010/mobile/updateTime",
+      method: "post",
       data: timeData,
     })
       .then(() => {
-        console.log('time');
         apiRequest(
           {
             url: `http://i7b110.p.ssafy.io:3010/mobile/user/${userId}`,
@@ -155,12 +142,11 @@ const Home = ({ navigation }) => {
   // 목표 볼륨 설정
   const VolumeFunc = async () => {
     axios({
-      url: 'http://i7b110.p.ssafy.io:3010/mobile/updateVolume',
-      method: 'POST',
+      url: "http://i7b110.p.ssafy.io:3010/mobile/updateVolume",
+      method: "POST",
       data: volumeData,
     })
       .then(() => {
-        console.log('volume');
         apiRequest(
           {
             url: `http://i7b110.p.ssafy.io:3010/mobile/user/${userId}`,
@@ -172,14 +158,29 @@ const Home = ({ navigation }) => {
         console.log(error);
       });
   };
+  //잘못된 RFID가 넘어오면 로그인으로 되돌아감
+  useEffect(() => {
+    const timeout = setTimeout(() => {
+      AsyncStorage.clear();
+      navigation.navigate("Login");
+    }, 10000);
+
+    if (!loading) {
+      clearTimeout(timeout);
+    }
+    return () => {
+      clearTimeout(timeout);
+    }
+  }, [loading]);
 
   const LogoutFunc = () => {
-    AsyncStorage.removeItem('@user_id');
-    navigation.navigate('SplashScreen');
+    AsyncStorage.removeItem("@user_id");
+    navigation.navigate("SplashScreen");
   };
 
   return (
     <Fragment>
+      <StatusBar />
       {!loading ? (
         <ScrollView style={styles.scrollview}>
           <Modal
@@ -187,16 +188,24 @@ const Home = ({ navigation }) => {
             transparent={true}
             visible={timeModal}
             onRequestClose={() => {
-              Alert.alert('Modal has been closed.');
+              Alert.alert("Modal has been closed.");
               setTimeModal(!timeModal);
             }}
           >
             <View style={styles.centeredView}>
               <View style={styles.modalView}>
                 <Text style={styles.modalText}>이번주 목표 시간 설정</Text>
-                <TimeScroll onHour={hourHandler} onMinute={minuteHandler} myHour={myHour} myMinute={myMinute} />
+                <TimeScroll
+                  onHour={hourHandler}
+                  onMinute={minuteHandler}
+                  myHour={myHour}
+                  myMinute={myMinute}
+                />
                 <View style={styles.modal}>
-                  <Pressable style={styles.buttonCancle} onPress={() => setTimeModal(!timeModal)}>
+                  <Pressable
+                    style={styles.buttonCancle}
+                    onPress={() => setTimeModal(!timeModal)}
+                  >
                     <Text style={styles.textStyle}>취소</Text>
                   </Pressable>
                   <Pressable
@@ -216,7 +225,7 @@ const Home = ({ navigation }) => {
             transparent={true}
             visible={volumeModal}
             onRequestClose={() => {
-              Alert.alert('Modal has been closed.');
+              Alert.alert("Modal has been closed.");
               setVolumeModal(!volumeModal);
             }}
           >
@@ -236,7 +245,10 @@ const Home = ({ navigation }) => {
                   <Text style={styles.unit}>Kg</Text>
                 </View>
                 <View style={styles.modal}>
-                  <Pressable style={styles.buttonCancle} onPress={() => setVolumeModal(!volumeModal)}>
+                  <Pressable
+                    style={styles.buttonCancle}
+                    onPress={() => setVolumeModal(!volumeModal)}
+                  >
                     <Text style={styles.textStyle}>취소</Text>
                   </Pressable>
                   <Pressable
@@ -253,17 +265,35 @@ const Home = ({ navigation }) => {
             </View>
           </Modal>
           <Container flexDirection="column">
-            <Container flex={1} justifyContent="space-between" mt={40} mb={10}>
-              <Text style={styles.logo}>Salus</Text>
-              <View>
-                <TouchableOpacity
-                  onPress={() => {
-                    navigation.navigate('Calendar');
-                  }}
-                >
-                  <Image source={calendar} style={styles.image} />
-                </TouchableOpacity>
-                <Text style={styles.calendartext}>캘린더</Text>
+            <Container flex={1} justifyContent="space-between" mb={10}>
+              <TouchableOpacity onPress={LogoutFunc}>
+                <Text style={styles.logo}>Salus</Text>
+              </TouchableOpacity>
+              <View style={styles.iconStyle}>
+                <View>
+                  <TouchableOpacity
+                    onPress={() => {
+                      navigation.navigate("Exercise");
+                    }}
+                  >
+                    <Image
+                      source={workout}
+                      style={styles.imageWorkout}
+                      resizeMode="contain"
+                    />
+                    <Text style={styles.workoutText}>운동</Text>
+                  </TouchableOpacity>
+                </View>
+                <View>
+                  <TouchableOpacity
+                    onPress={() => {
+                      navigation.navigate("Calendar");
+                    }}
+                  >
+                    <Image source={calendar} style={styles.image} />
+                    <Text style={styles.calendartext}>캘린더</Text>
+                  </TouchableOpacity>
+                </View>
               </View>
             </Container>
             <Container flex={9} flexDirection="column">
@@ -301,22 +331,25 @@ const Home = ({ navigation }) => {
                   <ExerciseList data={exercise} />
                 </Container>
               </Container>
-              <Button title="go to CurrentExercise" onPress={() => navigation.navigate('Exercise')} />
-              <Pressable onPressIn={fadeIn} onPressOut={fadeOut} onPress={LogoutFunc}>
-                <Animated.View style={styles.button}>
-                  <Text style={styles.text}>로그아웃</Text>
-                </Animated.View>
-              </Pressable>
             </Container>
             <StatusBar style="dark" />
           </Container>
         </ScrollView>
       ) : (
-        <Container flexDirection="column">
-          <LinearGradient colors={['#92a3fd', '#9dceff']} style={styles.background} />
+        <Container flexDirection="column" style={styles.background}>
+          <StatusBar />
+          <LinearGradient
+            colors={["#92a3fd", "#9dceff"]}
+            style={styles.linearBack}
+          />
           <Image source={logo} style={styles.loadinglogo} />
           <Text style={styles.loadingtext}>운동기록 로딩중...</Text>
-          <ActivityIndicator animating={true} color="white" size="large" style={styles.activityIndicator} />
+          <ActivityIndicator
+            animating={true}
+            color="white"
+            size="large"
+            style={styles.activityIndicator}
+          />
         </Container>
       )}
     </Fragment>
@@ -325,16 +358,16 @@ const Home = ({ navigation }) => {
 
 const styles = StyleSheet.create({
   scrollview: {
-    position: 'absolute',
+    position: "absolute",
     left: 0,
     right: 0,
-    top: 0,
-    flex: 1,
-    backgroundColor: 'white',
+    top: 27,
+    height: "100%",
+    backgroundColor: "white",
   },
   logo: {
-    color: '#92a3fd',
-    marginLeft: '5%',
+    color: "#92a3fd",
+    marginLeft: "5%",
     fontSize: 40,
   },
   image: {
@@ -342,39 +375,46 @@ const styles = StyleSheet.create({
     height: 30,
   },
   calendartext: {
-    marginRight: '6%',
+    marginRight: "5%",
     fontSize: 12,
-    color: '#96989d',
+    color: "#96989d",
   },
-  week: { marginEnd: '5%', marginStart: '5%' },
+  workoutText: {
+    marginRight: 15,
+    paddingLeft: 6,
+    fontSize: 12,
+    color: "#96989d",
+  },
+
+  week: { marginEnd: "5%", marginStart: "5%" },
   exercise: {
-    marginHorizontal: '5%',
+    marginHorizontal: "5%",
     fontSize: 16,
   },
   detail: {
-    color: '#96989d',
-    marginEnd: '5%',
+    color: "#96989d",
+    marginEnd: "5%",
   },
   goal: {
     fontSize: 15,
-    marginVertical: '5%',
+    marginVertical: "5%",
   },
   centeredView: {
     flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: 'rgba(0, 0, 0, 0.5)',
+    justifyContent: "center",
+    alignItems: "center",
+    backgroundColor: "rgba(0, 0, 0, 0.5)",
   },
   modal: {
-    flexDirection: 'row',
+    flexDirection: "row",
   },
   modalView: {
     margin: 20,
-    backgroundColor: 'white',
+    backgroundColor: "white",
     borderRadius: 20,
     padding: 35,
-    alignItems: 'center',
-    shadowColor: '#000',
+    alignItems: "center",
+    shadowColor: "#000",
     shadowOffset: {
       width: 0,
       height: 2,
@@ -386,11 +426,11 @@ const styles = StyleSheet.create({
   modalViewVolume: {
     marginBottom: 100,
     margin: 20,
-    backgroundColor: 'white',
+    backgroundColor: "white",
     borderRadius: 20,
     padding: 35,
-    alignItems: 'center',
-    shadowColor: '#000',
+    alignItems: "center",
+    shadowColor: "#000",
     shadowOffset: {
       width: 0,
       height: 2,
@@ -403,7 +443,7 @@ const styles = StyleSheet.create({
     borderRadius: 20,
     padding: 10,
     elevation: 2,
-    backgroundColor: '#92a3fd',
+    backgroundColor: "#92a3fd",
     width: 100,
     marginHorizontal: 3,
   },
@@ -411,18 +451,18 @@ const styles = StyleSheet.create({
     borderRadius: 20,
     padding: 10,
     elevation: 2,
-    backgroundColor: '#c0c2c4',
+    backgroundColor: "#c0c2c4",
     width: 100,
     marginHorizontal: 3,
   },
   textStyle: {
-    color: 'white',
-    fontWeight: 'bold',
-    textAlign: 'center',
+    color: "white",
+    fontWeight: "bold",
+    textAlign: "center",
   },
   modalText: {
     marginBottom: 15,
-    textAlign: 'center',
+    textAlign: "center",
   },
   input: {
     height: 40,
@@ -430,15 +470,15 @@ const styles = StyleSheet.create({
     borderRadius: 8,
     padding: 10,
     width: 280,
-    backgroundColor: '#f8f9fd',
+    backgroundColor: "#f8f9fd",
     borderWidth: 1,
-    borderColor: 'rgba(99, 126, 255, 0.5)',
+    borderColor: "rgba(99, 126, 255, 0.5)",
   },
   unit: {
-    textAlignVertical: 'center',
-    fontWeight: 'bold',
+    textAlignVertical: "center",
+    fontWeight: "bold",
     lineHeight: 65,
-    color: '#rgba(99, 126, 255, 0.5)',
+    color: "#rgba(99, 126, 255, 0.5)",
   },
   loadinglogo: {
     width: screenWidth * 0.8,
@@ -446,33 +486,76 @@ const styles = StyleSheet.create({
     marginBottom: 50,
   },
   activityIndicator: {
-    alignItems: 'center',
+    alignItems: "center",
     height: 80,
   },
-  background: {
-    position: 'absolute',
-    left: 0,
-    right: 0,
-    top: 0,
-    height: screenHeight,
-  },
   loadingtext: {
-    color: 'white',
+    color: "white",
   },
   button: {
     opacity: animated,
     width: screenWidth * 0.6,
     height: 48,
     padding: 15,
-    alignItems: 'center',
+    alignItems: "center",
     borderRadius: 30,
     marginTop: 50,
-    backgroundColor: '#7a91ff',
+    backgroundColor: "#7a91ff",
   },
   text: {
-    backgroundColor: 'transparent',
+    backgroundColor: "transparent",
     fontSize: 18,
-    color: '#fff',
+    color: "#fff",
+  },
+  loadinglogo: {
+    width: screenWidth * 0.8,
+    height: (screenWidth * 0.8) / 2.6,
+    marginBottom: 50,
+  },
+  activityIndicator: {
+    alignItems: "center",
+    height: 80,
+  },
+  background: {
+    position: "absolute",
+    left: 0,
+    right: 0,
+    top: 0,
+    height: "100%",
+  },
+  linearBack: {
+    position: "absolute",
+    left: 0,
+    right: 0,
+    top: 0,
+    height: "100%",
+  },
+  loadingtext: {
+    color: "white",
+  },
+  button: {
+    opacity: animated,
+    width: screenWidth * 0.6,
+    height: 48,
+    padding: 15,
+    alignItems: "center",
+    borderRadius: 30,
+    marginTop: 30,
+    backgroundColor: "#7a91ff",
+  },
+  text: {
+    backgroundColor: "transparent",
+    fontSize: 18,
+    color: "#fff",
+  },
+  iconStyle: {
+    flexDirection: "row",
+  },
+  imageWorkout: {
+    marginLeft: 2,
+    width: 25,
+    height: 30,
+    marginRight: 10,
   },
 });
 

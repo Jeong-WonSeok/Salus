@@ -131,14 +131,6 @@ const Login = ({ navigation }) => {
                 <Text style={styles.text}>로그인</Text>
               </Animated.View>
             </Pressable>
-            <Button
-              title="캘린더"
-              onPress={() => navigation.navigate("Calendar")}
-            />
-            <Button
-              title="메인페이지"
-              onPress={() => navigation.navigate("Home")}
-            />
           </LinearGradient>
         </Container>
       </TouchableWithoutFeedback>
@@ -151,11 +143,10 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   background: {
-    position: "absolute",
-    left: 0,
-    right: 0,
-    top: 0,
-    flex: 1,
+    width: screenWidth,
+    height: '100%',
+    justifyContent: 'center',
+    alignItems: 'center',
   },
   logo: {
     width: screenWidth * 0.8,

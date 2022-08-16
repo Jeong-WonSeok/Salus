@@ -9,8 +9,7 @@ import DailyExerciseList from "./Components/DailyExerciseList";
 import { Container } from "../../theme/global-theme";
 import useHttp from "../../hooks/useHttp";
 
-const CalendarForm = ({ value, onChange, events }) => {
-  const rfid = "977237223725";
+const CalendarForm = ({ value, onChange, events, rfid }) => {
   const { apiRequest } = useHttp();
   const [calendar, setCalendar] = useState([]);
   const [dailyExerciseDatas, setDailyExerciseDatas] = useState();
@@ -32,10 +31,9 @@ const CalendarForm = ({ value, onChange, events }) => {
       },
       getDailyData
     );
-  }, [apiRequest, getDailyData, value]);
+  }, [apiRequest, getDailyData, value, rfid]);
 
   const Items = (dailyDatas) => {
-    console.log(dailyDatas[0][0]);
     return (
       <View>
         <Container flexDirection="column" background={"#EDEEF4"}>
@@ -50,7 +48,7 @@ const CalendarForm = ({ value, onChange, events }) => {
               <View style={styles.column}>
                 <Text style={styles.list}>총볼륨</Text>
                 <Text style={styles.detail}>
-                  {dailyDatas[0][0]?.totalWeight || "-"}
+                  {dailyDatas[0][0]?.totalVolume || "-"}
                 </Text>
               </View>
             </View>
@@ -114,6 +112,7 @@ const CalendarForm = ({ value, onChange, events }) => {
 const styles = StyleSheet.create({
   pages: {
     width: "100%",
+    marginTop: 27,
   },
   calendar: {
     width: "100%",

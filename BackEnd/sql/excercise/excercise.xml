@@ -52,9 +52,13 @@
     WHERE rfidKey = #{rfidKey} 
     AND excerciseDay = DATE(NOW())
     ORDER BY endTime DESC;
+
+    SELECT equipmentName, isStarted 
+    FROM fitness_equipment 
+    WHERE equipmentName = #{equipmentName};
     </select>
 
-    <select id="nowtest">
+    <select id="excerciseNowData">
     SELECT weightNow, equipmentName, rfidKey FROM daily_excercise where rfidKey = #{rfidKey}
     ORDER BY updateRegist desc LIMIT 1;
     </select>

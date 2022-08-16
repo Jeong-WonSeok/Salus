@@ -85,7 +85,6 @@ const ModalOverlay = (props) => {
       >
         <b style={{ color: "#f06875" }}>◼</b> 20대 남성 권장 운동량
       </h5>
-
       <LineChart
         width={500}
         height={345}
