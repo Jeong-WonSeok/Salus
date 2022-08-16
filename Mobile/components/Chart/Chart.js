@@ -10,7 +10,7 @@ export const LChart = ({ data }) => {
   return (
     <LineChart
       data={{
-        labels: ['일', '월', '화', '수', '목', '금', '토'],
+        labels: ['월', '화', '수', '목', '금', '토', '일'],
         datasets: [
           {
             data: data,

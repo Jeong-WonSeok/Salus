@@ -205,7 +205,6 @@ const Home = ({ navigation }) => {
                   <Pressable
                     style={styles.buttonCancle}
                     onPress={() => setTimeModal(!timeModal)}
-                  
                   >
                     <Text style={styles.textStyle}>취소</Text>
                   </Pressable>

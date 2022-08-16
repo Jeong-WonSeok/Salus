@@ -7,6 +7,7 @@ const LabelsYAxis = ({
   padding,
   maximumYFromData,
   precision,
+  unit,
 }) => {
   const PARTS = hg;
   return new Array(PARTS + 1).fill(0).map((_, index) => {
@@ -18,15 +19,16 @@ const LabelsYAxis = ({
     return (
       <text
         key={index}
-        x={x}
+        x={x - 3}
         y={yCoordinate}
         style={{
           fill: "#808080",
-          fontSize: FONT_SIZE,
+          fontSize: FONT_SIZE - 2,
           fontFamily: "Helvetica",
         }}
       >
-        {parseFloat(maximumYFromData * (index / PARTS)).toFixed(precision)}
+        {parseFloat(maximumYFromData * (index / PARTS)).toFixed(precision)}{" "}
+        {unit}
       </text>
     );
   });
