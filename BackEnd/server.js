@@ -17,7 +17,6 @@ const app = express();
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 
-app.set("view engine", "ejs");
 app.use(
   session({ secret: "MySecret", resave: false, saveUninitialized: true })
 );
@@ -30,10 +29,6 @@ app.use(cors({
 app.use(cookieParser());
 app.use(routers);
 app.use("/", require("./routers"));
-
-// swagger
-const { swaggerUi, specs } = require("./swagger/swagger");
-app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(specs));
 
 // server run
 const server = app.listen(3010, () => {

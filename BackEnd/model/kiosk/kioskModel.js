@@ -3,7 +3,6 @@ const mybatisMapper = require("mybatis-mapper");
 
 
 const searchUser = async (req, res) => {
-  console.log("user:" + req.params.rfidKey);
 	var param = {
     rfidKey: req.params.rfidKey,
   };
@@ -61,7 +60,6 @@ const searchUser = async (req, res) => {
 
 //오늘 운동 데이터 받아오기
 const DailyData = async (req, res) => {
-	console.log('check', req.params);
   var param = {
     rfidKey: req.params.rfidKey,
   };
@@ -72,23 +70,6 @@ const DailyData = async (req, res) => {
   return res.json(result[0]);  
 
 };
-
-const equipmentMonthData = async(req, res) =>{
-  var param = {
-    equipmentName : req.params.equipmentName
-  };
-  const format = { language: "sql", indent: "" };
-  const query = mybatisMapper.getStatement(
-    "kiosk",
-    "equipMonthData",
-    param,
-    format
-  );
-  conn.query(query, (err, results) => {
-    if (err) console.log(err);
-    return res.json(results);
-  });
-}
 
 const todayCheck = async(req, res)=>{
   var param = {
@@ -102,13 +83,11 @@ const todayCheck = async(req, res)=>{
     format
   );
   const result = await conn.promise().query(query);
-	console.log(result[0][0]);
 	return result[0][0];
 }
 
 module.exports = {
   DailyData,
   searchUser,
-  equipmentMonthData,
   todayCheck
 };
