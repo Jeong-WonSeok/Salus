@@ -16,7 +16,7 @@ while numb == 1:
         bus.write_byte(addr, 5)
         time.sleep(1)
     elif md==2:
-        bus.write_byte(addr, 5)
+        bus.write_byte(addr, 14)
         time.sleep(1)
     elif md==3:
         bus.write_byte(addr, 5)
