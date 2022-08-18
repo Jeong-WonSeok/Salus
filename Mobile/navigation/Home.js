@@ -28,6 +28,7 @@ import { LinearGradient } from "expo-linear-gradient";
 import logo from "../assets/logo/logo.png";
 import moment from "moment";
 import axios from "axios";
+import { useIsFocused } from "@react-navigation/native";
 
 const screenWidth = Dimensions.get("window").width;
 const screenHeight = Dimensions.get("window").height;
@@ -94,7 +95,7 @@ const Home = ({ navigation }) => {
   }, []);
 
   // 페이지 렌더시 첫 데이터 받아오기
-
+  const isFocused = useIsFocused();
   useEffect(() => {
     apiRequest(
       {
@@ -102,7 +103,7 @@ const Home = ({ navigation }) => {
       },
       getData
     );
-  }, [apiRequest, getData, userId]);
+  }, [apiRequest, getData, userId, isFocused]);
 
   const timeData = {
     rfidKey: userId,
@@ -163,7 +164,7 @@ const Home = ({ navigation }) => {
     const timeout = setTimeout(() => {
       AsyncStorage.clear();
       navigation.navigate("Login");
-    }, 10000);
+    }, 20000);
 
     if (!loading) {
       clearTimeout(timeout);
