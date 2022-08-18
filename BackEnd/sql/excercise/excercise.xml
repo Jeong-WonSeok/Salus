@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="dailyexcercise">
+    <!-- 운동 데이터가 있는 지 확인 -->
+    <select id="selectExcercise">
+    select * 
+    from daily_excercise
+    where excerciseDay = #{excerciseDay}
+    and weightNow = #{weightNow}
+    and equipmentName = #{equipmentName}
+    and rfidKey = #{rfidKey}
+    </select>
+
+    <!-- 운동 데이터 삽입-->
+    <insert id="insertExcercise" >
+    insert into daily_excercise
+    (weightNow, startTime, endTime, countNow, equipmentName, excerciseDay, rfidKey)
+    values
+    (#{weightNow}, NOW(), NOW(),1, #{equipmentName}, #{excerciseDay}, #{rfidKey})
+    </insert>
+
+    <!-- 운동 데이터 수정-->
+    <update id="updateExcercise">
+    update daily_excercise
+    set countNow = countNow + 1, endTime = NOW()
+    where excerciseDay = #{excerciseDay}
+    and weightNow = #{weightNow}
+    and equipmentName = #{equipmentName}
+    and rfidKey = #{rfidKey}
+    </update>
+
+    <update id="isStarted">
+    UPDATE fitness_equipment SET isStarted = IF(isStarted=0,1,0) WHERE equipmentName = #{equipmentName};
+    </update>
+
+    <select id="returnRasp">
+    SELECT equipmentName, isStarted FROM fitness_equipment WHERE equipmentName = #{equipmentName};
+    </select>
+
+    <select id="mobileExcerciseData">
+    SELECT d.equipmentName, weightNow, countNow, 
+    ROUND(SUM((6 * (3.5 * u.weight * (ROUND((HOUR(TIMEDIFF(d.endtime, d.startTime)) * 60 )+ (second(TIMEDIFF(d.endtime, d.startTime)) + MINUTE(TIMEDIFF(d.endtime, d.startTime)) * 60) / 60)))) / 1000 * 5)) AS "calorie",
+    date_format(TIMEDIFF(endTime, startTime), '%i:%s') AS exTime,
+    f.equipmentStimulate, f.equipmentEnglishStimulate, u.gender
+    FROM daily_excercise d 
+	JOIN fitness_equipment f ON d.equipmentName = f.equipmentName
+    JOIN user u on u.rfidKey = d.rfidKey
+    WHERE d.weightNow = #{weightNow} AND d.rfidKey = #{rfidKey} AND d.equipmentName=#{equipmentName} AND d.excerciseDay = DATE(NOW());
+
+    SELECT ROW_NUMBER() OVER(ORDER BY endTime DESC) as id, equipmentName, weightNow, countNow
+    FROM daily_excercise
+    WHERE rfidKey = #{rfidKey} 
+    AND excerciseDay = DATE(NOW())
+    ORDER BY endTime DESC;
+
+    SELECT equipmentName, isStarted 
+    FROM fitness_equipment 
+    WHERE equipmentName = #{equipmentName};
+    </select>
+
+    <select id="excerciseNowData">
+    SELECT weightNow, equipmentName, rfidKey FROM daily_excercise where rfidKey = #{rfidKey}
+    ORDER BY updateRegist desc LIMIT 1;
+    </select>
+
+</mapper>
