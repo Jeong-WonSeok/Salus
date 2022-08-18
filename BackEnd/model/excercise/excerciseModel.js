@@ -2,7 +2,6 @@ const conn = require("../../database/db");
 const mybatisMapper = require("mybatis-mapper");
 
 const updateIsStarted = async (req, res) =>{
-  console.log('equipmentName', req.params);
   const param = {
     equipmentName : req.params.equipmentName
   }
@@ -26,9 +25,8 @@ const updateIsStarted = async (req, res) =>{
   }
 };
 
-//현재 운동 측정 값 받아오기
+
 const excerciseData = async (req, res) => {
-	console.log('excerciseData', req);
   const param = {
     excerciseDay: req.params.excerciseDay,
     weightNow: req.params.weightNow,
@@ -43,10 +41,9 @@ const excerciseData = async (req, res) => {
     format
   );
   const result = await conn.promise().query(query);
-    //만약 운동데이터가 없다면 새로 만들고 횟수 1 넣어줌
-    if (result[0].length === 0) {
-	 console.log('운동 데이터 추가', result[0]);  
-      const query2 = mybatisMapper.getStatement(
+    if (result[0].length === 0) {;  
+      // 운동 시작한 기구가 DB 에 없을 때 카운트 +1 DB Insert 
+	const query2 = mybatisMapper.getStatement(
         "dailyexcercise",
         "insertExcercise",
         param,
@@ -55,9 +52,8 @@ const excerciseData = async (req, res) => {
       const result2 = await conn.promise().query(query2);
       return result2[0];
     }
-    //만약 운동데이터가 있다면 카운트 + 1
+    // DB에 기록 된 운동이 있을 시에 카운트 +1 Update
     else {
-	console.log("운동 데이터 수정", result[0]);
       const query3 = mybatisMapper.getStatement(
         "dailyexcercise",
         "updateExcercise",
@@ -68,7 +64,7 @@ const excerciseData = async (req, res) => {
 	    return result3[0];
     }
 };
-// 모바일로 운동데이터 보냄
+
 const mobileExcerciseData = async (req, res) => {
   
   const param = {
@@ -84,9 +80,7 @@ const mobileExcerciseData = async (req, res) => {
     format
   );
   const result = await conn.promise().query(query);
-  console.log(result[0]);
   return result[0];
-  //return res.json(result[0]);
 }
 
 const excerciseNowData = async (req, res) =>{
