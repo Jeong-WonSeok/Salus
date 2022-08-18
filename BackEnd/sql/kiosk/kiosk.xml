@@ -63,11 +63,6 @@ SELECT DATE_FORMAT(d.excerciseDay,'%y-%m-%d') as "excerciseDay", e.equipmentCate
 	  AND d.rfidKey = #{rfidKey}
 	  ) 
   </select>
-  <select id="equipMonthData">
-  SELECT (weightNow * countNow) AS "volume", DATE_FORMAT(excerciseDay,'%y-%m-%d') AS "excerciseDay" FROM daily_excercise
-  WHERE equipmentName = #{equipmentName}
-  ORDER BY excerciseDay;
-  </select>
   <insert id="attendanceEntry">
   INSERT INTO attendance 
   (rfidKey, dailyExcerciseStart, attendanceCheck, excerciseDay)

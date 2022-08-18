@@ -10,14 +10,8 @@ const excercise = require("./excercise");
 /** 모바일 관련 router */
 const mobile = require("./mobile");
 
-router.get("/", function(req, res) {
-	res.render('main');
-});
-
 router.use("/kiosk", kiosk);
 router.use("/excercise", excercise);
 router.use("/mobile", mobile);
-
-
 
 module.exports = router;
