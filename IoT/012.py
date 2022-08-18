@@ -5,8 +5,10 @@ import RPi.GPIO as GPIO
 from mfrc522 import MFRC522
 from mfrc522 import SimpleMFRC522
 from hx711 import HX711 
+from smbus import SMBus
 
-
+addr = 0x8 
+bus = SMBus(1)
 GPIO.setwarnings(False)
 GPIO_TRIGGER = 23
 GPIO_ECHO = 24
@@ -92,6 +94,8 @@ def equipmentWorkoutStart(id):
         sio.emit('equipmentStart',{'equipmentName':'렛 풀다운 머신'})
         now_Id=id
         print('data send')
+        bus.write_byte(addr, 5)
+        time.sleep(1)
 
 def equipmentWorkoutEnd(id):
     global now_Id
@@ -99,6 +103,8 @@ def equipmentWorkoutEnd(id):
         sio.emit('equipmentEnd',{'equipmentName':'렛 풀다운 머신'})
         now_Id=-1
         print('data send done')
+        bus.write_byte(addr, 5)
+        time.sleep(1)
 
 @sio.event
 def equipmentRfidRecieved(data):
@@ -107,6 +113,7 @@ def equipmentRfidRecieved(data):
     print(type(data))
     print(data['equipmentId'])
     print(data['equipmentName'])
+    
 
 @sio.event
 def connect():
