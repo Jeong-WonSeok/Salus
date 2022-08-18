@@ -72,20 +72,20 @@ const Exercise = () => {
     return () => {
       socket.disconnect();
     };
-  }, []);
+  }, [socket]);
   useEffect(() => {
     socket.on('equipmentRecieved', (data) => {
-      if (!timeTicking && data.isStarted == 1) {
-        setTimeTicking(data.isStarted);
-      } else if (timeTicking && data.isStarted == 0) {
-        setTimeTicking(data.isStarted);
+      setTimeTicking(data[0].isStarted)
+      if(timeTicking === 0) {
+        setMinutes(0)
+        setSeconds(0)
       }
     })
 
     return () => {
       socket.disconnect();
     }
-  }, [timeTicking]);
+  }, [timeTicking, socket]);
 
   const Items = ({ item }) => {
     return (
@@ -119,6 +119,7 @@ const Exercise = () => {
   }, [count]);
 
   useEffect(() => {
+
     const countdown = setInterval(() => {
       setSeconds(parseInt(seconds) + 1);
 
@@ -166,8 +167,6 @@ const Exercise = () => {
             <Text style={styles.count}>
               {timeTicking
                 ? `${minutes}: ${seconds < 10 ? `0${seconds}` : seconds}`
-                : currentInfo?.exTime
-                ? currentInfo?.exTime
                 : "00:00"}
             </Text>
           </Container>
