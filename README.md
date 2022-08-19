@@ -112,7 +112,7 @@
     > RFID 키를 키오스크에 찍어 로그인이 가능합니다.
     > 
     
-    [키오스크](/uploads/8f3ad9db5e8f4a1cdba9ede41801f1fe/키오스크)
+    ![image](/uploads/30c09ca22f4180313259839bb90cb6b7/image.png)
     
 
 - 키오스크 메인 화면 (오늘의 운동기록이 없을 시)
@@ -121,7 +121,7 @@
     (지난 5일 동안 어느 부위를 했는지 한 눈에 파악할 수 있게 보여줍니다.)
     > 
     
-    ![Untitled](Overview(%E1%84%8E%E1%85%AC%E1%84%8C%E1%85%A9%E1%86%BC%20ver)%204e1e27d73d9047cfa3546d85bea96a5f/Untitled%202.png)
+    ![image](/uploads/66a00148aafafbc668e276106cacd04a/image.png)
     
 
 - 키오스크 메인화면 (오늘 운동기록이 있을시)
@@ -130,7 +130,7 @@
     (어떤 머신으로 몇번을 하였고 총 Volume 은 어떻게 되는 지 확인할 수 있습니다. )
     > 
     
-    ![Untitled](Overview(%E1%84%8E%E1%85%AC%E1%84%8C%E1%85%A9%E1%86%BC%20ver)%204e1e27d73d9047cfa3546d85bea96a5f/Untitled%203.png)
+    ![image](/uploads/be0e6064bb4ef18172e3fa6d3b608e4a/image.png)
     
 
 - 키오스크 메인화면 (Calender 선택시)
@@ -138,7 +138,7 @@
     > Calendar를 클릭하면 한달간 운동을 한 부위(상체, 전신, 하체)와 출석기록을 볼 수 있습니다.
     > 
     
-    ![Untitled](Overview(%E1%84%8E%E1%85%AC%E1%84%8C%E1%85%A9%E1%86%BC%20ver)%204e1e27d73d9047cfa3546d85bea96a5f/Untitled%204.png)
+    ![image](/uploads/e39e92a9ef49b1780caaeaa4edffe35b/image.png)
     
 
 - 키오스크 한달간의 운동 기록 확인
@@ -146,7 +146,7 @@
     > “렛 풀다운 머신”을 클릭하면 지난 5개월간의 월간 Volume 을 파악할 수 있으며 자신과 비슷한 체형의 사람들의 평균 Volume을 비교할 수 있습니다.
     > 
     
-    ![Untitled](Overview(%E1%84%8E%E1%85%AC%E1%84%8C%E1%85%A9%E1%86%BC%20ver)%204e1e27d73d9047cfa3546d85bea96a5f/Untitled%205.png)
+    ![image](/uploads/22ea54c5b9684bea74dddf2356a0f2ca/image.png)
     
 
 ### **모바일**
@@ -156,7 +156,7 @@
     > 회원 이메일과 헬스장에서 등록 한 RFIDKEY 를 입력해주면 로그인이 됩니다.
     > 
     
-    ![Untitled](Overview(%E1%84%8E%E1%85%AC%E1%84%8C%E1%85%A9%E1%86%BC%20ver)%204e1e27d73d9047cfa3546d85bea96a5f/Untitled%206.png)
+    ![image](/uploads/a05b0413e53357a2a457791db87e8399/image.png)
     
 
 - 모바일 메인 페이지
@@ -167,7 +167,7 @@
     운동, 캘린더 버튼을 누르면 각 페이지로 연결됩니다.
     > 
     
-    ![Untitled](Overview(%E1%84%8E%E1%85%AC%E1%84%8C%E1%85%A9%E1%86%BC%20ver)%204e1e27d73d9047cfa3546d85bea96a5f/Untitled%207.png)
+    ![image](/uploads/cb25956ee19813bdb19fa2a03c72da0e/image.png)
     
 
 - 이번 주 목표 시간 설정
@@ -176,7 +176,7 @@
     시간, 분을 조정하여 이번 주 목표 시간을 재설정할 수 있습니다.
     > 
     
-    ![Untitled](Overview(%E1%84%8E%E1%85%AC%E1%84%8C%E1%85%A9%E1%86%BC%20ver)%204e1e27d73d9047cfa3546d85bea96a5f/Untitled%208.png)
+    ![image](/uploads/d26c273572b2ca27ce83fac345e46831/image.png)
     
 
 - 이번 주 목표 볼륨 설정
@@ -185,7 +185,7 @@
     불륨을 조정하여 이번 주 목표 불륨을 재설정할 수 있습니다.
     > 
     
-    ![Untitled](Overview(%E1%84%8E%E1%85%AC%E1%84%8C%E1%85%A9%E1%86%BC%20ver)%204e1e27d73d9047cfa3546d85bea96a5f/Untitled%209.png)
+    ![image](/uploads/e21cf405455ad0776e88e8a9da396197/image.png)
     
 
 - 실시간 운동 기록
@@ -196,7 +196,7 @@
     횟수는 사용자가 운동 기구를 당길 때 횟수가 증가됩니다.
     > 
     
-    ![Untitled](Overview(%E1%84%8E%E1%85%AC%E1%84%8C%E1%85%A9%E1%86%BC%20ver)%204e1e27d73d9047cfa3546d85bea96a5f/Untitled%2010.png)
+    ![image](/uploads/be448b766149027e87361104f8da44e9/image.png)
     
 
 - 실시간 운동 누적 기록
@@ -204,7 +204,7 @@
     > 실시간으로 오늘 운동한 누적 기록이 카드형태로 보여줍니다.
     > 
     
-    ![Untitled](Overview(%E1%84%8E%E1%85%AC%E1%84%8C%E1%85%A9%E1%86%BC%20ver)%204e1e27d73d9047cfa3546d85bea96a5f/Untitled%2011.png)
+    ![image](/uploads/51c7d826a72bb2d7fe982f6dcefcd7f5/image.png)
     
 
 - 모바일 캘린더 화면
@@ -215,16 +215,16 @@
     달력 이동을 통해 과거의 기록도 볼 수 있습니다.
     > 
     
-    ![Untitled](Overview(%E1%84%8E%E1%85%AC%E1%84%8C%E1%85%A9%E1%86%BC%20ver)%204e1e27d73d9047cfa3546d85bea96a5f/Untitled%2012.png)
+    ![image](/uploads/aca5aa1cc6f5fec3fed15c65314e88f1/image.png)
     
 
 ### IoT
 
 - 로드셀
     
-    ![KakaoTalk_20220818_192746025.jpg](Overview(%E1%84%8E%E1%85%AC%E1%84%8C%E1%85%A9%E1%86%BC%20ver)%204e1e27d73d9047cfa3546d85bea96a5f/KakaoTalk_20220818_192746025.jpg)
+    ![image](/uploads/279b7312fc4d0afbf479b4b0f4ebcea7/image.png)
     
 
 - RFID 리더기+Raspberry Pi+Arduino + 스피커모듈
     
-    ![Untitled](Overview(%E1%84%8E%E1%85%AC%E1%84%8C%E1%85%A9%E1%86%BC%20ver)%204e1e27d73d9047cfa3546d85bea96a5f/Untitled.jpeg)
+    ![image](/uploads/06094c509daab6a19c20462a8ecd288c/image.png)
