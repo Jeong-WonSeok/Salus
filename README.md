@@ -1,7 +1,7 @@
 # Overview(최종 ver)
 
 
-![logo.png](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/efa4c14b-44bc-4b56-b94c-772e42778b8c/logo.png)
+![logo.png](Overview(%E1%84%8E%E1%85%AC%E1%84%8C%E1%85%A9%E1%86%BC%20ver)%204e1e27d73d9047cfa3546d85bea96a5f/logo.png)
 
 **목차**
 
