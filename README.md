@@ -1,6 +1,5 @@
 # Overview(최종 ver)
 
-태그: 프로젝트 기획 및 배경
 
 ![logo.png](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/efa4c14b-44bc-4b56-b94c-772e42778b8c/logo.png)
 
