@@ -1,7 +1,7 @@
 # Salus
 
 
-![logo.png](Overview(최종 ver) 4e1e27d73d9047cfa3546d85bea96a5f/logo.png)
+![logo.png](Overview(최종 ver)4e1e27d73d9047cfa3546d85bea96a5f/logo.png)
 
 **목차**
 
