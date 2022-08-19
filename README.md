@@ -64,7 +64,9 @@
 
 ---
 
-![Untitled](Overview(%E1%84%8E%E1%85%AC%E1%84%8C%E1%85%A9%E1%86%BC%20ver)%204e1e27d73d9047cfa3546d85bea96a5f/Untitled.png)
+![Untitled](/uploads/f29e33b2eff8cb4e33c0a64345c8593b/Untitled.png)
+
+
 
 가. 이슈 관리 : JIRA
 
@@ -110,7 +112,7 @@
     > RFID 키를 키오스크에 찍어 로그인이 가능합니다.
     > 
     
-    ![Untitled](Overview(%E1%84%8E%E1%85%AC%E1%84%8C%E1%85%A9%E1%86%BC%20ver)%204e1e27d73d9047cfa3546d85bea96a5f/Untitled%201.png)
+    [키오스크](/uploads/8f3ad9db5e8f4a1cdba9ede41801f1fe/키오스크)
     
 
 - 키오스크 메인 화면 (오늘의 운동기록이 없을 시)
