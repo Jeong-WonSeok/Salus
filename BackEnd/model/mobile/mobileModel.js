@@ -61,7 +61,6 @@ const calendarDetailData = async(req, res) =>{
 }
 
 const targetTime = async(req, res)=>{
-    console.log(req.body);
     var param = {
         rfidKey : req.body.rfidKey,
         targetTime : req.body.targetTime
@@ -76,7 +75,6 @@ const targetTime = async(req, res)=>{
 }
 
 const targetVolume = async(req, res)=>{
-    console.log(req.body);
     var param = {
         rfidKey : req.body.rfidKey,
         targetVolume : req.body.targetVolume

@@ -13,7 +13,7 @@ const webSocket = require("./socket/socket");
 
 const app = express();
 
-// bodyParser
+
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 
@@ -21,7 +21,7 @@ app.use(
   session({ secret: "MySecret", resave: false, saveUninitialized: true })
 );
 
-// routers
+
 app.use(cors({
   origin : true,
   credentials : true
@@ -30,7 +30,7 @@ app.use(cookieParser());
 app.use(routers);
 app.use("/", require("./routers"));
 
-// server run
+
 const server = app.listen(3010, () => {
   console.log("Salus Server started 3010");
 });

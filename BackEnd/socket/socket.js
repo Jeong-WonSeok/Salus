@@ -10,13 +10,13 @@ module.exports = (server) => {
             const todayCheck = await kioskModel.todayCheck({
                  params : { rfidKey : data.rfidKey}
                 });
-            socket.emit('rfidLoginRecieved', todayCheck);
+            io.emit('rfidLoginRecieved', todayCheck);
         });
         socket.on('equipmentStart', async (data) => {
             const isStarted = await exModel.updateIsStarted( {
                 params : { equipmentName : data.equipmentName }
             })
-            socket.emit('equipmentRecieved', isStarted[0]);
+            io.emit('equipmentRecieved', isStarted[0]);
         });
         socket.on('equipmentData', async (data) =>{
             const equipmentData = await exModel.excerciseData({
