@@ -109,7 +109,7 @@ const Exercise = () => {
         title: `${currentInfo?.equipmentName} ${count}회!`,
         body: `${currentInfo?.equipmentName} ${count}회 완료했습니다.`,
       },
-      trigger: { seconds: 1 },
+      trigger: null,
     });
   }
   useEffect(() => {
