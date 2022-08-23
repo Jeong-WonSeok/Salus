@@ -29,7 +29,33 @@
 - **Project Duration**
     - 2022.07.11 ~ 2022.08.19 (6주)
 
-## 2. SALUS BACKGROUND
+## 2. SALUS SERVER DEPLOYMENT
+
+- ** First **
+    a) 서버 실행을 위한 명령어
+        - ssh -i I7B110T.pem ubuntu@i7B110.p.ssafy.io
+    b) 깃 리포지토리로 이동 
+        - cd S07P12B110/
+
+- ** BackEnd **
+    a) BackEnd폴더로 이동
+        - cd BackEnd/
+    b) 서버 실행
+        - npm start
+
+- ** FrontEnd **
+    a) FrontEnd 폴더로 이동(S07P12B110 위치에서)
+        - cd FrontEnd
+    b) 서버 실행 
+        - npm start
+
+- ** IoT **
+    a) .bashrc에 라즈베리파이를 부팅시 해당 코드를 실행하도록 설정되어 있음
+    b) 밑의 명령어로도 코드 실행가능
+        - cd /home/pi/Desktop/S07P12B110/IoT
+        - python3 012.py
+
+## 3. SALUS BACKGROUND
 
 ---
 
@@ -40,7 +66,7 @@
 > - 운동인으로서 이러한 상황에 대한 문제의식에서 시작했습니다.
 > - 넌 운동만해 일기는 내가 쓸게
 
-## 3. SALUS INFORMATION
+## 4. SALUS INFORMATION
 
 ---
 
