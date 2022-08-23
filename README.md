@@ -51,7 +51,7 @@
 
         npm start
 
-- **FrontEnd **
+- **FrontEnd**
 
     a) FrontEnd 폴더로 이동(S07P12B110 위치에서)
 
