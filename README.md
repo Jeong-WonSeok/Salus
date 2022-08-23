@@ -35,31 +35,31 @@
 
     a) 서버 실행을 위한 명령어
 
-        - ssh -i I7B110T.pem ubuntu@i7B110.p.ssafy.io
+        ssh -i I7B110T.pem ubuntu@i7B110.p.ssafy.io
 
     b) 깃 리포지토리로 이동 
 
-        - cd S07P12B110/
+        cd S07P12B110/
 
 - **BackEnd**
 
     a) BackEnd폴더로 이동
 
-        - cd BackEnd/
+        cd BackEnd/
 
     b) 서버 실행
 
-        - npm start
+        npm start
 
 - **FrontEnd **
 
     a) FrontEnd 폴더로 이동(S07P12B110 위치에서)
 
-        - cd FrontEnd
+        cd FrontEnd
 
     b) 서버 실행 
 
-        - npm start
+        npm start
 
 - **IoT**
 
@@ -67,8 +67,8 @@
 
     b) 밑의 명령어로도 코드 실행가능
 
-        - cd /home/pi/Desktop/S07P12B110/IoT
-        - python3 012.py
+        cd /home/pi/Desktop/S07P12B110/IoT
+        python3 012.py
 
 ## 3. SALUS BACKGROUND
 
