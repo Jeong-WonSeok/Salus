@@ -31,28 +31,43 @@
 
 ## 2. SALUS SERVER DEPLOYMENT
 
-- ** First **
+- ** First**
     a) 서버 실행을 위한 명령어
+
         - ssh -i I7B110T.pem ubuntu@i7B110.p.ssafy.io
+
     b) 깃 리포지토리로 이동 
+
         - cd S07P12B110/
 
-- ** BackEnd **
+- ** BackEnd**
+
     a) BackEnd폴더로 이동
+
         - cd BackEnd/
+
     b) 서버 실행
+
         - npm start
 
 - ** FrontEnd **
+
     a) FrontEnd 폴더로 이동(S07P12B110 위치에서)
+
         - cd FrontEnd
+
     b) 서버 실행 
+
         - npm start
 
-- ** IoT **
+- ** IoT**
+
     a) .bashrc에 라즈베리파이를 부팅시 해당 코드를 실행하도록 설정되어 있음
+
     b) 밑의 명령어로도 코드 실행가능
+
         - cd /home/pi/Desktop/S07P12B110/IoT
+
         - python3 012.py
 
 ## 3. SALUS BACKGROUND
