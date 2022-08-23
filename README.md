@@ -31,7 +31,7 @@
 
 ## 2. SALUS SERVER DEPLOYMENT
 
-- ** First**
+- **Service Name : Salus**
     a) 서버 실행을 위한 명령어
 
         - ssh -i I7B110T.pem ubuntu@i7B110.p.ssafy.io
