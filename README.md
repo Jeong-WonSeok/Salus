@@ -31,7 +31,8 @@
 
 ## 2. SALUS SERVER DEPLOYMENT
 
-- **Service Name : Salus**
+- **First**
+
     a) 서버 실행을 위한 명령어
 
         - ssh -i I7B110T.pem ubuntu@i7B110.p.ssafy.io
@@ -40,7 +41,7 @@
 
         - cd S07P12B110/
 
-- ** BackEnd**
+- **BackEnd**
 
     a) BackEnd폴더로 이동
 
@@ -50,7 +51,7 @@
 
         - npm start
 
-- ** FrontEnd **
+- **FrontEnd **
 
     a) FrontEnd 폴더로 이동(S07P12B110 위치에서)
 
@@ -60,7 +61,7 @@
 
         - npm start
 
-- ** IoT**
+- **IoT**
 
     a) .bashrc에 라즈베리파이를 부팅시 해당 코드를 실행하도록 설정되어 있음
 
