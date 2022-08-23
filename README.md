@@ -68,7 +68,6 @@
     b) 밑의 명령어로도 코드 실행가능
 
         - cd /home/pi/Desktop/S07P12B110/IoT
-
         - python3 012.py
 
 ## 3. SALUS BACKGROUND
