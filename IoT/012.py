@@ -4,10 +4,14 @@ import time
 import RPi.GPIO as GPIO
 from mfrc522 import MFRC522
 from mfrc522 import SimpleMFRC522
-from hx711 import HX711 
+from hx711 import HX711
 from smbus import SMBus
+import cv2
+import numpy as np
 
-addr = 0x8 
+cap = cv2.VideoCapture(0)
+
+addr = 0x8
 bus = SMBus(1)
 GPIO.setwarnings(False)
 GPIO_TRIGGER = 23
@@ -60,38 +64,40 @@ def zeroWeight():
     err = hx.zero()
     if err:
         raise ValueError('Tare is unsuccessful.')
-    reading = hx.get_data_mean()  
+    reading = hx.get_data_mean() 
     if reading:
         hx.set_scale_ratio(25.55)  # set ratio for current channel
     else:
         raise ValueError('Cannot calculate mean value. Try debug mode. Variable reading:', reading)
-tmp_num=0    
-
+tmp_num=0   
+nowWeight=-1
 def countSend():
-    global tmp_num,prev_dist
+    global tmp_num,prev_dist, nowWeight
     dist = distance()
-    nowWeight=-1
     print('count',dist)
     if dist<200:
         time.sleep(1)
-        if dist<24:
+        if dist<40:
             check[0]=True
-        if check[0] and dist>35:
+            nowWeight=weightChecking()
+        if check[0] and dist>56:
             check[1]=True
     print(check)
     if check[0] and check[1]:
         check[0],check[1]=False,False
         tmp_num+=1
         print(tmp_num, 'sended')
-        sio.emit('equipmentData',{'rfidKey':now_Id,'excerciseDay':excercise_time,'equipmentName':'렛 풀다운 머신','weightNow':55})
+        if nowWeight>0:
+            sio.emit('equipmentData',{'rfidKey':now_Id,'excerciseDay':excercise_time,'equipmentName':'펙덱 플라이 머신','weightNow':nowWeight})
+            nowWeight= -1
         check[0]=False
         check[1]=False
-    prev_dist=dist    
+    prev_dist=dist   
 
 def equipmentWorkoutStart(id):
     global now_Id
     if now_Id!=id:
-        sio.emit('equipmentStart',{'equipmentName':'렛 풀다운 머신'})
+        sio.emit('equipmentStart',{'equipmentName':'펙덱 플라이 머신'})
         now_Id=id
         print('data send')
         bus.write_byte(addr, 5)
@@ -100,11 +106,45 @@ def equipmentWorkoutStart(id):
 def equipmentWorkoutEnd(id):
     global now_Id
     if now_Id==id:
-        sio.emit('equipmentEnd',{'equipmentName':'렛 풀다운 머신'})
+        sio.emit('equipmentEnd',{'equipmentName':'펙덱 플라이 머신'})
         now_Id=-1
         print('data send done')
         bus.write_byte(addr, 5)
         time.sleep(1)
+
+def weightChecking():
+    if cap.isOpened():
+        ret,a=cap.read()
+        checking=0
+        
+        while checking==0: 
+            if ret:
+                ret,a=cap.read()
+                
+                a=a[261:288,81:460]
+                dst = a.copy()
+                a=cv2.medianBlur(a,5)
+                gray = cv2.cvtColor(a, cv2.COLOR_BGR2HSV)
+                hsv_1=np.array([85,70,100])
+                hsv_2=np.array([145,255,255])
+                img_mask=cv2.inRange(gray,hsv_1,hsv_2)
+                cnt, labels, stats, centroids = cv2.connectedComponentsWithStats(img_mask)
+                centroids=list(centroids)
+                centroids.sort(key=lambda x:x[0])
+                tmp_data=centroids[0][0]
+                
+                for i in range(0,cnt):
+                    (x,y,w,h,area)=stats[i]
+                    if area <60 or area>500:
+                        continue
+                    if centroids[i][0]-tmp_data<100:
+                        checking+=1
+                    tmp_data=centroids[i][0]
+                    cv2.rectangle(dst,(x-5,y-5,w+10,h+10),(0,0,255))
+                print(checking)
+            
+        return 90-checking*10
+    return None
 
 @sio.event
 def equipmentRfidRecieved(data):
@@ -113,7 +153,7 @@ def equipmentRfidRecieved(data):
     print(type(data))
     print(data['equipmentId'])
     print(data['equipmentName'])
-    
+  
 
 @sio.event
 def connect():
