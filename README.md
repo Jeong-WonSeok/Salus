@@ -1,7 +1,7 @@
 # Salus
 
 
-![logo](/uploads/40f23f8e19ca064b71518d3686fec23b/logo.png)
+![image](https://user-images.githubusercontent.com/90893428/197336532-0f71acac-9c55-4552-9f9d-6bce722b2411.png)
 
 **목차**
 
@@ -105,7 +105,7 @@
 
 ---
 
-![Untitled](/uploads/f29e33b2eff8cb4e33c0a64345c8593b/Untitled.png)
+![image](https://user-images.githubusercontent.com/90893428/197336553-ae8d4576-be42-4344-a8a2-6ea0e64922cf.png)
 
 
 
@@ -153,7 +153,7 @@
     > RFID 키를 키오스크에 찍어 로그인이 가능합니다.
     > 
     
-    ![image](/uploads/30c09ca22f4180313259839bb90cb6b7/image.png)
+    ![image](https://user-images.githubusercontent.com/90893428/197336590-b958fea6-8b45-48ea-9e66-abbea46725cc.png)
     
 
 - 키오스크 메인 화면 (오늘의 운동기록이 없을 시)
@@ -162,7 +162,7 @@
     (지난 5일 동안 어느 부위를 했는지 한 눈에 파악할 수 있게 보여줍니다.)
     > 
     
-    ![image](/uploads/66a00148aafafbc668e276106cacd04a/image.png)
+    ![image](https://user-images.githubusercontent.com/90893428/197336596-e49262aa-0e67-4ceb-8b98-5209a95880d0.png)
     
 
 - 키오스크 메인화면 (오늘 운동기록이 있을시)
@@ -171,7 +171,7 @@
     (어떤 머신으로 몇번을 하였고 총 Volume 은 어떻게 되는 지 확인할 수 있습니다. )
     > 
     
-    ![image](/uploads/be0e6064bb4ef18172e3fa6d3b608e4a/image.png)
+    ![image](https://user-images.githubusercontent.com/90893428/197336614-5efabe37-754b-4f21-8c76-d8820d93f69d.png)
     
 
 - 키오스크 메인화면 (Calender 선택시)
@@ -179,7 +179,7 @@
     > Calendar를 클릭하면 한달간 운동을 한 부위(상체, 전신, 하체)와 출석기록을 볼 수 있습니다.
     > 
     
-    ![image](/uploads/e39e92a9ef49b1780caaeaa4edffe35b/image.png)
+    ![image](https://user-images.githubusercontent.com/90893428/197336626-7c61f4be-2800-483f-ba38-4b3c3ec90071.png)
     
 
 - 키오스크 한달간의 운동 기록 확인
@@ -187,7 +187,7 @@
     > “렛 풀다운 머신”을 클릭하면 지난 5개월간의 월간 Volume 을 파악할 수 있으며 자신과 비슷한 체형의 사람들의 평균 Volume을 비교할 수 있습니다.
     > 
     
-    ![image](/uploads/22ea54c5b9684bea74dddf2356a0f2ca/image.png)
+    ![image](https://user-images.githubusercontent.com/90893428/197336640-968e88e3-012b-4ecc-9daf-e1f4c6d0f4b5.png)
     
 
 ### **모바일**
@@ -197,7 +197,7 @@
     > 회원 이메일과 헬스장에서 등록 한 RFIDKEY 를 입력해주면 로그인이 됩니다.
     > 
     
-    ![image](/uploads/a05b0413e53357a2a457791db87e8399/image.png)
+    ![image](https://user-images.githubusercontent.com/90893428/197336645-2dc1d4ae-3c9e-4781-ba09-1543457802fd.png)
     
 
 - 모바일 메인 페이지
@@ -208,7 +208,7 @@
     운동, 캘린더 버튼을 누르면 각 페이지로 연결됩니다.
     > 
     
-    ![image](/uploads/cb25956ee19813bdb19fa2a03c72da0e/image.png)
+    ![image](https://user-images.githubusercontent.com/90893428/197336650-ffe29c5f-0016-4112-8228-f7d1979405d6.png)
     
 
 - 이번 주 목표 시간 설정
@@ -217,7 +217,7 @@
     시간, 분을 조정하여 이번 주 목표 시간을 재설정할 수 있습니다.
     > 
     
-    ![image](/uploads/d26c273572b2ca27ce83fac345e46831/image.png)
+    ![image](https://user-images.githubusercontent.com/90893428/197336689-f418c776-99b6-49ce-bf0e-ce1f3758a2ad.png)
     
 
 - 이번 주 목표 볼륨 설정
@@ -226,7 +226,7 @@
     불륨을 조정하여 이번 주 목표 불륨을 재설정할 수 있습니다.
     > 
     
-    ![image](/uploads/e21cf405455ad0776e88e8a9da396197/image.png)
+    ![image](https://user-images.githubusercontent.com/90893428/197336699-2ef57b22-f0ef-4860-96b2-5f97d7f9b622.png)
     
 
 - 실시간 운동 기록
@@ -237,7 +237,7 @@
     횟수는 사용자가 운동 기구를 당길 때 횟수가 증가됩니다.
     > 
     
-    ![image](/uploads/be448b766149027e87361104f8da44e9/image.png)
+    ![image](https://user-images.githubusercontent.com/90893428/197336708-d60aea85-c0ee-49c2-89c1-326866aa1e09.png)
     
 
 - 실시간 운동 누적 기록
@@ -245,7 +245,7 @@
     > 실시간으로 오늘 운동한 누적 기록이 카드형태로 보여줍니다.
     > 
     
-    ![image](/uploads/51c7d826a72bb2d7fe982f6dcefcd7f5/image.png)
+    ![image](https://user-images.githubusercontent.com/90893428/197336719-a3e89268-c774-487c-b80d-9830d0a1a84c.png)
     
 
 - 모바일 캘린더 화면
@@ -256,16 +256,16 @@
     달력 이동을 통해 과거의 기록도 볼 수 있습니다.
     > 
     
-    ![image](/uploads/aca5aa1cc6f5fec3fed15c65314e88f1/image.png)
+    ![image](https://user-images.githubusercontent.com/90893428/197336725-17719f11-eaef-4742-9489-6395ed3fa262.png)
     
 
 ### IoT
 
 - 로드셀
-    
-    ![image](/uploads/279b7312fc4d0afbf479b4b0f4ebcea7/image.png)
+    - 영상 처리로 대체
+    ![image](https://user-images.githubusercontent.com/90893428/197336739-2f6edbad-41df-49e5-a293-ce244c80efc1.png)
     
 
 - RFID 리더기+Raspberry Pi+Arduino + 스피커모듈
     
-    ![image](/uploads/06094c509daab6a19c20462a8ecd288c/image.png)
+    ![image](https://user-images.githubusercontent.com/90893428/197336759-4d643291-dd19-4d15-8a25-cb1bacb9c023.png)
